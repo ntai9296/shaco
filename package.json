@@ -5,11 +5,37 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "lint": "eslint \"./app/javascript/**/*.ts{,x}\"",
+    "generate": "apollo codegen:generate './graphql/generated.ts' --outputFlat --no-addTypename --mergeInFieldsFromFragmentSpreads -c=apollo.config.js --target=typescript"
   },
   "dependencies": {
+    "@apollo/client": "^3.0.0-rc.12",
+    "@apollo/link-context": "^2.0.0-beta.3",
+    "@fullcalendar/interaction": "^5.1.0",
+    "@fullcalendar/react": "^5.1.0",
+    "@fullcalendar/resource-timegrid": "^5.1.0",
+    "cookie": "^0.4.1",
+    "graphql": "^15.3.0",
+    "immutability-helper": "^3.1.1",
+    "js-cookie": "^2.2.1",
+    "moment-timezone": "^0.5.31",
     "next": "9.4.4",
+    "randomstring": "^1.1.5",
     "react": "16.13.1",
-    "react-dom": "16.13.1"
+    "react-dom": "16.13.1",
+    "react-feather": "^2.0.8",
+    "react-modal": "^3.11.2",
+    "react-select": "^3.1.0",
+    "react-tiny-popover": "^5.1.0",
+    "sass": "^1.26.10",
+    "styled-components": "^5.1.1"
+  },
+  "devDependencies": {
+    "@types/node": "^14.0.22",
+    "@types/react": "^16.9.43",
+    "@types/styled-components": "^5.1.1",
+    "apollo": "^2.29.1",
+    "typescript": "^3.9.6"
   }
 }

@@ -1,0 +1,96 @@
+// Place all the styles related to the Static controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+@import url(http://fonts.googleapis.com/css?family=Inter:300,400,500,700|Roboto:300,400,500,700|Open+Sans:300,400,500,700);
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  font-weight: 400;
+  color: #444;
+}
+
+body {
+  position: relative;
+  font-family: "Inter", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Open Sans", "Roboto", sans-serif;
+  font-size: 14px;
+
+  > div {
+    height: 100%;
+  }
+}
+
+input, textarea {
+  font-family: "Inter", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Open Sans", "Roboto", sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+}
+
+button {
+  border: none;
+}
+
+button,
+button:focus {
+  outline: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+:focus {
+  outline: none;
+}
+
+@-ms-keyframes spin {
+  from { -ms-transform: rotate(0deg); }
+  to { -ms-transform: rotate(360deg); }
+}
+@-moz-keyframes spin {
+  from { -moz-transform: rotate(0deg); }
+  to { -moz-transform: rotate(360deg); }
+}
+@-webkit-keyframes spin {
+  from { -webkit-transform: rotate(0deg); }
+  to { -webkit-transform: rotate(360deg); }
+}
+@keyframes spin {
+  from {
+      transform:rotate(0deg);
+  }
+  to {
+      transform:rotate(360deg);
+  }
+}
+
+#working-overlay {
+  position: absolute;
+  user-select: none;
+}
+
+.react-tiny-popover-container {
+  height: initial;
+}
+
+.fc-event-main {
+  overflow: hidden;
+}
+
+.fc .fc-timegrid-slot-minor {
+  border-top-style: none !important;
+}
