@@ -66,7 +66,7 @@ export default () => {
             <S.Title>Login to your account</S.Title>
             <S.SubTitle>
               Don't have an account yet?{" "}
-              <Link prefetch href="/sign-up">
+              <Link href="/sign-up">
                 <a>Sign up</a>
               </Link>
             </S.SubTitle>
