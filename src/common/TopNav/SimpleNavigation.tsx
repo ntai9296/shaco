@@ -38,7 +38,7 @@ const AccountIcon = styled.a`
 const Logo = styled.div`
   max-width: 12rem;
   width: 100%;
-  background: url(https://siromortgage.com/static/img/brand.svg) no-repeat;
+  // background: url(https://siromortgage.com/static/img/brand.svg) no-repeat;
   background-size: contain;
   background-position: 0;
   font-size: 0;
@@ -94,7 +94,7 @@ export default ({ skipUser }: { skipUser?: boolean }) => {
     <Nav>
       <NavBrand>
         <Link href="/">
-          <Logo>Pantheon</Logo>
+          <Logo>Fireside</Logo>
         </Link>
       </NavBrand>
       <NavAction>
