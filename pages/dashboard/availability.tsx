@@ -17,7 +17,6 @@ const Availability = () => {
   if (loading) {
     return null;
   }
-  console.log(!userData?.currentUser)
 
   if (!userData?.currentUser) {
     Router.replace("/login");
