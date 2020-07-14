@@ -1,7 +1,46 @@
 // Place all the styles related to the Static controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
-@import url(http://fonts.googleapis.com/css?family=Inter:300,400,500,700|Roboto:300,400,500,700|Open+Sans:300,400,500,700);
+
+/* inter-regular - latin */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  src: url('/fonts/inter-v2-latin-regular.eot'); /* IE9 Compat Modes */
+  src: local(''),
+       url('/fonts/inter-v2-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('/fonts/inter-v2-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+       url('/fonts/inter-v2-latin-regular.woff') format('woff'), /* Modern Browsers */
+       url('/fonts/inter-v2-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('/fonts/inter-v2-latin-regular.svg#Inter') format('svg'); /* Legacy iOS */
+}
+/* inter-500 - latin */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  src: url('/fonts/inter-v2-latin-500.eot'); /* IE9 Compat Modes */
+  src: local(''),
+       url('/fonts/inter-v2-latin-500.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('/fonts/inter-v2-latin-500.woff2') format('woff2'), /* Super Modern Browsers */
+       url('/fonts/inter-v2-latin-500.woff') format('woff'), /* Modern Browsers */
+       url('/fonts/inter-v2-latin-500.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('/fonts/inter-v2-latin-500.svg#Inter') format('svg'); /* Legacy iOS */
+}
+/* inter-700 - latin */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  src: url('/fonts/inter-v2-latin-700.eot'); /* IE9 Compat Modes */
+  src: local(''),
+       url('/fonts/inter-v2-latin-700.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('/fonts/inter-v2-latin-700.woff2') format('woff2'), /* Super Modern Browsers */
+       url('/fonts/inter-v2-latin-700.woff') format('woff'), /* Modern Browsers */
+       url('/fonts/inter-v2-latin-700.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('/fonts/inter-v2-latin-700.svg#Inter') format('svg'); /* Legacy iOS */
+}
 
 * {
   -webkit-font-smoothing: antialiased;
