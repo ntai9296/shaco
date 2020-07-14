@@ -3,11 +3,11 @@ import dynamic from "next/dynamic";
 import Router from "next/router";
 import Link from "next/link";
 import moment from "moment-timezone";
-import * as S from "../../../src/Availability/Availability.styled";
-import * as UserAPI from "../../../graphql/User/UserAPI";
-import DashboardLayout from "../../../src/common/Layout/DashboardLayout";
+import * as S from "../../src/Availability/Availability.styled";
+import * as UserAPI from "../../graphql/User/UserAPI";
+import DashboardLayout from "../../src/common/Layout/DashboardLayout";
 
-const Calendar = dynamic(() => import("../../../src/Availability/Calendar"), {
+const Calendar = dynamic(() => import("../../src/Availability/Calendar"), {
   ssr: false,
 });
 
