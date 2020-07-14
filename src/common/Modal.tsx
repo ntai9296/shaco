@@ -2,7 +2,7 @@ import React from "react";
 import ReactModal from "react-modal";
 import styled from "styled-components";
 
-const Modal = styled(ReactModal)`
+const Modal = styled(ReactModal)<{ maxWidth?: number }>`
   max-width: ${(props) => (props.maxWidth ? `${props.maxWidth}px` : "400px")};
   margin: 100px auto;
   background: #fff;

@@ -1,4 +1,4 @@
-import { useQuery, useMutation, useLazyQuery, OperationVariables } from "@apollo/client";
+import { useQuery, useMutation, useLazyQuery, OperationVariables, QueryHookOptions } from "@apollo/client";
 import cookie from "js-cookie";
 import * as User from "./user";
 import {
@@ -14,7 +14,9 @@ import {
   getCurrentUserCalendarEventsQueryVariables,
 } from "../generated";
 
-export const getCurrentUser = () => useQuery<getCurrentUserQuery>(User.GET_CURRENT_USER_QUERY, { ssr: false });
+export const getCurrentUser = (options?: QueryHookOptions<getCurrentUserQuery, Record<string, any>> | undefined) => useQuery<getCurrentUserQuery>(User.GET_CURRENT_USER_QUERY, options);
+export const getCurrentUserLazy = (options?: QueryHookOptions<getCurrentUserQuery, Record<string, any>> | undefined) => useLazyQuery<getCurrentUserQuery>(User.GET_CURRENT_USER_QUERY, options);
+
 export const getCurrentUserProfile = () =>
   useQuery<getCurrentUserProfileQuery>(User.GET_CURRENT_USER_PROFILE_QUERY);
 export const useUser = () => useQuery(User.GET_CURRENT_USER_QUERY);

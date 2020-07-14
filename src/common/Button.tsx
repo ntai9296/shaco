@@ -2,6 +2,12 @@ import React from "react";
 import styled from "styled-components";
 import { Styling } from "./utility";
 
+interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  children: JSX.Element | JSX.Element[] | string;
+  isLoading?: boolean;
+  flex?: boolean;
+}
+
 const Button = styled.button<Props>`
   background: ${Styling.primaryColor};
   color: #fff;
@@ -52,13 +58,12 @@ const Button = styled.button<Props>`
   `}
 `;
 
-interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  children: unknown;
-  isLoading?: boolean;
-  flex?: boolean;
-}
-
-export default ({ flex = true, isLoading = false, children, ...props }: Props) => (
+export default ({
+  flex = true,
+  isLoading = false,
+  children,
+  ...props
+}: Props) => (
   <Button flex={flex} disabled={isLoading} isLoading={isLoading} {...props}>
     {children}
   </Button>

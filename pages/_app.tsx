@@ -1,31 +1,15 @@
 import "../styles/static.scss";
-import Head from "next/head";
+import "../styles/calendar.scss";
+import { ApolloProvider } from "@apollo/client";
+import { useApollo } from "../lib/withApollo";
 
-function MyApp({ Component, pageProps }) {
-  if (typeof window !== "undefined") {
-    window.addEventListener("DOMContentLoaded", () => {
-      let newDoc: any = document;
-      newDoc.getElementById("holderStyle").remove();
-    });
-  }
-
+const App = ({ Component, pageProps }: any) => {
+  const apolloClient = useApollo(pageProps);
   return (
-    <>
-      <Head>
-        <style
-          id="holderStyle"
-          dangerouslySetInnerHTML={{
-            __html: `
-      *, *::before, *::after {
-        transition: none!important;
-      }
-    `,
-          }}
-        />
-      </Head>
+    <ApolloProvider client={apolloClient}>
       <Component {...pageProps} />
-    </>
+    </ApolloProvider>
   );
 }
 
-export default MyApp;
+export default App;

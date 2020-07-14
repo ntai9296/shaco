@@ -18,6 +18,8 @@ import * as UserAPI from "../../../graphql/User/UserAPI";
 export default () => {
   const { data: userData } = UserAPI.getCurrentUser();
   const router = useRouter();
+
+  const activeRoute = (routeName: string) => router.route.includes(routeName);
   return (
     <S.Sidebar>
       <S.Brand>
@@ -35,13 +37,12 @@ export default () => {
         >
           <S.Profile>
             <S.Avatar>
-              <img
-                alt="avatar"
-                src={
-                  userData.currentUser.profile.profilePhotoUrl ||
-                  "https://storage.googleapis.com/superpeer-prod.appspot.com/hosts/Lx0I2Irrvc0OQBBM8Nvc/s0u1qmhwg6c21@s_800.jpg"
-                }
-              />
+              {userData?.currentUser?.profile?.profilePhotoUrl && (
+                <img
+                  alt="avatar"
+                  src={userData.currentUser.profile.profilePhotoUrl}
+                />
+              )}
             </S.Avatar>
             <S.ProfileInfo>
               <S.ProfileName>
@@ -59,13 +60,13 @@ export default () => {
         </Link>
       )}
       <Link href="/dashboard/calls">
-        <S.SidebarItem isActive={false}>
+        <S.SidebarItem isActive={activeRoute("/calls")}>
           <PhoneIncoming width={15} height={15} />
           Calls
         </S.SidebarItem>
       </Link>
       <Link href="/dashboard/availability">
-        <S.SidebarItem isActive={false}>
+        <S.SidebarItem isActive={activeRoute("availability")}>
           <Calendar width={15} height={15} />
           Availability
         </S.SidebarItem>
@@ -73,28 +74,28 @@ export default () => {
 
       <S.MenuTitle>Account</S.MenuTitle>
       <Link href="/dashboard/profile">
-        <S.SidebarItem isActive={false}>
+        <S.SidebarItem isActive={activeRoute("profile")}>
           <User width={15} height={15} />
           Profile
         </S.SidebarItem>
       </Link>
 
       <Link href="/dashboard/payout">
-        <S.SidebarItem isActive={false}>
+        <S.SidebarItem isActive={activeRoute("payout")}>
           <DollarSign width={15} height={15} />
           Payouts
         </S.SidebarItem>
       </Link>
 
       <Link href="/dashboard/notifications">
-        <S.SidebarItem isActive={false}>
+        <S.SidebarItem isActive={activeRoute("notifications")}>
           <Bell width={15} height={15} />
           Notifications
         </S.SidebarItem>
       </Link>
 
       <Link href="/dashboard/settings">
-        <S.SidebarItem isActive={false}>
+        <S.SidebarItem isActive={activeRoute("settings")}>
           <Settings width={15} height={15} />
           Settings
         </S.SidebarItem>

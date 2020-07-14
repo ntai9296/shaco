@@ -1,5 +1,4 @@
 import Head from "next/head";
-import { withApollo } from "../lib/apollo";
 
 const App = () => {
   return (
@@ -13,4 +12,4 @@ const App = () => {
   );
 };
 
-export default withApollo({ ssr: true })(App);
+export default App;

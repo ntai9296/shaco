@@ -5,7 +5,7 @@ export const Heading = styled.h1`
   margin: 0 0 25px 0;
 `;
 export const Calendar = styled.div`
-  height: 80vh;
+  height: 70vh;
 `;
 
 export const Event = styled.div``;

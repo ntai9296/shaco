@@ -1,5 +1,4 @@
 import { useRouter } from "next/router";
-import { withApollo } from "../lib/apollo";
 
 const App = () => {
   const router = useRouter();
@@ -7,4 +6,4 @@ const App = () => {
   return <div className="container">{profileSlug}</div>;
 };
 
-export default withApollo({ ssr: true })(App);
+export default App;

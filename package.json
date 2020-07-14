@@ -12,15 +12,20 @@
   "dependencies": {
     "@apollo/client": "^3.0.0-rc.12",
     "@apollo/link-context": "^2.0.0-beta.3",
-    "@fullcalendar/interaction": "^5.1.0",
-    "@fullcalendar/react": "^5.1.0",
-    "@fullcalendar/resource-timegrid": "^5.1.0",
+    "@fullcalendar/core": "^4.4.2",
+    "@fullcalendar/interaction": "^4.4.2",
+    "@fullcalendar/moment-timezone": "^4.4.2",
+    "@fullcalendar/react": "^4.4.2",
+    "@fullcalendar/resource-timegrid": "^4.4.2",
+    "@zeit/next-css": "^1.0.1",
+    "@zeit/next-sass": "^1.0.1",
     "cookie": "^0.4.1",
     "graphql": "^15.3.0",
     "immutability-helper": "^3.1.1",
     "js-cookie": "^2.2.1",
     "moment-timezone": "^0.5.31",
     "next": "9.4.4",
+    "node-sass": "^4.14.1",
     "randomstring": "^1.1.5",
     "react": "16.13.1",
     "react-dom": "16.13.1",
@@ -32,10 +37,15 @@
     "styled-components": "^5.1.1"
   },
   "devDependencies": {
+    "@types/js-cookie": "^2.2.6",
+    "@types/moment-timezone": "^0.5.13",
     "@types/node": "^14.0.22",
+    "@types/randomstring": "^1.1.6",
     "@types/react": "^16.9.43",
+    "@types/react-modal": "^3.10.6",
     "@types/styled-components": "^5.1.1",
     "apollo": "^2.29.1",
-    "typescript": "^3.9.6"
+    "typescript": "^3.9.6",
+    "webpack": "^4.43.0"
   }
 }

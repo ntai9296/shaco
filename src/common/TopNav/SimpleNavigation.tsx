@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import Link from "../Link";
+import Link from "next/link";
 import * as UserAPI from "../../../graphql/User/UserAPI";
 import Popover from "react-tiny-popover";
 import { Styling } from "../utility";
@@ -84,14 +84,16 @@ const MenuItem = styled.div`
   `}
 `;
 
-export default () => {
-  const { data: userData, loading: userLoading } = UserAPI.getCurrentUser();
+export default ({ skipUser }: { skipUser?: boolean }) => {
+  const { data: userData } = UserAPI.getCurrentUser({
+    skip: skipUser,
+  });
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
 
   return (
     <Nav>
       <NavBrand>
-        <Link to="/">
+        <Link href="/">
           <Logo>Pantheon</Logo>
         </Link>
       </NavBrand>

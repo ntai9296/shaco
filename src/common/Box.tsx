@@ -7,4 +7,4 @@ const Box = styled.div`
   border-radius: 8px;
 `;
 
-export default ({ children }) => <Box>{children}</Box>;
+export default ({ children }: any) => <Box>{children}</Box>;
