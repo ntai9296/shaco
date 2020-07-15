@@ -81,7 +81,7 @@ export default () => {
           variables: {
             input: {
               profileId: profile.id,
-              remoteProfilePhotoUrl: result.Location,
+              profilePhotoUrl: result.Location,
             },
           },
         });
@@ -102,7 +102,7 @@ export default () => {
           variables: {
             input: {
               profileId: profile.id,
-              remoteCoverPhotoUrl: result.Location,
+              coverPhotoUrl: result.Location,
             },
           },
         });

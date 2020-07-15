@@ -650,8 +650,8 @@ export interface UpdateProfileInput {
   lastName?: string | null;
   about?: string | null;
   shortDescription?: string | null;
-  remoteProfilePhotoUrl?: string | null;
-  remoteCoverPhotoUrl?: string | null;
+  profilePhotoUrl?: string | null;
+  coverPhotoUrl?: string | null;
   clientMutationId?: string | null;
 }
 
