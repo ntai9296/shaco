@@ -40,14 +40,20 @@ export const GET_CURRENT_USER_PROFILE_QUERY = gql`
         coverPhotoUrl
         coverPhotoThumbUrl
         servicesConnection {
-          edges {
-            node {
-              id
-              name
-              description
-              price
-              imageUrl
-              introVideoUrl
+          nodes {
+            id
+            name
+            description
+            price
+            imageUrl
+            introVideoUrl
+            buttonText
+            providableType
+            providable {
+              ... on VideoCallService {
+                id
+                duration
+              }
             }
           }
         }
@@ -96,7 +102,10 @@ export const LOGIN_USER_MUTATION = gql`
 `;
 
 export const GET_CURRENT_USER_CALENDER_EVENTS_QUERY = gql`
-  query getCurrentUserCalendarEventsQuery($beforeEnding: DateTime, $atOrAfterStarting: DateTime) {
+  query getCurrentUserCalendarEventsQuery(
+    $beforeEnding: DateTime
+    $atOrAfterStarting: DateTime
+  ) {
     currentUser {
       id
       timezone

@@ -19,8 +19,8 @@ export default () => {
   const { data: userData } = UserAPI.getCurrentUser();
   const router = useRouter();
 
-  const activeRoute = (routeName: string) => router.route.includes(`/dashboard${routeName}`);
-  console.log(router)
+  const activeRoute = (routeName: string) =>
+    router.route.includes(`/dashboard${routeName}`);
   return (
     <S.Sidebar>
       <S.Brand>
@@ -38,16 +38,20 @@ export default () => {
         >
           <S.Profile>
             <S.Avatar>
-              {userData?.currentUser?.profile?.profilePhotoUrl && (
+              {userData?.currentUser?.profile?.profilePhotoUrl ? (
                 <img
                   alt="avatar"
                   src={userData.currentUser.profile.profilePhotoUrl}
                 />
+              ) : (
+                <S.ProfilePlaceholder>
+                  <User />
+                </S.ProfilePlaceholder>
               )}
             </S.Avatar>
             <S.ProfileInfo>
               <S.ProfileName>
-                {userData.currentUser.profile.firstName}{" "}
+                {userData.currentUser.profile.firstName || "Your name"}{" "}
                 {userData.currentUser.profile.lastName}
               </S.ProfileName>
               <S.ViewProfile>
@@ -61,7 +65,9 @@ export default () => {
         </Link>
       )}
       <Link href="/dashboard/calls">
-        <S.SidebarItem isActive={activeRoute("/calls") || router.route === "/dashboard"}>
+        <S.SidebarItem
+          isActive={activeRoute("/calls") || router.route === "/dashboard"}
+        >
           <PhoneIncoming width={15} height={15} />
           Calls
         </S.SidebarItem>

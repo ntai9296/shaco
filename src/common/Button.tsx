@@ -8,7 +8,7 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   flex?: boolean;
 }
 
-const Button = styled.button<Props>`
+export const CommonButton = styled.button<Props>`
   background: ${Styling.primaryColor};
   color: #fff;
 
@@ -64,7 +64,7 @@ export default ({
   children,
   ...props
 }: Props) => (
-  <Button flex={flex} disabled={isLoading} isLoading={isLoading} {...props}>
+  <CommonButton flex={flex} disabled={isLoading} isLoading={isLoading} {...props}>
     {children}
-  </Button>
+  </CommonButton>
 );

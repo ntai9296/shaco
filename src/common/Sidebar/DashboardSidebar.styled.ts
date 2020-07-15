@@ -33,6 +33,21 @@ export const Profile = styled.div`
   align-items: center;
   cursor: pointer;
 `;
+
+export const ProfilePlaceholder = styled.div`
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: lightgray;
+  border-radius: 50%;
+
+  > svg {
+    color: #fff;
+  }
+`;
+
 export const Avatar = styled.div`
   height: 64px;
   width: 64px;
