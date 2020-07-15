@@ -47,7 +47,6 @@ export const ServiceItemTitle = styled.h3`
   margin: 0 0 15px 0;
   text-align: center;
   font-size: 20px;
-  font-family: "Inter";
 `;
 
 export const ServiceItemImageHover = styled.div`
@@ -161,7 +160,6 @@ export const ServiceItemCostInput = styled(NumberFormat)`
   font-weight: 700;
   text-align: center;
   margin: 0 0 5px 0;
-  font-family: "Inter";
   font-size: 28px;
 `;
 
@@ -204,6 +202,9 @@ export const ServiceItemDurationSelect = styled.select`
 
 export const AddServiceItemActions = styled.div`
   margin-top: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 `;
 
 export const ErrorMessage = styled.div`

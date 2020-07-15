@@ -47,3 +47,27 @@ export const UPDATE_SERVICE_MUTATION = gql`
     }
   }
 `;
+
+export const DELETE_SERVICE_MUTATION = gql`
+  mutation deleteServiceMutation($input: DeleteServiceInput!) {
+    deleteService(input: $input) {
+      service {
+        id
+        name
+        imageUrl
+        introVideoUrl
+        description
+        price
+        introVideoUrl
+        buttonText
+        providableType
+        providable {
+          ... on VideoCallService {
+            id
+            duration
+          }
+        }
+      }
+    }
+  }
+`;

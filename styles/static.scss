@@ -29,31 +29,31 @@
         url("/fonts/Inter-Bold.woff?v=3.13") format("woff");
 }
 
-/* roboto-slab-500 - latin */
+/* roboto-500 - latin */
 @font-face {
-  font-family: 'Roboto Slab';
+  font-family: 'Roboto';
   font-style: normal;
   font-weight: 500;
-  src: url('/fonts/roboto-slab-v12-latin-500.eot'); /* IE9 Compat Modes */
-  src: local(''),
-       url('/fonts/roboto-slab-v12-latin-500.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-       url('/fonts/roboto-slab-v12-latin-500.woff2') format('woff2'), /* Super Modern Browsers */
-       url('/fonts/roboto-slab-v12-latin-500.woff') format('woff'), /* Modern Browsers */
-       url('/fonts/roboto-slab-v12-latin-500.ttf') format('truetype'), /* Safari, Android, iOS */
-       url('/fonts/roboto-slab-v12-latin-500.svg#RobotoSlab') format('svg'); /* Legacy iOS */
+  src: url('/fonts/roboto-v20-latin-500.eot'); /* IE9 Compat Modes */
+  src: local('Roboto Medium'), local('Roboto-Medium'),
+       url('/fonts/roboto-v20-latin-500.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('/fonts/roboto-v20-latin-500.woff2') format('woff2'), /* Super Modern Browsers */
+       url('/fonts/roboto-v20-latin-500.woff') format('woff'), /* Modern Browsers */
+       url('/fonts/roboto-v20-latin-500.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('/fonts/roboto-v20-latin-500.svg#Roboto') format('svg'); /* Legacy iOS */
 }
-/* roboto-slab-700 - latin */
+/* roboto-700 - latin */
 @font-face {
-  font-family: 'Roboto Slab';
+  font-family: 'Roboto';
   font-style: normal;
   font-weight: 700;
-  src: url('/fonts/roboto-slab-v12-latin-700.eot'); /* IE9 Compat Modes */
-  src: local(''),
-       url('/fonts/roboto-slab-v12-latin-700.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-       url('/fonts/roboto-slab-v12-latin-700.woff2') format('woff2'), /* Super Modern Browsers */
-       url('/fonts/roboto-slab-v12-latin-700.woff') format('woff'), /* Modern Browsers */
-       url('/fonts/roboto-slab-v12-latin-700.ttf') format('truetype'), /* Safari, Android, iOS */
-       url('/fonts/roboto-slab-v12-latin-700.svg#RobotoSlab') format('svg'); /* Legacy iOS */
+  src: url('/fonts/roboto-v20-latin-700.eot'); /* IE9 Compat Modes */
+  src: local('Roboto Bold'), local('Roboto-Bold'),
+       url('/fonts/roboto-v20-latin-700.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('/fonts/roboto-v20-latin-700.woff2') format('woff2'), /* Super Modern Browsers */
+       url('/fonts/roboto-v20-latin-700.woff') format('woff'), /* Modern Browsers */
+       url('/fonts/roboto-v20-latin-700.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('/fonts/roboto-v20-latin-700.svg#Roboto') format('svg'); /* Legacy iOS */
 }
 
 * {
@@ -73,7 +73,7 @@ body {
 
 body {
   position: relative;
-  font-family: "Inter", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Roboto Slab", sans-serif;
+  font-family: "Inter", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Roboto", sans-serif;
   font-size: 14px;
 
   > div {
@@ -82,11 +82,11 @@ body {
 }
 
 input, textarea {
-  font-family: "Inter", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Roboto Slab", sans-serif;
+  font-family: "Inter", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Roboto", sans-serif;
 }
 
 h1, h2, h3, h4, h5, h6, label {
-  font-family: "Roboto Slab", "Inter", "SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: "Roboto", "Inter", "SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 *,

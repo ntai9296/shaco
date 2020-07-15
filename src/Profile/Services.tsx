@@ -38,7 +38,6 @@ export default () => {
     window.scrollTo(0, 0);
   }, [showAddService, editService]);
 
-
   if (!profile) {
     return null;
   }
@@ -98,6 +97,32 @@ const ServiceItemForm = ({
     { loading: updateLoading, error: updateError },
   ] = ServiceAPI.updateService({
     onCompleted: () => onCancel(),
+  });
+
+  const [
+    deleteService,
+    { loading: deleteLoading, error: deleteError },
+  ] = ServiceAPI.deleteService({
+    onCompleted: () => {
+      onCancel();
+    },
+    update: (cache, { data }) => {
+      if (data?.deleteService?.service?.id) {
+        cache.modify({
+          id: cache.identify(profile as any),
+          fields: {
+            servicesConnection(existingConnection, { readField }) {
+              return {
+                ...existingConnection,
+                nodes: existingConnection.nodes.filter(
+                  (node: any) => readField("id", node) !== data?.deleteService?.service?.id
+                ),
+              };
+            },
+          },
+        });
+      }
+    },
   });
 
   const [createService, { loading, error }] = ServiceAPI.createService({
@@ -304,17 +329,39 @@ const ServiceItemForm = ({
           />
         </S.ErrorMessage>
       )}
+      {deleteError && (
+        <S.ErrorMessage>
+          <Notification
+            notifications={deleteError.graphQLErrors.map((e) => e.message)}
+            type="error"
+          />
+        </S.ErrorMessage>
+      )}
       <S.AddServiceItemActions>
-        {initService ? (
-          <S.CreateButton onClick={onSaveService} isLoading={updateLoading}>
-            Save
-          </S.CreateButton>
-        ) : (
-          <S.CreateButton onClick={onCreateService} isLoading={loading}>
-            Create
-          </S.CreateButton>
+        <div>
+          {initService ? (
+            <S.CreateButton onClick={onSaveService} isLoading={updateLoading}>
+              Save
+            </S.CreateButton>
+          ) : (
+            <S.CreateButton onClick={onCreateService} isLoading={loading}>
+              Create
+            </S.CreateButton>
+          )}
+          <S.CancelButton onClick={onCancel}>Cancel</S.CancelButton>
+        </div>
+        {initService && (
+          <div>
+            <S.CancelButton
+              isLoading={deleteLoading}
+              onClick={() => deleteService({
+                variables: { input: { serviceId: initService.id } },
+              })}
+            >
+              Delete
+            </S.CancelButton>
+          </div>
         )}
-        <S.CancelButton onClick={onCancel}>Cancel</S.CancelButton>
       </S.AddServiceItemActions>
     </S.AddServiceItem>
   );

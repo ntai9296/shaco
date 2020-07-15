@@ -5,6 +5,8 @@ import {
   createServiceMutationVariables,
   updateServiceMutation,
   updateServiceMutationVariables,
+  deleteServiceMutation,
+  deleteServiceMutationVariables,
 } from "../generated";
 
 export const createService = (
@@ -24,5 +26,15 @@ export const updateService = (
 ) =>
   useMutation<updateServiceMutation, updateServiceMutationVariables>(
     Service.UPDATE_SERVICE_MUTATION,
+    options
+  );
+
+export const deleteService = (
+  options?:
+    | MutationHookOptions<deleteServiceMutation, deleteServiceMutationVariables>
+    | undefined
+) =>
+  useMutation<deleteServiceMutation, deleteServiceMutationVariables>(
+    Service.DELETE_SERVICE_MUTATION,
     options
   );
