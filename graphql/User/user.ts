@@ -36,9 +36,7 @@ export const GET_CURRENT_USER_PROFILE_QUERY = gql`
         currencyType
         status
         profilePhotoUrl
-        profilePhotoThumbUrl
         coverPhotoUrl
-        coverPhotoThumbUrl
         servicesConnection {
           nodes {
             id

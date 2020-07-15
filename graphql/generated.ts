@@ -131,9 +131,7 @@ export interface getProfileQuery_profile {
   currencyType: string;
   status: number;
   profilePhotoUrl: string | null;
-  profilePhotoThumbUrl: string | null;
   coverPhotoUrl: string | null;
-  coverPhotoThumbUrl: string | null;
   servicesConnection: getProfileQuery_profile_servicesConnection | null;
 }
 
@@ -168,9 +166,7 @@ export interface updateProfileMutation_updateProfile_profile {
   currencyType: string;
   status: number;
   profilePhotoUrl: string | null;
-  profilePhotoThumbUrl: string | null;
   coverPhotoUrl: string | null;
-  coverPhotoThumbUrl: string | null;
 }
 
 export interface updateProfileMutation_updateProfile {
@@ -338,9 +334,7 @@ export interface getCurrentUserProfileQuery_currentUser_profile {
   currencyType: string;
   status: number;
   profilePhotoUrl: string | null;
-  profilePhotoThumbUrl: string | null;
   coverPhotoUrl: string | null;
-  coverPhotoThumbUrl: string | null;
   servicesConnection: getCurrentUserProfileQuery_currentUser_profile_servicesConnection | null;
 }
 

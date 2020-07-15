@@ -13,9 +13,7 @@ export const GET_PROFILE = gql`
       currencyType
       status
       profilePhotoUrl
-      profilePhotoThumbUrl
       coverPhotoUrl
-      coverPhotoThumbUrl
       servicesConnection {
         edges {
           node {
@@ -46,9 +44,7 @@ export const UPDATE_PROFILE = gql`
         currencyType
         status
         profilePhotoUrl
-        profilePhotoThumbUrl
         coverPhotoUrl
-        coverPhotoThumbUrl
       }
     }
   }
