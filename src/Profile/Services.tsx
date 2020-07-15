@@ -3,7 +3,7 @@ import _ from "lodash";
 import { Edit, Plus } from "react-feather";
 import * as S from "./Services.styled";
 import * as UserAPI from "../../graphql/User/UserAPI";
-import * as ServiceAPI from "../../graphql/service/ServiceAPI";
+import * as ServiceAPI from "../../graphql/Service/ServiceAPI";
 import * as Utility from "../../src/common/utility";
 import {
   getCurrentUserProfileQuery_currentUser_profile,
