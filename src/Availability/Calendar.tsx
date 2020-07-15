@@ -12,6 +12,7 @@ import {
   CalendarEventAvailabilityEnum,
   getCurrentUserCalendarEventsQuery_currentUser_calendarEventsConnection_edges_node,
 } from "../../graphql/generated";
+import { findSameDay } from "./utils";
 
 interface Event {
   id: string;
@@ -142,6 +143,9 @@ export default () => {
   };
 
   const onCalendarEventChange = async (event: any) => {
+    console.log(event);
+    console.log(events);
+    findSameDay(event.event.start, event.event.end, events);
     try {
       const result = await updateCalendarEvent({
         variables: {
@@ -170,7 +174,7 @@ export default () => {
 
   const onDeleteEventClick = async (eventId: string) => {
     const event = events.find((e) => e.id === eventId);
-    
+
     if (event?.editable && confirm("Do you want to delete this date?")) {
       try {
         await deleteCalendarEvent({
