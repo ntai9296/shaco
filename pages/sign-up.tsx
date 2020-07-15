@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import cookie from "js-cookie";
 import Router from "next/router";
+import moment from 'moment-timezone';
 import Link from "next/link";
 import * as S from "../src/SignUp/SignUp.styled";
 import Input from "../src/common/Input";
@@ -24,6 +25,7 @@ export default () => {
   const [form, setForm] = useState({
     email: "",
     password: "",
+    timezone: moment.tz.guess(),
   });
   const [errors, setErrors] = useState<string[]>([]);
 
@@ -110,7 +112,7 @@ export default () => {
             <S.SubmitRow>
               <S.SubmitButtonField>
                 <Button isLoading={loading} type="submit">
-                  Login
+                  Sign Up
                 </Button>
               </S.SubmitButtonField>
             </S.SubmitRow>

@@ -19,7 +19,8 @@ export default () => {
   const { data: userData } = UserAPI.getCurrentUser();
   const router = useRouter();
 
-  const activeRoute = (routeName: string) => router.route.includes(routeName);
+  const activeRoute = (routeName: string) => router.route.includes(`/dashboard${routeName}`);
+  console.log(router)
   return (
     <S.Sidebar>
       <S.Brand>
@@ -60,13 +61,13 @@ export default () => {
         </Link>
       )}
       <Link href="/dashboard/calls">
-        <S.SidebarItem isActive={activeRoute("/calls")}>
+        <S.SidebarItem isActive={activeRoute("/calls") || router.route === "/dashboard"}>
           <PhoneIncoming width={15} height={15} />
           Calls
         </S.SidebarItem>
       </Link>
       <Link href="/dashboard/availability">
-        <S.SidebarItem isActive={activeRoute("availability")}>
+        <S.SidebarItem isActive={activeRoute("/availability")}>
           <Calendar width={15} height={15} />
           Availability
         </S.SidebarItem>
@@ -74,28 +75,28 @@ export default () => {
 
       <S.MenuTitle>Account</S.MenuTitle>
       <Link href="/dashboard/profile">
-        <S.SidebarItem isActive={activeRoute("profile")}>
+        <S.SidebarItem isActive={activeRoute("/profile")}>
           <User width={15} height={15} />
           Profile
         </S.SidebarItem>
       </Link>
 
       <Link href="/dashboard/payout">
-        <S.SidebarItem isActive={activeRoute("payout")}>
+        <S.SidebarItem isActive={activeRoute("/payout")}>
           <DollarSign width={15} height={15} />
           Payouts
         </S.SidebarItem>
       </Link>
 
       <Link href="/dashboard/notifications">
-        <S.SidebarItem isActive={activeRoute("notifications")}>
+        <S.SidebarItem isActive={activeRoute("/notifications")}>
           <Bell width={15} height={15} />
           Notifications
         </S.SidebarItem>
       </Link>
 
       <Link href="/dashboard/settings">
-        <S.SidebarItem isActive={activeRoute("settings")}>
+        <S.SidebarItem isActive={activeRoute("/settings")}>
           <Settings width={15} height={15} />
           Settings
         </S.SidebarItem>

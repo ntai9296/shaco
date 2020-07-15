@@ -469,6 +469,7 @@ export interface CreateHostUserInput {
 export interface CreateUserInput {
   email: string;
   password: string;
+  timezone?: string | null;
   clientMutationId?: string | null;
 }
 
