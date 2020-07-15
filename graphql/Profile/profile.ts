@@ -8,6 +8,8 @@ export const GET_PROFILE = gql`
       shortDescription
       about
       slug
+      firstName
+      lastName
       introVideoUrl
       brandColor
       currencyType
@@ -15,14 +17,20 @@ export const GET_PROFILE = gql`
       profilePhotoUrl
       coverPhotoUrl
       servicesConnection {
-        edges {
-          node {
-            id
-            name
-            description
-            price
-            imageUrl
-            introVideoUrl
+        nodes {
+          id
+          name
+          description
+          price
+          imageUrl
+          introVideoUrl
+          buttonText
+          providableType
+          providable {
+            ... on VideoCallService {
+              id
+              duration
+            }
           }
         }
       }
@@ -39,6 +47,8 @@ export const UPDATE_PROFILE = gql`
         shortDescription
         about
         slug
+        firstName
+        lastName
         introVideoUrl
         brandColor
         currencyType

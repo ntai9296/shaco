@@ -97,27 +97,28 @@ export interface deleteCalendarEventMutationVariables {
 // GraphQL query operation: getProfileQuery
 // ====================================================
 
-export interface getProfileQuery_profile_servicesConnection_edges_node {
+export interface getProfileQuery_profile_servicesConnection_nodes_providable {
+  id: string;
+  duration: number;
+}
+
+export interface getProfileQuery_profile_servicesConnection_nodes {
   id: string;
   name: string | null;
   description: string | null;
   price: number;
   imageUrl: string | null;
   introVideoUrl: string | null;
-}
-
-export interface getProfileQuery_profile_servicesConnection_edges {
-  /**
-   * The item at the end of the edge.
-   */
-  node: getProfileQuery_profile_servicesConnection_edges_node | null;
+  buttonText: string | null;
+  providableType: ServiceProvidableTypeEnum;
+  providable: getProfileQuery_profile_servicesConnection_nodes_providable;
 }
 
 export interface getProfileQuery_profile_servicesConnection {
   /**
-   * A list of edges.
+   * A list of nodes.
    */
-  edges: (getProfileQuery_profile_servicesConnection_edges | null)[] | null;
+  nodes: (getProfileQuery_profile_servicesConnection_nodes | null)[] | null;
 }
 
 export interface getProfileQuery_profile {
@@ -126,6 +127,8 @@ export interface getProfileQuery_profile {
   shortDescription: string;
   about: string;
   slug: string | null;
+  firstName: string;
+  lastName: string;
   introVideoUrl: string | null;
   brandColor: string | null;
   currencyType: string;
@@ -161,6 +164,8 @@ export interface updateProfileMutation_updateProfile_profile {
   shortDescription: string;
   about: string;
   slug: string | null;
+  firstName: string;
+  lastName: string;
   introVideoUrl: string | null;
   brandColor: string | null;
   currencyType: string;
