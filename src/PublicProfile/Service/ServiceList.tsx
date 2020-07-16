@@ -16,7 +16,7 @@ export default ({ services }: Props) => {
   >(services);
 
   useEffect(() => {
-    setCapServices(services.slice(0, 3));
+    setCapServices(services.slice(0, 6));
   }, []);
 
   return (
@@ -26,7 +26,7 @@ export default ({ services }: Props) => {
           <ServiceItem key={service.id} service={service} />
         ))}
       </S.ServiceList>
-      {services.length > 3 && capServices.length <= 3 && (
+      {services.length > 6 && capServices.length <= 6 && (
         <S.ShowMoreContent>
           <S.ShowMoreButton invert onClick={() => setCapServices(services)}>
             <div>
