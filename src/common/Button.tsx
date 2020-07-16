@@ -1,11 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 import { Styling } from "./utility";
+import { setLightness, readableColor } from "polished";
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  children: JSX.Element | JSX.Element[] | string;
+  children: any;
   isLoading?: boolean;
   flex?: boolean;
+  invert?: boolean;
 }
 
 export const CommonButton = styled.button<Props>`
@@ -17,6 +19,21 @@ export const CommonButton = styled.button<Props>`
   font-size: 1rem;
   line-height: 1rem;
   border-radius: 8px;
+
+  ${(props) =>
+    props.theme.primaryColor &&
+    `
+    background: ${props.theme.primaryColor};
+    color: #fff;
+  `}
+
+  ${(props) =>
+    props.theme.primaryColor &&
+    props.invert &&
+    `
+  background: ${setLightness(0.9, props.theme.primaryColor)};
+  color: ${props.theme.primaryColor};
+  `}
 
   ${(props) =>
     props.flex &&
@@ -64,7 +81,12 @@ export default ({
   children,
   ...props
 }: Props) => (
-  <CommonButton flex={flex} disabled={isLoading} isLoading={isLoading} {...props}>
+  <CommonButton
+    flex={flex}
+    disabled={isLoading}
+    isLoading={isLoading}
+    {...props}
+  >
     {children}
   </CommonButton>
 );

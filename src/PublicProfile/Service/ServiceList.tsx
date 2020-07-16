@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import { ChevronDown } from "react-feather";
 import * as S from "./Service.styled";
 import {
   getPublicProfileQuery_profile_servicesConnection_nodes,
@@ -12,13 +13,11 @@ interface Props {
 export default ({ services }: Props) => {
   const [capServices, setCapServices] = useState<
     getPublicProfileQuery_profile_servicesConnection_nodes[]
-  >([]);
+  >(services);
 
   useEffect(() => {
-    if (capServices.length === 0) {
-      setCapServices(services.slice(0, 3));
-    }
-  }, [capServices]);
+    setCapServices(services.slice(0, 3));
+  }, []);
 
   return (
     <>
@@ -29,8 +28,10 @@ export default ({ services }: Props) => {
       </S.ServiceList>
       {services.length > 3 && capServices.length <= 3 && (
         <S.ShowMoreContent>
-          <S.ShowMoreButton onClick={() => setCapServices(services)}>
-            See all
+          <S.ShowMoreButton invert onClick={() => setCapServices(services)}>
+            <div>
+              See all {services.length} services <ChevronDown />
+            </div>
           </S.ShowMoreButton>
         </S.ShowMoreContent>
       )}

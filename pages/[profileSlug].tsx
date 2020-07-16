@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import Head from "next/head";
+import { ThemeProvider } from "styled-components";
 import { GET_PUBLIC_PROFILE_QUERY } from "../graphql/Profile/profile";
 import { getPublicProfileBySlug } from "../graphql/Profile/ProfileAPI";
 import { initializeApollo } from "../lib/withApollo";
@@ -12,7 +13,7 @@ const App = () => {
   const router = useRouter();
   const { profileSlug } = router.query;
 
-  const { data, loading } = getPublicProfileBySlug(profileSlug as string);
+  const { data } = getPublicProfileBySlug(profileSlug as string);
 
   if (!data?.profile?.id) {
     return <div>profile not found</div>;
@@ -20,7 +21,7 @@ const App = () => {
 
   const pageTitle = `${data.profile.name} | Fireside`;
   return (
-    <>
+    <ThemeProvider theme={{ primaryColor: data.profile.brandColor }}>
       <Head>
         <title>{pageTitle}</title>
         <meta name="description" content={data.profile.shortDescription} />
@@ -73,18 +74,18 @@ const App = () => {
                 />
               </S.ServiceList>
             </S.ServiceContent>
-            <S.AboutContent>
-              <S.AboutTitle>About</S.AboutTitle>
-              <S.AboutBox>
-                <S.AboutDescription>
-                  {data.profile.about}
-                </S.AboutDescription>
-              </S.AboutBox>
-            </S.AboutContent>
+            {data.profile.about && (
+              <S.AboutContent>
+                <S.AboutTitle>About</S.AboutTitle>
+                <S.AboutBox>
+                  <S.AboutDescription>{data.profile.about}</S.AboutDescription>
+                </S.AboutBox>
+              </S.AboutContent>
+            )}
           </S.Content>
         </S.Main>
       </S.Body>
-    </>
+    </ThemeProvider>
   );
 };
 

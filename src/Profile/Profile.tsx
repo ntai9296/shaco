@@ -9,6 +9,8 @@ import Settings from "../../src/Profile/Settings";
 import * as UserAPI from "../../graphql/User/UserAPI";
 import * as Utility from "../../src/common/utility";
 import Services from "./Services";
+import { ThemeProvider } from "styled-components";
+import profile from "../../pages/dashboard/profile";
 
 export default () => {
   const router = useRouter();
@@ -55,7 +57,9 @@ export default () => {
       return (
         <S.Content>
           <S.ContentTitle>Page Settings</S.ContentTitle>
-          <S.ContentSubTitle>Set your page details and make a great first impression</S.ContentSubTitle>
+          <S.ContentSubTitle>
+            Set your page details and make a great first impression
+          </S.ContentSubTitle>
           <Settings />
         </S.Content>
       );
@@ -63,58 +67,66 @@ export default () => {
   };
 
   return (
-    <S.Layout>
-      <S.TopNav>
-        <S.TopNavLeft>
-          <Link href="/dashboard">
-            <a>
-              <S.GoBack>
-                <ArrowLeft width={16} height={16} />
-                Back to dashboard
-              </S.GoBack>
-            </a>
-          </Link>
-        </S.TopNavLeft>
-        <S.TopNavRight>
-          {userData.currentUser?.profile?.slug && (
-            <Link href={`/${userData.currentUser.profile.slug}?preview=true`}>
-              <a target="_blank">
-                <S.PreviewLink>
-                  <Eye width={15} height={15} />
-                  Preview
-                </S.PreviewLink>
+    <ThemeProvider
+      theme={{ primaryColor: userData?.currentUser?.profile?.brandColor }}
+    >
+      <S.Layout>
+        <S.TopNav>
+          <S.TopNavLeft>
+            <Link href="/dashboard">
+              <a>
+                <S.GoBack>
+                  <ArrowLeft width={16} height={16} />
+                  Back to dashboard
+                </S.GoBack>
               </a>
             </Link>
-          )}
-          <Button>Launch</Button>
-        </S.TopNavRight>
-      </S.TopNav>
-      <S.Body>
-        <S.Tabs>
-          <S.Tab active={router.route === "/dashboard/profile"}>
-            <div>
-              <Link href="/dashboard/profile">
-                <a>Basics</a>
+          </S.TopNavLeft>
+          <S.TopNavRight>
+            {userData.currentUser?.profile?.slug && (
+              <Link href={`/${userData.currentUser.profile.slug}?preview=true`}>
+                <a target="_blank">
+                  <S.PreviewLink>
+                    <Eye width={15} height={15} />
+                    Preview
+                  </S.PreviewLink>
+                </a>
               </Link>
-            </div>
-          </S.Tab>
-          <S.Tab active={router.route.includes("/dashboard/profile/services")}>
-            <div>
-              <Link href="/dashboard/profile/services">
-                <a>Services</a>
-              </Link>
-            </div>
-          </S.Tab>
-          <S.Tab active={router.route.includes("/dashboard/profile/settings")}>
-            <div>
-              <Link href="/dashboard/profile/settings">
-                <a>Page Settings</a>
-              </Link>
-            </div>
-          </S.Tab>
-        </S.Tabs>
-        {onRenderContent()}
-      </S.Body>
-    </S.Layout>
+            )}
+            <Button>Launch</Button>
+          </S.TopNavRight>
+        </S.TopNav>
+        <S.Body>
+          <S.Tabs>
+            <S.Tab active={router.route === "/dashboard/profile"}>
+              <div>
+                <Link href="/dashboard/profile">
+                  <a>Basics</a>
+                </Link>
+              </div>
+            </S.Tab>
+            <S.Tab
+              active={router.route.includes("/dashboard/profile/services")}
+            >
+              <div>
+                <Link href="/dashboard/profile/services">
+                  <a>Services</a>
+                </Link>
+              </div>
+            </S.Tab>
+            <S.Tab
+              active={router.route.includes("/dashboard/profile/settings")}
+            >
+              <div>
+                <Link href="/dashboard/profile/settings">
+                  <a>Page Settings</a>
+                </Link>
+              </div>
+            </S.Tab>
+          </S.Tabs>
+          {onRenderContent()}
+        </S.Body>
+      </S.Layout>
+    </ThemeProvider>
   );
 };

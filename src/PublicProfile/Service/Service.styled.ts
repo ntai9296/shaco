@@ -12,13 +12,17 @@ export const ServiceList = styled.div<{ totalCount: number }>`
     `
     justify-content: center;
   `}
+
+  ${Utility.mediaBreakpointDown("lg")} {
+    justify-content: center;
+  }
 `;
 
 export const ServiceItem = styled.div`
   padding: 10px;
   flex-basis: 33.33%;
 
-  ${Utility.mediaBreakpointDown("lg")} {
+  ${Utility.mediaBreakpointDown("md")} {
     flex-basis: 50%;
   }
   ${Utility.mediaBreakpointDown("sm")} {
@@ -117,5 +121,10 @@ export const ShowMoreContent = styled.div`
 `;
 export const ShowMoreButton = styled(CommonButton)`
   border-radius: 25px;
-  padding: 15px 25px;
+  padding: 10px 20px;
+
+  > div {
+    display: flex;
+    align-items: center;
+  }
 `;

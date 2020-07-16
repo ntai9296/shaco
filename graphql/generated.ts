@@ -655,6 +655,7 @@ export interface UpdateProfileInput {
   shortDescription?: string | null;
   profilePhotoUrl?: string | null;
   coverPhotoUrl?: string | null;
+  brandColor?: string | null;
   clientMutationId?: string | null;
 }
 

@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Styling } from "../common/utility";
+import { CommonButton } from "../common/Button";
 
 export const Body = styled.div`
   margin: 32px -8px 0 -8px;
@@ -163,4 +164,15 @@ export const IntroLeft = styled.div`
 export const IntroRight = styled.div`
   flex: 1;
   padding-left: 8px;
+`;
+
+export const BrandColorField = styled.div`
+  display: flex;
+  flex-direction: column;
+  > label {
+    margin-bottom: ${Styling.labelInputMargin};
+  }
+`;
+export const BrandColorButton = styled(CommonButton)`
+  width: fit-content;
 `;

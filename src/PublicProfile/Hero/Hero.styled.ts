@@ -28,6 +28,10 @@ export const Banner = styled.div<{ backgroundURL: string }>`
     height: 30vw;
   }
 
+  ${Utility.mediaBreakpointUp("md")} {
+    height: 20vw;
+  }
+
   > div {
     transform: translateY(35%);
     position: relative;
