@@ -20,6 +20,7 @@ const App = () => {
   }
 
   const pageTitle = `${data.profile.name} | Fireside`;
+  const coverPhotoURL = data.profile.coverPhotoUrl || "";
   return (
     <ThemeProvider theme={{ primaryColor: data.profile.brandColor }}>
       <Head>
@@ -32,7 +33,7 @@ const App = () => {
           name="twitter:description"
           content={data.profile.shortDescription}
         />
-        <meta name="twitter:image" content={data.profile.coverPhotoUrl} />
+        {coverPhotoURL && <meta name="twitter:image" content={coverPhotoURL} />}
 
         <meta property="og:title" content={pageTitle} />
         <meta property="og:type" content="article" />
@@ -40,7 +41,7 @@ const App = () => {
           property="og:url"
           content={`https://tryfireside.com/${profileSlug}`}
         />
-        <meta property="og:image" content={data.profile.coverPhotoUrl} />
+        {coverPhotoURL && <meta property="og:image" content={coverPhotoURL} />}
         <meta
           property="og:description"
           content={data.profile.shortDescription}
