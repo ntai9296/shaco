@@ -94,15 +94,15 @@ export interface deleteCalendarEventMutationVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: getProfileQuery
+// GraphQL query operation: getPublicProfileQuery
 // ====================================================
 
-export interface getProfileQuery_profile_servicesConnection_nodes_providable {
+export interface getPublicProfileQuery_profile_servicesConnection_nodes_providable {
   id: string;
   duration: number;
 }
 
-export interface getProfileQuery_profile_servicesConnection_nodes {
+export interface getPublicProfileQuery_profile_servicesConnection_nodes {
   id: string;
   name: string | null;
   description: string | null;
@@ -111,41 +111,39 @@ export interface getProfileQuery_profile_servicesConnection_nodes {
   introVideoUrl: string | null;
   buttonText: string | null;
   providableType: ServiceProvidableTypeEnum;
-  providable: getProfileQuery_profile_servicesConnection_nodes_providable;
+  providable: getPublicProfileQuery_profile_servicesConnection_nodes_providable;
 }
 
-export interface getProfileQuery_profile_servicesConnection {
+export interface getPublicProfileQuery_profile_servicesConnection {
   /**
    * A list of nodes.
    */
-  nodes: (getProfileQuery_profile_servicesConnection_nodes | null)[] | null;
+  nodes: (getPublicProfileQuery_profile_servicesConnection_nodes | null)[] | null;
 }
 
-export interface getProfileQuery_profile {
+export interface getPublicProfileQuery_profile {
   id: string;
   name: string;
   shortDescription: string;
   about: string;
   slug: string | null;
-  firstName: string;
-  lastName: string;
   introVideoUrl: string | null;
   brandColor: string | null;
   currencyType: string;
   status: number;
-  profilePhotoUrl: string | null;
-  coverPhotoUrl: string | null;
-  servicesConnection: getProfileQuery_profile_servicesConnection | null;
+  profilePhotoUrl: string;
+  coverPhotoUrl: string;
+  servicesConnection: getPublicProfileQuery_profile_servicesConnection;
 }
 
-export interface getProfileQuery {
+export interface getPublicProfileQuery {
   /**
    * Get profile based on slug
    */
-  profile: getProfileQuery_profile | null;
+  profile: getPublicProfileQuery_profile | null;
 }
 
-export interface getProfileQueryVariables {
+export interface getPublicProfileQueryVariables {
   slug: string;
 }
 

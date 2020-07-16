@@ -11,6 +11,8 @@ export const ServiceList = styled.div`
   grid-template-columns: repeat(3, 1fr);
   display: grid;
   gap: 15px;
+  grid-template-columns: repeat(auto-fit, minmax(32.33%, 32.33%));
+  justify-content: center;
 `;
 
 export const ServiceItem = styled.div`
@@ -63,6 +65,19 @@ export const ServiceItemImageHover = styled.div`
   cursor: pointer;
 `;
 
+export const DeleteImageButton = styled.a`
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 7px;
+  background: #fff;
+  border-radius: 50%;
+  margin: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
 export const ServiceItemImage = styled.div`
   display: flex;
   align-items: center;
@@ -87,7 +102,8 @@ export const ServiceItemImagePlaceholder = styled.div`
   justify-content: center;
   width: 100%;
   cursor: pointer;
-  font-weight: bold;
+  font-weight: 500;
+  text-align: center;
 `;
 export const ServiceItemImageContent = styled.img`
   width: auto;
@@ -100,7 +116,6 @@ export const ServiceItemPricing = styled.div`
 `;
 export const ServiceItemCost = styled.h2`
   margin: 0 0 5px 0;
-  font-family: "Inter";
   font-size: 28px;
 `;
 export const ServiceItemDuration = styled.p`
@@ -108,6 +123,7 @@ export const ServiceItemDuration = styled.p`
   color: rgb(112, 108, 100);
   text-transform: uppercase;
   font-weight: bold;
+  font-size: 13px;
 `;
 export const ServiceItemDescriptionBox = styled.div<{ maxHeight?: boolean }>`
   position: relative;
@@ -141,6 +157,7 @@ export const ServiceItemButton = styled(CommonButton)`
   border-radius: 25px;
   padding: 12px 40px;
   font-size: 15px;
+  font-weight: 500;
 `;
 
 export const AddServiceItem = styled.div`

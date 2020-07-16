@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import _ from "lodash";
-import { Edit, Plus } from "react-feather";
+import { Edit, Plus, Trash } from "react-feather";
 import * as S from "./Services.styled";
 import * as UserAPI from "../../graphql/User/UserAPI";
 import * as ServiceAPI from "../../graphql/Service/ServiceAPI";
@@ -115,7 +115,8 @@ const ServiceItemForm = ({
               return {
                 ...existingConnection,
                 nodes: existingConnection.nodes.filter(
-                  (node: any) => readField("id", node) !== data?.deleteService?.service?.id
+                  (node: any) =>
+                    readField("id", node) !== data?.deleteService?.service?.id
                 ),
               };
             },
@@ -237,7 +238,7 @@ const ServiceItemForm = ({
           <S.ServiceItemTitleInput
             onChange={(e) => onChangeService("name", e.target.value)}
             value={service.name}
-            placeholder="Service name"
+            placeholder="Enter service title"
           />
         </S.ServiceItemTitle>
         <S.ServiceItemImage>
@@ -246,6 +247,18 @@ const ServiceItemForm = ({
               <S.ServiceItemImageContent src={service.imageUrl} />
               <S.ServiceItemImageHover onClick={() => imageRef.current.click()}>
                 Change image
+                <S.DeleteImageButton
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onChangeService("imageUrl", "");
+                  }}
+                >
+                  <Trash
+                    width={15}
+                    height={15}
+                    color={Utility.Styling.dangerColor}
+                  />
+                </S.DeleteImageButton>
               </S.ServiceItemImageHover>
             </>
           ) : (
@@ -253,6 +266,8 @@ const ServiceItemForm = ({
               onClick={() => imageRef.current.click()}
             >
               Choose image
+              <br />
+              Recommended size: 460 by 200 pixels
             </S.ServiceItemImagePlaceholder>
           )}
           <input
@@ -267,18 +282,19 @@ const ServiceItemForm = ({
         <S.ServiceItemPricing>
           <S.ServiceItemCost>
             <S.ServiceItemCostInput
-              value={service.price}
+              allowNegative={false}
+              value={service.price || ""}
               onValueChange={({ floatValue }: any) =>
-                onChangeService("price", floatValue)
+                onChangeService("price", floatValue || 0)
               }
               prefix="$"
               thousandSeparator
-              placeholder="Price"
+              placeholder="Enter price"
               decimalScale={2}
             />
           </S.ServiceItemCost>
           <S.ServiceItemDuration>
-            for
+            Duration:
             <S.ServiceItemDurationSelect
               onChange={(e) =>
                 onChangeService("providableData", {
@@ -354,9 +370,11 @@ const ServiceItemForm = ({
           <div>
             <S.CancelButton
               isLoading={deleteLoading}
-              onClick={() => deleteService({
-                variables: { input: { serviceId: initService.id } },
-              })}
+              onClick={() =>
+                deleteService({
+                  variables: { input: { serviceId: initService.id } },
+                })
+              }
             >
               Delete
             </S.CancelButton>
@@ -401,7 +419,7 @@ const ServiceItem = ({
         {service.providableType ===
           ServiceProvidableTypeEnum.VIDEO_CALL_SERVICE && (
           <S.ServiceItemDuration>
-            for {service?.providable.duration} minutes
+            Duration: {service?.providable.duration} minutes
           </S.ServiceItemDuration>
         )}
         <S.ServiceItemAction>

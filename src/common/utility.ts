@@ -29,10 +29,8 @@ export const Styling = {
   boxShadow: "0 2px 4px rgba(81,107,152,0.16)",
 };
 
-export const mediaBreakpointUp = (breakpoint: Breakpoint, first: any, args: any) => css`
-  @media (min-width: ${BreakpointWidth[breakpoint][0]}px) {
-    ${css(first, ...args)}
-  }
+export const mediaBreakpointUp = (breakpoint: Breakpoint) => `
+  @media (min-width: ${BreakpointWidth[breakpoint][0]}px)
 `;
 
 export const mediaBreakpointDown = (breakpoint: Breakpoint) =>
@@ -44,14 +42,15 @@ export const mediaBreakpointBetween = (
   first: any,
   ...args: any
 ) => css`
-  @media (min-width: ${BreakpointWidth[breakpointLower][0]}px) and (max-width: ${BreakpointWidth[
-      breakpointUpper
-    ][1]}px) {
+  @media (min-width: ${BreakpointWidth[
+      breakpointLower
+    ][0]}px) and (max-width: ${BreakpointWidth[breakpointUpper][1]}px) {
     ${css(first, ...args)}
   }
 `;
 
-export const showWorkingOverlay = (delay = 500) => OverlayJS.showWorkingOverlay(delay);
+export const showWorkingOverlay = (delay = 500) =>
+  OverlayJS.showWorkingOverlay(delay);
 export const hideWorkingOverlay = () => OverlayJS.hideWorkingOverlay();
 export const extensionName = (fileName: string) => {
   return fileName.substr(fileName.lastIndexOf(".") + 1);

@@ -35,15 +35,11 @@ const AccountIcon = styled.a`
   }
 `;
 
-const Logo = styled.div`
-  max-width: 12rem;
-  width: 100%;
-  // background: url(https://siromortgage.com/static/img/brand.svg) no-repeat;
-  background-size: contain;
-  background-position: 0;
-  font-size: 0;
-  width: 100px;
-  height: 30px;
+const Logo = styled.a`
+  color: ${Styling.textColor};
+  font-weight: 700;
+  font-size: 20px;
+  cursor: pointer;
 `;
 
 const Menu = styled.div`

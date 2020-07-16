@@ -18,7 +18,7 @@ export const Brand = styled.div`
 
   a {
     font-size: 26px;
-    color: ${Styling.primaryColor};
+    color: ${Styling.textColor};
     font-weight: bold;
   }
 `;

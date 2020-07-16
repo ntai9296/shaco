@@ -1,15 +1,13 @@
 import { gql } from "@apollo/client";
 
-export const GET_PROFILE = gql`
-  query getProfileQuery($slug: String!) {
+export const GET_PUBLIC_PROFILE_QUERY = gql`
+  query getPublicProfileQuery($slug: String!) {
     profile(slug: $slug) {
       id
       name
       shortDescription
       about
       slug
-      firstName
-      lastName
       introVideoUrl
       brandColor
       currencyType
