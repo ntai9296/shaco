@@ -43,39 +43,19 @@ export const ServiceTitle = styled.h3`
   font-size: 20px;
 `;
 
-export const ServiceItemImageHover = styled.div`
-  display: none;
-  position: absolute;
-  width: 100%;
-  top: 0;
-  height: 100%;
-  background: rgba(100, 100, 100, 0.5);
-  color: #fff;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  cursor: pointer;
-`;
-
 export const ServiceItemImage = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 22px;
-
   position: relative;
-
-  :hover {
-    > ${ServiceItemImageHover} {
-      display: flex;
-    }
-  }
 `;
 
 export const ServiceItemImageContent = styled.img`
   width: auto;
   max-width: 100%;
   max-height: 8em;
+  border-radius: 8px;
 `;
 
 export const ServiceItemPricing = styled.div`

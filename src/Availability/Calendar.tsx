@@ -117,13 +117,35 @@ export default () => {
   }, [userData]);
 
   const onCalendarSelect = async (info: any) => {
-    findSameDay("", moment.tz(info.startStr, timezone), moment.tz(info.endStr, timezone), events, timezone);
+    const { start, end, deleteIds } = findSameDay(
+      "",
+      moment.tz(info.startStr, timezone),
+      moment.tz(info.endStr, timezone),
+      events,
+      timezone
+    );
+
+    let currEvents = events;
+
+    // Delete all events in combined
+    deleteIds.forEach((id: string) => {
+      deleteCalendarEvent({
+        variables: {
+          input: {
+            calendarEventId: id,
+          },
+        },
+      });
+    });
+    currEvents = currEvents.filter((event) => !deleteIds.includes(event.id));
+    setEvents(currEvents);
+
     try {
       const result = await createCalendarEvent({
         variables: {
           input: {
-            starting: moment.tz(info.startStr, timezone).toISOString(),
-            ending: moment.tz(info.endStr, timezone).toISOString(),
+            starting: start.toISOString(),
+            ending: end.toISOString(),
             availability: CalendarEventAvailabilityEnum.FREE,
             integrationType: CalendarEventIntegrationTypeEnum.INTERNAL,
             title: "Available",
@@ -132,7 +154,7 @@ export default () => {
       });
       if (result?.data?.createCalendarEvent?.calendarEvent) {
         setEvents([
-          ...events,
+          ...currEvents,
           nodeToEvent(result.data.createCalendarEvent.calendarEvent),
         ]);
       }
@@ -144,28 +166,51 @@ export default () => {
   };
 
   const onCalendarEventChange = async (event: any) => {
-    findSameDay(event.event.id, moment.tz(event.event.start, timezone), moment.tz(event.event.end, timezone), events, timezone);
-    try {
-      const result = await updateCalendarEvent({
+    const { start, end, deleteIds } = findSameDay(
+      event.event.id,
+      moment.tz(event.event.start, timezone),
+      moment.tz(event.event.end, timezone),
+      events,
+      timezone
+    );
+
+    let currEvents = events;
+
+    // Delete all events in combined
+    deleteIds.forEach((id: string) => {
+      deleteCalendarEvent({
         variables: {
           input: {
-            calendarEventId: event.event.id,
-            starting: moment.tz(event.event.start, timezone).toISOString(),
-            ending: moment.tz(event.event.end, timezone).toISOString(),
+            calendarEventId: id,
           },
         },
       });
+    });
+    currEvents = currEvents.filter((event) => !deleteIds.includes(event.id));
+    const eventIndex = currEvents.findIndex((e) => e.id === event.event.id);
+    setEvents(
+      update(currEvents, {
+        [eventIndex]: {
+          start: {
+            $set: start.format(),
+          },
+          end: {
+            $set: end.format(),
+          },
+        },
+      })
+    );
 
-      const eventIndex = events.findIndex((e) => e.id === event.event.id);
-      if (result?.data?.updateCalendarEvent?.calendarEvent) {
-        setEvents(
-          update(events, {
-            [eventIndex]: {
-              $set: nodeToEvent(result.data.updateCalendarEvent.calendarEvent),
-            },
-          })
-        );
-      }
+    try {
+      await updateCalendarEvent({
+        variables: {
+          input: {
+            calendarEventId: event.event.id,
+            starting: start.toISOString(),
+            ending: end.toISOString(),
+          },
+        },
+      });
     } catch (err) {
       console.log(err);
     }

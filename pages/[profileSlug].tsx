@@ -77,7 +77,7 @@ const App = () => {
               <S.AboutTitle>About</S.AboutTitle>
               <S.AboutBox>
                 <S.AboutDescription>
-                  {data.profile.shortDescription}
+                  {data.profile.about}
                 </S.AboutDescription>
               </S.AboutBox>
             </S.AboutContent>

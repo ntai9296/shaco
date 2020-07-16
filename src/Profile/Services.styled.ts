@@ -109,6 +109,7 @@ export const ServiceItemImageContent = styled.img`
   width: auto;
   max-width: 100%;
   max-height: 8em;
+  border-radius: 8px;
 `;
 export const ServiceItemPricing = styled.div`
   margin-bottom: 40px;
