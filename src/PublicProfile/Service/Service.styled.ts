@@ -2,10 +2,16 @@ import styled from "styled-components";
 import * as Utility from "../../common/utility";
 import { CommonButton } from "../../common/Button";
 
-export const ServiceList = styled.div`
+export const ServiceList = styled.div<{ totalCount: number }>`
   display: flex;
   flex-wrap: wrap;
   margin: 0 -10px 10px -10px;
+
+  ${(props) =>
+    props.totalCount < 3 &&
+    `
+    justify-content: center;
+  `}
 `;
 
 export const ServiceItem = styled.div`

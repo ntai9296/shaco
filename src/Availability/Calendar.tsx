@@ -117,6 +117,7 @@ export default () => {
   }, [userData]);
 
   const onCalendarSelect = async (info: any) => {
+    findSameDay("", moment.tz(info.startStr, timezone), moment.tz(info.endStr, timezone), events, timezone);
     try {
       const result = await createCalendarEvent({
         variables: {
@@ -143,9 +144,7 @@ export default () => {
   };
 
   const onCalendarEventChange = async (event: any) => {
-    console.log(event);
-    console.log(events);
-    findSameDay(event.event.start, event.event.end, events);
+    findSameDay(event.event.id, moment.tz(event.event.start, timezone), moment.tz(event.event.end, timezone), events, timezone);
     try {
       const result = await updateCalendarEvent({
         variables: {

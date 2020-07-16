@@ -22,7 +22,7 @@ export default ({ services }: Props) => {
 
   return (
     <>
-      <S.ServiceList>
+      <S.ServiceList totalCount={capServices.length}>
         {capServices.map((service) => (
           <ServiceItem key={service.id} service={service} />
         ))}
