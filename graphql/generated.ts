@@ -131,8 +131,8 @@ export interface getPublicProfileQuery_profile {
   brandColor: string | null;
   currencyType: string;
   status: number;
-  profilePhotoUrl: string;
-  coverPhotoUrl: string;
+  profilePhotoUrl: string | null;
+  coverPhotoUrl: string | null;
   servicesConnection: getPublicProfileQuery_profile_servicesConnection;
 }
 

@@ -49,14 +49,14 @@ const App = () => {
       </Head>
       <S.Body>
         <Header
-          avatarURL={data.profile.profilePhotoUrl}
+          avatarURL={data.profile.profilePhotoUrl || ""}
           name={data.profile.name}
         />
         <div style={{ marginTop: 64 }} />
         <S.Main>
           <Hero
-            avatarURL={data.profile.profilePhotoUrl}
-            backgroundURL={data.profile.coverPhotoUrl}
+            avatarURL={data.profile.profilePhotoUrl || ""}
+            backgroundURL={data.profile.coverPhotoUrl || ""}
           />
           <S.Content>
             <S.TitleContent>
@@ -73,14 +73,6 @@ const App = () => {
                 />
               </S.ServiceList>
             </S.ServiceContent>
-            {data.profile.about && (
-              <S.AboutContent>
-                <S.AboutTitle>About</S.AboutTitle>
-                <S.AboutBox>
-                  <S.AboutDescription>{data.profile.about}</S.AboutDescription>
-                </S.AboutBox>
-              </S.AboutContent>
-            )}
           </S.Content>
         </S.Main>
       </S.Body>
