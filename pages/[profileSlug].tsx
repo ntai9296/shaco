@@ -47,7 +47,6 @@ const App = () => {
         />
         <meta property="og:site_name" content="Fireside" />
       </Head>
-
       <S.Body>
         <Header
           avatarURL={data.profile.profilePhotoUrl}

@@ -17,6 +17,7 @@
     "@fullcalendar/moment-timezone": "^4.4.2",
     "@fullcalendar/react": "^4.4.2",
     "@fullcalendar/resource-timegrid": "^4.4.2",
+    "@sentry/react": "^5.19.2",
     "@zeit/next-css": "^1.0.1",
     "@zeit/next-sass": "^1.0.1",
     "cookie": "^0.4.1",
