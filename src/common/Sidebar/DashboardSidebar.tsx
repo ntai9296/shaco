@@ -2,13 +2,13 @@ import React from "react";
 import {
   ArrowRight,
   User,
-  PhoneIncoming,
   Calendar,
   Bell,
   Settings,
   HelpCircle,
   DollarSign,
   LogOut,
+  Star,
 } from "react-feather";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -64,12 +64,12 @@ export default () => {
           </S.Profile>
         </Link>
       )}
-      <Link href="/dashboard/calls">
+      <Link href="/dashboard/bookings">
         <S.SidebarItem
-          isActive={activeRoute("/calls") || router.route === "/dashboard"}
+          isActive={activeRoute("/bookings") || router.route === "/dashboard"}
         >
-          <PhoneIncoming width={15} height={15} />
-          Calls
+          <Star width={15} height={15} />
+          Bookings
         </S.SidebarItem>
       </Link>
       <Link href="/dashboard/availability">
