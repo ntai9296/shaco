@@ -12,7 +12,7 @@ interface Props {
 export default ({ backgroundURL, avatarURL, introVideoURL }: Props) => {
   const [open, setOpen] = useState(false);
   const [videoPlaying, setVideoPlaying] = useState(false);
-  const [videoMuted, setVideoMuted] = useState(false);
+  const [videoMuted, setVideoMuted] = useState(true);
   return (
     <S.BannerContainer>
       <S.Banner backgroundURL={backgroundURL}>
