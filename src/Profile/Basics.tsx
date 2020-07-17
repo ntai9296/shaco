@@ -260,18 +260,12 @@ export default () => {
             <S.PageNameField>
               <Input
                 label="Page name"
+                placeholder="E.g: John Doe"
                 value={profile?.name || ""}
                 onChange={(e) => onChangeProfile("name", e.target.value)}
               />
             </S.PageNameField>
           </S.PageNameRow>
-          {/* <S.CategoryRow>
-            <S.CategoryField>
-              <Select label="Category">
-                <option>Hello world</option>
-              </Select>
-            </S.CategoryField>
-          </S.CategoryRow> */}
           <S.ShortDescriptionRow>
             <S.ShortDescriptionField>
               <Input

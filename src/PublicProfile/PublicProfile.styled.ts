@@ -28,6 +28,31 @@ export const ShortDescription = styled.p`
   font-size: 15px;
 `;
 
+export const SocialMediaList = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+`;
+
+export const SocialMediaItem = styled.a`
+  margin-right: 8px;
+  cursor: pointer;
+  color: #444;
+
+  :last-child {
+    margin-right: 0;
+  }
+  > div {
+    background-color: rgb(240, 239, 237);
+    border-radius: 50%;
+    padding: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+`;
+
 export const ServiceContent = styled.div``;
 export const ServiceTitle = styled.h2`
   margin: 0 0 15px 0;
@@ -63,12 +88,11 @@ export const AboutDescription = styled.p`
 `;
 
 export const ServiceList = styled.div`
-    ${Utility.mediaBreakpointDown("sm")} {
-      max-width: 600px;
-      margin: auto;
-    }
+  ${Utility.mediaBreakpointDown("sm")} {
+    max-width: 600px;
+    margin: auto;
+  }
 `;
-
 
 // content: " ";
 //     position: absolute;
@@ -79,4 +103,3 @@ export const ServiceList = styled.div`
 //     background: -webkit-linear-gradient(to bottom, rgba(255,255,255,0), #fff 80%);
 //     background: -moz-linear-gradient(to bottom, rgba(255,255,255,0), #fff 80%);
 //     background: linear-gradient(to bottom, rgba(255,255,255,0), #fff 80%);
-

@@ -14,6 +14,13 @@ export const GET_PUBLIC_PROFILE_QUERY = gql`
       status
       profilePhotoUrl
       coverPhotoUrl
+
+      facebookUrl
+      twitterUrl
+      instagramUrl
+      youtubeUrl
+      twitchUrl
+
       servicesConnection {
         nodes {
           id

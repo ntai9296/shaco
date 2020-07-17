@@ -1,6 +1,8 @@
 import { useRouter } from "next/router";
 import Head from "next/head";
+import Link from "next/link";
 import { ThemeProvider } from "styled-components";
+import { Instagram, Facebook, Youtube, Twitter, Twitch } from "react-feather";
 import { GET_PUBLIC_PROFILE_QUERY } from "../graphql/Profile/profile";
 import { getPublicProfileBySlug } from "../graphql/Profile/ProfileAPI";
 import { initializeApollo } from "../lib/withApollo";
@@ -66,6 +68,69 @@ const App = () => {
               <S.ShortDescription>
                 {data.profile.shortDescription}
               </S.ShortDescription>
+              {(data.profile.facebookUrl ||
+                data.profile.instagramUrl ||
+                data.profile.twitchUrl ||
+                data.profile.twitterUrl ||
+                data.profile.youtubeUrl) && (
+                <S.SocialMediaList>
+                  {data.profile.instagramUrl && (
+                    <S.SocialMediaItem
+                      href={data.profile.instagramUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <div>
+                        <Instagram size={16} />
+                      </div>
+                    </S.SocialMediaItem>
+                  )}
+                  {data.profile.twitterUrl && (
+                    <S.SocialMediaItem
+                      href={data.profile.twitterUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <div>
+                        <Twitter size={16} />
+                      </div>
+                    </S.SocialMediaItem>
+                  )}
+                  {data.profile.facebookUrl && (
+                    <S.SocialMediaItem
+                      href={data.profile.facebookUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <div>
+                        <Facebook size={16} />
+                      </div>
+                    </S.SocialMediaItem>
+                  )}
+                  {data.profile.youtubeUrl && (
+                    <S.SocialMediaItem
+                      href={data.profile.youtubeUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <div>
+                        <Youtube size={16} />
+                      </div>
+                    </S.SocialMediaItem>
+                  )}
+                  {data.profile.twitchUrl && (
+                    <S.SocialMediaItem
+                      href={data.profile.twitchUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <div>
+                        <Twitch size={16} />
+                      </div>
+                    </S.SocialMediaItem>
+                  )}
+                </S.SocialMediaList>
+              )}
             </S.TitleContent>
             <S.ServiceContent>
               <S.ServiceTitle>How can I help you?</S.ServiceTitle>

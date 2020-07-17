@@ -133,6 +133,11 @@ export interface getPublicProfileQuery_profile {
   status: number;
   profilePhotoUrl: string | null;
   coverPhotoUrl: string | null;
+  facebookUrl: string | null;
+  twitterUrl: string | null;
+  instagramUrl: string | null;
+  youtubeUrl: string | null;
+  twitchUrl: string | null;
   servicesConnection: getPublicProfileQuery_profile_servicesConnection;
 }
 
@@ -658,6 +663,11 @@ export interface UpdateProfileInput {
   coverPhotoUrl?: string | null;
   introVideoUrl?: string | null;
   brandColor?: string | null;
+  facebookUrl: string;
+  instagramUrl: string;
+  twitchUrl: string;
+  twitterUrl: string;
+  youtubeUrl: string;
   clientMutationId?: string | null;
 }
 
