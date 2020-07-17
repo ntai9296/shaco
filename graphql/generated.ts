@@ -663,11 +663,11 @@ export interface UpdateProfileInput {
   coverPhotoUrl?: string | null;
   introVideoUrl?: string | null;
   brandColor?: string | null;
-  facebookUrl: string;
-  instagramUrl: string;
-  twitchUrl: string;
-  twitterUrl: string;
-  youtubeUrl: string;
+  facebookUrl?: string | null;
+  instagramUrl?: string | null;
+  twitchUrl?: string | null;
+  twitterUrl?: string | null;
+  youtubeUrl?: string | null;
   clientMutationId?: string | null;
 }
 
