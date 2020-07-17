@@ -160,7 +160,7 @@ const ServiceItemForm = ({
       duration: 30,
     },
     name: "",
-    buttonText: "",
+    buttonText: "Choose",
     price: 0,
     description: "",
   });
