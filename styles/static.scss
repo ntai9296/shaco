@@ -3,57 +3,60 @@
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
 @font-face {
-  font-family: 'Inter';
-  font-style:  normal;
+  font-family: "Inter";
+  font-style: normal;
   font-weight: 400;
-  src: local(''),
-        url("/fonts/Inter-Regular.woff2?v=3.13") format("woff2"),
-        url("/fonts/Inter-Regular.woff?v=3.13") format("woff");
+  src: local(""), url("/fonts/Inter-Regular.woff2?v=3.13") format("woff2"),
+    url("/fonts/Inter-Regular.woff?v=3.13") format("woff");
 }
 
 @font-face {
-  font-family: 'Inter';
-  font-style:  normal;
+  font-family: "Inter";
+  font-style: normal;
   font-weight: 500;
-  src: local(''),
-        url("/fonts/Inter-Medium.woff2?v=3.13") format("woff2"),
-        url("/fonts/Inter-Medium.woff?v=3.13") format("woff");
+  src: local(""), url("/fonts/Inter-Medium.woff2?v=3.13") format("woff2"),
+    url("/fonts/Inter-Medium.woff?v=3.13") format("woff");
 }
 
 @font-face {
-  font-family: 'Inter';
-  font-style:  normal;
+  font-family: "Inter";
+  font-style: normal;
   font-weight: 700;
-  src: local(''),
-        url("/fonts/Inter-Bold.woff2?v=3.13") format("woff2"),
-        url("/fonts/Inter-Bold.woff?v=3.13") format("woff");
+  src: local(""), url("/fonts/Inter-Bold.woff2?v=3.13") format("woff2"),
+    url("/fonts/Inter-Bold.woff?v=3.13") format("woff");
 }
 
 /* roboto-500 - latin */
 @font-face {
-  font-family: 'Roboto';
+  font-family: "Roboto";
   font-style: normal;
   font-weight: 500;
-  src: url('/fonts/roboto-v20-latin-500.eot'); /* IE9 Compat Modes */
-  src: local('Roboto Medium'), local('Roboto-Medium'),
-       url('/fonts/roboto-v20-latin-500.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-       url('/fonts/roboto-v20-latin-500.woff2') format('woff2'), /* Super Modern Browsers */
-       url('/fonts/roboto-v20-latin-500.woff') format('woff'), /* Modern Browsers */
-       url('/fonts/roboto-v20-latin-500.ttf') format('truetype'), /* Safari, Android, iOS */
-       url('/fonts/roboto-v20-latin-500.svg#Roboto') format('svg'); /* Legacy iOS */
+  src: url("/fonts/roboto-v20-latin-500.eot"); /* IE9 Compat Modes */
+  src: local("Roboto Medium"), local("Roboto-Medium"),
+    url("/fonts/roboto-v20-latin-500.eot?#iefix") format("embedded-opentype"),
+    /* IE6-IE8 */ url("/fonts/roboto-v20-latin-500.woff2") format("woff2"),
+    /* Super Modern Browsers */ url("/fonts/roboto-v20-latin-500.woff")
+      format("woff"),
+    /* Modern Browsers */ url("/fonts/roboto-v20-latin-500.ttf")
+      format("truetype"),
+    /* Safari, Android, iOS */ url("/fonts/roboto-v20-latin-500.svg#Roboto")
+      format("svg"); /* Legacy iOS */
 }
 /* roboto-700 - latin */
 @font-face {
-  font-family: 'Roboto';
+  font-family: "Roboto";
   font-style: normal;
   font-weight: 700;
-  src: url('/fonts/roboto-v20-latin-700.eot'); /* IE9 Compat Modes */
-  src: local('Roboto Bold'), local('Roboto-Bold'),
-       url('/fonts/roboto-v20-latin-700.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-       url('/fonts/roboto-v20-latin-700.woff2') format('woff2'), /* Super Modern Browsers */
-       url('/fonts/roboto-v20-latin-700.woff') format('woff'), /* Modern Browsers */
-       url('/fonts/roboto-v20-latin-700.ttf') format('truetype'), /* Safari, Android, iOS */
-       url('/fonts/roboto-v20-latin-700.svg#Roboto') format('svg'); /* Legacy iOS */
+  src: url("/fonts/roboto-v20-latin-700.eot"); /* IE9 Compat Modes */
+  src: local("Roboto Bold"), local("Roboto-Bold"),
+    url("/fonts/roboto-v20-latin-700.eot?#iefix") format("embedded-opentype"),
+    /* IE6-IE8 */ url("/fonts/roboto-v20-latin-700.woff2") format("woff2"),
+    /* Super Modern Browsers */ url("/fonts/roboto-v20-latin-700.woff")
+      format("woff"),
+    /* Modern Browsers */ url("/fonts/roboto-v20-latin-700.ttf")
+      format("truetype"),
+    /* Safari, Android, iOS */ url("/fonts/roboto-v20-latin-700.svg#Roboto")
+      format("svg"); /* Legacy iOS */
 }
 
 * {
@@ -73,7 +76,8 @@ body {
 
 body {
   position: relative;
-  font-family: "Inter", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Roboto", sans-serif;
+  font-family: "Inter", "SF Pro Display", -apple-system, BlinkMacSystemFont,
+    "Roboto", sans-serif;
   font-size: 14px;
 
   > div {
@@ -81,13 +85,22 @@ body {
   }
 }
 
-input, textarea {
-  font-family: "Inter", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Roboto", sans-serif;
+input,
+textarea {
+  font-family: "Inter", "SF Pro Display", -apple-system, BlinkMacSystemFont,
+    "Roboto", sans-serif;
   font-size: 16px;
 }
 
-h1, h2, h3, h4, h5, h6, label {
-  font-family: "Roboto", "Inter", "SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+label {
+  font-family: "Roboto", "Inter", "SF Pro Display", -apple-system,
+    BlinkMacSystemFont, sans-serif;
 }
 
 *,
@@ -116,23 +129,35 @@ button:focus {
 }
 
 @-ms-keyframes spin {
-  from { -ms-transform: rotate(0deg); }
-  to { -ms-transform: rotate(360deg); }
+  from {
+    -ms-transform: rotate(0deg);
+  }
+  to {
+    -ms-transform: rotate(360deg);
+  }
 }
 @-moz-keyframes spin {
-  from { -moz-transform: rotate(0deg); }
-  to { -moz-transform: rotate(360deg); }
+  from {
+    -moz-transform: rotate(0deg);
+  }
+  to {
+    -moz-transform: rotate(360deg);
+  }
 }
 @-webkit-keyframes spin {
-  from { -webkit-transform: rotate(0deg); }
-  to { -webkit-transform: rotate(360deg); }
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+  }
 }
 @keyframes spin {
   from {
-      transform:rotate(0deg);
+    transform: rotate(0deg);
   }
   to {
-      transform:rotate(360deg);
+    transform: rotate(360deg);
   }
 }
 

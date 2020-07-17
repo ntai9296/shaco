@@ -8,10 +8,12 @@ import * as UserAPI from "../../graphql/User/UserAPI";
 import * as ProfileAPI from "../../graphql/Profile/ProfileAPI";
 import * as Utility from "../common/utility";
 import { getCurrentUserProfileQuery_currentUser_profile } from "../../graphql/generated";
+import Button from "../common/Button";
 
 export default () => {
   const profilePhotoRef = useRef<any>();
   const coverPhotoRef = useRef<any>();
+  const introVideoRef = useRef<any>();
 
   const { data } = UserAPI.getCurrentUserProfile();
   const [updateProfile] = ProfileAPI.updateProfile();
@@ -114,6 +116,27 @@ export default () => {
     }
   };
 
+  const onUploadIntroVideo = async () => {
+    Utility.showWorkingOverlay();
+    try {
+      const result = await Utility.uploadToS3(introVideoRef.current.files[0]);
+      if (profile) {
+        updateProfile({
+          variables: {
+            input: {
+              profileId: profile.id,
+              introVideoUrl: result.Location,
+            },
+          },
+        });
+      }
+    } catch (error) {
+      console.log(error.message);
+    } finally {
+      Utility.hideWorkingOverlay();
+    }
+  };
+
   const onChangeProfileSlug = async (slug: string) => {
     if (profile) {
       setProfileSlug(slug.trim());
@@ -156,12 +179,32 @@ export default () => {
                 value=""
               />
             </S.IntroLeft>
-            {/* <S.IntroRight>
+            <S.IntroRight>
               <S.ProfilePhotoField>
                 <S.Label>Intro video</S.Label>
-                <Button flex={false}>Upload video</Button>
+                {profile?.introVideoUrl ? (
+                  <Input
+                    value={profile?.introVideoUrl}
+                    onChange={(e) => onChangeProfile("introVideoUrl", e.target.value)}
+                  />
+                ) : (
+                  <Button
+                    onClick={() => introVideoRef.current.click()}
+                    flex={false}
+                  >
+                    Upload video
+                  </Button>
+                )}
               </S.ProfilePhotoField>
-            </S.IntroRight> */}
+              <input
+                onChange={onUploadIntroVideo}
+                accept="video/*"
+                ref={introVideoRef}
+                style={{ display: "none " }}
+                type="file"
+                value=""
+              />
+            </S.IntroRight>
           </S.IntroRow>
           <S.Row>
             <S.ProfilePhotoField>

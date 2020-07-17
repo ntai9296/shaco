@@ -120,6 +120,7 @@ export const CoverPhoto = styled.div<{ url: string }>`
   background-size: cover;
   background-repeat: no-repeat;
   overflow: hidden;
+  background-position: center center;
 
   &:hover {
     > ${ChangeCoverPhoto} {

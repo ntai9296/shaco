@@ -553,6 +553,7 @@ export enum CalendarEventIntegrationTypeEnum {
 }
 
 export enum ServiceProvidableTypeEnum {
+  GENERAL_SERVICE = "GENERAL_SERVICE",
   VIDEO_CALL_SERVICE = "VIDEO_CALL_SERVICE",
 }
 
@@ -655,6 +656,7 @@ export interface UpdateProfileInput {
   shortDescription?: string | null;
   profilePhotoUrl?: string | null;
   coverPhotoUrl?: string | null;
+  introVideoUrl?: string | null;
   brandColor?: string | null;
   clientMutationId?: string | null;
 }

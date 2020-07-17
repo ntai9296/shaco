@@ -227,6 +227,9 @@ const ServiceItemForm = ({
             value={createServiceState.providableType}
             label="Service type"
           >
+            <option value={ServiceProvidableTypeEnum.GENERAL_SERVICE}>
+              General
+            </option>
             <option value={ServiceProvidableTypeEnum.VIDEO_CALL_SERVICE}>
               Video call
             </option>

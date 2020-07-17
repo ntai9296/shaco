@@ -58,6 +58,7 @@ const App = () => {
           <Hero
             avatarURL={data.profile.profilePhotoUrl || ""}
             backgroundURL={data.profile.coverPhotoUrl || ""}
+            introVideoURL={data.profile.introVideoUrl || ""}
           />
           <S.Content>
             <S.TitleContent>

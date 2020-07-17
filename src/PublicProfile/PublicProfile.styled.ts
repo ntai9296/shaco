@@ -68,3 +68,15 @@ export const ServiceList = styled.div`
       margin: auto;
     }
 `;
+
+
+// content: " ";
+//     position: absolute;
+//     bottom: 0;
+//     left: 0;
+//     width: 100%;
+//     height: 30px;
+//     background: -webkit-linear-gradient(to bottom, rgba(255,255,255,0), #fff 80%);
+//     background: -moz-linear-gradient(to bottom, rgba(255,255,255,0), #fff 80%);
+//     background: linear-gradient(to bottom, rgba(255,255,255,0), #fff 80%);
+
