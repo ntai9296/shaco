@@ -26,12 +26,17 @@ interface Props {
 
 export default ({ service }: Props) => {
   const router = useRouter();
+  const userTimezone = useRef(moment.tz.guess());
+  const [loading, setLoading] = useState(false);
   const [
     createBooking,
-    { loading: createBookingLoading, error: createBookingError },
+    { error: createBookingError },
   ] = BookingAPI.createBooking({
     onCompleted: (data) => {
       router.push(`/booking/${data.createBooking?.booking?.id}`);
+    },
+    onError: () => {
+      setLoading(false);
     },
   });
 
@@ -50,6 +55,7 @@ export default ({ service }: Props) => {
     tokenId: "",
     bookingDate: "",
     phoneNumber: "",
+    timezone: userTimezone.current,
     bookingQuestions: (service.serviceQuestionsConnection.nodes || []).map(
       (node) => ({
         question: node?.question,
@@ -59,7 +65,6 @@ export default ({ service }: Props) => {
     ) as BookingQuestionInput[],
   });
 
-  const userTimezone = useRef(moment.tz.guess());
   const [currentDateTime] = useState(moment.tz(userTimezone.current));
   const [calendarDateTime, setCalendarDateTime] = useState(currentDateTime);
   const [availabilities, setAvailabilities] = useState<{
@@ -133,6 +138,7 @@ export default ({ service }: Props) => {
     if (!form.email) {
       return setErrors(["Missing email"]);
     }
+    setLoading(true);
     createBooking({
       variables: {
         input: {
@@ -186,7 +192,7 @@ export default ({ service }: Props) => {
               form={form}
               onChangeForm={(newForm: any) => setForm(newForm)}
               title="Provide booking details"
-              loading={createBookingLoading}
+              loading={loading}
               errors={errors}
               showPayment={service.price > 0}
               price={service.price}
