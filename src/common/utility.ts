@@ -13,8 +13,8 @@ const BreakpointWidth = {
 };
 
 export const Styling = {
-  labelInputMargin: "8px",
-  columnPadding: "12px",
+  labelInputMargin: "6px",
+  columnPadding: "6px",
   rowMarginBottom: "17px",
 
   textColor: "#444",
@@ -25,7 +25,7 @@ export const Styling = {
   dangerColor: "#d64545",
   backgroundColor: "rgb(247, 247, 248);",
 
-  inputBorderRadius: "8px",
+  inputBorderRadius: "6px",
   boxShadow: "0 2px 4px rgba(81,107,152,0.16)",
 };
 
@@ -77,3 +77,7 @@ export const uploadToS3 = (file: any): { Location: string } => {
     },
   }).promise();
 };
+
+export const getDefaultStyling = () => ({
+  ...Styling,
+});

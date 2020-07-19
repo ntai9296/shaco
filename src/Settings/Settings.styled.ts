@@ -1,12 +1,7 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const Container = styled.div`
-  padding: 36px;
-  width: 50%;
-
-  @media all and (max-width: 1366px) {
-    width: 100%;
-  }
+  max-width: 600px;
 `;
 
 export const Heading = styled.h1`

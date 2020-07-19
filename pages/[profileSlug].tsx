@@ -1,6 +1,5 @@
 import { useRouter } from "next/router";
 import Head from "next/head";
-import Link from "next/link";
 import { ThemeProvider } from "styled-components";
 import { Instagram, Facebook, Youtube, Twitter, Twitch } from "react-feather";
 import { GET_PUBLIC_PROFILE_QUERY } from "../graphql/Profile/profile";

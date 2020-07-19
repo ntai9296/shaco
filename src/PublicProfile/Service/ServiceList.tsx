@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { ChevronDown } from "react-feather";
+import Link from 'next/link';
 import * as S from "./Service.styled";
 import {
   getPublicProfileQuery_profile_servicesConnection_nodes,
@@ -71,9 +72,11 @@ const ServiceItem = ({
             </S.ServiceItemDuration>
           )}
           <S.ServiceItemAction>
-            <S.ServiceItemButton>
-              {service.buttonText || "Go"}
-            </S.ServiceItemButton>
+            <Link href={`/checkout/${service.id}`}>
+              <S.ServiceItemButton>
+                {service.buttonText || "Select"}
+              </S.ServiceItemButton>
+            </Link>
           </S.ServiceItemAction>
         </S.ServiceItemPricing>
         {service.description && (
