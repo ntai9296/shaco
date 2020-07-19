@@ -1510,12 +1510,6 @@
   resolved "https://registry.yarnpkg.com/@stripe/stripe-js/-/stripe-js-1.8.0.tgz#100f102d757cd024f94635dba231993554c8cfba"
   integrity sha512-VsIohJw70LIdB4b621RN6pTyw49ZMy+QjB81fl+Psu5X5ppiq/c+rG0F+XKHSVpp4JZRNDkQnsOGeuHow0aluA==
 
-"@types/@stripe/react-stripe-js":
-  version "1.1.2"
-  resolved "https://codeload.github.com/stripe/react-stripe-js/tar.gz/0050ed4b3d16932227d0b31b137df804608946fe"
-  dependencies:
-    prop-types "^15.7.2"
-
 "@types/color-name@^1.1.1":
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/@types/color-name/-/color-name-1.1.1.tgz#1c1261bbeaa10a8055bbc5d8ab84b7b2afc846a0"

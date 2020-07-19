@@ -1,15 +1,15 @@
-import React from 'react';
-import * as S from '../../src/Settings/Settings.styled';
-import Router from 'next/router';
-import Select from 'react-select';
-import moment from 'moment-timezone';
-import Input from '../../src/common/Input';
-import * as UserAPI from '../../graphql/User/UserAPI';
+import React from "react";
+import * as S from "../../src/Settings/Settings.styled";
+import Router from "next/router";
+import Select from "react-select";
+import moment from "moment-timezone";
+import Input from "../../src/common/Input";
+import * as UserAPI from "../../graphql/User/UserAPI";
 
 const options = [
-  { value: 'chocolate', label: 'Chocolate' },
-  { value: 'strawberry', label: 'Strawberry' },
-  { value: 'vanilla', label: 'Vanilla' },
+  { value: "chocolate", label: "Chocolate" },
+  { value: "strawberry", label: "Strawberry" },
+  { value: "vanilla", label: "Vanilla" },
 ];
 
 export const formatTimezone = (tzString: any) =>
@@ -54,21 +54,20 @@ export default () => {
       <S.Hr />
       <S.Title>Change password</S.Title>
 
-        <S.FormWrap>
-          <S.FormGroup>
-            <S.Label>Current password</S.Label>
-            <Input />
-          </S.FormGroup>
-          <S.FormGroup>
-            <S.Label>New password</S.Label>
-            <Input />
-          </S.FormGroup>
+      <S.FormWrap>
+        <S.FormGroup>
+          <S.Label>Current password</S.Label>
+          <Input />
+        </S.FormGroup>
+        <S.FormGroup>
+          <S.Label>New password</S.Label>
+          <Input />
+        </S.FormGroup>
 
-          <S.FormGroup>
-            <S.SubmitButton>Change</S.SubmitButton>
-          </S.FormGroup>
-        </S.FormWrap>
-      </S.Container>
-    </DashboardLayout>
+        <S.FormGroup>
+          <S.SubmitButton>Change</S.SubmitButton>
+        </S.FormGroup>
+      </S.FormWrap>
+    </S.Container>
   );
 };
