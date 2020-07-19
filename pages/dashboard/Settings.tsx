@@ -3,7 +3,6 @@ import * as S from '../../src/Settings/Settings.styled';
 import Router from 'next/router';
 import Select from 'react-select';
 import moment from 'moment-timezone';
-import sortBy from 'lodash.sortby';
 import Input from '../../src/common/Input';
 import * as UserAPI from '../../graphql/User/UserAPI';
 
@@ -18,18 +17,6 @@ export const formatTimezone = (tzString: any) =>
     .tz(tzString)
     .format('h:mm A')})`;
 
-export const getTimezoneProps = (tzString: any) => {
-  const tz = moment.tz(tzString);
-  const tzStringOffset = tz.format('Z').replace(':00', '').replace(':30', '.5');
-  let x = tzStringOffset === 0 ? 0 : parseInt(tzStringOffset).toFixed(2);
-
-  return {
-    label: formatTimezone(tzString),
-    value: `${tzString}`,
-    time: `${x}`,
-    offset: tz._offset,
-  };
-};
 
 export default () => {
   const { data: userData, loading } = UserAPI.getCurrentUser();
@@ -43,20 +30,9 @@ export default () => {
     return null;
   }
 
-  const timeZones = moment.tz.names().map((tz) => {
-    return getTimezoneProps(tz);
-  });
+  const timeZones = moment.tz.names().map((tz) => []);
 
-  const currentTimeZone = timeZones.find(
-    (item) => item.value === userData.currentUser.timezone
-  );
-
-  console.log(currentTimeZone);
-  const options = sortBy(timeZones, [
-    function (el) {
-      return -el.time;
-    },
-  ]);
+  const currentTimeZone = userData.currentUser.timezone;
 
   return (
     <S.Container>
@@ -72,7 +48,7 @@ export default () => {
       <Select
         options={options}
         placeholder="Select your timezone"
-        defaultValue={currentTimeZone}
+        // defaultValue={currentTimeZone}
       />
       <S.Hr />
       <S.Title>Change password</S.Title>
