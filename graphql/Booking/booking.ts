@@ -16,3 +16,23 @@ export const CREATE_BOOKING_MUTATION = gql`
   }
   ${BOOKING_FRAGMENT}
 `;
+
+export const GET_BOOKING_CONFIRMATION_QUERY = gql`
+  query getBookingConfirmationQuery($id: ID!) {
+    node(id: $id) {
+      ... on Booking {
+        ...bookingFragment
+        price
+        bookingDate
+        userEmail
+        hostProfile {
+          id
+          name
+          profilePhotoUrl
+          slug
+        }
+      }
+    }
+  }
+  ${BOOKING_FRAGMENT}
+`;

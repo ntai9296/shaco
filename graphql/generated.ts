@@ -29,6 +29,45 @@ export interface createBookingMutationVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: getBookingConfirmationQuery
+// ====================================================
+
+export interface getBookingConfirmationQuery_node_CalendarEvent {}
+
+export interface getBookingConfirmationQuery_node_Booking_hostProfile {
+  id: string;
+  name: string;
+  profilePhotoUrl: string | null;
+  slug: string | null;
+}
+
+export interface getBookingConfirmationQuery_node_Booking {
+  id: string;
+  price: number | null;
+  bookingDate: any;
+  userEmail: string;
+  hostProfile: getBookingConfirmationQuery_node_Booking_hostProfile;
+}
+
+export type getBookingConfirmationQuery_node = getBookingConfirmationQuery_node_CalendarEvent | getBookingConfirmationQuery_node_Booking;
+
+export interface getBookingConfirmationQuery {
+  /**
+   * Fetches an object given its ID.
+   */
+  node: getBookingConfirmationQuery_node | null;
+}
+
+export interface getBookingConfirmationQueryVariables {
+  id: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: createCalendarEventMutation
 // ====================================================
 
@@ -735,6 +774,7 @@ export interface CreateBookingInput {
   lastName: string;
   email: string;
   phoneNumber?: string | null;
+  timezone?: string | null;
   bookingQuestions?: BookingQuestionInput[] | null;
   clientMutationId?: string | null;
 }
