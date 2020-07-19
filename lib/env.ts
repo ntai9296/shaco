@@ -1,0 +1,3 @@
+export default {
+  STRIPE_PUBLISHABLE_KEY: "pk_test_51H0leHB13ZByLutNOyYgIQBpFXqvZiI9YQmoiZhb0xJEMzsaKvJJgwuEZfFjRZSrMqGQN4giirokJ5AF9GlBpvxX00poL45wEE",
+};

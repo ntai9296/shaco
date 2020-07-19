@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Styling } from "./utility";
-import { setLightness, readableColor } from "polished";
+import { setLightness } from "polished";
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: any;
@@ -18,7 +18,7 @@ export const CommonButton = styled.button<Props>`
   font-weight: 400;
   font-size: 1rem;
   line-height: 1rem;
-  border-radius: 8px;
+  border-radius: 6px;
 
   ${(props) =>
     props.theme.primaryColor &&

@@ -1,22 +1,23 @@
-import React from 'react';
-import * as S from '../../src/Settings/Settings.styled';
-import Router from 'next/router';
-import Select from 'react-select';
-import moment from 'moment-timezone';
-import Input from '../../src/common/Input';
-import * as UserAPI from '../../graphql/User/UserAPI';
+import React from "react";
+import * as S from "../../src/Settings/Settings.styled";
+import Router from "next/router";
+import Select from "react-select";
+import moment from "moment-timezone";
+import Input from "../../src/common/Input";
+import * as UserAPI from "../../graphql/User/UserAPI";
 
 const options = [
-  { value: 'chocolate', label: 'Chocolate' },
-  { value: 'strawberry', label: 'Strawberry' },
-  { value: 'vanilla', label: 'Vanilla' },
+  { value: "chocolate", label: "Chocolate" },
+  { value: "strawberry", label: "Strawberry" },
+  { value: "vanilla", label: "Vanilla" },
 ];
 
 export const formatTimezone = (tzString: any) =>
-  `(GMT${moment.tz(tzString).format('Z')}) ${tzString} (${moment()
+  `(GMT${moment.tz(tzString).format("Z")}) ${tzString} (${moment()
     .tz(tzString)
-    .format('h:mm A')})`;
+    .format("h:mm A")})`;
 
+const TIME_ZONE_LIST = [];
 
 export default () => {
   const { data: userData, loading } = UserAPI.getCurrentUser();
@@ -26,7 +27,7 @@ export default () => {
   }
 
   if (!userData?.currentUser) {
-    Router.replace('/login');
+    Router.replace("/login");
     return null;
   }
 

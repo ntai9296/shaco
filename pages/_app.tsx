@@ -1,9 +1,12 @@
 import "../styles/static.scss";
 import "../styles/calendar.scss";
+import "../styles/rc-calendar.css";
 import { ApolloProvider } from "@apollo/client";
 import { useApollo } from "../lib/withApollo";
 import Head from "next/head";
 import * as Sentry from "@sentry/react";
+import { ThemeProvider } from "styled-components";
+import { getDefaultStyling } from "../src/common/utility";
 
 Sentry.init({
   dsn:
@@ -34,9 +37,11 @@ const App = ({ Component, pageProps }: any) => {
         <title>Fireside</title>
         <meta name="description" content="Fireside app" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
       </Head>
-      <Component {...pageProps} />
+      <ThemeProvider theme={{ main: getDefaultStyling() }}>
+        <Component {...pageProps} />
+      </ThemeProvider>
     </ApolloProvider>
   );
 };

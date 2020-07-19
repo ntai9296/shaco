@@ -4,6 +4,31 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: createBookingMutation
+// ====================================================
+
+export interface createBookingMutation_createBooking_booking {
+  id: string;
+}
+
+export interface createBookingMutation_createBooking {
+  booking: createBookingMutation_createBooking_booking | null;
+}
+
+export interface createBookingMutation {
+  createBooking: createBookingMutation_createBooking | null;
+}
+
+export interface createBookingMutationVariables {
+  input: CreateBookingInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: createCalendarEventMutation
 // ====================================================
 
@@ -309,6 +334,95 @@ export interface deleteServiceMutationVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: getServiceQuery
+// ====================================================
+
+export interface getServiceQuery_node_Booking {}
+
+export interface getServiceQuery_node_Service_providable {
+  id: string;
+  duration: number;
+}
+
+export interface getServiceQuery_node_Service_serviceQuestionsConnection_nodes {
+  id: string;
+  question: string | null;
+}
+
+export interface getServiceQuery_node_Service_serviceQuestionsConnection {
+  /**
+   * A list of nodes.
+   */
+  nodes: (getServiceQuery_node_Service_serviceQuestionsConnection_nodes | null)[] | null;
+}
+
+export interface getServiceQuery_node_Service {
+  id: string;
+  name: string | null;
+  imageUrl: string | null;
+  introVideoUrl: string | null;
+  description: string | null;
+  price: number;
+  buttonText: string | null;
+  providableType: ServiceProvidableTypeEnum;
+  providable: getServiceQuery_node_Service_providable;
+  serviceQuestionsConnection: getServiceQuery_node_Service_serviceQuestionsConnection;
+}
+
+export type getServiceQuery_node = getServiceQuery_node_Booking | getServiceQuery_node_Service;
+
+export interface getServiceQuery {
+  /**
+   * Fetches an object given its ID.
+   */
+  node: getServiceQuery_node | null;
+}
+
+export interface getServiceQueryVariables {
+  id: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: getServiceAvailabilityQuery
+// ====================================================
+
+export interface getServiceAvailabilityQuery_node_Booking {}
+
+export interface getServiceAvailabilityQuery_node_Service_profile {
+  id: string;
+  availabilities: any | null;
+}
+
+export interface getServiceAvailabilityQuery_node_Service {
+  id: string;
+  profile: getServiceAvailabilityQuery_node_Service_profile | null;
+}
+
+export type getServiceAvailabilityQuery_node = getServiceAvailabilityQuery_node_Booking | getServiceAvailabilityQuery_node_Service;
+
+export interface getServiceAvailabilityQuery {
+  /**
+   * Fetches an object given its ID.
+   */
+  node: getServiceAvailabilityQuery_node | null;
+}
+
+export interface getServiceAvailabilityQueryVariables {
+  id: string;
+  atOrAfterStarting?: any | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: getCurrentUserQuery
 // ====================================================
 
@@ -543,6 +657,45 @@ export interface getCurrentUserCalendarEventsQueryVariables {
 // @generated
 // This file was automatically generated and should not be edited.
 
+// ====================================================
+// GraphQL fragment: bookingFragment
+// ====================================================
+
+export interface bookingFragment {
+  id: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL fragment: serviceFragment
+// ====================================================
+
+export interface serviceFragment_providable {
+  id: string;
+  duration: number;
+}
+
+export interface serviceFragment {
+  id: string;
+  name: string | null;
+  imageUrl: string | null;
+  introVideoUrl: string | null;
+  description: string | null;
+  price: number;
+  buttonText: string | null;
+  providableType: ServiceProvidableTypeEnum;
+  providable: serviceFragment_providable;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
 //==============================================================
 // START Enums and Input Objects
 //==============================================================
@@ -560,6 +713,30 @@ export enum CalendarEventIntegrationTypeEnum {
 export enum ServiceProvidableTypeEnum {
   GENERAL_SERVICE = "GENERAL_SERVICE",
   VIDEO_CALL_SERVICE = "VIDEO_CALL_SERVICE",
+}
+
+/**
+ * Attributes for creating booking questions
+ */
+export interface BookingQuestionInput {
+  question: string;
+  answer: string;
+  serviceQuestionId: string;
+}
+
+/**
+ * Autogenerated input type of CreateBooking
+ */
+export interface CreateBookingInput {
+  serviceId: string;
+  bookingDate: any;
+  tokenId: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phoneNumber?: string | null;
+  bookingQuestions?: BookingQuestionInput[] | null;
+  clientMutationId?: string | null;
 }
 
 /**
@@ -597,6 +774,7 @@ export interface CreateServiceInput {
   description?: string | null;
   providableType: ServiceProvidableTypeEnum;
   providableData: any;
+  customQuestions?: string[] | null;
   clientMutationId?: string | null;
 }
 

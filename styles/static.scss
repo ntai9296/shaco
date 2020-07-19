@@ -89,7 +89,6 @@ input,
 textarea {
   font-family: "Inter", "SF Pro Display", -apple-system, BlinkMacSystemFont,
     "Roboto", sans-serif;
-  font-size: 16px;
 }
 
 h1,
@@ -97,10 +96,14 @@ h2,
 h3,
 h4,
 h5,
-h6,
-label {
+h6 {
   font-family: "Roboto", "Inter", "SF Pro Display", -apple-system,
     BlinkMacSystemFont, sans-serif;
+}
+
+label {
+  font-family: "Inter";
+  color: #000;
 }
 
 *,
@@ -176,4 +179,8 @@ button:focus {
 
 .fc .fc-timegrid-slot-minor {
   border-top-style: none !important;
+}
+
+.ReactModalPortal {
+  height: 0;
 }

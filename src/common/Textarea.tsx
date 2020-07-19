@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Styling } from "./utility";
+import { Styling, mediaBreakpointDown } from "./utility";
 
 const Textarea = styled.textarea`
   color: #3b3b3b;
@@ -8,10 +8,14 @@ const Textarea = styled.textarea`
   border: 1px solid #b1b1b1;
   max-width: 100%;
   width: 100%;
-  line-height: 1.5;
   padding: 8px;
   border-radius: ${Styling.inputBorderRadius};
   resize: vertical;
+  font-size: 14px;
+
+  ${mediaBreakpointDown("sm")} {
+    font-size: 16px;
+  }
 
   // :focus {
   //   box-shadow: 0 0 0 4px #b7d7f9;
