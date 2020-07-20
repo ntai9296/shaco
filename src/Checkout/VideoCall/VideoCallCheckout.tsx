@@ -82,7 +82,7 @@ export default ({ service }: Props) => {
       const availableObject = Object.keys(node.profile?.availabilities).reduce(
         (availableObject: any, key: string) => {
           const currentDateObj = node.profile?.availabilities[key];
-          if (service.providable.duration <= currentDateObj.min) {
+          if (service.providable.duration) {
             currentDateObj.slots.map(({ starting, ending }: any) => {
               let momentStarting = moment.tz(starting, userTimezone.current);
               const momentEnding = moment.tz(ending, userTimezone.current);
@@ -90,7 +90,7 @@ export default ({ service }: Props) => {
                 .clone()
                 .add(service.providable.duration, "minutes");
 
-              while (momentStartingWithDuration < momentEnding) {
+              while (momentStartingWithDuration <= momentEnding) {
                 const slotDate = momentStarting.format("MM/DD/YYYY");
                 if (!availableObject[slotDate]) {
                   availableObject[slotDate] = [];
@@ -127,7 +127,7 @@ export default ({ service }: Props) => {
     },
   });
 
-  const onSubmitPaymentCheckout = () => {
+  const onSubmitPaymentCheckout = (tokenId: string = "") => {
     // Validate data
     if (!form.firstName) {
       return setErrors(["Missing first name"]);
@@ -143,6 +143,7 @@ export default ({ service }: Props) => {
       variables: {
         input: {
           ...form,
+          tokenId,
         },
       },
     });

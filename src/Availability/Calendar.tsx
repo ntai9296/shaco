@@ -82,8 +82,8 @@ export default () => {
     if (timeRange) {
       getCalendarEvents({
         variables: {
-          atOrAfterStarting: timeRange.start.toISOString(),
-          beforeEnding: timeRange.end.toISOString(),
+          // atOrAfterStarting: timeRange.start.toISOString(),
+          // beforeEnding: timeRange.end.toISOString(),
         },
       });
     }
@@ -103,14 +103,15 @@ export default () => {
     if (userData?.currentUser) {
       setTimezone(userData.currentUser.timezone);
       const range = {
-        start: moment.tz(userData.currentUser.timezone).startOf("isoWeek"),
-        end: moment.tz(userData.currentUser.timezone).endOf("isoWeek"),
+        // start: moment.tz(userData.currentUser.timezone).startOf("isoWeek"),
+        // end: moment.tz(userData.currentUser.timezone).endOf("isoWeek"),
       };
-      setTimeRange(range);
+      // console.log(range)
+      // setTimeRange(range);
       getCalendarEvents({
         variables: {
-          atOrAfterStarting: range.start.toISOString(),
-          beforeEnding: range.end.toISOString(),
+          // atOrAfterStarting: range.start.toISOString(),
+          // beforeEnding: range.end.toISOString(),
         },
       });
     }
@@ -255,6 +256,7 @@ export default () => {
                 end: timeRange.end.add(7, "days"),
               });
             }
+            calendarRef.current.getApi().next();
           },
         },
         prev: {
@@ -265,8 +267,8 @@ export default () => {
                 start: timeRange.start.subtract(7, "days"),
                 end: timeRange.end.subtract(7, "days"),
               });
-              calendarRef.current.getApi().prev();
             }
+            calendarRef.current.getApi().prev();
           },
         },
         today: {
@@ -280,7 +282,7 @@ export default () => {
           },
         },
       }}
-      firstDay={1}
+      // firstDay={1}
       timeZone={timezone}
       ref={calendarRef}
       eventClick={({ event }) => {

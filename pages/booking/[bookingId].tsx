@@ -44,7 +44,9 @@ export default () => {
           the video call to {node.userEmail}
         </S.BookingEmailMessage>
         <Link href={`/${node.hostProfile.slug}`}>
-          <Button>Done</Button>
+          <a>
+            <Button>Done</Button>
+          </a>
         </Link>
       </S.ConfirmationContainer>
     </S.BookingConfirmationContainer>
