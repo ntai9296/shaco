@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { Styling, mediaBreakpointDown } from "./utility";
+import { mediaBreakpointDown } from "./utility";
+import { setLightness } from "polished";
 
 const Input = styled.input`
   color: #3b3b3b;
@@ -9,16 +10,16 @@ const Input = styled.input`
   max-width: 100%;
   width: 100%;
   padding: 8px;
-  border-radius: ${Styling.inputBorderRadius};
+  border-radius: ${props => props.theme.main.inputBorderRadius};
   font-size: 14px;
 
   ${mediaBreakpointDown("sm")} {
     font-size: 16px;
   }
-
-  // :focus {
-  //   box-shadow: 0 0 0 4px #b7d7f9;
-  // }
+  :focus {
+    box-shadow: 0 0 0 2px ${props => setLightness(0.8, props.theme.main.primaryColor)};
+    transition: box-shadow 0.3s ease-in-out !important;
+  }
 `;
 const Content = styled.div`
   display: flex;
@@ -26,7 +27,7 @@ const Content = styled.div`
   flex-wrap: wrap;
 
   > label {
-    margin-bottom: ${Styling.labelInputMargin};
+    margin-bottom: ${props => props.theme.main.labelInputMargin};
   }
 `;
 
