@@ -164,9 +164,7 @@ const CheckoutForm = ({
           <S.Row>
             <S.CardInput>
               <label>Card information</label>
-              <div>
-                <CardElement id="card-element" options={CARD_ELEMENT_OPTIONS} />
-              </div>
+              <CardElement id="card-element" options={CARD_ELEMENT_OPTIONS} />
             </S.CardInput>
           </S.Row>
         )}

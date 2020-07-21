@@ -86,9 +86,11 @@ body {
 }
 
 input,
-textarea {
+textarea,
+select {
   font-family: "Inter", "SF Pro Display", -apple-system, BlinkMacSystemFont,
     "Roboto", sans-serif;
+  -webkit-appearance: none;
 }
 
 h1,

@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { mediaBreakpointDown } from "../../common/utility";
+import { setLightness } from "polished";
 
 export const PaymentCheckoutContainer = styled.div``;
 export const Title = styled.h3`
@@ -46,5 +47,11 @@ export const CardInput = styled.div`
     padding: 8px;
     border-radius: 6px;
     font-size: 14px;
+
+    &.StripeElement--focus {
+      box-shadow: 0 0 0 2px
+        ${(props) => setLightness(0.8, props.theme.main.primaryColor)};
+      transition: box-shadow 0.3s ease-in-out !important;
+    }
   }
 `;
