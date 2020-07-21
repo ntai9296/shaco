@@ -20,7 +20,13 @@ const Notification = styled.div<{ errorType: "error" | "success" | "info" }>`
     `
   color: #fff;
   background: ${Styling.dangerColor};
-  
+  `}
+
+  ${(props) =>
+    props.errorType === "success" &&
+    `
+  color: #fff;
+  background: ${props.theme.main.successColor};
   `}
 `;
 

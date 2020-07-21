@@ -1,4 +1,11 @@
-import { useQuery, useMutation, useLazyQuery, OperationVariables, QueryHookOptions } from "@apollo/client";
+import {
+  useQuery,
+  useMutation,
+  useLazyQuery,
+  OperationVariables,
+  QueryHookOptions,
+  MutationHookOptions,
+} from "@apollo/client";
 import cookie from "js-cookie";
 import * as User from "./user";
 import {
@@ -12,37 +19,77 @@ import {
   getCurrentUserProfileQuery,
   getCurrentUserCalendarEventsQuery,
   getCurrentUserCalendarEventsQueryVariables,
+  resetPasswordMutation,
+  resetPasswordMutationVariables,
+  forgotPasswordMutation,
+  forgotPasswordMutationVariables,
 } from "../generated";
 
-export const getCurrentUser = (options?: QueryHookOptions<getCurrentUserQuery, Record<string, any>> | undefined) => useQuery<getCurrentUserQuery>(User.GET_CURRENT_USER_QUERY, options);
-export const getCurrentUserLazy = (options?: QueryHookOptions<getCurrentUserQuery, Record<string, any>> | undefined) => useLazyQuery<getCurrentUserQuery>(User.GET_CURRENT_USER_QUERY, options);
+export const getCurrentUser = (
+  options?:
+    | QueryHookOptions<getCurrentUserQuery, Record<string, any>>
+    | undefined
+) => useQuery<getCurrentUserQuery>(User.GET_CURRENT_USER_QUERY, options);
+export const getCurrentUserLazy = (
+  options?:
+    | QueryHookOptions<getCurrentUserQuery, Record<string, any>>
+    | undefined
+) => useLazyQuery<getCurrentUserQuery>(User.GET_CURRENT_USER_QUERY, options);
 
 export const getCurrentUserProfile = () =>
   useQuery<getCurrentUserProfileQuery>(User.GET_CURRENT_USER_PROFILE_QUERY);
 export const useUser = () => useQuery(User.GET_CURRENT_USER_QUERY);
 export const createUser = () =>
-  useMutation<createUserMutation, createUserMutationVariables>(User.CREATE_USER_MUTATION);
+  useMutation<createUserMutation, createUserMutationVariables>(
+    User.CREATE_USER_MUTATION
+  );
 export const createHostUser = () =>
   useMutation<createHostUserMutation, createHostUserMutationVariables>(
-    User.CREATE_HOST_USER_MUTATION,
+    User.CREATE_HOST_USER_MUTATION
   );
 export const loginUser = () =>
-  useMutation<loginUserMutation, loginUserMutationVariables>(User.LOGIN_USER_MUTATION);
+  useMutation<loginUserMutation, loginUserMutationVariables>(
+    User.LOGIN_USER_MUTATION
+  );
 export const logoutUser = () => {
   cookie.remove("token");
   window.location.reload();
 };
 export const getCurrentUserCalendarEvents = (
-  variables: getCurrentUserCalendarEventsQueryVariables,
+  variables: getCurrentUserCalendarEventsQueryVariables
 ) =>
-  useQuery<getCurrentUserCalendarEventsQuery, getCurrentUserCalendarEventsQueryVariables>(
-    User.GET_CURRENT_USER_CALENDER_EVENTS_QUERY,
-    {
-      variables,
-    },
-  );
-export const getCurrentUserCalendarEventsLazy = (variables: OperationVariables) =>
-  useLazyQuery<getCurrentUserCalendarEventsQuery, getCurrentUserCalendarEventsQueryVariables>(
-    User.GET_CURRENT_USER_CALENDER_EVENTS_QUERY,
+  useQuery<
+    getCurrentUserCalendarEventsQuery,
+    getCurrentUserCalendarEventsQueryVariables
+  >(User.GET_CURRENT_USER_CALENDER_EVENTS_QUERY, {
     variables,
+  });
+export const getCurrentUserCalendarEventsLazy = (
+  variables: OperationVariables
+) =>
+  useLazyQuery<
+    getCurrentUserCalendarEventsQuery,
+    getCurrentUserCalendarEventsQueryVariables
+  >(User.GET_CURRENT_USER_CALENDER_EVENTS_QUERY, variables);
+
+export const forgotPassword = (
+  options: MutationHookOptions<
+    forgotPasswordMutation,
+    forgotPasswordMutationVariables
+  >
+) =>
+  useMutation<forgotPasswordMutation, forgotPasswordMutationVariables>(
+    User.FORGOT_PASSWORD_MUTATION,
+    options
+  );
+
+export const resetPassword = (
+  options?: MutationHookOptions<
+    resetPasswordMutation,
+    resetPasswordMutationVariables
+  >
+) =>
+  useMutation<resetPasswordMutation, resetPasswordMutationVariables>(
+    User.RESET_PASSWORD_MUTATION,
+    options
   );

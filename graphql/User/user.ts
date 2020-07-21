@@ -125,3 +125,24 @@ export const GET_CURRENT_USER_CALENDER_EVENTS_QUERY = gql`
     }
   }
 `;
+
+export const RESET_PASSWORD_MUTATION = gql`
+  mutation resetPasswordMutation($input: ResetPasswordInput!) {
+    resetPassword(input: $input) {
+      accessToken
+      user {
+        id
+        email
+        roles
+      }
+    }
+  }
+`;
+
+export const FORGOT_PASSWORD_MUTATION = gql`
+  mutation forgotPasswordMutation($input: ForgotPasswordInput!) {
+    forgotPassword(input: $input) {
+      message
+    }
+  }
+`;

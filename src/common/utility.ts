@@ -22,6 +22,8 @@ export const Styling = {
   primaryColor: "#0070f3",
   primaryColorLight: "#e2f0ff",
 
+  successColor: "#4caf50",
+
   dangerColor: "#d64545",
   backgroundColor: "rgb(247, 247, 248);",
 
