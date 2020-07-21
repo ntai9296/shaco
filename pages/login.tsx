@@ -93,6 +93,11 @@ export default () => {
                 />
               </S.PasswordField>
             </S.PasswordRow>
+            <S.EmailRow>
+              <Link href="/forgot_password">
+                <a>Forgot your password?</a>
+              </Link>
+            </S.EmailRow>
             {errors.length > 0 && (
               <S.ErrorRow>
                 <Notification
