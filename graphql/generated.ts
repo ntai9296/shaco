@@ -9,6 +9,7 @@
 
 export interface createBookingMutation_createBooking_booking {
   id: string;
+  status: BookingStatusEnum | null;
 }
 
 export interface createBookingMutation_createBooking {
@@ -29,10 +30,67 @@ export interface createBookingMutationVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: cancelBookingMutation
+// ====================================================
+
+export interface cancelBookingMutation_cancelBooking_booking {
+  id: string;
+  status: BookingStatusEnum | null;
+}
+
+export interface cancelBookingMutation_cancelBooking {
+  booking: cancelBookingMutation_cancelBooking_booking | null;
+}
+
+export interface cancelBookingMutation {
+  cancelBooking: cancelBookingMutation_cancelBooking | null;
+}
+
+export interface cancelBookingMutationVariables {
+  input: CancelBookingInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: rescheduleBookingMutation
+// ====================================================
+
+export interface rescheduleBookingMutation_rescheduleBooking_booking {
+  id: string;
+  status: BookingStatusEnum | null;
+}
+
+export interface rescheduleBookingMutation_rescheduleBooking {
+  booking: rescheduleBookingMutation_rescheduleBooking_booking | null;
+}
+
+export interface rescheduleBookingMutation {
+  rescheduleBooking: rescheduleBookingMutation_rescheduleBooking | null;
+}
+
+export interface rescheduleBookingMutationVariables {
+  input: RescheduleBookingInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: getBookingConfirmationQuery
 // ====================================================
 
 export interface getBookingConfirmationQuery_node_CalendarEvent {}
+
+export interface getBookingConfirmationQuery_node_Booking_providable {
+  id: string;
+  duration: number;
+}
 
 export interface getBookingConfirmationQuery_node_Booking_hostProfile {
   id: string;
@@ -43,9 +101,12 @@ export interface getBookingConfirmationQuery_node_Booking_hostProfile {
 
 export interface getBookingConfirmationQuery_node_Booking {
   id: string;
+  status: BookingStatusEnum | null;
   price: number | null;
   bookingDate: any;
   userEmail: string;
+  providableType: string;
+  providable: getBookingConfirmationQuery_node_Booking_providable | null;
   hostProfile: getBookingConfirmationQuery_node_Booking_hostProfile;
 }
 
@@ -60,6 +121,66 @@ export interface getBookingConfirmationQuery {
 
 export interface getBookingConfirmationQueryVariables {
   id: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: getBookingRescheduleQuery
+// ====================================================
+
+export interface getBookingRescheduleQuery_node_CalendarEvent {}
+
+export interface getBookingRescheduleQuery_node_Booking_providable {
+  id: string;
+  duration: number;
+}
+
+export interface getBookingRescheduleQuery_node_Booking_hostProfile {
+  id: string;
+  name: string;
+  profilePhotoUrl: string | null;
+  slug: string | null;
+  availabilities: any | null;
+}
+
+export interface getBookingRescheduleQuery_node_Booking_service_providable {
+  id: string;
+  duration: number;
+}
+
+export interface getBookingRescheduleQuery_node_Booking_service {
+  id: string;
+  providable: getBookingRescheduleQuery_node_Booking_service_providable;
+}
+
+export interface getBookingRescheduleQuery_node_Booking {
+  id: string;
+  status: BookingStatusEnum | null;
+  price: number | null;
+  bookingDate: any;
+  userEmail: string;
+  providableType: string;
+  providable: getBookingRescheduleQuery_node_Booking_providable | null;
+  hostProfile: getBookingRescheduleQuery_node_Booking_hostProfile;
+  service: getBookingRescheduleQuery_node_Booking_service | null;
+}
+
+export type getBookingRescheduleQuery_node = getBookingRescheduleQuery_node_CalendarEvent | getBookingRescheduleQuery_node_Booking;
+
+export interface getBookingRescheduleQuery {
+  /**
+   * Fetches an object given its ID.
+   */
+  node: getBookingRescheduleQuery_node | null;
+}
+
+export interface getBookingRescheduleQueryVariables {
+  id: string;
+  atOrAfterStarting?: any | null;
 }
 
 /* tslint:disable */
@@ -702,6 +823,7 @@ export interface getCurrentUserCalendarEventsQueryVariables {
 
 export interface bookingFragment {
   id: string;
+  status: BookingStatusEnum | null;
 }
 
 /* tslint:disable */
@@ -739,12 +861,19 @@ export interface serviceFragment {
 // START Enums and Input Objects
 //==============================================================
 
+export enum BookingStatusEnum {
+  ACTIVE = "ACTIVE",
+  CANCELLED = "CANCELLED",
+  COMPLETED = "COMPLETED",
+}
+
 export enum CalendarEventAvailabilityEnum {
   BUSY = "BUSY",
   FREE = "FREE",
 }
 
 export enum CalendarEventIntegrationTypeEnum {
+  BOOKING = "BOOKING",
   GOOGLE_CALENDAR = "GOOGLE_CALENDAR",
   INTERNAL = "INTERNAL",
 }
@@ -761,6 +890,14 @@ export interface BookingQuestionInput {
   question: string;
   answer: string;
   serviceQuestionId: string;
+}
+
+/**
+ * Autogenerated input type of CancelBooking
+ */
+export interface CancelBookingInput {
+  bookingId: string;
+  clientMutationId?: string | null;
 }
 
 /**
@@ -850,6 +987,15 @@ export interface DeleteServiceInput {
 export interface LoginUserInput {
   email: string;
   password: string;
+  clientMutationId?: string | null;
+}
+
+/**
+ * Autogenerated input type of RescheduleBooking
+ */
+export interface RescheduleBookingInput {
+  bookingId: string;
+  bookingDate: any;
   clientMutationId?: string | null;
 }
 

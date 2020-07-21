@@ -1,10 +1,10 @@
 import React from "react";
 import moment from "moment-timezone";
 import { useRouter } from "next/router";
-import * as S from "../../src/Booking/Booking.styled";
-import * as BookingAPI from "../../graphql/Booking/BookingAPI";
-import { getBookingConfirmationQuery_node_Booking } from "../../graphql/generated";
-import Button from "../../src/common/Button";
+import * as S from "../../../src/Booking/Booking.styled";
+import * as BookingAPI from "../../../graphql/Booking/BookingAPI";
+import { getBookingConfirmationQuery_node_Booking, BookingStatusEnum } from "../../../graphql/generated";
+import Button from "../../../src/common/Button";
 import Link from "next/link";
 
 export default () => {
@@ -21,7 +21,7 @@ export default () => {
 
   const node = data?.node as getBookingConfirmationQuery_node_Booking;
 
-  if (!node) {
+  if (!node || node?.status === BookingStatusEnum.CANCELLED) {
     return <div>Booking not found</div>;
   }
   return (
@@ -37,7 +37,7 @@ export default () => {
         <S.BookingDetails>
           {moment
             .tz(node.bookingDate, moment.tz.guess())
-            .format("ddd, MMM DD - hh:mm A")}
+            .format("ddd, MMM DD - hh:mm A")} ({ node.providable?.duration } mins)
         </S.BookingDetails>
         <S.BookingEmailMessage>
           We sent a confirmation, and a calendar invitation with a link to join

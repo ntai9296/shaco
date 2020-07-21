@@ -3,6 +3,7 @@ import { gql } from "@apollo/client";
 const BOOKING_FRAGMENT = gql`
   fragment bookingFragment on Booking {
     id
+    status
   }
 `;
 
@@ -17,6 +18,29 @@ export const CREATE_BOOKING_MUTATION = gql`
   ${BOOKING_FRAGMENT}
 `;
 
+export const CANCEL_BOOKING_MUTATION = gql`
+  mutation cancelBookingMutation($input: CancelBookingInput!) {
+    cancelBooking(input: $input) {
+      booking {
+        ...bookingFragment
+      }
+    }
+  }
+  ${BOOKING_FRAGMENT}
+`;
+
+export const RESCHEDULE_BOOKING_MUTATION = gql`
+  mutation rescheduleBookingMutation($input: RescheduleBookingInput!) {
+    rescheduleBooking(input: $input) {
+      booking {
+        ...bookingFragment
+      }
+    }
+  }
+  ${BOOKING_FRAGMENT}
+`;
+
+
 export const GET_BOOKING_CONFIRMATION_QUERY = gql`
   query getBookingConfirmationQuery($id: ID!) {
     node(id: $id) {
@@ -25,11 +49,55 @@ export const GET_BOOKING_CONFIRMATION_QUERY = gql`
         price
         bookingDate
         userEmail
+        providableType
+        providable {
+          ... on VideoCall {
+            id
+            duration
+          }
+        }
         hostProfile {
           id
           name
           profilePhotoUrl
           slug
+        }
+      }
+    }
+  }
+  ${BOOKING_FRAGMENT}
+`;
+
+export const GET_BOOKING_RESCHEDULE_QUERY = gql`
+  query getBookingRescheduleQuery($id: ID!, $atOrAfterStarting: DateTime) {
+    node(id: $id) {
+      ... on Booking {
+        ...bookingFragment
+        price
+        bookingDate
+        userEmail
+        providableType
+        providable {
+          ... on VideoCall {
+            id
+            duration
+          }
+        }
+        hostProfile {
+          id
+          name
+          profilePhotoUrl
+          slug
+          availabilities(atOrAfterStarting: $atOrAfterStarting)
+        }
+        service {
+          id
+          providable {
+            ... on VideoCallService {
+              id
+              duration
+            }
+          }
         }
       }
     }

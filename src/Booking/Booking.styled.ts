@@ -1,11 +1,17 @@
 import styled from "styled-components";
+import { mediaBreakpointDown } from "../common/utility";
 
 export const BookingConfirmationContainer = styled.div`
   padding-top: 100px;
+
+  ${mediaBreakpointDown("sm")} {
+    padding: 30px 15px;
+  }
 `;
 
 export const ConfirmationHeader = styled.h2`
   text-align: center;
+  font-size: 28px;
 `;
 
 export const ConfirmationContainer = styled.div`
@@ -42,4 +48,15 @@ export const BookingEmailMessage = styled.p`
   text-align: center;
   max-width: 80%;
   margin: 0 auto 20px auto;
+`;
+export const BookingNewDateTime = styled.p`
+  text-align: center;
+  max-width: 80%;
+  margin: 0 auto 20px auto;
+  font-size: 17px;
+  font-weight: 500;
+`;
+
+export const ConfirmRescheduleButtonContainer = styled.div`
+  margin-top: 15px;
 `;

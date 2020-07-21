@@ -33,7 +33,7 @@ export default ({ service }: Props) => {
     { error: createBookingError },
   ] = BookingAPI.createBooking({
     onCompleted: (data) => {
-      router.push(`/booking/${data.createBooking?.booking?.id}`);
+      router.push(`/bookings/${data.createBooking?.booking?.id}`);
     },
     onError: () => {
       setLoading(false);
@@ -137,6 +137,9 @@ export default ({ service }: Props) => {
     }
     if (!form.email) {
       return setErrors(["Missing email"]);
+    }
+    if ((form.bookingQuestions?.filter((q) => !q.answer) || []).length > 0) {
+      return setErrors(["Please fill out the text field"]);
     }
     setLoading(true);
     createBooking({

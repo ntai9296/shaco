@@ -37,7 +37,7 @@ export const CalendarTimes = styled.div`
   display: flex;
   flex-wrap: wrap;
 `;
-export const CalendarTime = styled.div`
+export const CalendarTime = styled.div<{ active?: boolean }>`
   border-radius: 5px;
   padding: 10px;
   text-align: center;
@@ -53,4 +53,12 @@ export const CalendarTime = styled.div`
   color: ${props.theme.main.primaryColor};
   background-color: ${setLightness(0.95, props.theme.main.primaryColor)};
   `};
+
+  ${(props) =>
+    props.active &&
+    `
+  border: 1px solid ${props.theme.main.primaryColor};
+  color: #fff;
+  background-color: ${props.theme.main.primaryColor};
+  `}
 `;
