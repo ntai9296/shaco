@@ -14,7 +14,7 @@ import Notification from "../common/Notification";
 export default () => {
   const [errors, setErrors] = useState<string[]>([]);
   const [code, setCode] = useState("");
-  const [userProfile, setUserProfile] = useState();
+  const [userProfile, setUserProfile] = useState<any>();
   const { data: userData, loading } = getCurrentUserWithConnectAccounts();
 
   const [createConnect] = createConnectAccount({
