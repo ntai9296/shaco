@@ -44,8 +44,14 @@ export default () => {
   const nodeToEvent = (
     event: getCurrentUserCalendarEventsQuery_currentUser_calendarEventsConnection_edges_node
   ): Event => {
-    const start = moment.tz(event.starting, timezone);
-    const end = moment.tz(event.ending, timezone);
+    const start = moment.tz(
+      event.starting || moment().startOf("day"),
+      timezone
+    );
+    const end = moment.tz(
+      event.ending || moment.tz(event.starting, timezone).endOf("day"),
+      timezone
+    );
     const duration = moment.duration(start.diff(end));
     const ending = duration.asMinutes() > 30 ? start.add(30, "minutes") : end;
     const isInternal =
@@ -68,13 +74,21 @@ export default () => {
 
   const [getCalendarEvents] = UserAPI.getCurrentUserCalendarEventsLazy({
     onCompleted: (data: any) => {
+      let events = [];
       if (data?.currentUser?.calendarEventsConnection?.edges) {
-        setEvents(
-          data.currentUser.calendarEventsConnection.edges.map((edge: any) =>
-            nodeToEvent(edge.node)
-          )
+        events = data.currentUser.calendarEventsConnection.edges.map(
+          (edge: any) => nodeToEvent(edge.node)
         );
       }
+      if (data?.currentUser?.googleCalendarEvents) {
+        events = [
+          ...events,
+          ...data?.currentUser?.googleCalendarEvents.map((e: any) =>
+            nodeToEvent(e)
+          ),
+        ];
+      }
+      setEvents(events);
     },
   });
 

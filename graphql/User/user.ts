@@ -17,6 +17,22 @@ export const GET_CURRENT_USER_QUERY = gql`
   }
 `;
 
+export const GET_CURRENT_USER_WITH_CONNECT_ACCOUNTS_QUERY = gql`
+  query getCurrentUserWithConnectAccountsQuery {
+    currentUser {
+      id
+      email
+      connectAccountsConnection {
+        nodes {
+          id
+          email
+          integrationType
+        }
+      }
+    }
+  }
+`;
+
 export const GET_CURRENT_USER_PROFILE_QUERY = gql`
   query getCurrentUserProfileQuery {
     currentUser {
@@ -107,6 +123,7 @@ export const GET_CURRENT_USER_CALENDER_EVENTS_QUERY = gql`
     currentUser {
       id
       timezone
+      googleCalendarEvents
       calendarEventsConnection(
         beforeEnding: $beforeEnding
         atOrAfterStarting: $atOrAfterStarting

@@ -23,6 +23,7 @@ import {
   resetPasswordMutationVariables,
   forgotPasswordMutation,
   forgotPasswordMutationVariables,
+  getCurrentUserWithConnectAccountsQuery,
 } from "../generated";
 
 export const getCurrentUser = (
@@ -30,6 +31,7 @@ export const getCurrentUser = (
     | QueryHookOptions<getCurrentUserQuery, Record<string, any>>
     | undefined
 ) => useQuery<getCurrentUserQuery>(User.GET_CURRENT_USER_QUERY, options);
+
 export const getCurrentUserLazy = (
   options?:
     | QueryHookOptions<getCurrentUserQuery, Record<string, any>>
@@ -91,5 +93,16 @@ export const resetPassword = (
 ) =>
   useMutation<resetPasswordMutation, resetPasswordMutationVariables>(
     User.RESET_PASSWORD_MUTATION,
+    options
+  );
+
+export const getCurrentUserWithConnectAccounts = (
+  options?: QueryHookOptions<
+    getCurrentUserWithConnectAccountsQuery,
+    Record<string, any>
+  >
+) =>
+  useQuery<getCurrentUserWithConnectAccountsQuery>(
+    User.GET_CURRENT_USER_WITH_CONNECT_ACCOUNTS_QUERY,
     options
   );

@@ -10,16 +10,19 @@ import {
 } from "../generated";
 
 export const createCalendarEvent = () =>
-  useMutation<createCalendarEventMutation, createCalendarEventMutationVariables>(
-    Calendar.CREATE_CALENDAR_EVENT_MUTATION,
-  );
+  useMutation<
+    createCalendarEventMutation,
+    createCalendarEventMutationVariables
+  >(Calendar.CREATE_CALENDAR_EVENT_MUTATION);
 
 export const updateCalendarEvent = () =>
-  useMutation<updateCalendarEventMutation, updateCalendarEventMutationVariables>(
-    Calendar.UPDATE_CALENDAR_EVENT_MUTATION,
-  );
+  useMutation<
+    updateCalendarEventMutation,
+    updateCalendarEventMutationVariables
+  >(Calendar.UPDATE_CALENDAR_EVENT_MUTATION);
 
 export const deleteCalendarEvent = () =>
-  useMutation<deleteCalendarEventMutation, deleteCalendarEventMutationVariables>(
-    Calendar.DELETE_CALENDAR_EVENT_MUTATION,
-  );
+  useMutation<
+    deleteCalendarEventMutation,
+    deleteCalendarEventMutationVariables
+  >(Calendar.DELETE_CALENDAR_EVENT_MUTATION);

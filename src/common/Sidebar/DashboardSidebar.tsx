@@ -101,6 +101,13 @@ export default () => {
         </S.SidebarItem>
       </Link>
 
+      <Link href="/dashboard/calendar">
+        <S.SidebarItem isActive={activeRoute("/calendar")}>
+          <Calendar width={15} height={15} />
+          Calendar
+        </S.SidebarItem>
+      </Link>
+
       <Link href="/dashboard/settings">
         <S.SidebarItem isActive={activeRoute("/settings")}>
           <Settings width={15} height={15} />

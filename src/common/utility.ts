@@ -27,6 +27,7 @@ export const Styling = {
   dangerColor: "#d64545",
   backgroundColor: "rgb(247, 247, 248);",
 
+  borderRadius: "6px",
   inputBorderRadius: "6px",
   boxShadow: "0 2px 4px rgba(81,107,152,0.16)",
 };
