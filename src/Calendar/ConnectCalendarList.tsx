@@ -13,6 +13,8 @@ import Notification from "../common/Notification";
 
 export default () => {
   const [errors, setErrors] = useState<string[]>([]);
+  const [code, setCode] = useState("");
+  const [userProfile, setUserProfile] = useState();
   const { data: userData, loading } = getCurrentUserWithConnectAccounts();
 
   const [createConnect] = createConnectAccount({
@@ -36,6 +38,10 @@ export default () => {
           },
         });
       }
+    },
+    onCompleted: () => {
+      setUserProfile(undefined);
+      setCode("");
     },
   });
 
@@ -65,18 +71,49 @@ export default () => {
   });
 
   useEffect(() => {
+    if (code && userProfile) {
+      createConnect({
+        variables: {
+          input: {
+            ...userProfile,
+            code: code,
+            integrationType: ConnectAccountIntegrationTypeEnum.GOOGLE_CALENDAR,
+          },
+        },
+      });
+    }
+  }, [code, userProfile]);
+
+  useEffect(() => {
     if (typeof window !== "undefined") {
       const win = window as any;
       win?.gapix?.addEventListener("load", () => {
         gapi.load("client:auth2", () => {
-          gapi.client.init({
-            apiKey: Environment.GOOGLE_OAUTH_API_KEY,
-            clientId: Environment.GOOGLE_OAUTH_CLIENT_ID,
-            discoveryDocs: [
-              "https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest",
-            ],
-            scope: "https://www.googleapis.com/auth/calendar",
-          });
+          gapi.client
+            .init({
+              apiKey: Environment.GOOGLE_OAUTH_API_KEY,
+              clientId: Environment.GOOGLE_OAUTH_CLIENT_ID,
+              discoveryDocs: [
+                "https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest",
+              ],
+              scope: "https://www.googleapis.com/auth/calendar",
+            })
+            .then(() => {
+              gapi.auth2.getAuthInstance().isSignedIn.listen(() => {
+                const profile = gapi.auth2
+                  .getAuthInstance()
+                  .currentUser.get()
+                  .getBasicProfile();
+
+                const profileData = {
+                  id: profile.getId(),
+                  firstName: profile.getGivenName(),
+                  lastName: profile.getFamilyName(),
+                  email: profile.getEmail(),
+                };
+                setUserProfile(profileData);
+              });
+            });
         });
       });
     }
@@ -130,34 +167,14 @@ export default () => {
           ) : (
             <S.CalendarItemButton
               onClick={() => {
+                setCode("");
+                gapi.auth2.getAuthInstance().signOut();
                 gapi.auth2
                   .getAuthInstance()
                   .grantOfflineAccess()
                   .then((code) => {
-                    const profile = gapi.auth2
-                      .getAuthInstance()
-                      .currentUser.get()
-                      .getBasicProfile();
-
-                    const profileData = {
-                      id: profile.getId(),
-                      firstName: profile.getGivenName(),
-                      lastName: profile.getFamilyName(),
-                      email: profile.getEmail(),
-                    };
-
                     setErrors([]);
-
-                    createConnect({
-                      variables: {
-                        input: {
-                          ...profileData,
-                          code: code.code,
-                          integrationType:
-                            ConnectAccountIntegrationTypeEnum.GOOGLE_CALENDAR,
-                        },
-                      },
-                    });
+                    setCode(code.code);
                   });
               }}
             >
