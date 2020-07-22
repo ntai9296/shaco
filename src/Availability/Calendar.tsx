@@ -57,6 +57,11 @@ export default () => {
     const isInternal =
       event.integrationType === CalendarEventIntegrationTypeEnum.INTERNAL;
 
+    // Check for busy all day
+    if (!event.ending) {
+      start.startOf("day");
+    }
+
     return {
       id: event.id,
       start: start.format(),
