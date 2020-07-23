@@ -640,9 +640,11 @@ export interface getServiceAvailabilityQueryVariables {
 
 export interface getCurrentUserQuery_currentUser_profile {
   id: string;
+  name: string;
   firstName: string;
   lastName: string;
   profilePhotoUrl: string | null;
+  slug: string | null;
 }
 
 export interface getCurrentUserQuery_currentUser {

@@ -9,9 +9,11 @@ export const GET_CURRENT_USER_QUERY = gql`
       timezone
       profile {
         id
+        name
         firstName
         lastName
         profilePhotoUrl
+        slug
       }
     }
   }

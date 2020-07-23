@@ -3,12 +3,13 @@ import {
   ArrowRight,
   User,
   Calendar,
-  Bell,
   Settings,
   HelpCircle,
   DollarSign,
   LogOut,
   Star,
+  CheckSquare,
+  Columns,
 } from "react-feather";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -31,8 +32,8 @@ export default () => {
       {userData?.currentUser?.profile && (
         <Link
           href={
-            userData.currentUser.roles.includes("host")
-              ? "/host"
+            userData.currentUser.profile.slug
+              ? `/${userData.currentUser.profile.slug}`
               : "/dashboard/profile"
           }
         >
@@ -50,14 +51,11 @@ export default () => {
               )}
             </S.Avatar>
             <S.ProfileInfo>
-              <S.ProfileName>
-                {userData.currentUser.profile.firstName || "Your name"}{" "}
-                {userData.currentUser.profile.lastName}
-              </S.ProfileName>
+              <S.ProfileName>{userData.currentUser.profile.name}</S.ProfileName>
               <S.ViewProfile>
-                {userData.currentUser.roles.includes("host")
+                {userData.currentUser.profile.slug
                   ? "Public profile"
-                  : "Become a host"}
+                  : "Complete profile"}
                 <ArrowRight width={15} height={15} />
               </S.ViewProfile>
             </S.ProfileInfo>
@@ -74,7 +72,7 @@ export default () => {
       </Link>
       <Link href="/dashboard/availability">
         <S.SidebarItem isActive={activeRoute("/availability")}>
-          <Calendar width={15} height={15} />
+          <CheckSquare width={15} height={15} />
           Availability
         </S.SidebarItem>
       </Link>
@@ -87,17 +85,17 @@ export default () => {
         </S.SidebarItem>
       </Link>
 
+      <Link href="/dashboard/services">
+        <S.SidebarItem isActive={activeRoute("/services")}>
+          <Columns width={15} height={15} />
+          Services
+        </S.SidebarItem>
+      </Link>
+
       <Link href="/dashboard/payout">
         <S.SidebarItem isActive={activeRoute("/payout")}>
           <DollarSign width={15} height={15} />
           Payouts
-        </S.SidebarItem>
-      </Link>
-
-      <Link href="/dashboard/notifications">
-        <S.SidebarItem isActive={activeRoute("/notifications")}>
-          <Bell width={15} height={15} />
-          Notifications
         </S.SidebarItem>
       </Link>
 
@@ -115,11 +113,11 @@ export default () => {
         </S.SidebarItem>
       </Link>
 
-      <S.MenuTitle>Support</S.MenuTitle>
+      {/* <S.MenuTitle>Support</S.MenuTitle>
 
       <Link href="/dashboard/faqs">
         <S.SidebarItem>
-          <Bell width={15} height={15} />
+          <HelpCircle width={15} height={15} />
           FAQs
         </S.SidebarItem>
       </Link>
@@ -127,7 +125,7 @@ export default () => {
       <S.SidebarItem>
         <HelpCircle width={15} height={15} />
         Give feedback
-      </S.SidebarItem>
+      </S.SidebarItem> */}
 
       <S.SidebarItem
         style={{ marginTop: 30 }}
