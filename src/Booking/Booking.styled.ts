@@ -60,3 +60,7 @@ export const BookingNewDateTime = styled.p`
 export const ConfirmRescheduleButtonContainer = styled.div`
   margin-top: 15px;
 `;
+
+export const CalendarContainer = styled.div`
+  width: 100%;
+`;

@@ -124,7 +124,7 @@ export default () => {
           ({node.providable?.duration} mins)
         </S.BookingDetails>
         <S.BookingNewDateTime>Select a new date and time</S.BookingNewDateTime>
-        <div>
+        <S.CalendarContainer>
           <Calendar
             selectedValue={calendarDateTime}
             onSelect={(e) => setCalendarDateTime(e)}
@@ -152,7 +152,7 @@ export default () => {
               )}
             </VS.CalendarTimes>
           </VS.CalendarTimeList>
-        </div>
+        </S.CalendarContainer>
         {bookingSlot && (
           <S.ConfirmRescheduleButtonContainer>
             <Button
