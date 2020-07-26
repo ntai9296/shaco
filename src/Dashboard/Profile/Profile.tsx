@@ -10,7 +10,6 @@ import Input from "../../common/Input";
 import Popper from "../../common/Popper";
 import Button from "../../common/Button";
 import Notification from "../../common/Notification";
-import notifications from "../../../pages/dashboard/notifications";
 
 export default () => {
   const profilePhotoRef = useRef<any>();
