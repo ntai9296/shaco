@@ -2,6 +2,7 @@ import React from "react";
 import Router from "next/router";
 import { ArrowLeft } from "react-feather";
 import * as S from "./CheckoutSummary.styled";
+import { ServicePricingTypeEnum } from "../../graphql/generated";
 
 interface Props {
   title: string;
@@ -9,7 +10,8 @@ interface Props {
   currency: string;
   description: string;
   img?: string | null;
-  children: any;
+  children?: any;
+  pricingType: ServicePricingTypeEnum;
 }
 
 export default ({
@@ -19,7 +21,23 @@ export default ({
   img,
   currency,
   children,
+  pricingType,
 }: Props) => {
+  const getPricingText = () => {
+    switch (pricingType) {
+      case ServicePricingTypeEnum.SIMPLE:
+        return (
+          <>
+            {currency}
+            {price / 100}
+          </>
+        );
+      case ServicePricingTypeEnum.FREE:
+        return "Free";
+      case ServicePricingTypeEnum.FLEXIBLE:
+        return "Name your price";
+    }
+  };
   return (
     <S.ProductSummaryContainer>
       <S.BackButtonContainer>
@@ -32,16 +50,7 @@ export default ({
       </S.BackButtonContainer>
       <S.ProductSummaryInfoContainer>
         <S.Title>{title}</S.Title>
-        <S.Price>
-          {price <= 0 ? (
-            "Free"
-          ) : (
-            <>
-              {currency}
-              {price / 100}
-            </>
-          )}
-        </S.Price>
+        <S.Price>{getPricingText()}</S.Price>
         <S.Description>{description}</S.Description>
         {children && <S.MoreData>{children}</S.MoreData>}
       </S.ProductSummaryInfoContainer>

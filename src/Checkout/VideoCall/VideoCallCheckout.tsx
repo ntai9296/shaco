@@ -71,6 +71,8 @@ export default ({ service }: Props) => {
     [key: string]: any[];
   }>({});
 
+  const providable = service.providable as any;
+
   const { data } = getServiceAvailabilityById({
     variables: {
       id: service.id,
@@ -82,13 +84,13 @@ export default ({ service }: Props) => {
       const availableObject = Object.keys(node.profile?.availabilities).reduce(
         (availableObject: any, key: string) => {
           const currentDateObj = node.profile?.availabilities[key];
-          if (service.providable.duration) {
+          if (providable.duration) {
             currentDateObj.slots.map(({ starting, ending }: any) => {
               let momentStarting = moment.tz(starting, userTimezone.current);
               const momentEnding = moment.tz(ending, userTimezone.current);
               let momentStartingWithDuration = momentStarting
                 .clone()
-                .add(service.providable.duration, "minutes");
+                .add(providable.duration, "minutes");
 
               while (momentStartingWithDuration <= momentEnding) {
                 const slotDate = momentStarting.format("MM/DD/YYYY");
@@ -101,7 +103,7 @@ export default ({ service }: Props) => {
                     ...availableObject[slotDate],
                     {
                       starting: momentStarting,
-                      duration: service.providable.duration,
+                      duration: providable.duration,
                       ending: momentStartingWithDuration,
                       format: momentStarting.format("h:mm A"),
                     },
@@ -109,12 +111,12 @@ export default ({ service }: Props) => {
                   momentStarting = momentStartingWithDuration;
                   momentStartingWithDuration = momentStartingWithDuration
                     .clone()
-                    .add(service.providable.duration, "minutes");
+                    .add(providable.duration, "minutes");
                 } else {
                   momentStarting = momentStarting.add(15, "minutes");
                   momentStartingWithDuration = momentStarting
                     .clone()
-                    .add(service.providable.duration, "minutes");
+                    .add(providable.duration, "minutes");
                 }
               }
             });
@@ -169,8 +171,9 @@ export default ({ service }: Props) => {
           title={service.name || ""}
           price={service.price}
           currency="$"
-          description={`Duration: ${service.providable.duration} mins`}
+          description={`Duration: ${providable.duration} mins`}
           img={service.imageUrl}
+          pricingType={service.pricingType}
         >
           {form.bookingDate && payment && (
             <div>

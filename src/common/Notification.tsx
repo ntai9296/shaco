@@ -38,11 +38,16 @@ const NotificationItem = styled.div`
   }
 `;
 
-export default ({ type = "info", notifications, onClose }: Props) => (
-  <Notification errorType={type}>
-    {onClose && <CloseIcon onClick={onClose} />}
-    {notifications.map((notification, idx) => (
-      <NotificationItem key={idx}>{notification}</NotificationItem>
-    ))}
-  </Notification>
-);
+export default ({ type = "info", notifications, onClose }: Props) => {
+  if (notifications.length === 0) {
+    return null;
+  }
+  return (
+    <Notification errorType={type}>
+      {onClose && <CloseIcon onClick={onClose} />}
+      {notifications.map((notification, idx) => (
+        <NotificationItem key={idx}>{notification}</NotificationItem>
+      ))}
+    </Notification>
+  );
+};

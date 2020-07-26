@@ -1,10 +1,12 @@
 import React, { useState, useRef, useEffect } from "react";
-import { ChevronDown } from "react-feather";
-import Link from 'next/link';
+import { ChevronDown, Edit } from "react-feather";
+import Link from "next/link";
 import * as S from "./Service.styled";
 import {
   getPublicProfileQuery_profile_servicesConnection_nodes,
   ServiceProvidableTypeEnum,
+  ServicePricingTypeEnum,
+  ServiceTypeEnum,
 } from "../../../graphql/generated";
 
 interface Props {
@@ -18,7 +20,7 @@ export default ({ services }: Props) => {
 
   useEffect(() => {
     setCapServices(services.slice(0, 6));
-  }, []);
+  }, [services]);
 
   return (
     <>
@@ -40,10 +42,14 @@ export default ({ services }: Props) => {
   );
 };
 
-const ServiceItem = ({
+export const ServiceItem = ({
   service,
+  editMode,
+  previewMode,
 }: {
   service: getPublicProfileQuery_profile_servicesConnection_nodes;
+  editMode?: boolean;
+  previewMode?: boolean;
 }) => {
   const [showMore, setShowMore] = useState(false);
   const paragraphRef = useRef<any>(null);
@@ -52,9 +58,29 @@ const ServiceItem = ({
       setShowMore(true);
     }
   }, [paragraphRef.current]);
+
+  const onRenderItemCost = () => {
+    if (service.pricingType === ServicePricingTypeEnum.FREE) {
+      return "Free";
+    } else if (service.pricingType === ServicePricingTypeEnum.FLEXIBLE) {
+      return "Name your price";
+    }
+
+    return `$${service.price / 100}`;
+  };
+
+  const providable = service.providable as any;
+
   return (
     <S.ServiceItem>
       <S.ServiceContent>
+        {editMode && (
+          <S.EditHeader>
+            <Link href={`/dashboard/services/${service.id}`}>
+              <Edit size={20} />
+            </Link>
+          </S.EditHeader>
+        )}
         <S.ServiceTitle>{service.name}</S.ServiceTitle>
         <S.ServiceItemImage>
           {service.imageUrl && (
@@ -62,21 +88,24 @@ const ServiceItem = ({
           )}
         </S.ServiceItemImage>
         <S.ServiceItemPricing>
-          <S.ServiceItemCost>
-            {service.price <= 0 ? "Free" : `$${service.price / 100}`}
-          </S.ServiceItemCost>
-          {service.providableType ===
-            ServiceProvidableTypeEnum.VIDEO_CALL_SERVICE && (
+          <S.ServiceItemCost>{onRenderItemCost()}</S.ServiceItemCost>
+          {service.serviceType === ServiceTypeEnum.VIRTUAL_ONE_ON_ONE && (
             <S.ServiceItemDuration>
-              Duration: {service?.providable.duration} minutes
+              Duration: {providable?.duration} minutes
             </S.ServiceItemDuration>
           )}
           <S.ServiceItemAction>
-            <Link href={`/checkout/${service.id}`}>
+            {previewMode ? (
               <S.ServiceItemButton>
                 {service.buttonText || "Select"}
               </S.ServiceItemButton>
-            </Link>
+            ) : (
+              <Link href={`/checkout/${service.id}`}>
+                <S.ServiceItemButton>
+                  {service.buttonText || "Select"}
+                </S.ServiceItemButton>
+              </Link>
+            )}
           </S.ServiceItemAction>
         </S.ServiceItemPricing>
         {service.description && (

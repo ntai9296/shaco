@@ -50,17 +50,19 @@ export default () => {
       }
 
       const service = node.service as getBookingRescheduleQuery_node_Booking_service;
+      const providable = node.providable as any;
+
       const availableObject = Object.keys(
         node.hostProfile?.availabilities
       ).reduce((availableObject: any, key: string) => {
         const currentDateObj = node.hostProfile?.availabilities[key];
-        if (service.providable.duration) {
+        if (providable?.duration) {
           currentDateObj.slots.map(({ starting, ending }: any) => {
             let momentStarting = moment.tz(starting, userTimezone.current);
             const momentEnding = moment.tz(ending, userTimezone.current);
             let momentStartingWithDuration = momentStarting
               .clone()
-              .add(service.providable.duration, "minutes");
+              .add(providable.duration, "minutes");
 
             while (momentStartingWithDuration <= momentEnding) {
               const slotDate = momentStarting.format("MM/DD/YYYY");
@@ -73,7 +75,7 @@ export default () => {
                   ...availableObject[slotDate],
                   {
                     starting: momentStarting,
-                    duration: service.providable.duration,
+                    duration: providable.duration,
                     ending: momentStartingWithDuration,
                     format: momentStarting.format("h:mm A"),
                   },
@@ -81,12 +83,12 @@ export default () => {
                 momentStarting = momentStartingWithDuration;
                 momentStartingWithDuration = momentStartingWithDuration
                   .clone()
-                  .add(service.providable.duration, "minutes");
+                  .add(providable.duration, "minutes");
               } else {
                 momentStarting = momentStarting.add(15, "minutes");
                 momentStartingWithDuration = momentStarting
                   .clone()
-                  .add(service.providable.duration, "minutes");
+                  .add(providable.duration, "minutes");
               }
             }
           });

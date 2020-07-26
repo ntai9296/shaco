@@ -62,6 +62,12 @@ export const GET_BOOKING_CONFIRMATION_QUERY = gql`
           profilePhotoUrl
           slug
         }
+        service {
+          id
+          name
+          imageUrl
+          description
+        }
       }
     }
   }

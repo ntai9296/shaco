@@ -1,4 +1,6 @@
 import { gql } from "@apollo/client";
+import { SERVICE_FRAGMENT } from "../Service/service";
+import { PROFILE_FRAGMENT } from "../Profile/profile";
 
 export const GET_CURRENT_USER_QUERY = gql`
   query getCurrentUserQuery {
@@ -14,6 +16,7 @@ export const GET_CURRENT_USER_QUERY = gql`
         lastName
         profilePhotoUrl
         slug
+        brandColor
       }
     }
   }
@@ -42,40 +45,11 @@ export const GET_CURRENT_USER_PROFILE_QUERY = gql`
       email
       roles
       profile {
-        id
-        name
-        shortDescription
-        about
-        slug
-        firstName
-        lastName
-        introVideoUrl
-        brandColor
-        currencyType
-        status
-        profilePhotoUrl
-        coverPhotoUrl
-        servicesConnection {
-          nodes {
-            id
-            name
-            description
-            price
-            imageUrl
-            introVideoUrl
-            buttonText
-            providableType
-            providable {
-              ... on VideoCallService {
-                id
-                duration
-              }
-            }
-          }
-        }
+        ...profileFragment
       }
     }
   }
+  ${PROFILE_FRAGMENT}
 `;
 
 export const CREATE_USER_MUTATION = gql`
@@ -164,4 +138,23 @@ export const FORGOT_PASSWORD_MUTATION = gql`
       message
     }
   }
+`;
+
+export const GET_CURRENT_USER_PROFILE_SERVICES_QUERY = gql`
+  query getCurrentUserProfileServicesQuery {
+    currentUser {
+      id
+      email
+      profile {
+        id
+        brandColor
+        servicesConnection {
+          nodes {
+            ...serviceFragment
+          }
+        }
+      }
+    }
+  }
+  ${SERVICE_FRAGMENT}
 `;

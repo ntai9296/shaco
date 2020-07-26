@@ -13,6 +13,8 @@ import Button from "../../common/Button";
 import Notification from "../../common/Notification";
 import ENV from "../../../lib/env";
 import Textarea from "../../common/Textarea";
+import { ServicePricingTypeEnum } from "../../../graphql/generated";
+import NumberFormatInput from "../../common/NumberFormatInput";
 
 const stripePromise = loadStripe(ENV.STRIPE_PUBLISHABLE_KEY);
 
@@ -62,6 +64,7 @@ const CheckoutForm = ({
   loading,
   errors: initErrors,
   price,
+  pricingType,
 }: {
   title: string;
   form: any;
@@ -70,6 +73,7 @@ const CheckoutForm = ({
   loading: boolean;
   errors: string[];
   price: number;
+  pricingType: ServicePricingTypeEnum;
 }) => {
   const stripe = useStripe();
   const elements = useElements();
@@ -85,7 +89,7 @@ const CheckoutForm = ({
     e.preventDefault();
     setErrors([]);
 
-    if (price <= 0) {
+    if (pricingType === ServicePricingTypeEnum.FREE) {
       return onSubmit("");
     }
 
@@ -111,6 +115,17 @@ const CheckoutForm = ({
 
   const onFormChange = (field: string, value: any) =>
     onChangeForm({ ...form, [field]: value });
+
+  const getPricingText = () => {
+    switch (pricingType) {
+      case ServicePricingTypeEnum.SIMPLE:
+        return `Pay $${price / 100}`;
+      case ServicePricingTypeEnum.FREE:
+        return "Confirm Booking";
+      case ServicePricingTypeEnum.FLEXIBLE:
+        return "Request Booking";
+    }
+  };
 
   return (
     <S.PaymentCheckoutContainer>
@@ -138,10 +153,28 @@ const CheckoutForm = ({
           />
         </S.Row>
 
+        {pricingType === ServicePricingTypeEnum.FLEXIBLE && (
+          <S.Row>
+            <NumberFormatInput
+              value={form.price || ""}
+              onValueChange={({ floatValue }) =>
+                onFormChange("price", floatValue)
+              }
+              label="How much do you want to pay?"
+              prefix="$"
+              allowLeadingZeros={false}
+              allowNegative={false}
+              allowEmptyFormatting={false}
+              decimalScale={2}
+              thousandSeparator
+            />
+          </S.Row>
+        )}
+
         {form.bookingQuestions?.map((question: any, idx: number) => (
           <S.Row key={question.serviceQuestionId}>
             <Textarea
-              rows={6}
+              rows={2}
               value={question.answer}
               label={question.question}
               onChange={(e) => {
@@ -160,7 +193,8 @@ const CheckoutForm = ({
           </S.Row>
         ))}
 
-        {price > 0 && (
+        {(pricingType === ServicePricingTypeEnum.SIMPLE ||
+          pricingType === ServicePricingTypeEnum.FLEXIBLE) && (
           <S.Row>
             <S.CardInput>
               <label>Card information</label>
@@ -180,7 +214,7 @@ const CheckoutForm = ({
         )}
         <div>
           <Button type="submit" isLoading={loading}>
-            {price > 0 ? `Pay $${price / 100}` : "Confirm Booking"}
+            {getPricingText()}
           </Button>
         </div>
       </S.PaymentCheckout>

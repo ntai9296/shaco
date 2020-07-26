@@ -64,3 +64,13 @@ export const ConfirmRescheduleButtonContainer = styled.div`
 export const CalendarContainer = styled.div`
   width: 100%;
 `;
+
+export const ServiceImage = styled.div`
+  margin-bottom: 10px;
+  > img {
+    width: auto;
+    max-width: 100%;
+    max-height: 8em;
+    border-radius: 8px;
+  }
+`;

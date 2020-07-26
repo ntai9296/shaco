@@ -10,6 +10,7 @@ import {
   ServiceProvidableTypeEnum,
 } from "../../graphql/generated";
 import dynamic from "next/dynamic";
+import RegularCheckout from "../../src/Checkout/RegularCheckout/RegularCheckout";
 
 const VideoCallCheckout = dynamic(
   () => import("../../src/Checkout/VideoCall/VideoCallCheckout"),
@@ -34,7 +35,7 @@ export default () => {
       case ServiceProvidableTypeEnum.VIDEO_CALL_SERVICE:
         return <VideoCallCheckout service={node} />;
       default:
-        return "not found";
+        return <RegularCheckout service={node} />;
     }
   };
 
@@ -66,17 +67,7 @@ export default () => {
 
         <meta property="og:site_name" content="Fireside" />
       </Head>
-      {/* <S.Body>
-        <Header avatarURL={""} name={""} />
-        <div style={{ marginTop: 64 }} />
-        <S.Main>
-          <S.TitleContent>
-            <S.Title>Complete your checkout</S.Title>
-          </S.TitleContent> */}
-
       <div>{renderCheckout()}</div>
-      {/* </S.Main>
-      </S.Body> */}
     </ThemeProvider>
   );
 };

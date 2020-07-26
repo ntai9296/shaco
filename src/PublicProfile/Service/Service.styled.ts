@@ -73,7 +73,7 @@ export const ServiceItemCost = styled.h2`
 `;
 
 export const ServiceItemDuration = styled.p`
-  margin: 0 0 23px 0;
+  margin: 0;
   color: rgb(112, 108, 100);
   text-transform: uppercase;
   font-weight: bold;
@@ -127,6 +127,7 @@ export const ServiceItemButton = styled(CommonButton)`
   padding: 12px 40px;
   font-size: 16px;
   font-weight: 500;
+  margin-top: 20px;
 `;
 
 export const ShowMoreContent = styled.div`
@@ -141,4 +142,21 @@ export const ShowMoreButton = styled(CommonButton)`
     display: flex;
     align-items: center;
   }
+`;
+
+export const EditHeader = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+
+  > svg {
+    cursor: pointer;
+  }
+`;
+
+export const AddServiceContainer = styled(ServiceContent)`
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
 `;

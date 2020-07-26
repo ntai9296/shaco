@@ -1,6 +1,7 @@
 import { gql } from "@apollo/client";
+import { SERVICE_QUESTION_FRAGMENT } from '../ServiceQuestion/service_question';
 
-const SERVICE_FRAGMENT = gql`
+export const SERVICE_FRAGMENT = gql`
   fragment serviceFragment on Service {
     id
     name
@@ -11,10 +12,15 @@ const SERVICE_FRAGMENT = gql`
     introVideoUrl
     buttonText
     providableType
+    serviceType
+    pricingType
     providable {
       ... on VideoCallService {
         id
         duration
+      }
+      ... on GeneralService {
+        id
       }
     }
   }
@@ -24,48 +30,22 @@ export const CREATE_SERVICE_MUTATION = gql`
   mutation createServiceMutation($input: CreateServiceInput!) {
     createService(input: $input) {
       service {
-        id
-        name
-        imageUrl
-        introVideoUrl
-        description
-        price
-        introVideoUrl
-        buttonText
-        providableType
-        providable {
-          ... on VideoCallService {
-            id
-            duration
-          }
-        }
+        ...serviceFragment
       }
     }
   }
+  ${SERVICE_FRAGMENT}
 `;
 
 export const UPDATE_SERVICE_MUTATION = gql`
   mutation updateServiceMutation($input: UpdateServiceInput!) {
     updateService(input: $input) {
       service {
-        id
-        name
-        imageUrl
-        introVideoUrl
-        description
-        price
-        introVideoUrl
-        buttonText
-        providableType
-        providable {
-          ... on VideoCallService {
-            id
-            duration
-          }
-        }
+        ...serviceFragment
       }
     }
   }
+  ${SERVICE_FRAGMENT}
 `;
 
 export const DELETE_SERVICE_MUTATION = gql`
@@ -73,20 +53,6 @@ export const DELETE_SERVICE_MUTATION = gql`
     deleteService(input: $input) {
       service {
         id
-        name
-        imageUrl
-        introVideoUrl
-        description
-        price
-        introVideoUrl
-        buttonText
-        providableType
-        providable {
-          ... on VideoCallService {
-            id
-            duration
-          }
-        }
       }
     }
   }
@@ -99,14 +65,14 @@ export const GET_SERVICE_QUERY = gql`
         ...serviceFragment
         serviceQuestionsConnection {
           nodes {
-            id
-            question
+            ...serviceQuestionFragment
           }
         }
       }
     }
   }
   ${SERVICE_FRAGMENT}
+  ${SERVICE_QUESTION_FRAGMENT}
 `;
 
 export const GET_SERVICE_AVAILABILITY_QUERY = gql`

@@ -30,6 +30,7 @@ export const Styling = {
   borderRadius: "6px",
   inputBorderRadius: "6px",
   boxShadow: "0 2px 4px rgba(81,107,152,0.16)",
+  border: "1px solid rgb(229,227,221)"
 };
 
 export const mediaBreakpointUp = (breakpoint: Breakpoint) => `

@@ -24,6 +24,7 @@ import {
   forgotPasswordMutation,
   forgotPasswordMutationVariables,
   getCurrentUserWithConnectAccountsQuery,
+  getCurrentUserProfileServicesQuery,
 } from "../generated";
 
 export const getCurrentUser = (
@@ -38,8 +39,22 @@ export const getCurrentUserLazy = (
     | undefined
 ) => useLazyQuery<getCurrentUserQuery>(User.GET_CURRENT_USER_QUERY, options);
 
-export const getCurrentUserProfile = () =>
-  useQuery<getCurrentUserProfileQuery>(User.GET_CURRENT_USER_PROFILE_QUERY);
+export const getCurrentUserProfile = (
+  options?: QueryHookOptions<getCurrentUserProfileQuery>
+) =>
+  useQuery<getCurrentUserProfileQuery>(
+    User.GET_CURRENT_USER_PROFILE_QUERY,
+    options
+  );
+
+export const getCurrentUserProfileServices = (
+  options?: QueryHookOptions<getCurrentUserProfileServicesQuery>
+) =>
+  useQuery<getCurrentUserProfileServicesQuery>(
+    User.GET_CURRENT_USER_PROFILE_SERVICES_QUERY,
+    options
+  );
+
 export const useUser = () => useQuery(User.GET_CURRENT_USER_QUERY);
 export const createUser = () =>
   useMutation<createUserMutation, createUserMutationVariables>(

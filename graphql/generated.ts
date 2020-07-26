@@ -99,15 +99,24 @@ export interface getBookingConfirmationQuery_node_Booking_hostProfile {
   slug: string | null;
 }
 
+export interface getBookingConfirmationQuery_node_Booking_service {
+  id: string;
+  name: string | null;
+  imageUrl: string | null;
+  description: string | null;
+}
+
 export interface getBookingConfirmationQuery_node_Booking {
   id: string;
   status: BookingStatusEnum | null;
   price: number | null;
   bookingDate: any;
+  description: string | null;
   userEmail: string;
-  providableType: string;
+  providableType: string | null;
   providable: getBookingConfirmationQuery_node_Booking_providable | null;
   hostProfile: getBookingConfirmationQuery_node_Booking_hostProfile;
+  service: getBookingConfirmationQuery_node_Booking_service | null;
 }
 
 export type getBookingConfirmationQuery_node = getBookingConfirmationQuery_node_CalendarEvent | getBookingConfirmationQuery_node_Booking;
@@ -147,14 +156,18 @@ export interface getBookingRescheduleQuery_node_Booking_hostProfile {
   availabilities: any | null;
 }
 
-export interface getBookingRescheduleQuery_node_Booking_service_providable {
+export interface getBookingRescheduleQuery_node_Booking_service_providable_GeneralService {}
+
+export interface getBookingRescheduleQuery_node_Booking_service_providable_VideoCallService {
   id: string;
   duration: number;
 }
 
+export type getBookingRescheduleQuery_node_Booking_service_providable = getBookingRescheduleQuery_node_Booking_service_providable_GeneralService | getBookingRescheduleQuery_node_Booking_service_providable_VideoCallService;
+
 export interface getBookingRescheduleQuery_node_Booking_service {
   id: string;
-  providable: getBookingRescheduleQuery_node_Booking_service_providable;
+  providable: getBookingRescheduleQuery_node_Booking_service_providable | null;
 }
 
 export interface getBookingRescheduleQuery_node_Booking {
@@ -163,7 +176,7 @@ export interface getBookingRescheduleQuery_node_Booking {
   price: number | null;
   bookingDate: any;
   userEmail: string;
-  providableType: string;
+  providableType: string | null;
   providable: getBookingRescheduleQuery_node_Booking_providable | null;
   hostProfile: getBookingRescheduleQuery_node_Booking_hostProfile;
   service: getBookingRescheduleQuery_node_Booking_service | null;
@@ -334,21 +347,29 @@ export interface deleteConnectAccountMutationVariables {
 // GraphQL query operation: getPublicProfileQuery
 // ====================================================
 
-export interface getPublicProfileQuery_profile_servicesConnection_nodes_providable {
+export interface getPublicProfileQuery_profile_servicesConnection_nodes_providable_VideoCallService {
   id: string;
   duration: number;
 }
 
+export interface getPublicProfileQuery_profile_servicesConnection_nodes_providable_GeneralService {
+  id: string;
+}
+
+export type getPublicProfileQuery_profile_servicesConnection_nodes_providable = getPublicProfileQuery_profile_servicesConnection_nodes_providable_VideoCallService | getPublicProfileQuery_profile_servicesConnection_nodes_providable_GeneralService;
+
 export interface getPublicProfileQuery_profile_servicesConnection_nodes {
   id: string;
   name: string | null;
-  description: string | null;
-  price: number;
   imageUrl: string | null;
   introVideoUrl: string | null;
+  description: string | null;
+  price: number;
   buttonText: string | null;
-  providableType: ServiceProvidableTypeEnum;
-  providable: getPublicProfileQuery_profile_servicesConnection_nodes_providable;
+  providableType: ServiceProvidableTypeEnum | null;
+  serviceType: ServiceTypeEnum;
+  pricingType: ServicePricingTypeEnum;
+  providable: getPublicProfileQuery_profile_servicesConnection_nodes_providable | null;
 }
 
 export interface getPublicProfileQuery_profile_servicesConnection {
@@ -432,13 +453,43 @@ export interface updateProfileMutationVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: checkProfileSlugAvailabilityQuery
+// ====================================================
+
+export interface checkProfileSlugAvailabilityQuery_profile {
+  id: string;
+}
+
+export interface checkProfileSlugAvailabilityQuery {
+  /**
+   * Get profile based on slug
+   */
+  profile: checkProfileSlugAvailabilityQuery_profile | null;
+}
+
+export interface checkProfileSlugAvailabilityQueryVariables {
+  slug: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: createServiceMutation
 // ====================================================
 
-export interface createServiceMutation_createService_service_providable {
+export interface createServiceMutation_createService_service_providable_VideoCallService {
   id: string;
   duration: number;
 }
+
+export interface createServiceMutation_createService_service_providable_GeneralService {
+  id: string;
+}
+
+export type createServiceMutation_createService_service_providable = createServiceMutation_createService_service_providable_VideoCallService | createServiceMutation_createService_service_providable_GeneralService;
 
 export interface createServiceMutation_createService_service {
   id: string;
@@ -448,8 +499,10 @@ export interface createServiceMutation_createService_service {
   description: string | null;
   price: number;
   buttonText: string | null;
-  providableType: ServiceProvidableTypeEnum;
-  providable: createServiceMutation_createService_service_providable;
+  providableType: ServiceProvidableTypeEnum | null;
+  serviceType: ServiceTypeEnum;
+  pricingType: ServicePricingTypeEnum;
+  providable: createServiceMutation_createService_service_providable | null;
 }
 
 export interface createServiceMutation_createService {
@@ -473,10 +526,16 @@ export interface createServiceMutationVariables {
 // GraphQL mutation operation: updateServiceMutation
 // ====================================================
 
-export interface updateServiceMutation_updateService_service_providable {
+export interface updateServiceMutation_updateService_service_providable_VideoCallService {
   id: string;
   duration: number;
 }
+
+export interface updateServiceMutation_updateService_service_providable_GeneralService {
+  id: string;
+}
+
+export type updateServiceMutation_updateService_service_providable = updateServiceMutation_updateService_service_providable_VideoCallService | updateServiceMutation_updateService_service_providable_GeneralService;
 
 export interface updateServiceMutation_updateService_service {
   id: string;
@@ -486,8 +545,10 @@ export interface updateServiceMutation_updateService_service {
   description: string | null;
   price: number;
   buttonText: string | null;
-  providableType: ServiceProvidableTypeEnum;
-  providable: updateServiceMutation_updateService_service_providable;
+  providableType: ServiceProvidableTypeEnum | null;
+  serviceType: ServiceTypeEnum;
+  pricingType: ServicePricingTypeEnum;
+  providable: updateServiceMutation_updateService_service_providable | null;
 }
 
 export interface updateServiceMutation_updateService {
@@ -511,21 +572,8 @@ export interface updateServiceMutationVariables {
 // GraphQL mutation operation: deleteServiceMutation
 // ====================================================
 
-export interface deleteServiceMutation_deleteService_service_providable {
-  id: string;
-  duration: number;
-}
-
 export interface deleteServiceMutation_deleteService_service {
   id: string;
-  name: string | null;
-  imageUrl: string | null;
-  introVideoUrl: string | null;
-  description: string | null;
-  price: number;
-  buttonText: string | null;
-  providableType: ServiceProvidableTypeEnum;
-  providable: deleteServiceMutation_deleteService_service_providable;
 }
 
 export interface deleteServiceMutation_deleteService {
@@ -551,14 +599,21 @@ export interface deleteServiceMutationVariables {
 
 export interface getServiceQuery_node_Booking {}
 
-export interface getServiceQuery_node_Service_providable {
+export interface getServiceQuery_node_Service_providable_VideoCallService {
   id: string;
   duration: number;
 }
 
+export interface getServiceQuery_node_Service_providable_GeneralService {
+  id: string;
+}
+
+export type getServiceQuery_node_Service_providable = getServiceQuery_node_Service_providable_VideoCallService | getServiceQuery_node_Service_providable_GeneralService;
+
 export interface getServiceQuery_node_Service_serviceQuestionsConnection_nodes {
   id: string;
   question: string | null;
+  isDefault: number;
 }
 
 export interface getServiceQuery_node_Service_serviceQuestionsConnection {
@@ -576,8 +631,10 @@ export interface getServiceQuery_node_Service {
   description: string | null;
   price: number;
   buttonText: string | null;
-  providableType: ServiceProvidableTypeEnum;
-  providable: getServiceQuery_node_Service_providable;
+  providableType: ServiceProvidableTypeEnum | null;
+  serviceType: ServiceTypeEnum;
+  pricingType: ServicePricingTypeEnum;
+  providable: getServiceQuery_node_Service_providable | null;
   serviceQuestionsConnection: getServiceQuery_node_Service_serviceQuestionsConnection;
 }
 
@@ -635,6 +692,87 @@ export interface getServiceAvailabilityQueryVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: createServiceQuestionMutation
+// ====================================================
+
+export interface createServiceQuestionMutation_createServiceQuestion_serviceQuestion {
+  id: string;
+  question: string | null;
+  isDefault: number;
+}
+
+export interface createServiceQuestionMutation_createServiceQuestion {
+  serviceQuestion: createServiceQuestionMutation_createServiceQuestion_serviceQuestion | null;
+}
+
+export interface createServiceQuestionMutation {
+  createServiceQuestion: createServiceQuestionMutation_createServiceQuestion | null;
+}
+
+export interface createServiceQuestionMutationVariables {
+  input: CreateServiceQuestionInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: deleteServiceQuestionMutation
+// ====================================================
+
+export interface deleteServiceQuestionMutation_deleteServiceQuestion_serviceQuestion {
+  id: string;
+  question: string | null;
+  isDefault: number;
+}
+
+export interface deleteServiceQuestionMutation_deleteServiceQuestion {
+  serviceQuestion: deleteServiceQuestionMutation_deleteServiceQuestion_serviceQuestion | null;
+}
+
+export interface deleteServiceQuestionMutation {
+  deleteServiceQuestion: deleteServiceQuestionMutation_deleteServiceQuestion | null;
+}
+
+export interface deleteServiceQuestionMutationVariables {
+  input: DeleteServiceQuestionInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: updateServiceQuestionMutation
+// ====================================================
+
+export interface updateServiceQuestionMutation_updateServiceQuestion_serviceQuestion {
+  id: string;
+  question: string | null;
+  isDefault: number;
+}
+
+export interface updateServiceQuestionMutation_updateServiceQuestion {
+  serviceQuestion: updateServiceQuestionMutation_updateServiceQuestion_serviceQuestion | null;
+}
+
+export interface updateServiceQuestionMutation {
+  updateServiceQuestion: updateServiceQuestionMutation_updateServiceQuestion | null;
+}
+
+export interface updateServiceQuestionMutationVariables {
+  input: UpdateServiceQuestionInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: getCurrentUserQuery
 // ====================================================
 
@@ -645,6 +783,7 @@ export interface getCurrentUserQuery_currentUser_profile {
   lastName: string;
   profilePhotoUrl: string | null;
   slug: string | null;
+  brandColor: string | null;
 }
 
 export interface getCurrentUserQuery_currentUser {
@@ -706,30 +845,6 @@ export interface getCurrentUserWithConnectAccountsQuery {
 // GraphQL query operation: getCurrentUserProfileQuery
 // ====================================================
 
-export interface getCurrentUserProfileQuery_currentUser_profile_servicesConnection_nodes_providable {
-  id: string;
-  duration: number;
-}
-
-export interface getCurrentUserProfileQuery_currentUser_profile_servicesConnection_nodes {
-  id: string;
-  name: string | null;
-  description: string | null;
-  price: number;
-  imageUrl: string | null;
-  introVideoUrl: string | null;
-  buttonText: string | null;
-  providableType: ServiceProvidableTypeEnum;
-  providable: getCurrentUserProfileQuery_currentUser_profile_servicesConnection_nodes_providable;
-}
-
-export interface getCurrentUserProfileQuery_currentUser_profile_servicesConnection {
-  /**
-   * A list of nodes.
-   */
-  nodes: (getCurrentUserProfileQuery_currentUser_profile_servicesConnection_nodes | null)[] | null;
-}
-
 export interface getCurrentUserProfileQuery_currentUser_profile {
   id: string;
   name: string;
@@ -744,7 +859,6 @@ export interface getCurrentUserProfileQuery_currentUser_profile {
   status: number;
   profilePhotoUrl: string | null;
   coverPhotoUrl: string | null;
-  servicesConnection: getCurrentUserProfileQuery_currentUser_profile_servicesConnection | null;
 }
 
 export interface getCurrentUserProfileQuery_currentUser {
@@ -957,6 +1071,66 @@ export interface forgotPasswordMutationVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: getCurrentUserProfileServicesQuery
+// ====================================================
+
+export interface getCurrentUserProfileServicesQuery_currentUser_profile_servicesConnection_nodes_providable_VideoCallService {
+  id: string;
+  duration: number;
+}
+
+export interface getCurrentUserProfileServicesQuery_currentUser_profile_servicesConnection_nodes_providable_GeneralService {
+  id: string;
+}
+
+export type getCurrentUserProfileServicesQuery_currentUser_profile_servicesConnection_nodes_providable = getCurrentUserProfileServicesQuery_currentUser_profile_servicesConnection_nodes_providable_VideoCallService | getCurrentUserProfileServicesQuery_currentUser_profile_servicesConnection_nodes_providable_GeneralService;
+
+export interface getCurrentUserProfileServicesQuery_currentUser_profile_servicesConnection_nodes {
+  id: string;
+  name: string | null;
+  imageUrl: string | null;
+  introVideoUrl: string | null;
+  description: string | null;
+  price: number;
+  buttonText: string | null;
+  providableType: ServiceProvidableTypeEnum | null;
+  serviceType: ServiceTypeEnum;
+  pricingType: ServicePricingTypeEnum;
+  providable: getCurrentUserProfileServicesQuery_currentUser_profile_servicesConnection_nodes_providable | null;
+}
+
+export interface getCurrentUserProfileServicesQuery_currentUser_profile_servicesConnection {
+  /**
+   * A list of nodes.
+   */
+  nodes: (getCurrentUserProfileServicesQuery_currentUser_profile_servicesConnection_nodes | null)[] | null;
+}
+
+export interface getCurrentUserProfileServicesQuery_currentUser_profile {
+  id: string;
+  brandColor: string | null;
+  servicesConnection: getCurrentUserProfileServicesQuery_currentUser_profile_servicesConnection | null;
+}
+
+export interface getCurrentUserProfileServicesQuery_currentUser {
+  id: string;
+  email: string;
+  profile: getCurrentUserProfileServicesQuery_currentUser_profile | null;
+}
+
+export interface getCurrentUserProfileServicesQuery {
+  /**
+   * Get current user based on jwt token in header
+   */
+  currentUser: getCurrentUserProfileServicesQuery_currentUser | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL fragment: bookingFragment
 // ====================================================
 
@@ -971,13 +1145,44 @@ export interface bookingFragment {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL fragment: profileFragment
+// ====================================================
+
+export interface profileFragment {
+  id: string;
+  name: string;
+  shortDescription: string;
+  about: string;
+  slug: string | null;
+  firstName: string;
+  lastName: string;
+  introVideoUrl: string | null;
+  brandColor: string | null;
+  currencyType: string;
+  status: number;
+  profilePhotoUrl: string | null;
+  coverPhotoUrl: string | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL fragment: serviceFragment
 // ====================================================
 
-export interface serviceFragment_providable {
+export interface serviceFragment_providable_VideoCallService {
   id: string;
   duration: number;
 }
+
+export interface serviceFragment_providable_GeneralService {
+  id: string;
+}
+
+export type serviceFragment_providable = serviceFragment_providable_VideoCallService | serviceFragment_providable_GeneralService;
 
 export interface serviceFragment {
   id: string;
@@ -987,8 +1192,25 @@ export interface serviceFragment {
   description: string | null;
   price: number;
   buttonText: string | null;
-  providableType: ServiceProvidableTypeEnum;
-  providable: serviceFragment_providable;
+  providableType: ServiceProvidableTypeEnum | null;
+  serviceType: ServiceTypeEnum;
+  pricingType: ServicePricingTypeEnum;
+  providable: serviceFragment_providable | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL fragment: serviceQuestionFragment
+// ====================================================
+
+export interface serviceQuestionFragment {
+  id: string;
+  question: string | null;
+  isDefault: number;
 }
 
 /* tslint:disable */
@@ -1004,6 +1226,7 @@ export enum BookingStatusEnum {
   ACTIVE = "ACTIVE",
   CANCELLED = "CANCELLED",
   COMPLETED = "COMPLETED",
+  REQUESTED = "REQUESTED",
 }
 
 export enum CalendarEventAvailabilityEnum {
@@ -1021,9 +1244,25 @@ export enum ConnectAccountIntegrationTypeEnum {
   GOOGLE_CALENDAR = "GOOGLE_CALENDAR",
 }
 
+export enum ServicePricingTypeEnum {
+  FLEXIBLE = "FLEXIBLE",
+  FREE = "FREE",
+  SIMPLE = "SIMPLE",
+}
+
 export enum ServiceProvidableTypeEnum {
   GENERAL_SERVICE = "GENERAL_SERVICE",
   VIDEO_CALL_SERVICE = "VIDEO_CALL_SERVICE",
+}
+
+export enum ServiceTypeEnum {
+  CUSTOMIZE_YOUR_OWN = "CUSTOMIZE_YOUR_OWN",
+  QUESTION_ANSWER = "QUESTION_ANSWER",
+  SELLING_MERCH = "SELLING_MERCH",
+  SIMPLE_SUPPORT = "SIMPLE_SUPPORT",
+  SOCIAL_MEDIA_SHOUT_OUT = "SOCIAL_MEDIA_SHOUT_OUT",
+  VIRTUAL_GROUP_MEET_UP = "VIRTUAL_GROUP_MEET_UP",
+  VIRTUAL_ONE_ON_ONE = "VIRTUAL_ONE_ON_ONE",
 }
 
 /**
@@ -1056,6 +1295,7 @@ export interface CreateBookingInput {
   phoneNumber?: string | null;
   timezone?: string | null;
   bookingQuestions?: BookingQuestionInput[] | null;
+  price?: number | null;
   clientMutationId?: string | null;
 }
 
@@ -1101,13 +1341,23 @@ export interface CreateHostUserInput {
 export interface CreateServiceInput {
   profileId: string;
   name: string;
-  price: number;
+  price?: number | null;
   buttonText: string;
   imageUrl?: string | null;
   description?: string | null;
-  providableType: ServiceProvidableTypeEnum;
+  pricingType: ServicePricingTypeEnum;
+  serviceType: ServiceTypeEnum;
   providableData: any;
-  customQuestions?: string[] | null;
+  serviceQuestions: any[];
+  clientMutationId?: string | null;
+}
+
+/**
+ * Autogenerated input type of CreateServiceQuestion
+ */
+export interface CreateServiceQuestionInput {
+  serviceId: string;
+  question: string;
   clientMutationId?: string | null;
 }
 
@@ -1142,6 +1392,14 @@ export interface DeleteConnectAccountInput {
  */
 export interface DeleteServiceInput {
   serviceId: string;
+  clientMutationId?: string | null;
+}
+
+/**
+ * Autogenerated input type of DeleteServiceQuestion
+ */
+export interface DeleteServiceQuestionInput {
+  serviceQuestionId: string;
   clientMutationId?: string | null;
 }
 
@@ -1226,7 +1484,17 @@ export interface UpdateServiceInput {
   buttonText: string;
   imageUrl?: string | null;
   description?: string | null;
+  pricingType?: ServicePricingTypeEnum | null;
   providableData?: any | null;
+  clientMutationId?: string | null;
+}
+
+/**
+ * Autogenerated input type of UpdateServiceQuestion
+ */
+export interface UpdateServiceQuestionInput {
+  serviceQuestionId: string;
+  question: string;
   clientMutationId?: string | null;
 }
 
