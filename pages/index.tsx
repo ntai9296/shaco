@@ -1,4 +1,3 @@
-import Head from "next/head";
 import styled from "styled-components";
 import { mediaBreakpointDown } from "../src/common/utility";
 import { CommonButton } from "../src/common/Button";
@@ -187,11 +186,6 @@ const UseCaseItemContent = styled.div`
 const App = () => {
   return (
     <div className="container">
-      <Head>
-        <title>Fireside</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
       <MainContainer>
         <Header>
           <Brand>

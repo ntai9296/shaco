@@ -118,12 +118,12 @@ const CheckoutForm = ({
 
   const getPricingText = () => {
     switch (pricingType) {
-      case ServicePricingTypeEnum.SIMPLE:
-        return `Pay $${price / 100}`;
       case ServicePricingTypeEnum.FREE:
         return "Confirm Booking";
       case ServicePricingTypeEnum.FLEXIBLE:
         return "Request Booking";
+      default:
+        return `Pay $${price / 100}`;
     }
   };
 

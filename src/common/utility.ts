@@ -19,7 +19,7 @@ export const Styling = {
 
   textColor: "#444",
 
-  primaryColor: "#0070f3",
+  primaryColor: "#f77f00",
   primaryColorLight: "#e2f0ff",
 
   successColor: "#4caf50",
