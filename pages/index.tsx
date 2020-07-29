@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Link from "next/link";
 import { mediaBreakpointDown } from "../src/common/utility";
 import { CommonButton } from "../src/common/Button";
 import LearnAboutOurServiceSection from "../src/Landing/LearnAboutOurServiceSection";
@@ -191,7 +192,9 @@ const App = () => {
           <Brand>
             <img src="/logo.svg" />
           </Brand>
-          <SignInButton flex={false}>SIGN IN</SignInButton>
+          <Link href="/login">
+            <SignInButton flex={false}>SIGN IN</SignInButton>
+          </Link>
         </Header>
         <HeroSection>
           <HeroLeftContainer>
@@ -202,7 +205,9 @@ const App = () => {
               connect with people anywhere in the world.
             </HeroDescription>
             <HeroButtonContainer>
-              <HeroButton flex={false}>Get Started</HeroButton>
+              <Link href="/join">
+                <HeroButton flex={false}>Get Started</HeroButton>
+              </Link>
             </HeroButtonContainer>
           </HeroLeftContainer>
           <HeroRightContainer>

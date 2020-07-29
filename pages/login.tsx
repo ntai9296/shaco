@@ -11,7 +11,14 @@ import Notification from "../src/common/Notification";
 import SimpleNavigation from "../src/common/TopNav/SimpleNavigation";
 
 export default () => {
-  const [getCurrentUser, { data: userData }] = UserAPI.getCurrentUserLazy();
+  const [getCurrentUser, { data: userData }] = UserAPI.getCurrentUserLazy({
+    onCompleted: () => {
+      setUserLoading(false);
+    },
+    onError: () => {
+      setUserLoading(false);
+    },
+  });
 
   useEffect(() => {
     getCurrentUser();
@@ -23,6 +30,7 @@ export default () => {
     password: "",
   });
   const [errors, setErrors] = useState<string[]>([]);
+  const [userLoading, setUserLoading] = useState(true);
 
   useEffect(() => {
     setErrors(error?.message ? [error?.message] : []);
@@ -54,6 +62,10 @@ export default () => {
     cookie.set("token", loginData.loginUser.accessToken);
     Utility.showWorkingOverlay();
     Router.replace("/dashboard");
+    return null;
+  }
+
+  if (userLoading) {
     return null;
   }
 

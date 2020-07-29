@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import { CommonButton } from "../common/Button";
 import styled from "styled-components";
 
@@ -23,14 +24,15 @@ const CtaButton = styled(CommonButton)`
   border-radius: 25px;
   padding: 20px 40px;
   font-weight: bold;
-  background: #f77f00;
 `;
 
 export default () => {
   return (
     <CallToActionSection>
       <CallToActionContainer>
-        <CtaButton flex={false}>Get Early Access</CtaButton>
+        <Link href="/join">
+          <CtaButton flex={false}>Get Early Access</CtaButton>
+        </Link>
       </CallToActionContainer>
     </CallToActionSection>
   );
