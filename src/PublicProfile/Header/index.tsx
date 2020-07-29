@@ -25,17 +25,17 @@ const Header = ({ avatarURL, name }: Props) => {
               <S.HeaderLeft>
                 <Link href="/">
                   <S.Logo>
-                    <span>Fireside</span>
+                    <img src="/logo.svg" />
                   </S.Logo>
                 </Link>
               </S.HeaderLeft>
 
-              <S.HeaderRight>
+              {/* <S.HeaderRight>
                 <ul>
                   <li>
-                    {/* <LinkMenuWrap>
+                    <LinkMenuWrap>
                       <a href='/login'>Log in</a>
-                    </LinkMenuWrap> */}
+                    </LinkMenuWrap>
                   </li>
                   <li>
                     <S.LinkMenuWrap>
@@ -77,7 +77,7 @@ const Header = ({ avatarURL, name }: Props) => {
                     </S.LinkMenuWrap>
                   </li>
                 </ul>
-              </S.HeaderRight>
+              </S.HeaderRight> */}
             </S.HeaderContainer>
           </div>
           <S.MobileContent style={styledContentOpen}>
@@ -113,7 +113,7 @@ const Header = ({ avatarURL, name }: Props) => {
             <S.HeaderLeft>
               <Link href="/">
                 <S.Logo>
-                  <span>Fireside</span>
+                  <img src="/logo.svg" />
                 </S.Logo>
               </Link>
             </S.HeaderLeft>

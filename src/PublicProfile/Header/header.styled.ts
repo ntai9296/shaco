@@ -551,4 +551,7 @@ export const Logo = styled.a`
     font-size: 20px;
     color: rgb(36, 30, 18);
   }
+  > img {
+    max-width: 150px;
+  }
 `;
