@@ -44,7 +44,7 @@ const ItemContent = styled.div`
   flex-direction: column;
   ${mediaBreakpointDown("md")} {
     align-items: center;
-    margin-botton: 20px;
+    margin-bottom: 20px;
   }
 `;
 
@@ -64,6 +64,11 @@ const Step = styled.div`
 `;
 const ProfileTitle = styled.h2`
   margin: 0 0 20px 0;
+  width: 100%;
+
+  ${mediaBreakpointDown("md")} {
+    text-align: center;
+  }
 `;
 const ProfileBox = styled.div`
   padding: 20px 30px;
