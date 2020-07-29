@@ -10,7 +10,6 @@ export const Price = styled.div`
   font-size: 36px;
   font-weight: bold;
   margin: 5px 0 3px 0;
-  font-family: "Roboto";
 `;
 export const Description = styled.div`
   font-weight: 500;
