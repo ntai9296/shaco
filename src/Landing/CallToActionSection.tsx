@@ -1,0 +1,37 @@
+import React from "react";
+import { CommonButton } from "../common/Button";
+import styled from "styled-components";
+
+const CallToActionSection = styled.section`
+  background: #f2f3f3;
+  padding: 100px 0;
+`;
+
+const CallToActionContainer = styled.div`
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  > img {
+    position: absolute;
+    left: 0;
+  }
+`;
+
+const CtaButton = styled(CommonButton)`
+  border-radius: 25px;
+  padding: 20px 40px;
+  font-weight: bold;
+  background: #f77f00;
+`;
+
+export default () => {
+  return (
+    <CallToActionSection>
+      <CallToActionContainer>
+        <CtaButton flex={false}>Get Early Access</CtaButton>
+      </CallToActionContainer>
+    </CallToActionSection>
+  );
+};

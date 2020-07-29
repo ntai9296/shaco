@@ -76,8 +76,7 @@ body {
 
 body {
   position: relative;
-  font-family: "Inter", "SF Pro Display", -apple-system, BlinkMacSystemFont,
-    "Roboto", sans-serif;
+  font-family: "Inter", "SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: 14px;
 
   > div {
@@ -93,15 +92,15 @@ select {
   -webkit-appearance: none;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: "Roboto", "Inter", "SF Pro Display", -apple-system,
-    BlinkMacSystemFont, sans-serif;
-}
+// h1,
+// h2,
+// h3,
+// h4,
+// h5,
+// h6 {
+//   font-family: "Roboto", "Inter", "SF Pro Display", -apple-system,
+//     BlinkMacSystemFont, sans-serif;
+// }
 
 label {
   font-family: "Inter";

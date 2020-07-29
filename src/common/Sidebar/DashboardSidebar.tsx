@@ -4,7 +4,6 @@ import {
   User,
   Calendar,
   Settings,
-  HelpCircle,
   DollarSign,
   LogOut,
   Star,
@@ -32,6 +31,11 @@ export default () => {
       {userData?.currentUser?.profile && (
         <Link
           href={
+            userData.currentUser.profile.slug
+              ? `/[profileSlug]`
+              : "/dashboard/profile"
+          }
+          as={
             userData.currentUser.profile.slug
               ? `/${userData.currentUser.profile.slug}`
               : "/dashboard/profile"
@@ -62,22 +66,16 @@ export default () => {
           </S.Profile>
         </Link>
       )}
-      <Link href="/dashboard/bookings">
+      <Link href="/dashboard/requests">
         <S.SidebarItem
-          isActive={activeRoute("/bookings") || router.route === "/dashboard"}
+          isActive={activeRoute("/requests") || router.route === "/dashboard"}
         >
           <Star width={15} height={15} />
-          Bookings
-        </S.SidebarItem>
-      </Link>
-      <Link href="/dashboard/availability">
-        <S.SidebarItem isActive={activeRoute("/availability")}>
-          <CheckSquare width={15} height={15} />
-          Availability
+          Requests
         </S.SidebarItem>
       </Link>
 
-      <S.MenuTitle>Account</S.MenuTitle>
+      {/* <S.MenuTitle>Account</S.MenuTitle> */}
       <Link href="/dashboard/profile">
         <S.SidebarItem isActive={activeRoute("/profile")}>
           <User width={15} height={15} />
@@ -92,12 +90,19 @@ export default () => {
         </S.SidebarItem>
       </Link>
 
-      <Link href="/dashboard/payout">
+      <Link href="/dashboard/availability">
+        <S.SidebarItem isActive={activeRoute("/availability")}>
+          <CheckSquare width={15} height={15} />
+          Availability
+        </S.SidebarItem>
+      </Link>
+
+      {/* <Link href="/dashboard/payout">
         <S.SidebarItem isActive={activeRoute("/payout")}>
           <DollarSign width={15} height={15} />
           Payouts
         </S.SidebarItem>
-      </Link>
+      </Link> */}
 
       <Link href="/dashboard/calendar">
         <S.SidebarItem isActive={activeRoute("/calendar")}>

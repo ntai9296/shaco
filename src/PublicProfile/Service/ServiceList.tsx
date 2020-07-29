@@ -76,7 +76,10 @@ export const ServiceItem = ({
       <S.ServiceContent>
         {editMode && (
           <S.EditHeader>
-            <Link href={`/dashboard/services/${service.id}`}>
+            <Link
+              href="/dashboard/services/[serviceId]"
+              as={`/dashboard/services/${service.id}`}
+            >
               <Edit size={20} />
             </Link>
           </S.EditHeader>
@@ -100,7 +103,10 @@ export const ServiceItem = ({
                 {service.buttonText || "Select"}
               </S.ServiceItemButton>
             ) : (
-              <Link href={`/checkout/${service.id}`}>
+              <Link
+                href={`/checkout/[serviceId]`}
+                as={`/checkout/${service.id}`}
+              >
                 <S.ServiceItemButton>
                   {service.buttonText || "Select"}
                 </S.ServiceItemButton>
