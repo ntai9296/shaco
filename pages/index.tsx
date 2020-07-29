@@ -40,7 +40,9 @@ const HeroSection = styled.section`
 `;
 
 const Brand = styled.div`
-  font-size: 24px;
+  > img {
+    width: 150px;
+  }
 `;
 
 const SignInButton = styled(CommonButton)`
@@ -96,6 +98,10 @@ const HeroDescription = styled.p`
   ${mediaBreakpointDown("md")} {
     text-align: center;
     margin: 0 auto 25px auto;
+  }
+  ${mediaBreakpointDown("xs")} {
+    width: 100%;
+    font-size: 14px;
   }
 `;
 
@@ -189,7 +195,7 @@ const App = () => {
       <MainContainer>
         <Header>
           <Brand>
-            <b>Fireside</b>
+            <img src="/logo.svg" />
           </Brand>
           <SignInButton flex={false}>SIGN IN</SignInButton>
         </Header>
