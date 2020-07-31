@@ -30,7 +30,7 @@ export default () => {
   return (
     <CallToActionSection>
       <CallToActionContainer>
-        <Link href="/join">
+        <Link href="/early_access">
           <CtaButton flex={false}>Get Early Access</CtaButton>
         </Link>
       </CallToActionContainer>
