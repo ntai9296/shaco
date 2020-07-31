@@ -73,17 +73,8 @@ export default () => {
     <S.Page>
       <SimpleNavigation skipUser={true} />
       <S.Layout>
+        <S.Title>Login to your account</S.Title>
         <S.Content>
-          <S.Heading>
-            <S.Title>Login to your account</S.Title>
-            <S.SubTitle>
-              Don't have an account yet?{" "}
-              <Link href="/sign-up">
-                <a>Sign up</a>
-              </Link>
-            </S.SubTitle>
-          </S.Heading>
-
           <S.SignUpForm onSubmit={onSubmitSignUp}>
             <S.EmailRow>
               <S.EmailField>

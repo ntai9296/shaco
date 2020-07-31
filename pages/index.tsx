@@ -79,6 +79,7 @@ const HeroH1 = styled.h1`
   font-size: 50px;
   margin: 0 0 25px 0;
   color: #000000;
+  font-weight: 900;
 
   ${mediaBreakpointDown("md")} {
     text-align: center;
@@ -113,10 +114,10 @@ const HeroButtonContainer = styled.div`
 `;
 
 const HeroButton = styled(CommonButton)`
-  border-radius: 25px;
+  border-radius: 40px;
   background-color: #f77f00;
   font-weight: bold;
-  font-size: 18px;
+  font-size: 16px;
   padding: 20px 40px;
 `;
 
@@ -205,8 +206,8 @@ const App = () => {
               connect with people anywhere in the world.
             </HeroDescription>
             <HeroButtonContainer>
-              <Link href="/join">
-                <HeroButton flex={false}>Get Started</HeroButton>
+              <Link href="/early_access">
+                <HeroButton flex={false}>Get Early Access</HeroButton>
               </Link>
             </HeroButtonContainer>
           </HeroLeftContainer>

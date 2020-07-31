@@ -6,6 +6,7 @@ import Input from "../../src/common/Input";
 import Button from "../../src/common/Button";
 import { resetPassword, getCurrentUserLazy } from "../../graphql/User/UserAPI";
 import Notification from "../../src/common/Notification";
+import SimpleNavigation from "../../src/common/TopNav/SimpleNavigation";
 
 export default () => {
   const router = useRouter();
@@ -48,45 +49,48 @@ export default () => {
   }
 
   return (
-    <S.ResetPasswordLayout>
-      <S.ResetPasswordHeader>Set new password</S.ResetPasswordHeader>
-      <S.ResetPasswordContainer>
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            setErrors([]);
-            submitResetPassword({
-              variables: {
-                input: {
-                  token: token as string,
-                  newPassword: password,
+    <S.Page>
+      <SimpleNavigation skipUser />
+      <S.ResetPasswordLayout>
+        <S.ResetPasswordHeader>Set new password</S.ResetPasswordHeader>
+        <S.ResetPasswordContainer>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              setErrors([]);
+              submitResetPassword({
+                variables: {
+                  input: {
+                    token: token as string,
+                    newPassword: password,
+                  },
                 },
-              },
-            });
-          }}
-        >
-          <S.Row>
-            <Input
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              label="New password"
-              type="password"
-            />
-          </S.Row>
-          {errors.length > 0 && (
+              });
+            }}
+          >
             <S.Row>
-              <Notification
-                onClose={() => setErrors([])}
-                notifications={errors}
-                type="error"
+              <Input
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                label="New password"
+                type="password"
               />
             </S.Row>
-          )}
-          <S.Row>
-            <Button isLoading={loading}>Submit</Button>
-          </S.Row>
-        </form>
-      </S.ResetPasswordContainer>
-    </S.ResetPasswordLayout>
+            {errors.length > 0 && (
+              <S.Row>
+                <Notification
+                  onClose={() => setErrors([])}
+                  notifications={errors}
+                  type="error"
+                />
+              </S.Row>
+            )}
+            <S.Row>
+              <Button isLoading={loading}>Submit</Button>
+            </S.Row>
+          </form>
+        </S.ResetPasswordContainer>
+      </S.ResetPasswordLayout>
+    </S.Page>
   );
 };

@@ -20,11 +20,16 @@ export const Heading = styled.div`
   margin: 0 0 25px 0;
 `;
 export const Title = styled.h1`
-  margin: 0 0 25px 0;
+  margin: 0 0 15px 0;
   text-align: center;
   font-weight: 900;
 `;
-export const SubTitle = styled.p``;
+export const SubTitle = styled.p`
+  max-width: 80%;
+  text-align: center;
+  margin: 0 auto 20px auto;
+`;
+
 export const SignUpForm = styled.form``;
 export const NameRow = styled.div`
   display: flex;
@@ -58,5 +63,12 @@ export const CountryField = styled.div``;
 export const ErrorRow = styled.div`
   margin-bottom: ${Styling.rowMarginBottom};
 `;
-export const SubmitRow = styled.div``;
+export const SubmitRow = styled.div`
+  padding-top: 15px;
+`;
 export const SubmitButtonField = styled.div``;
+
+export const SuccessMessage = styled.p`
+  text-align: center;
+  font-size: 16px;
+`;

@@ -158,3 +158,11 @@ export const GET_CURRENT_USER_PROFILE_SERVICES_QUERY = gql`
   }
   ${SERVICE_FRAGMENT}
 `;
+
+export const REQUEST_EARLY_ACCESS_MUTATION = gql`
+  mutation requestEarlyAccessMutation($input: RequestEarlyAccessInput!) {
+    requestEarlyAccess(input: $input) {
+      message
+    }
+  }
+`;

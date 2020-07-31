@@ -26,6 +26,14 @@
     url("/fonts/Inter-Bold.woff?v=3.13") format("woff");
 }
 
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 900;
+  src: local(""), url("/fonts/Inter-ExtraBold.woff2?v=3.13") format("woff2"),
+    url("/fonts/Inter-ExtraBold.woff?v=3.13") format("woff");
+}
+
 * {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

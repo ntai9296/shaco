@@ -12,8 +12,8 @@ const Nav = styled.nav`
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  padding: 20px 40px;
-  box-shadow: 0 2px 4px rgba(81, 107, 152, 0.16);
+  padding: 15px 40px;
+  border: 1px solid rgb(229,227,221);
 `;
 
 const NavBrand = styled.div``;
@@ -36,10 +36,11 @@ const AccountIcon = styled.a`
 `;
 
 const Logo = styled.a`
-  color: ${Styling.textColor};
-  font-weight: 700;
-  font-size: 20px;
   cursor: pointer;
+
+  > img {
+    width: 150px;
+  }
 `;
 
 const Menu = styled.div`
@@ -90,7 +91,9 @@ export default ({ skipUser }: { skipUser?: boolean }) => {
     <Nav>
       <NavBrand>
         <Link href="/">
-          <Logo>Fireside</Logo>
+          <Logo>
+            <img src="/logo.svg" />
+          </Logo>
         </Link>
       </NavBrand>
       <NavAction>

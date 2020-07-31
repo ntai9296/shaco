@@ -25,6 +25,8 @@ import {
   forgotPasswordMutationVariables,
   getCurrentUserWithConnectAccountsQuery,
   getCurrentUserProfileServicesQuery,
+  requestEarlyAccessMutation,
+  requestEarlyAccessMutationVariables,
 } from "../generated";
 
 export const getCurrentUser = (
@@ -68,6 +70,18 @@ export const loginUser = () =>
   useMutation<loginUserMutation, loginUserMutationVariables>(
     User.LOGIN_USER_MUTATION
   );
+
+export const requestEarlyAccess = (
+  options?: MutationHookOptions<
+    requestEarlyAccessMutation,
+    requestEarlyAccessMutationVariables
+  >
+) =>
+  useMutation<requestEarlyAccessMutation, requestEarlyAccessMutationVariables>(
+    User.REQUEST_EARLY_ACCESS_MUTATION,
+    options
+  );
+
 export const logoutUser = () => {
   cookie.remove("token");
   window.location.reload();

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import cookie from "js-cookie";
 import * as S from "../src/ResetPassword/ResetPassword.styled";
 import Input from "../src/common/Input";
 import Button from "../src/common/Button";
 import { forgotPassword, getCurrentUserLazy } from "../graphql/User/UserAPI";
 import Notification from "../src/common/Notification";
+import SimpleNavigation from "../src/common/TopNav/SimpleNavigation";
 
 export default () => {
   const router = useRouter();
@@ -37,52 +37,55 @@ export default () => {
   }
 
   return (
-    <S.ResetPasswordLayout>
-      <S.ResetPasswordHeader>Forgot password</S.ResetPasswordHeader>
-      <S.ResetPasswordContainer>
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            setErrors([]);
-            submitForgotPassword({
-              variables: {
-                input: {
-                  email,
+    <S.Page>
+      <SimpleNavigation skipUser />
+      <S.ResetPasswordLayout>
+        <S.ResetPasswordHeader>Forgot password</S.ResetPasswordHeader>
+        <S.ResetPasswordContainer>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              setErrors([]);
+              submitForgotPassword({
+                variables: {
+                  input: {
+                    email,
+                  },
                 },
-              },
-            });
-          }}
-        >
-          <S.Row>
-            <Input
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              label="Email"
-              type="email"
-            />
-          </S.Row>
-          {errors.length > 0 && (
+              });
+            }}
+          >
             <S.Row>
-              <Notification
-                onClose={() => setErrors([])}
-                notifications={errors}
-                type="error"
+              <Input
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                label="Email"
+                type="email"
               />
             </S.Row>
-          )}
-          {data?.forgotPassword?.message && (
-            <S.Row>
-              <Notification
-                notifications={[data?.forgotPassword?.message]}
-                type="success"
-              />
-            </S.Row>
-          )}
-          <S.Row>
-            <Button isLoading={loading}>Submit</Button>
-          </S.Row>
-        </form>
-      </S.ResetPasswordContainer>
-    </S.ResetPasswordLayout>
+            {errors.length > 0 && (
+              <S.Row>
+                <Notification
+                  onClose={() => setErrors([])}
+                  notifications={errors}
+                  type="error"
+                />
+              </S.Row>
+            )}
+            {data?.forgotPassword?.message && (
+              <S.Row>
+                <Notification
+                  notifications={[data?.forgotPassword?.message]}
+                  type="success"
+                />
+              </S.Row>
+            )}
+            <S.SubmitRow>
+              <Button isLoading={loading}>Submit</Button>
+            </S.SubmitRow>
+          </form>
+        </S.ResetPasswordContainer>
+      </S.ResetPasswordLayout>
+    </S.Page>
   );
 };
