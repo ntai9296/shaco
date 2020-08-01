@@ -19,6 +19,7 @@ export const ResetPasswordLayout = styled.div`
 export const ResetPasswordHeader = styled.h2`
   text-align: center;
   font-size: 28px;
+  font-weight: 900;
 `;
 
 export const ResetPasswordContainer = styled.div`

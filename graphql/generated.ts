@@ -790,6 +790,8 @@ export interface getCurrentUserQuery_currentUser {
   email: string;
   roles: string[];
   timezone: string;
+  waitlisted: boolean;
+  onboarded: boolean;
   profile: getCurrentUserQuery_currentUser_profile | null;
 }
 
@@ -1447,7 +1449,7 @@ export interface RequestEarlyAccessInput {
   email: string;
   firstName: string;
   lastName: string;
-  socialMediaUrl: string;
+  socialMediaAccounts: string;
   timezone?: string | null;
   referCode?: string | null;
   clientMutationId?: string | null;

@@ -9,6 +9,8 @@ export const GET_CURRENT_USER_QUERY = gql`
       email
       roles
       timezone
+      waitlisted
+      onboarded
       profile {
         id
         name

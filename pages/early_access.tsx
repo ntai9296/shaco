@@ -31,7 +31,7 @@ export default () => {
     email: "",
     firstName: "",
     lastName: "",
-    socialMediaUrl: "",
+    socialMediaAccounts: "",
   });
   const [errors, setErrors] = useState<string[]>([]);
   const [userLoading, setUserLoading] = useState(true);
@@ -123,11 +123,11 @@ export default () => {
                 <S.EmailRow>
                   <S.EmailField>
                     <Input
-                      value={form.socialMediaUrl}
+                      value={form.socialMediaAccounts}
                       onChange={(e) =>
-                        onChangeForm("socialMediaUrl", e.target.value)
+                        onChangeForm("socialMediaAccounts", e.target.value)
                       }
-                      label="Social media URL"
+                      label="Social media accounts"
                     />
                   </S.EmailField>
                 </S.EmailRow>

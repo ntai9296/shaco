@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Link from "next/link";
 import * as UserAPI from "../../../graphql/User/UserAPI";
 import Popover from "react-tiny-popover";
-import { Styling } from "../utility";
+import { Styling, mediaBreakpointDown } from "../utility";
 
 const Nav = styled.nav`
   background-color: #fff;
@@ -13,7 +13,12 @@ const Nav = styled.nav`
   align-items: center;
   width: 100%;
   padding: 15px 40px;
-  border: 1px solid rgb(229,227,221);
+  border: 1px solid rgb(229, 227, 221);
+  height: 64px;
+
+  ${mediaBreakpointDown("sm")} {
+    padding: 15px;
+  }
 `;
 
 const NavBrand = styled.div``;

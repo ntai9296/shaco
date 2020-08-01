@@ -1,5 +1,5 @@
 import React from "react";
-import Router from 'next/router';
+import Router from "next/router";
 import * as S from "./DashboardLayout.styled";
 import { ThemeProvider } from "styled-components";
 import DashboardSidebar from "../Sidebar/DashboardSidebar";
@@ -14,6 +14,11 @@ export default ({ children }: { children: any }) => {
 
   if (!userData?.currentUser) {
     Router.replace("/login");
+    return null;
+  }
+
+  if (!userData.currentUser.onboarded) {
+    Router.replace("/onboarding");
     return null;
   }
 
