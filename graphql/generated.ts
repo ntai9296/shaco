@@ -808,6 +808,27 @@ export interface getCurrentUserQuery {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: exchangeOnboardingTokenMutation
+// ====================================================
+
+export interface exchangeOnboardingTokenMutation_exchangeOnboardingToken {
+  accessToken: string | null;
+}
+
+export interface exchangeOnboardingTokenMutation {
+  exchangeOnboardingToken: exchangeOnboardingTokenMutation_exchangeOnboardingToken | null;
+}
+
+export interface exchangeOnboardingTokenMutationVariables {
+  input: ExchangeOnboardingTokenInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: getCurrentUserWithConnectAccountsQuery
 // ====================================================
 
@@ -1116,6 +1137,7 @@ export interface getCurrentUserProfileServicesQuery_currentUser_profile {
 export interface getCurrentUserProfileServicesQuery_currentUser {
   id: string;
   email: string;
+  onboarded: boolean;
   profile: getCurrentUserProfileServicesQuery_currentUser_profile | null;
 }
 
@@ -1145,6 +1167,131 @@ export interface requestEarlyAccessMutation {
 
 export interface requestEarlyAccessMutationVariables {
   input: RequestEarlyAccessInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: changeUserPasswordMutation
+// ====================================================
+
+export interface changeUserPasswordMutation_changeUserPassword_user {
+  id: string;
+}
+
+export interface changeUserPasswordMutation_changeUserPassword {
+  user: changeUserPasswordMutation_changeUserPassword_user | null;
+}
+
+export interface changeUserPasswordMutation {
+  changeUserPassword: changeUserPasswordMutation_changeUserPassword | null;
+}
+
+export interface changeUserPasswordMutationVariables {
+  input: ChangeUserPasswordInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: getCurrentUserOnboardingQuery
+// ====================================================
+
+export interface getCurrentUserOnboardingQuery_currentUser_profile_servicesConnection_nodes_providable_VideoCallService {
+  id: string;
+  duration: number;
+}
+
+export interface getCurrentUserOnboardingQuery_currentUser_profile_servicesConnection_nodes_providable_GeneralService {
+  id: string;
+}
+
+export type getCurrentUserOnboardingQuery_currentUser_profile_servicesConnection_nodes_providable = getCurrentUserOnboardingQuery_currentUser_profile_servicesConnection_nodes_providable_VideoCallService | getCurrentUserOnboardingQuery_currentUser_profile_servicesConnection_nodes_providable_GeneralService;
+
+export interface getCurrentUserOnboardingQuery_currentUser_profile_servicesConnection_nodes {
+  id: string;
+  name: string | null;
+  imageUrl: string | null;
+  introVideoUrl: string | null;
+  description: string | null;
+  price: number;
+  buttonText: string | null;
+  providableType: ServiceProvidableTypeEnum | null;
+  serviceType: ServiceTypeEnum;
+  pricingType: ServicePricingTypeEnum;
+  providable: getCurrentUserOnboardingQuery_currentUser_profile_servicesConnection_nodes_providable | null;
+}
+
+export interface getCurrentUserOnboardingQuery_currentUser_profile_servicesConnection {
+  /**
+   * A list of nodes.
+   */
+  nodes: (getCurrentUserOnboardingQuery_currentUser_profile_servicesConnection_nodes | null)[] | null;
+}
+
+export interface getCurrentUserOnboardingQuery_currentUser_profile {
+  id: string;
+  name: string;
+  shortDescription: string;
+  about: string;
+  slug: string | null;
+  firstName: string;
+  lastName: string;
+  introVideoUrl: string | null;
+  brandColor: string | null;
+  currencyType: string;
+  status: number;
+  profilePhotoUrl: string | null;
+  coverPhotoUrl: string | null;
+  servicesConnection: getCurrentUserOnboardingQuery_currentUser_profile_servicesConnection | null;
+}
+
+export interface getCurrentUserOnboardingQuery_currentUser {
+  id: string;
+  email: string;
+  roles: string[];
+  guest: boolean;
+  onboarded: boolean;
+  profile: getCurrentUserOnboardingQuery_currentUser_profile | null;
+}
+
+export interface getCurrentUserOnboardingQuery {
+  /**
+   * Get current user based on jwt token in header
+   */
+  currentUser: getCurrentUserOnboardingQuery_currentUser | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: updateUserMutation
+// ====================================================
+
+export interface updateUserMutation_updateUser_user {
+  id: string;
+  onboarded: boolean;
+}
+
+export interface updateUserMutation_updateUser {
+  user: updateUserMutation_updateUser_user | null;
+}
+
+export interface updateUserMutation {
+  updateUser: updateUserMutation_updateUser | null;
+}
+
+export interface updateUserMutationVariables {
+  input: UpdateUserInput;
 }
 
 /* tslint:disable */
@@ -1305,6 +1452,14 @@ export interface CancelBookingInput {
 }
 
 /**
+ * Autogenerated input type of ChangeUserPassword
+ */
+export interface ChangeUserPasswordInput {
+  newPassword: string;
+  clientMutationId?: string | null;
+}
+
+/**
  * Autogenerated input type of CreateBooking
  */
 export interface CreateBookingInput {
@@ -1426,6 +1581,14 @@ export interface DeleteServiceQuestionInput {
 }
 
 /**
+ * Autogenerated input type of ExchangeOnboardingToken
+ */
+export interface ExchangeOnboardingTokenInput {
+  token: string;
+  clientMutationId?: string | null;
+}
+
+/**
  * Autogenerated input type of ForgotPassword
  */
 export interface ForgotPasswordInput {
@@ -1530,6 +1693,14 @@ export interface UpdateServiceInput {
 export interface UpdateServiceQuestionInput {
   serviceQuestionId: string;
   question: string;
+  clientMutationId?: string | null;
+}
+
+/**
+ * Autogenerated input type of UpdateUser
+ */
+export interface UpdateUserInput {
+  onboarded?: boolean | null;
   clientMutationId?: string | null;
 }
 

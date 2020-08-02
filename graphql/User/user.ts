@@ -24,6 +24,16 @@ export const GET_CURRENT_USER_QUERY = gql`
   }
 `;
 
+export const EXCHANGE_ONBOARDING_TOKEN_MUTATION = gql`
+  mutation exchangeOnboardingTokenMutation(
+    $input: ExchangeOnboardingTokenInput!
+  ) {
+    exchangeOnboardingToken(input: $input) {
+      accessToken
+    }
+  }
+`;
+
 export const GET_CURRENT_USER_WITH_CONNECT_ACCOUNTS_QUERY = gql`
   query getCurrentUserWithConnectAccountsQuery {
     currentUser {
@@ -147,6 +157,7 @@ export const GET_CURRENT_USER_PROFILE_SERVICES_QUERY = gql`
     currentUser {
       id
       email
+      onboarded
       profile {
         id
         brandColor
@@ -165,6 +176,49 @@ export const REQUEST_EARLY_ACCESS_MUTATION = gql`
   mutation requestEarlyAccessMutation($input: RequestEarlyAccessInput!) {
     requestEarlyAccess(input: $input) {
       message
+    }
+  }
+`;
+
+export const CHANGE_USER_PASSWORD_MUTATION = gql`
+  mutation changeUserPasswordMutation($input: ChangeUserPasswordInput!) {
+    changeUserPassword(input: $input) {
+      user {
+        id
+      }
+    }
+  }
+`;
+
+export const GET_CURRENT_USER_ONBOARDING_QUERY = gql`
+  query getCurrentUserOnboardingQuery {
+    currentUser {
+      id
+      email
+      roles
+      guest
+      onboarded
+      profile {
+        ...profileFragment
+        servicesConnection {
+          nodes {
+            ...serviceFragment
+          }
+        }
+      }
+    }
+  }
+  ${PROFILE_FRAGMENT}
+  ${SERVICE_FRAGMENT}
+`;
+
+export const UPDATE_USER_MUTATION = gql`
+  mutation updateUserMutation($input: UpdateUserInput!) {
+    updateUser(input: $input) {
+      user {
+        id
+        onboarded
+      }
     }
   }
 `;

@@ -2,8 +2,9 @@ import styled from "styled-components";
 
 export const CalendarList = styled.div`
   margin-top: 25px;
-  border-radius: ${(props) => props.theme.main.borderRadius};
+  border-radius: ${(props) => props.theme.borderRadius};
   border: 1px solid rgb(229, 227, 221);
+  background: #fff;
 `;
 export const CalendarItem = styled.div`
   border-bottom: 1px solid rgb(229, 227, 221);

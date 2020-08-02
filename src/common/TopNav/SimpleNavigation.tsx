@@ -44,7 +44,7 @@ const Logo = styled.a`
   cursor: pointer;
 
   > img {
-    width: 150px;
+    width: 125px;
   }
 `;
 

@@ -25,7 +25,7 @@ export const Styling = {
   successColor: "#4caf50",
 
   dangerColor: "#d64545",
-  backgroundColor: "rgb(247, 247, 248);",
+  backgroundColor: "rgb(247, 247, 248)",
 
   borderRadius: "6px",
   inputBorderRadius: "6px",

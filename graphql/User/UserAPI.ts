@@ -27,6 +27,13 @@ import {
   getCurrentUserProfileServicesQuery,
   requestEarlyAccessMutation,
   requestEarlyAccessMutationVariables,
+  exchangeOnboardingTokenMutation,
+  exchangeOnboardingTokenMutationVariables,
+  changeUserPasswordMutation,
+  changeUserPasswordMutationVariables,
+  getCurrentUserOnboardingQuery,
+  updateUserMutation,
+  updateUserMutationVariables,
 } from "../generated";
 
 export const getCurrentUser = (
@@ -57,6 +64,14 @@ export const getCurrentUserProfileServices = (
     options
   );
 
+export const getCurrentUserOnboarding = (
+  options?: QueryHookOptions<getCurrentUserOnboardingQuery>
+) =>
+  useQuery<getCurrentUserOnboardingQuery>(
+    User.GET_CURRENT_USER_ONBOARDING_QUERY,
+    options
+  );
+
 export const useUser = () => useQuery(User.GET_CURRENT_USER_QUERY);
 export const createUser = () =>
   useMutation<createUserMutation, createUserMutationVariables>(
@@ -79,6 +94,28 @@ export const requestEarlyAccess = (
 ) =>
   useMutation<requestEarlyAccessMutation, requestEarlyAccessMutationVariables>(
     User.REQUEST_EARLY_ACCESS_MUTATION,
+    options
+  );
+
+export const exchangeOnboardingToken = (
+  options?: MutationHookOptions<
+    exchangeOnboardingTokenMutation,
+    exchangeOnboardingTokenMutationVariables
+  >
+) =>
+  useMutation<
+    exchangeOnboardingTokenMutation,
+    exchangeOnboardingTokenMutationVariables
+  >(User.EXCHANGE_ONBOARDING_TOKEN_MUTATION, options);
+
+export const changeUserPassword = (
+  options?: MutationHookOptions<
+    changeUserPasswordMutation,
+    changeUserPasswordMutationVariables
+  >
+) =>
+  useMutation<changeUserPasswordMutation, changeUserPasswordMutationVariables>(
+    User.CHANGE_USER_PASSWORD_MUTATION,
     options
   );
 
@@ -133,5 +170,13 @@ export const getCurrentUserWithConnectAccounts = (
 ) =>
   useQuery<getCurrentUserWithConnectAccountsQuery>(
     User.GET_CURRENT_USER_WITH_CONNECT_ACCOUNTS_QUERY,
+    options
+  );
+
+export const updateUser = (
+  options?: MutationHookOptions<updateUserMutation, updateUserMutationVariables>
+) =>
+  useMutation<updateUserMutation, updateUserMutationVariables>(
+    User.UPDATE_USER_MUTATION,
     options
   );

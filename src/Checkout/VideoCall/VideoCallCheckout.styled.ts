@@ -23,7 +23,7 @@ export const BookingDate = styled.div`
   font-weight: 500;
   font-size: 15px;
   a {
-    color: ${(props) => props.theme.main.primaryColor};
+    color: ${(props) => props.theme.primaryColor};
     cursor: pointer;
   }
 `;
@@ -45,20 +45,20 @@ export const CalendarTime = styled.div<{ active?: boolean }>`
   margin-bottom: 7px;
   margin-right: 7px;
   ${(props) =>
-    props.theme.main &&
+    props.theme &&
     `
   user-select: none;
   font-weight: 500;
-  border: 1px solid ${setLightness(0.85, props.theme.main.primaryColor)};
-  color: ${props.theme.main.primaryColor};
-  background-color: ${setLightness(0.95, props.theme.main.primaryColor)};
+  border: 1px solid ${setLightness(0.85, props.theme.primaryColor)};
+  color: ${props.theme.primaryColor};
+  background-color: ${setLightness(0.95, props.theme.primaryColor)};
   `};
 
   ${(props) =>
     props.active &&
     `
-  border: 1px solid ${props.theme.main.primaryColor};
+  border: 1px solid ${props.theme.primaryColor};
   color: #fff;
-  background-color: ${props.theme.main.primaryColor};
+  background-color: ${props.theme.primaryColor};
   `}
 `;

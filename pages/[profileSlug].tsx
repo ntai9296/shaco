@@ -9,6 +9,7 @@ import * as S from "../src/PublicProfile/PublicProfile.styled";
 import Header from "../src/PublicProfile/Header";
 import Hero from "../src/PublicProfile/Hero";
 import ServiceList from "../src/PublicProfile/Service/ServiceList";
+import { getDefaultStyling } from "../src/common/utility";
 
 const App = () => {
   const router = useRouter();
@@ -23,7 +24,9 @@ const App = () => {
   const pageTitle = `${data.profile.name} | Fireside`;
   const coverPhotoURL = data.profile.coverPhotoUrl || "";
   return (
-    <ThemeProvider theme={{ primaryColor: data.profile.brandColor }}>
+    <ThemeProvider
+      theme={{ ...getDefaultStyling(), primaryColor: data.profile.brandColor }}
+    >
       <Head>
         <title>{pageTitle}</title>
         <meta name="description" content={data.profile.shortDescription} />

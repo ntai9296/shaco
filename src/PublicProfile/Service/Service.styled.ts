@@ -38,6 +38,7 @@ export const ServiceContent = styled.div`
   border-radius: 5px;
   height: 100%;
   width: 100%;
+  background: #fff;
 `;
 
 export const ServiceTitle = styled.h3`

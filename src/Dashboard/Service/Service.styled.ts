@@ -1,6 +1,11 @@
 import styled from "styled-components";
 import Button from "../../common/Button";
 
+export const PageContainer = styled.div`
+  max-width: 1000px;
+  margin: 0 auto;
+`;
+
 export const ServiceContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -45,10 +50,11 @@ export const HeadingInfo = styled.p`
 `;
 
 export const NewServiceContainer = styled.div`
-  border: ${(props) => props.theme.main.border};
+  border: ${(props) => props.theme.border};
   border-radius: 13px;
   padding: 30px 25px;
   margin-bottom: 25px;
+  background: #fff;
 `;
 
 export const NewServiceHeaderContainer = styled.div`
@@ -63,7 +69,7 @@ export const NewServiceHeaderContainer = styled.div`
 `;
 
 export const Step = styled.div`
-  background: black;
+  background: ${props => props.theme.primaryColor};
   border-radius: 8px;
   width: 35px;
   height: 35px;
@@ -76,14 +82,14 @@ export const Step = styled.div`
 `;
 
 export const Row = styled.div`
-  margin-bottom: ${(props) => props.theme.main.rowMarginBottom};
+  margin-bottom: ${(props) => props.theme.rowMarginBottom};
 `;
 
 export const RowTwo = styled(Row)`
   display: flex;
   flex-wrap: wrap;
   margin: 0 -10px;
-  margin-bottom: ${(props) => props.theme.main.rowMarginBottom};
+  margin-bottom: ${(props) => props.theme.rowMarginBottom};
 `;
 
 export const FieldGroup = styled.div`
@@ -160,13 +166,13 @@ export const ServiceImageContainer = styled.div<any>`
 `;
 
 export const ScreeningQuestionList = styled.div`
-  border: ${(props) => props.theme.main.border};
+  border: ${(props) => props.theme.border};
   border-radius: 6px;
 `;
 
 export const ScreeningQuestionItem = styled.div`
   padding: 15px;
-  border-bottom: ${(props) => props.theme.main.border};
+  border-bottom: ${(props) => props.theme.border};
   display: flex;
   justify-content: flex-start;
   flex-wrap: wrap;
@@ -200,6 +206,6 @@ export const EditServiceActionContainer = styled.div`
 `;
 
 export const DeleteButton = styled(Button)`
-  background: #fff;
-  color: ${(props) => props.theme.main.dangerColor};
+  background: transparent;
+  color: ${(props) => props.theme.dangerColor};
 `;

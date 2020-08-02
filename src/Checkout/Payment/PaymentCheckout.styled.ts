@@ -14,7 +14,7 @@ export const Title = styled.h3`
 `;
 export const PaymentCheckout = styled.form``;
 export const Row = styled.div`
-  margin-bottom: ${(props) => props.theme.main.rowMarginBottom};
+  margin-bottom: ${(props) => props.theme.rowMarginBottom};
 `;
 export const NameRow = styled(Row)`
   display: flex;
@@ -24,10 +24,10 @@ export const NameRow = styled(Row)`
   > div {
     flex-basis: 50%;
     &:first-child {
-      padding: 0 ${(props) => props.theme.main.columnPadding} 0 10px;
+      padding: 0 ${(props) => props.theme.columnPadding} 0 10px;
     }
     &:last-child {
-      padding: 0 10px 0 ${(props) => props.theme.main.columnPadding};
+      padding: 0 10px 0 ${(props) => props.theme.columnPadding};
     }
   }
 `;
@@ -50,7 +50,7 @@ export const CardInput = styled.div`
 
     &.StripeElement--focus {
       box-shadow: 0 0 0 2px
-        ${(props) => setLightness(0.8, props.theme.main.primaryColor)};
+        ${(props) => setLightness(0.8, props.theme.primaryColor)};
       transition: box-shadow 0.3s ease-in-out !important;
     }
   }

@@ -41,7 +41,7 @@ const HeroSection = styled.section`
 
 const Brand = styled.div`
   > img {
-    width: 150px;
+    width: 125px;
   }
 `;
 

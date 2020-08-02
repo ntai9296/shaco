@@ -18,7 +18,10 @@ Sentry.init({
 
 //Binding events.
 Router.events.on("routeChangeStart", () => NProgress.start());
-Router.events.on("routeChangeComplete", () => NProgress.done());
+Router.events.on("routeChangeComplete", () => {
+  if(typeof window !== 'undefined') window.scrollTo(0, 0)
+  NProgress.done();
+});
 Router.events.on("routeChangeError", () => NProgress.done());
 
 const App = ({ Component, pageProps }: any) => {
@@ -69,7 +72,7 @@ const App = ({ Component, pageProps }: any) => {
         <link rel="manifest" href="/site.webmanifest" />
         <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
       </Head>
-      <ThemeProvider theme={{ main: getDefaultStyling() }}>
+      <ThemeProvider theme={{ ...getDefaultStyling() }}>
         <Component {...pageProps} />
       </ThemeProvider>
     </ApolloProvider>

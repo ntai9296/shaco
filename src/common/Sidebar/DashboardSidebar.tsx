@@ -25,7 +25,7 @@ export default () => {
     <S.Sidebar>
       <S.Brand>
         <Link href="/">
-          <a>Fireside</a>
+          <img src="/logo.svg" />
         </Link>
       </S.Brand>
       {userData?.currentUser?.profile && (
@@ -90,12 +90,12 @@ export default () => {
         </S.SidebarItem>
       </Link>
 
-      <Link href="/dashboard/availability">
+      {/* <Link href="/dashboard/availability">
         <S.SidebarItem isActive={activeRoute("/availability")}>
           <CheckSquare width={15} height={15} />
           Availability
         </S.SidebarItem>
-      </Link>
+      </Link> */}
 
       {/* <Link href="/dashboard/payout">
         <S.SidebarItem isActive={activeRoute("/payout")}>

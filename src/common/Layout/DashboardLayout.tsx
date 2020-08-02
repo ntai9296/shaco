@@ -3,9 +3,20 @@ import Router from "next/router";
 import * as S from "./DashboardLayout.styled";
 import { ThemeProvider } from "styled-components";
 import DashboardSidebar from "../Sidebar/DashboardSidebar";
+import { getDefaultStyling } from '../utility';
 import * as UserAPI from "../../../graphql/User/UserAPI";
 
-export default ({ children }: { children: any }) => {
+export default ({
+  children,
+  hideSidebar,
+  redirectOnboard = true,
+  noContentPadding,
+}: {
+  children: any;
+  hideSidebar?: boolean;
+  redirectOnboard?: boolean;
+  noContentPadding?: boolean;
+}) => {
   const { data: userData, loading } = UserAPI.getCurrentUser();
 
   if (loading) {
@@ -17,18 +28,26 @@ export default ({ children }: { children: any }) => {
     return null;
   }
 
-  if (!userData.currentUser.onboarded) {
+  if (redirectOnboard && !userData.currentUser.onboarded) {
     Router.replace("/onboarding");
     return null;
   }
 
   return (
     <ThemeProvider
-      theme={{ primaryColor: userData?.currentUser?.profile?.brandColor }}
+      theme={{
+        ...getDefaultStyling(),
+        primaryColor: userData?.currentUser?.profile?.brandColor,
+      }}
     >
       <S.Layout>
-        <DashboardSidebar />
-        <S.Content>{children}</S.Content>
+        {!hideSidebar && <DashboardSidebar />}
+        <S.Content
+          noContentPadding={noContentPadding}
+          hideSidebar={hideSidebar}
+        >
+          {children}
+        </S.Content>
       </S.Layout>
     </ThemeProvider>
   );

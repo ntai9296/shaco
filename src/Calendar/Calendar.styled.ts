@@ -11,6 +11,6 @@ export const HeadingInfo = styled.p`
   font-weight: 500;
 `;
 export const Description = styled.p`
-  color: ${(props) => setLightness(0.5, props.theme.main.textColor)};
+  color: ${(props) => setLightness(0.5, props.theme.textColor)};
   margin-bottom: 25px;
 `;

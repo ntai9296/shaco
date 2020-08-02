@@ -1,45 +1,81 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import cookie from "js-cookie";
+import Head from "next/head";
 import Router from "next/router";
-import SimpleNavigation from "../src/common/TopNav/SimpleNavigation";
-import { getCurrentUser } from "../graphql/User/UserAPI";
-import { initializeApollo } from "../lib/withApollo";
+import {
+  getCurrentUserLazy,
+  exchangeOnboardingToken,
+} from "../graphql/User/UserAPI";
+import * as S from "../src/Onboarding/OnboardingPage.styled";
+import Onboarding from "../src/Onboarding/Onboarding";
+import { ThemeProvider } from "styled-components";
+import { getDefaultStyling } from "../src/common/utility";
 
 export default () => {
-  const { data: userData, loading } = getCurrentUser();
+  const [getCurrentUser, { data: userData, loading }] = getCurrentUserLazy({
+    fetchPolicy: "cache-and-network",
+    onError: () => {
+      setLoaded(true);
+    },
+    onCompleted: () => {
+      setLoaded(true);
+    },
+  });
 
-  if (loading) {
+  const [exchangeOnboarding] = exchangeOnboardingToken({
+    onCompleted: (data) => {
+      cookie.set("token", data.exchangeOnboardingToken?.accessToken as string);
+      getCurrentUser();
+    },
+    onError: () => {
+      Router.replace("/");
+    },
+  });
+
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    const token = Router.query.tok as string;
+    if (token) {
+      exchangeOnboarding({
+        variables: {
+          input: {
+            token,
+          },
+        },
+      });
+    } else {
+      getCurrentUser();
+    }
+  }, []);
+
+  if (!loaded || loading) {
     return null;
   }
 
   if (!userData?.currentUser?.id) {
-    Router.replace('/');
+    Router.replace("/");
     return null;
   }
-  console.log(userData);
+
+  if (userData?.currentUser?.onboarded) {
+    Router.replace("/dashboard");
+    return null;
+  }
 
   return (
-    <div>
-      <SimpleNavigation />
-    </div>
+    <ThemeProvider
+      theme={{
+        ...getDefaultStyling,
+        primaryColor: userData?.currentUser?.profile?.brandColor,
+      }}
+    >
+      <S.Page>
+        <Head>
+          <script src="https://sdk.amazonaws.com/js/aws-sdk-2.713.0.min.js"></script>
+        </Head>
+        <Onboarding />
+      </S.Page>
+    </ThemeProvider>
   );
 };
-
-export async function getServerSideProps(context: any) {
-    const apolloClient = initializeApollo(null, context.req);
-
-    const token = context.req.url.replace("/onboarding?tok=", "");
-    console.log(token)
-  
-    // await apolloClient.query({
-    //   query: GET_PUBLIC_PROFILE_QUERY,
-    //   variables: {
-    //     slug: context.query.profileSlug,
-    //   },
-    // });
-  
-    return {
-      props: {
-        // initialApolloState: apolloClient.cache.extract(),
-      },
-    };
-  }

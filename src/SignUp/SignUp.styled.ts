@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Styling } from "../common/utility";
+import { Styling, mediaBreakpointDown } from "../common/utility";
 
 export const Page = styled.div`
   background-color: rgb(250, 250, 250);
@@ -9,6 +9,13 @@ export const Layout = styled.div`
   max-width: 600px;
   margin: auto;
   padding-top: 100px;
+
+  ${mediaBreakpointDown("md")} {
+    padding-top: 50px;
+  }
+  ${mediaBreakpointDown("sm")} {
+    padding: 40px 15px;
+  }
 `;
 export const Content = styled.div`
   padding: 30px 30px;
@@ -23,6 +30,7 @@ export const Title = styled.h1`
   margin: 0 0 25px 0;
   text-align: center;
   font-weight: 900;
+  font-size: 35px;
 `;
 export const SubTitle = styled.p``;
 export const SignUpForm = styled.form``;

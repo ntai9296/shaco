@@ -11,6 +11,7 @@ import {
 } from "../../graphql/generated";
 import dynamic from "next/dynamic";
 import RegularCheckout from "../../src/Checkout/RegularCheckout/RegularCheckout";
+import { getDefaultStyling } from "../../src/common/utility";
 
 const VideoCallCheckout = dynamic(
   () => import("../../src/Checkout/VideoCall/VideoCallCheckout"),
@@ -42,7 +43,11 @@ export default () => {
   const pageTitle = `${node.name} | Fireside`;
   const coverPhotoURL = node.imageUrl;
   return (
-    <ThemeProvider theme={{}}>
+    <ThemeProvider
+      theme={{
+        ...getDefaultStyling(),
+      }}
+    >
       <Head>
         <title>{node.name} | Fireside</title>
         {node.description && (

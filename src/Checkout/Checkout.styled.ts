@@ -9,7 +9,7 @@ export const Body = styled.div`
 export const Main = styled.div`
   width: 100%;
   min-height: 75vh;
-  margin-bottom: 250px;
+  padding-bottom: 150px;
 `;
 
 export const TitleContent = styled.div`

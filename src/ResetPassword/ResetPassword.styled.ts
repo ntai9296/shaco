@@ -29,7 +29,7 @@ export const ResetPasswordContainer = styled.div`
   justify-content: center;
   border: 1px solid rgb(229, 227, 221);
   padding: 30px;
-  border-radius: ${(props) => props.theme.main.inputBorderRadius};
+  border-radius: ${(props) => props.theme.inputBorderRadius};
   background: #fff;
 
   > form {

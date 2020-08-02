@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { setLightness } from "polished";
 import { Styling } from "../utility";
 
 export const Sidebar = styled.aside`
@@ -10,16 +11,15 @@ export const Sidebar = styled.aside`
   overflow-y: auto;
   background: #fafafb;
   width: 270px;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
+  background: #fff;
+  border-right: 1px solid rgb(229, 227, 221);
 `;
 
 export const Brand = styled.div`
   padding: 24px 60px 24px 20px;
 
-  a {
-    font-size: 26px;
-    color: ${Styling.textColor};
-    font-weight: bold;
+  img {
+    max-width: 125px;
   }
 `;
 
@@ -71,7 +71,7 @@ export const ProfileName = styled.p`
   color: #363636;
 `;
 export const ViewProfile = styled.div`
-  color: ${Styling.primaryColor};
+  color: ${props => props.theme.primaryColor};
   font-size: 13px;
   display: flex;
   align-items: center;
@@ -103,11 +103,12 @@ export const SidebarItem = styled.div<{ isActive?: boolean }>`
   ${(props) =>
     props.isActive &&
     `
-    background: ${Styling.primaryColorLight};
-    color: ${Styling.primaryColor};
+    background: ${props.theme.primaryColor};
+    color: #fff;
 
     :hover {
-        background-color: ${Styling.primaryColorLight};
+      background: ${props.theme.primaryColor};
+
     }
 
   `}

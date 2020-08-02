@@ -1,12 +1,13 @@
 import styled from "styled-components";
-import Button, { CommonButton } from "../../common/Button";
-import { mediaBreakpointDown } from "../../common/utility";
+import { CommonButton } from "../common/Button";
+import { mediaBreakpointDown } from "../common/utility";
 import { setLightness } from "polished";
 
 export const ProfileContainer = styled.div`
   display: flex;
   flex-direction: column;
-  max-width: 600px;
+  max-width: 500px;
+  width: 100%;
 `;
 
 export const ProfileSectionContainer = styled.div``;
@@ -16,7 +17,6 @@ export const ProfileSectionContent = styled.div`
   border-radius: 13px;
   padding: 30px 25px;
   margin-bottom: 25px;
-  background: #fff;
 `;
 
 export const ProfileHeaderContainer = styled.div`
@@ -31,7 +31,7 @@ export const ProfileHeaderContainer = styled.div`
 `;
 
 export const Step = styled.div`
-  background: ${props => props.theme.primaryColor};
+  background: black;
   border-radius: 8px;
   width: 35px;
   height: 35px;
@@ -93,10 +93,6 @@ export const CustomURLInput = styled.div<{ URLFocus?: boolean }>`
   > input {
     border: none;
     flex: 1;
-    width: 100%;
-    ${mediaBreakpointDown("xs")} {
-      font-size: 16px;
-    }
   }
   > a {
     cursor: pointer;

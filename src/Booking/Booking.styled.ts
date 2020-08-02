@@ -23,7 +23,7 @@ export const ConfirmationContainer = styled.div`
   margin: auto;
   border: 1px solid rgb(229, 227, 221);
   padding: 30px;
-  border-radius: ${(props) => props.theme.main.inputBorderRadius};
+  border-radius: ${(props) => props.theme.inputBorderRadius};
 `;
 
 export const ProfilePicture = styled.div`

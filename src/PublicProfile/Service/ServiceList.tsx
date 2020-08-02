@@ -4,7 +4,6 @@ import Link from "next/link";
 import * as S from "./Service.styled";
 import {
   getPublicProfileQuery_profile_servicesConnection_nodes,
-  ServiceProvidableTypeEnum,
   ServicePricingTypeEnum,
   ServiceTypeEnum,
 } from "../../../graphql/generated";
