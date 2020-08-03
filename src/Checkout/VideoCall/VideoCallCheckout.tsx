@@ -203,6 +203,7 @@ export default ({ service }: Props) => {
               errors={errors}
               showPayment={service.price > 0}
               price={service.price}
+              pricingType={service.pricingType}
             />
           ) : (
             <>
