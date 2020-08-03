@@ -3,7 +3,7 @@ import Router from "next/router";
 import * as S from "./DashboardLayout.styled";
 import { ThemeProvider } from "styled-components";
 import DashboardSidebar from "../Sidebar/DashboardSidebar";
-import { getDefaultStyling } from '../utility';
+import { getDefaultStyling } from "../utility";
 import * as UserAPI from "../../../graphql/User/UserAPI";
 
 export default ({
@@ -36,8 +36,9 @@ export default ({
   return (
     <ThemeProvider
       theme={{
-        ...getDefaultStyling(),
-        primaryColor: userData?.currentUser?.profile?.brandColor,
+        ...getDefaultStyling({
+          primaryColor: userData?.currentUser?.profile?.brandColor,
+        }),
       }}
     >
       <S.Layout>

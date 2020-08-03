@@ -82,6 +82,12 @@ export const uploadToS3 = (file: any): { Location: string } => {
   }).promise();
 };
 
-export const getDefaultStyling = () => ({
-  ...Styling,
-});
+export const getDefaultStyling = (theme?: any) => {
+  let obj: any = { ...Styling };
+  theme && Object.keys(theme).forEach((key) => {
+    if (theme[key]) {
+      obj[key] = theme[key]
+    }
+  });
+  return obj
+};

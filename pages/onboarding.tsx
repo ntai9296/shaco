@@ -66,8 +66,9 @@ export default () => {
   return (
     <ThemeProvider
       theme={{
-        ...getDefaultStyling,
-        primaryColor: userData?.currentUser?.profile?.brandColor,
+        ...getDefaultStyling({
+          primaryColor: userData?.currentUser?.profile?.brandColor,
+        }),
       }}
     >
       <S.Page>

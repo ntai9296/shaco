@@ -25,7 +25,9 @@ const App = () => {
   const coverPhotoURL = data.profile.coverPhotoUrl || "";
   return (
     <ThemeProvider
-      theme={{ ...getDefaultStyling(), primaryColor: data.profile.brandColor }}
+      theme={{
+        ...getDefaultStyling({ primaryColor: data.profile.brandColor }),
+      }}
     >
       <Head>
         <title>{pageTitle}</title>
