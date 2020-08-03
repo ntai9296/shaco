@@ -106,7 +106,7 @@ export default () => {
       <Link href="/dashboard/calendar">
         <S.SidebarItem isActive={activeRoute("/calendar")}>
           <Calendar width={15} height={15} />
-          Calendar
+          Calendar & Availability
         </S.SidebarItem>
       </Link>
 

@@ -1,7 +1,6 @@
 import React, { useState, useRef } from "react";
-import { Trash } from "react-feather";
 import { BlockPicker } from "react-color";
-import * as S from "./OnboardingProfile.styled";
+import * as S from "../Dashboard/Profile/Profile.styled";
 import * as UserAPI from "../../graphql/User/UserAPI";
 import * as ProfileAPI from "../../graphql/Profile/ProfileAPI";
 import * as Utility from "../common/utility";
@@ -34,6 +33,9 @@ export default ({ onNext }: any) => {
     onCompleted: () => {
       setSlugRequest(false);
       onNext();
+    },
+    onError: (err) => {
+      setErrors([err.message]);
     },
   });
 
@@ -92,6 +94,11 @@ export default ({ onNext }: any) => {
             profilePhotoUrl: profile.profilePhotoUrl,
             coverPhotoUrl: profile.coverPhotoUrl,
             brandColor: profile.brandColor,
+            facebookUrl: profile.facebookUrl,
+            twitchUrl: profile.twitchUrl,
+            instagramUrl: profile.instagramUrl,
+            twitterUrl: profile.twitterUrl,
+            youtubeUrl: profile.youtubeUrl,
           },
         },
       });
@@ -103,194 +110,182 @@ export default ({ onNext }: any) => {
   }
 
   return (
-    <S.ProfileContainer>
-      <S.ProfileSectionContainer>
-        <S.ProfileSectionContent>
-          <S.Row>
-            <S.FieldGroup>
-              <Input
-                onChange={(e) => onChangeProfile("name", e.target.value)}
-                value={profile.name}
-                label="Page title"
-                placeholder="E.g: Fireside"
-              />
-            </S.FieldGroup>
-          </S.Row>
+    <S.ProfileLayout>
+      <S.ProfileContainer>
+        <S.ProfileSectionContainer>
+          <S.ProfileSectionContent>
+            <S.ServiceImageContainer src={profile.coverPhotoUrl}>
+              <S.ChangeCoverImageButton
+                onClick={() => coverPhotoRef.current.click()}
+              >
+                Change cover
+              </S.ChangeCoverImageButton>
+            </S.ServiceImageContainer>
+            <input
+              onChange={onUploadCoverPhoto}
+              accept="image/*"
+              ref={coverPhotoRef}
+              style={{ display: "none " }}
+              type="file"
+              value=""
+            />
 
-          <S.Row>
-            <S.FieldGroup>
-              <label htmlFor="pageURL">Page URL</label>
-              <S.CustomURLInput URLFocus={URLFocus}>
-                <label htmlFor="pageURL">tryfireside.com/</label>
-                <input
-                  onChange={(e) =>
-                    onChangeProfile("slug", e.target.value.trim())
-                  }
-                  value={profile.slug || ""}
-                  onBlur={() => setURLFocus(false)}
-                  onFocus={() => setURLFocus(true)}
-                  id="pageURL"
-                  placeholder="fireside"
-                />
-                {profile.slug != data?.currentUser?.profile?.slug && (
-                  <a
-                    onClick={() => {
-                      if (profile.slug) {
-                        setSlugRequest(true);
-                        checkSlugAvailability({
-                          variables: {
-                            slug: profile.slug,
-                          },
-                        });
-                      }
-                    }}
-                  >
-                    Check
-                  </a>
-                )}
-              </S.CustomURLInput>
-              {profile.slug != data?.currentUser?.profile?.slug &&
-                slugRequest &&
-                availabilityData && (
-                  <S.NotificationContainer>
-                    <Notification
-                      type={availabilityData.profile?.id ? "error" : "success"}
-                      notifications={[
-                        availabilityData.profile?.id
-                          ? "URL is already taken"
-                          : "URL is available",
-                      ]}
-                    />
-                  </S.NotificationContainer>
-                )}
-            </S.FieldGroup>
-          </S.Row>
-          <S.Row>
-            <S.FieldGroup>
-              <Input
-                onChange={(e) =>
-                  onChangeProfile("shortDescription", e.target.value)
-                }
-                value={profile.shortDescription || ""}
-                label="Short description"
-                placeholder="Short description about your page"
+            <S.AvatarContainer>
+              <S.AvatarImg
+                onClick={() => profilePhotoRef.current.click()}
+                src={profile.profilePhotoUrl}
               />
-            </S.FieldGroup>
-          </S.Row>
-
-          <S.Row>
-            <S.FieldGroup>
-              <label>Profile photo</label>
-              <S.CustomPhotoIntroInput>
-                <input readOnly value={profile.profilePhotoUrl || ""} />
-                <a onClick={() => profilePhotoRef.current.click()}>Upload</a>
-                <input
-                  onChange={onUploadProfilePhoto}
-                  accept="image/*, video/*"
-                  ref={profilePhotoRef}
-                  style={{ display: "none " }}
-                  type="file"
-                  value=""
-                />
-              </S.CustomPhotoIntroInput>
-            </S.FieldGroup>
-          </S.Row>
-          <S.Row>
-            <S.FieldGroup>
-              {profile.coverPhotoUrl ? (
-                <S.ServiceImageContainer src={profile.coverPhotoUrl}>
-                  <S.ServiceItemImageHover
-                    onClick={() => coverPhotoRef.current.click()}
-                  >
-                    Click to change image
-                    <S.DeleteImageButton
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        onChangeProfile("coverPhotoUrl", "");
-                      }}
-                    >
-                      <Trash
-                        width={15}
-                        height={15}
-                        color={Utility.Styling.dangerColor}
-                      />
-                    </S.DeleteImageButton>
-                  </S.ServiceItemImageHover>
-                </S.ServiceImageContainer>
-              ) : (
-                <S.ImagePlaceholder
-                  onClick={() => coverPhotoRef.current.click()}
-                >
-                  <b>Cover photo</b>
-                  <div>Recommended size: 1600px wide by 400px tall</div>
-                </S.ImagePlaceholder>
-              )}
               <input
-                onChange={onUploadCoverPhoto}
-                accept="image/*"
-                ref={coverPhotoRef}
+                onChange={onUploadProfilePhoto}
+                accept="image/*, video/*"
+                ref={profilePhotoRef}
                 style={{ display: "none " }}
                 type="file"
                 value=""
               />
-            </S.FieldGroup>
-          </S.Row>
-          <S.Row>
-            <S.FieldGroup>
-              <label>Brand color</label>
-              <Popper
-                onClickOutside={() => setBrandColorOpen(false)}
-                isOpen={brandColorOpen}
-                position="right"
-                content={
-                  <BlockPicker
-                    colors={[
-                      "#162447",
-                      "#1f4068",
-                      "#e43f5a",
-                      "#24a19c",
-                      "#654062",
-                      "#438a5e",
-                      "#0f4c75",
-                      "#c02739",
-                      "#000000",
-                    ]}
-                    color={profile?.brandColor || Utility.Styling.primaryColor}
-                    onChangeComplete={(e) =>
-                      onChangeProfile("brandColor", e.hex)
-                    }
+            </S.AvatarContainer>
+            <S.AvatarHelper>Click to upload profile photo</S.AvatarHelper>
+
+            <S.BodyContainer>
+              <S.Row>
+                <S.FieldGroup>
+                  <Input
+                    onChange={(e) => onChangeProfile("name", e.target.value)}
+                    value={profile.name}
+                    label="Page title"
+                    placeholder="E.g: Fireside"
                   />
-                }
-              >
-                <S.BrandColorButton
-                  onClick={() => setBrandColorOpen(!brandColorOpen)}
-                  backgroundColor={
-                    profile?.brandColor || Utility.Styling.primaryColor
-                  }
-                >
-                  Click to change color
-                </S.BrandColorButton>
-              </Popper>
-              <p>
-                Choose any color—provided it’s dark enough to be legible—by
-                clicking on the button.
-              </p>
-            </S.FieldGroup>
-          </S.Row>
-          {errors.length > 0 && (
-            <S.Row>
-              <S.NotificationContainerBottom>
-                <Notification notifications={errors} type="error" />
-              </S.NotificationContainerBottom>
-            </S.Row>
-          )}
-          <S.Row>
-            <Button isLoading={loading} onClick={onUpdateProfile}>
-              Next
-            </Button>
-          </S.Row>
-        </S.ProfileSectionContent>
-      </S.ProfileSectionContainer>
-    </S.ProfileContainer>
+                </S.FieldGroup>
+              </S.Row>
+
+              <S.Row>
+                <S.FieldGroup>
+                  <label htmlFor="pageURL">Page URL</label>
+                  <S.CustomURLInput URLFocus={URLFocus}>
+                    <label htmlFor="pageURL">tryfireside.com/</label>
+                    <input
+                      onChange={(e) =>
+                        onChangeProfile("slug", e.target.value.trim())
+                      }
+                      value={profile.slug || ""}
+                      onBlur={() => setURLFocus(false)}
+                      onFocus={() => setURLFocus(true)}
+                      id="pageURL"
+                      placeholder="fireside"
+                    />
+                    {profile.slug != data?.currentUser?.profile?.slug && (
+                      <a
+                        onClick={() => {
+                          if (profile.slug) {
+                            setSlugRequest(true);
+                            checkSlugAvailability({
+                              variables: {
+                                slug: profile.slug,
+                              },
+                            });
+                          }
+                        }}
+                      >
+                        Check
+                      </a>
+                    )}
+                  </S.CustomURLInput>
+                  {profile.slug != data?.currentUser?.profile?.slug &&
+                    slugRequest &&
+                    availabilityData && (
+                      <S.NotificationContainer>
+                        <Notification
+                          type={
+                            availabilityData.profile?.id ? "error" : "success"
+                          }
+                          notifications={[
+                            availabilityData.profile?.id
+                              ? "URL is already taken"
+                              : "URL is available",
+                          ]}
+                        />
+                      </S.NotificationContainer>
+                    )}
+                </S.FieldGroup>
+              </S.Row>
+              <S.Row>
+                <S.FieldGroup>
+                  <Input
+                    onChange={(e) =>
+                      onChangeProfile("shortDescription", e.target.value)
+                    }
+                    value={profile.shortDescription || ""}
+                    label="Short description"
+                    placeholder="Short description about your page"
+                  />
+                </S.FieldGroup>
+              </S.Row>
+
+              <S.Row>
+                <S.FieldGroup>
+                  <label>Brand color</label>
+                  <Popper
+                    onClickOutside={() => setBrandColorOpen(false)}
+                    isOpen={brandColorOpen}
+                    position="right"
+                    content={
+                      <BlockPicker
+                        colors={[
+                          "#162447",
+                          "#1f4068",
+                          "#e43f5a",
+                          "#24a19c",
+                          "#654062",
+                          "#438a5e",
+                          "#0f4c75",
+                          "#c02739",
+                          "#f77f00",
+                          "#000000",
+                        ]}
+                        color={
+                          profile?.brandColor || Utility.Styling.primaryColor
+                        }
+                        onChangeComplete={(e) =>
+                          onChangeProfile("brandColor", e.hex)
+                        }
+                      />
+                    }
+                  >
+                    <S.BrandColorButton
+                      onClick={() => setBrandColorOpen(!brandColorOpen)}
+                      backgroundColor={
+                        profile?.brandColor || Utility.Styling.primaryColor
+                      }
+                    >
+                      Change color
+                    </S.BrandColorButton>
+                  </Popper>
+                  <p>
+                    Choose any color—provided it’s dark enough to be legible—by
+                    clicking on the button.
+                  </p>
+                </S.FieldGroup>
+              </S.Row>
+
+              {errors.length > 0 && (
+                <S.Row>
+                  <Notification
+                    onClose={() => setErrors([])}
+                    notifications={errors}
+                    type="error"
+                  />
+                </S.Row>
+              )}
+
+              <S.Row>
+                <Button isLoading={loading} onClick={onUpdateProfile}>
+                  Next: Add Services
+                </Button>
+              </S.Row>
+            </S.BodyContainer>
+          </S.ProfileSectionContent>
+        </S.ProfileSectionContainer>
+      </S.ProfileContainer>
+    </S.ProfileLayout>
   );
 };

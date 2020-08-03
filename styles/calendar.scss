@@ -1,2 +1,6 @@
-@import '~@fullcalendar/core/main.css';
-@import '~@fullcalendar/timegrid/main.css';
+@import "~@fullcalendar/core/main.css";
+@import "~@fullcalendar/timegrid/main.css";
+
+.fc-view-container {
+  background-color: #fff;
+}

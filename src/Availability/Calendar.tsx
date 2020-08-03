@@ -263,6 +263,7 @@ export default () => {
 
   return (
     <FullCalendar
+      contentHeight={500}
       eventOrder="priority"
       customButtons={{
         next: {

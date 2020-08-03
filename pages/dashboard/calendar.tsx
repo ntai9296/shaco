@@ -10,6 +10,10 @@ const ConnectCalendarList = dynamic(
   { ssr: false }
 );
 
+const Calendar = dynamic(() => import("../../src/Availability/Calendar"), {
+  ssr: false,
+});
+
 const Availability = () => {
   const { data: userData, loading } = UserAPI.getCurrentUser();
 
@@ -25,13 +29,16 @@ const Availability = () => {
   return (
     <DashboardLayout>
       <S.CalendarContainer>
-        <S.Heading>Calendar</S.Heading>
+        <S.Heading>Calendar (1:1 Virtual Meet Ups Only)</S.Heading>
         <S.HeadingInfo>
           Connect your calendar to let Fireside know when you're available and
           update your calendar as bookings are scheduled.
         </S.HeadingInfo>
         <ConnectCalendarList />
       </S.CalendarContainer>
+      <div>
+      <Calendar />
+      </div>
     </DashboardLayout>
   );
 };

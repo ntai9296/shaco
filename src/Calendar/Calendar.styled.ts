@@ -3,6 +3,7 @@ import { setLightness } from "polished";
 
 export const CalendarContainer = styled.div`
   max-width: 600px;
+  margin-bottom: 25px;
 `;
 export const Heading = styled.h1`
   margin: 0 0 25px 0;

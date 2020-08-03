@@ -7,6 +7,10 @@ export const ProfileLayout = styled.div`
   padding: 0 40px 40px 40px;
   max-width: 1100px;
   margin: auto;
+
+  ${mediaBreakpointDown("sm")} {
+    padding: 0;
+  }
 `;
 
 export const ProfileContainer = styled.div`

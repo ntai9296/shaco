@@ -21,7 +21,7 @@ const CallToActionContainer = styled.div`
 `;
 
 const CtaButton = styled(CommonButton)`
-  border-radius: 25px;
+  border-radius: 40px;
   padding: 20px 40px;
   font-weight: bold;
 `;
