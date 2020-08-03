@@ -27,7 +27,7 @@ export const Profile = styled.div`
   display: flex;
   padding: 1rem;
   margin: 0 1rem 1rem;
-  border: 1px solid #f1f1f5;
+  border: 1px solid rgb(229,227,221);
   border-radius: 10px;
   background: #fff;
   align-items: center;

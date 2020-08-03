@@ -5,6 +5,7 @@ export const Layout = styled.div`
   height: 100%;
   min-height: 100%;
 `;
+
 export const Content = styled.div<{
   hideSidebar?: boolean;
   noContentPadding?: boolean;

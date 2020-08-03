@@ -21,33 +21,8 @@ export const Hr = styled.hr`
   margin: 36px 0;
 `;
 
-export const FormGroup = styled.div`
-  padding-right: 24px;
-
-  @media all and (max-width: 1366px) {
-    width: 100%;
-    padding-right: 0;
-    padding-top: 12px;
-  }
+export const Row = styled.div`
+  margin-bottom: 15px;
 `;
 
-export const FormWrap = styled.form`
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-end;
-`;
-
-export const SubmitButton = styled.button`
-  width: auto;
-  background: #0070f3;
-  color: #fff;
-  font-weight: bold;
-  height: 42px;
-  padding: 4px 20px;
-  font-size: 14px;
-  border-radius: 8px;
-`;
-
-export const Label = styled.div`
-  margin-bottom: 8px;
-`;
+export const FormWrap = styled.form``;
