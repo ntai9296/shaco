@@ -88,6 +88,10 @@ const HowItWorkContentItem = styled.div`
   ${mediaBreakpointDown("sm")} {
     margin-bottom: 0;
   }
+
+  > img {
+    margin-bottom: 25px;
+  }
 `;
 
 const ContentItemHeading = styled.div`
@@ -95,6 +99,12 @@ const ContentItemHeading = styled.div`
   margin-bottom: 15px;
   align-items: center;
 `;
+
+const ContentItemTitle = styled.h2`
+  font-size: 30px;
+  margin: 0 0 25px 0;
+`;
+
 const ContentItemDescription = styled.div`
   font-size: 16px;
   width: 100%;
@@ -119,8 +129,8 @@ export default () => {
           onChange={(e) => setOption(e.target.value)}
         >
           <option value="0">1:1 Video Calls</option>
-          <option value="1">Virtual Classes & Events</option>
           <option value="2">Personalized Messages/Shoutouts</option>
+          <option value="6">Donations</option>
           <option value="4">Name Your Price</option>
           <option value="5">Create Your Own</option>
         </HowItWorkSelect>
@@ -133,6 +143,8 @@ export default () => {
             </HowItWorkContentLeftContainer>
             <HowItWorkContentRightContainer>
               <HowItWorkContentItem>
+                <ContentItemTitle>1:1 Video Calls</ContentItemTitle>
+                <img src="/line.png" />
                 <ContentItemHeading>
                   <ContentItemDescription>
                     <b>1.</b> Set your own availability, price, and call
@@ -167,6 +179,8 @@ export default () => {
             </HowItWorkContentLeftContainer>
             <HowItWorkContentRightContainer>
               <HowItWorkContentItem>
+                <ContentItemTitle>1:1 Video Calls</ContentItemTitle>
+                <img src="/line.png" />
                 <ContentItemHeading>
                   <ContentItemDescription>
                     <b>1.</b> Set your own price, # of attendees and class
@@ -201,6 +215,10 @@ export default () => {
             </HowItWorkContentLeftContainer>
             <HowItWorkContentRightContainer>
               <HowItWorkContentItem>
+                <ContentItemTitle>
+                  Personalized Messages/Shoutouts
+                </ContentItemTitle>
+                <img src="/line.png" />
                 <ContentItemHeading>
                   <ContentItemDescription>
                     • Get paid to post video shoutouts on social media (e.g.
@@ -227,6 +245,8 @@ export default () => {
             </HowItWorkContentLeftContainer>
             <HowItWorkContentRightContainer>
               <HowItWorkContentItem>
+                <ContentItemTitle>Name Your Price</ContentItemTitle>
+                <img src="/line.png" />
                 <ContentItemHeading>
                   <ContentItemDescription>
                     Make your services more accessible by allowing your
@@ -246,11 +266,34 @@ export default () => {
             </HowItWorkContentLeftContainer>
             <HowItWorkContentRightContainer>
               <HowItWorkContentItem>
+                <ContentItemTitle>Create Your Own</ContentItemTitle>
+                <img src="/line.png" />
                 <ContentItemHeading>
                   <ContentItemDescription>
                     Create your own custom services & interactions for your
                     audience. Experiment with different things to see what works
                     best for you and your customers.
+                  </ContentItemDescription>
+                </ContentItemHeading>
+              </HowItWorkContentItem>
+            </HowItWorkContentRightContainer>
+          </>
+        )}
+
+        {option === "6" && (
+          <>
+            <HowItWorkContentLeftContainer>
+              <img src="/donate.png" />
+            </HowItWorkContentLeftContainer>
+            <HowItWorkContentRightContainer>
+              <HowItWorkContentItem>
+                <ContentItemTitle>Donations</ContentItemTitle>
+                <img src="/line.png" />
+                <ContentItemHeading>
+                  <ContentItemDescription>
+                    Collect donations from people that follow you or use your
+                    services. Securely connect donations with Stripe and cash
+                    out to your account at any time.
                   </ContentItemDescription>
                 </ContentItemHeading>
               </HowItWorkContentItem>

@@ -167,7 +167,7 @@ export default () => {
             <ItemContent>
               <Step>2</Step>
               <ProfileTitle>Add your services & interactions.</ProfileTitle>
-              <ProfileServiceBox>
+              <ProfileServiceBox style={{ padding: 0 }}>
                 <img src="/custom_gif.gif" />
               </ProfileServiceBox>
             </ItemContent>

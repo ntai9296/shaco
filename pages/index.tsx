@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import styled from "styled-components";
 import Link from "next/link";
 import { mediaBreakpointDown } from "../src/common/utility";
@@ -5,11 +6,13 @@ import { CommonButton } from "../src/common/Button";
 import LearnAboutOurServiceSection from "../src/Landing/LearnAboutOurServiceSection";
 import HowItWorkSection from "../src/Landing/HowItWorkSection";
 import CallToActionSection from "../src/Landing/CallToActionSection";
+import { ArrowLeft, ArrowRight } from "react-feather";
 
 const MainContainer = styled.main`
   display: flex;
   flex-direction: column;
 `;
+
 const Header = styled.header`
   display: flex;
   align-items: center;
@@ -26,6 +29,7 @@ const Header = styled.header`
     padding: 0 15px;
   }
 `;
+
 const HeroSection = styled.section`
   padding: 85px 15px 100px 15px;
   align-items: center;
@@ -147,9 +151,17 @@ const UseCaseList = styled.div`
   flex-wrap: wrap;
   margin: 0 -10px;
 `;
-const UseCaseItemBox = styled.div`
+const UseCaseItemBox = styled.div<{ show?: boolean }>`
   flex-basis: 33.33%;
   padding: 10px;
+  display: none;
+  min-height: 240px;
+
+  ${(props) =>
+    props.show &&
+    `
+    display: block;
+  `}
 
   ${mediaBreakpointDown("md")} {
     flex-basis: 50%;
@@ -185,7 +197,35 @@ const UseCaseItemContent = styled.div`
   }
 `;
 
+const UseCaseListContent = styled.div`
+  display: flex;
+  align-items: center;
+`;
+const UseCaseLeftButton = styled.div<{ disable: boolean }>`
+  margin-right: 15px;
+  cursor: pointer;
+  color: #fff;
+
+  ${(props) =>
+    props.disable &&
+    `
+    opacity: 0.2;
+  `}
+`;
+const UseCaseRightButton = styled.div<{ disable: boolean }>`
+  margin-left: 15px;
+  cursor: pointer;
+  color: #fff;
+  ${(props) =>
+    props.disable &&
+    `
+    opacity: 0.2;
+  `}
+`;
+
 const App = () => {
+  const [step, setStep] = useState(0);
+
   return (
     <div className="container">
       <MainContainer>
@@ -218,66 +258,93 @@ const App = () => {
         <UseCaseSection>
           <UseCaseContainer>
             <UseCaseHeading>How Experts & Creators use Fireside</UseCaseHeading>
-            <UseCaseList>
-              <UseCaseItemBox>
-                <UseCaseItemContent>
-                  <h3>1:1 Video Calls</h3>
-                  <p>
-                    Meet with anyone in the world to connect on a more personal
-                    level. Answer questions or just have a chat. Set your own
-                    availability, price, and call duration.
-                  </p>
-                </UseCaseItemContent>
-              </UseCaseItemBox>
-              <UseCaseItemBox>
-                <UseCaseItemContent>
-                  <h3>Virtual Classes & Events</h3>
-                  <p>
-                    Host online classes and events via Zoom livestreams. Connect
-                    with your audience while monetizing your skills & expertise.
-                  </p>
-                </UseCaseItemContent>
-              </UseCaseItemBox>
-              <UseCaseItemBox>
-                <UseCaseItemContent>
-                  <h3>Personalized Messages/Shoutouts</h3>
-                  <p>
-                    Give video shoutouts on social media (IG, FB, YT, Tiktok,
-                    Twitch, Twitter, etc.) or send a personalized message.
-                  </p>
-                </UseCaseItemContent>
-              </UseCaseItemBox>
-              <UseCaseItemBox>
-                <UseCaseItemContent>
-                  <h3>Donations</h3>
-                  <p>
-                    Collect donations from people that follow you or use your
-                    services. Securely connect donations with Stripe and cash
-                    out to your account at any time.
-                  </p>
-                </UseCaseItemContent>
-              </UseCaseItemBox>
-              <UseCaseItemBox>
-                <UseCaseItemContent>
-                  <h3>Name Your Price</h3>
-                  <p>
-                    Make your services more accessible by allowing your
-                    community to name the price that they can afford for your
-                    services.
-                  </p>
-                </UseCaseItemContent>
-              </UseCaseItemBox>
-              <UseCaseItemBox>
-                <UseCaseItemContent>
-                  <h3>Create Your Own</h3>
-                  <p>
-                    Create your own custom services & interactions for your
-                    audience. Experiment with different things to see what works
-                    best for you and your customers.
-                  </p>
-                </UseCaseItemContent>
-              </UseCaseItemBox>
-            </UseCaseList>
+            <UseCaseListContent>
+              <UseCaseLeftButton
+                disable={step === 0}
+                onClick={() => {
+                  if (step === 0) {
+                    return;
+                  } else {
+                    setStep(step - 1);
+                  }
+                }}
+              >
+                <ArrowLeft />
+              </UseCaseLeftButton>
+              <UseCaseList>
+                <UseCaseItemBox show={[0].includes(step)}>
+                  <UseCaseItemContent>
+                    <h3>1:1 Video Calls</h3>
+                    <p>
+                      Meet with anyone in the world to connect on a more
+                      personal level. Answer questions or just have a chat. Set
+                      your own availability, price, and call duration.
+                    </p>
+                  </UseCaseItemContent>
+                </UseCaseItemBox>
+                <UseCaseItemBox show={[0].includes(step)}>
+                  <UseCaseItemContent>
+                    <h3>Answering Questions & Giving Advice</h3>
+                    <p>
+                      Get paid to answer customer questions or give them advice
+                      over a text, audio, or video recording. You can customize
+                      the price & details
+                    </p>
+                  </UseCaseItemContent>
+                </UseCaseItemBox>
+                <UseCaseItemBox show={[0].includes(step)}>
+                  <UseCaseItemContent>
+                    <h3>Personalized Messages/Shoutouts</h3>
+                    <p>
+                      Give video shoutouts on social media (IG, FB, YT, Tiktok,
+                      Twitch, Twitter, etc.) or send a personalized message.
+                    </p>
+                  </UseCaseItemContent>
+                </UseCaseItemBox>
+                <UseCaseItemBox show={[1].includes(step)}>
+                  <UseCaseItemContent>
+                    <h3>Donations</h3>
+                    <p>
+                      Collect donations from people that follow you or use your
+                      services. Securely connect donations with Stripe and cash
+                      out to your account at any time.
+                    </p>
+                  </UseCaseItemContent>
+                </UseCaseItemBox>
+                <UseCaseItemBox show={[1].includes(step)}>
+                  <UseCaseItemContent>
+                    <h3>Name Your Price</h3>
+                    <p>
+                      Make your services more accessible by allowing your
+                      community to name the price that they can afford for your
+                      services.
+                    </p>
+                  </UseCaseItemContent>
+                </UseCaseItemBox>
+                <UseCaseItemBox show={[1].includes(step)}>
+                  <UseCaseItemContent>
+                    <h3>Create Your Own</h3>
+                    <p>
+                      Create your own custom services & interactions for your
+                      audience. Experiment with different things to see what
+                      works best for you and your customers.
+                    </p>
+                  </UseCaseItemContent>
+                </UseCaseItemBox>
+              </UseCaseList>
+              <UseCaseRightButton
+                disable={step === 1}
+                onClick={() => {
+                  if (step === 1) {
+                    return;
+                  } else {
+                    setStep(step + 1);
+                  }
+                }}
+              >
+                <ArrowRight />
+              </UseCaseRightButton>
+            </UseCaseListContent>
           </UseCaseContainer>
         </UseCaseSection>
 
