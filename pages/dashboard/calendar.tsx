@@ -29,7 +29,7 @@ const Availability = () => {
   return (
     <DashboardLayout>
       <S.CalendarContainer>
-        <S.Heading>Calendar (1:1 Virtual Meet Ups Only)</S.Heading>
+        <S.Heading>Calendar (1:1 Virtual Video Calls Only)</S.Heading>
         <S.HeadingInfo>
           Connect your calendar to let Fireside know when you're available and
           update your calendar as bookings are scheduled.

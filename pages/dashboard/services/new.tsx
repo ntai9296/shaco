@@ -168,10 +168,10 @@ export default () => {
                       Answering Questions & Providing Advice
                     </option>
                     <option value={ServiceTypeEnum.VIRTUAL_ONE_ON_ONE}>
-                      Virtual 1:1 Meet Ups
+                      Virtual 1:1 Video Calls
                     </option>
                     <option value={ServiceTypeEnum.VIRTUAL_GROUP_MEET_UP}>
-                      Virtual Group Meet Ups
+                      Virtual Group Video Calls
                     </option>
                     <option value={ServiceTypeEnum.SOCIAL_MEDIA_SHOUT_OUT}>
                       Social Media & Video Shoutouts
