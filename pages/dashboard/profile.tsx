@@ -6,12 +6,6 @@ import DashboardLayout from "../../src/common/Layout/DashboardLayout";
 import * as UserAPI from "../../graphql/User/UserAPI";
 import Profile from "../../src/Dashboard/Profile/Profile";
 
-const Heading = styled.h1`
-  display: flex;
-  align-items: center;
-  margin-top: 0;
-`;
-
 export default () => {
   const { data: userData, loading } = UserAPI.getCurrentUser();
 
@@ -24,11 +18,10 @@ export default () => {
     return null;
   }
   return (
-    <DashboardLayout>
+    <DashboardLayout noContentPadding>
       <Head>
         <script src="https://sdk.amazonaws.com/js/aws-sdk-2.713.0.min.js"></script>
       </Head>
-      <Heading>Edit Profile</Heading>
       <div>
         <Profile />
       </div>

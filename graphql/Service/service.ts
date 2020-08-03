@@ -11,6 +11,7 @@ export const SERVICE_FRAGMENT = gql`
     price
     introVideoUrl
     buttonText
+    quantity
     providableType
     serviceType
     pricingType

@@ -182,6 +182,7 @@ export default () => {
           description: service.description,
           providableData,
           pricingType: service.pricingType,
+          quantity: service.quantity,
         },
       },
     });
@@ -380,6 +381,27 @@ export default () => {
                       decimalScale={2}
                       thousandSeparator
                       prefix="$"
+                    />
+                  </S.FieldGroup>
+                </S.Row>
+              )}
+
+              {[
+                ServiceTypeEnum.SELLING_MERCH,
+                ServiceTypeEnum.CUSTOMIZE_YOUR_OWN,
+              ].includes(service.serviceType) && (
+                <S.Row>
+                  <S.FieldGroup>
+                    <NumberFormatInput
+                      value={service.quantity || ""}
+                      onValueChange={({ floatValue }) =>
+                        onChangeService("quantity", floatValue)
+                      }
+                      allowNegative={false}
+                      placeholder="E.g: 100 available"
+                      label="Available quantity"
+                      decimalScale={0}
+                      thousandSeparator
                     />
                   </S.FieldGroup>
                 </S.Row>

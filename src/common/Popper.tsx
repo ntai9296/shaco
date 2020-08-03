@@ -32,7 +32,7 @@ export default ({
   return (
     <TinyPopper
       onClickOutside={onClickOutside}
-      containerStyle={{ overflow: "visible" }}
+      containerStyle={{ overflow: "visible", zIndex: "999" }}
       windowBorderPadding={15}
       isOpen={isOpen}
       position={position}

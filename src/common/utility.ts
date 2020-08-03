@@ -30,7 +30,7 @@ export const Styling = {
   borderRadius: "6px",
   inputBorderRadius: "6px",
   boxShadow: "0 2px 4px rgba(81,107,152,0.16)",
-  border: "1px solid rgb(229,227,221)"
+  border: "1px solid rgb(229,227,221)",
 };
 
 export const mediaBreakpointUp = (breakpoint: Breakpoint) => `
@@ -84,10 +84,24 @@ export const uploadToS3 = (file: any): { Location: string } => {
 
 export const getDefaultStyling = (theme?: any) => {
   let obj: any = { ...Styling };
-  theme && Object.keys(theme).forEach((key) => {
-    if (theme[key]) {
-      obj[key] = theme[key]
-    }
-  });
-  return obj
+  theme &&
+    Object.keys(theme).forEach((key) => {
+      if (theme[key]) {
+        obj[key] = theme[key];
+      }
+    });
+  return obj;
+};
+
+export const isVideoURL = (url: string) => {
+  const parts = url.split(".");
+  const extension = parts[parts.length - 1];
+  if (
+    ["m4v", "avi", "mp4", "mpg", "ogg", "webm"].includes(
+      extension.toLowerCase()
+    )
+  ) {
+    return true;
+  }
+  return false;
 };

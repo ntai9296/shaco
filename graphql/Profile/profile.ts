@@ -16,6 +16,12 @@ export const PROFILE_FRAGMENT = gql`
     status
     profilePhotoUrl
     coverPhotoUrl
+
+    facebookUrl
+    twitterUrl
+    instagramUrl
+    youtubeUrl
+    twitchUrl
   }
 `;
 

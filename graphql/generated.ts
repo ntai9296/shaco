@@ -365,6 +365,7 @@ export interface getPublicProfileQuery_profile_servicesConnection_nodes {
   description: string | null;
   price: number;
   buttonText: string | null;
+  quantity: number;
   providableType: ServiceProvidableTypeEnum | null;
   serviceType: ServiceTypeEnum;
   pricingType: ServicePricingTypeEnum;
@@ -498,6 +499,7 @@ export interface createServiceMutation_createService_service {
   description: string | null;
   price: number;
   buttonText: string | null;
+  quantity: number;
   providableType: ServiceProvidableTypeEnum | null;
   serviceType: ServiceTypeEnum;
   pricingType: ServicePricingTypeEnum;
@@ -544,6 +546,7 @@ export interface updateServiceMutation_updateService_service {
   description: string | null;
   price: number;
   buttonText: string | null;
+  quantity: number;
   providableType: ServiceProvidableTypeEnum | null;
   serviceType: ServiceTypeEnum;
   pricingType: ServicePricingTypeEnum;
@@ -630,6 +633,7 @@ export interface getServiceQuery_node_Service {
   description: string | null;
   price: number;
   buttonText: string | null;
+  quantity: number;
   providableType: ServiceProvidableTypeEnum | null;
   serviceType: ServiceTypeEnum;
   pricingType: ServicePricingTypeEnum;
@@ -881,6 +885,11 @@ export interface getCurrentUserProfileQuery_currentUser_profile {
   status: number;
   profilePhotoUrl: string | null;
   coverPhotoUrl: string | null;
+  facebookUrl: string | null;
+  twitterUrl: string | null;
+  instagramUrl: string | null;
+  youtubeUrl: string | null;
+  twitchUrl: string | null;
 }
 
 export interface getCurrentUserProfileQuery_currentUser {
@@ -1115,6 +1124,7 @@ export interface getCurrentUserProfileServicesQuery_currentUser_profile_services
   description: string | null;
   price: number;
   buttonText: string | null;
+  quantity: number;
   providableType: ServiceProvidableTypeEnum | null;
   serviceType: ServiceTypeEnum;
   pricingType: ServicePricingTypeEnum;
@@ -1222,6 +1232,7 @@ export interface getCurrentUserOnboardingQuery_currentUser_profile_servicesConne
   description: string | null;
   price: number;
   buttonText: string | null;
+  quantity: number;
   providableType: ServiceProvidableTypeEnum | null;
   serviceType: ServiceTypeEnum;
   pricingType: ServicePricingTypeEnum;
@@ -1249,6 +1260,11 @@ export interface getCurrentUserOnboardingQuery_currentUser_profile {
   status: number;
   profilePhotoUrl: string | null;
   coverPhotoUrl: string | null;
+  facebookUrl: string | null;
+  twitterUrl: string | null;
+  instagramUrl: string | null;
+  youtubeUrl: string | null;
+  twitchUrl: string | null;
   servicesConnection: getCurrentUserOnboardingQuery_currentUser_profile_servicesConnection | null;
 }
 
@@ -1331,6 +1347,11 @@ export interface profileFragment {
   status: number;
   profilePhotoUrl: string | null;
   coverPhotoUrl: string | null;
+  facebookUrl: string | null;
+  twitterUrl: string | null;
+  instagramUrl: string | null;
+  youtubeUrl: string | null;
+  twitchUrl: string | null;
 }
 
 /* tslint:disable */
@@ -1361,6 +1382,7 @@ export interface serviceFragment {
   description: string | null;
   price: number;
   buttonText: string | null;
+  quantity: number;
   providableType: ServiceProvidableTypeEnum | null;
   serviceType: ServiceTypeEnum;
   pricingType: ServicePricingTypeEnum;
@@ -1523,6 +1545,7 @@ export interface CreateServiceInput {
   buttonText: string;
   imageUrl?: string | null;
   description?: string | null;
+  quantity?: number | null;
   pricingType: ServicePricingTypeEnum;
   serviceType: ServiceTypeEnum;
   providableData: any;
@@ -1683,6 +1706,7 @@ export interface UpdateServiceInput {
   buttonText: string;
   imageUrl?: string | null;
   description?: string | null;
+  quantity?: number | null;
   pricingType?: ServicePricingTypeEnum | null;
   providableData?: any | null;
   clientMutationId?: string | null;

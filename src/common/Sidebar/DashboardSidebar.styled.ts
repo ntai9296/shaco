@@ -53,12 +53,15 @@ export const Avatar = styled.div`
   width: 64px;
   margin-right: 15px;
 
-  > img {
+  > div {
     width: 100%;
     height: 100%;
     border: 2px solid #fff;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
     border-radius: 50%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
   }
 `;
 export const ProfileInfo = styled.div`

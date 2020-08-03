@@ -44,9 +44,10 @@ export default () => {
           <S.Profile>
             <S.Avatar>
               {userData?.currentUser?.profile?.profilePhotoUrl ? (
-                <img
-                  alt="avatar"
-                  src={userData.currentUser.profile.profilePhotoUrl}
+                <div
+                  style={{
+                    backgroundImage: `url(${userData.currentUser.profile.profilePhotoUrl})`,
+                  }}
                 />
               ) : (
                 <S.ProfilePlaceholder>

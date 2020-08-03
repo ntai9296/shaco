@@ -37,6 +37,7 @@ export default () => {
     providableData: {
       duration: 30,
     },
+    quantity: 100,
     serviceQuestions: [],
   });
   const [errors, setErrors] = useState<string[]>([]);
@@ -103,6 +104,7 @@ export default () => {
           serviceType: service.serviceType,
           serviceQuestions: service.serviceQuestions,
           pricingType: service.pricingType,
+          quantity: service.quantity,
         },
       },
     });
@@ -309,6 +311,27 @@ export default () => {
               )}
 
               {[
+                ServiceTypeEnum.SELLING_MERCH,
+                ServiceTypeEnum.CUSTOMIZE_YOUR_OWN,
+              ].includes(service.serviceType) && (
+                <S.Row>
+                  <S.FieldGroup>
+                    <NumberFormatInput
+                      value={service.quantity || ""}
+                      onValueChange={({ floatValue }) =>
+                        onChangeService("quantity", floatValue)
+                      }
+                      allowNegative={false}
+                      placeholder="E.g: 100 available"
+                      label="Available quantity"
+                      decimalScale={0}
+                      thousandSeparator
+                    />
+                  </S.FieldGroup>
+                </S.Row>
+              )}
+
+              {[
                 ServiceTypeEnum.VIRTUAL_ONE_ON_ONE,
                 ServiceTypeEnum.VIRTUAL_GROUP_MEET_UP,
               ].includes(service.serviceType) && (
@@ -437,6 +460,7 @@ export default () => {
                   providable: service.providableData,
                   pricingType: service.pricingType,
                   serviceType: service.serviceType,
+                  quantity: service.quantity || 100,
                   providableType:
                     service.serviceType === ServiceTypeEnum.VIRTUAL_ONE_ON_ONE
                       ? ServiceProvidableTypeEnum.VIDEO_CALL_SERVICE
