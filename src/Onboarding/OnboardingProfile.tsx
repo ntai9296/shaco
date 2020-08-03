@@ -180,7 +180,7 @@ export default ({ onNext }: any) => {
 
           <S.Row>
             <S.FieldGroup>
-              <label>Profile photo / Intro video</label>
+              <label>Profile photo</label>
               <S.CustomPhotoIntroInput>
                 <input readOnly value={profile.profilePhotoUrl || ""} />
                 <a onClick={() => profilePhotoRef.current.click()}>Upload</a>

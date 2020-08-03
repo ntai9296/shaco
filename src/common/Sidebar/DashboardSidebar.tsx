@@ -110,8 +110,8 @@ export default () => {
         </S.SidebarItem>
       </Link>
 
-      <Link href="/dashboard/settings">
-        <S.SidebarItem isActive={activeRoute("/settings")}>
+      <Link href="/dashboard/setting">
+        <S.SidebarItem isActive={activeRoute("/setting")}>
           <Settings width={15} height={15} />
           Settings
         </S.SidebarItem>

@@ -33,7 +33,7 @@ const Availability = () => {
         <S.Timezone>
           Your timezone: {userData.currentUser.timezone}{" "}
           {moment.tz(userData.currentUser.timezone).format("(h:mm A)")}{" "}
-          <Link href="/dashboard/settings">
+          <Link href="/dashboard/setting">
             <a>Change</a>
           </Link>
         </S.Timezone>
