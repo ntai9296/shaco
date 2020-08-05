@@ -16,6 +16,8 @@ import {
   getBookingRescheduleQueryVariables,
   rescheduleBookingMutation,
   rescheduleBookingMutationVariables,
+  getHostBookingQueryVariables,
+  getHostBookingQuery,
 } from "../generated";
 
 export const createBooking = (
@@ -38,6 +40,14 @@ export const getBookingConfirmation = (
 ) =>
   useQuery<getBookingConfirmationQuery, getBookingConfirmationQueryVariables>(
     Booking.GET_BOOKING_CONFIRMATION_QUERY,
+    options
+  );
+
+export const getHostBooking = (
+  options?: QueryHookOptions<getHostBookingQuery, getHostBookingQueryVariables>
+) =>
+  useQuery<getHostBookingQuery, getHostBookingQueryVariables>(
+    Booking.GET_HOST_BOOKING_QUERY,
     options
   );
 

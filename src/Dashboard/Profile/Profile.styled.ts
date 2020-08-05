@@ -98,7 +98,7 @@ export const CustomURLInput = styled.div<{ URLFocus?: boolean }>`
   align-items: center;
   color: #3b3b3b;
   background-color: #fff;
-  border: 1px solid #b1b1b1;
+  border: 1px solid #d6e3eb;
   max-width: 100%;
   width: 100%;
   padding: 8px;
@@ -134,7 +134,7 @@ export const CustomPhotoIntroInput = styled.div<{ URLFocus?: boolean }>`
   align-items: center;
   color: #3b3b3b;
   background-color: #fff;
-  border: 1px solid #b1b1b1;
+  border: 1px solid #d6e3eb;
   max-width: 100%;
   width: 100%;
   padding: 8px;

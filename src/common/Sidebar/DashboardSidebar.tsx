@@ -70,7 +70,7 @@ export default () => {
       <Link href="/dashboard/requests">
         <S.SidebarItem isActive={activeRoute("/requests")}>
           <Star width={15} height={15} />
-          Requests
+          Bookings
         </S.SidebarItem>
       </Link>
 

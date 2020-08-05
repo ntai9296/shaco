@@ -8,6 +8,7 @@ import {
 } from "@apollo/client";
 import cookie from "js-cookie";
 import * as User from "./user";
+import { GET_CURRENT_USER_BOOKINGS_QUERY } from "../Booking/booking";
 import {
   getCurrentUserQuery,
   createUserMutation,
@@ -34,6 +35,8 @@ import {
   getCurrentUserOnboardingQuery,
   updateUserMutation,
   updateUserMutationVariables,
+  getCurrentUserBookingsQuery,
+  getCurrentUserBookingsQueryVariables,
 } from "../generated";
 
 export const getCurrentUser = (
@@ -178,5 +181,16 @@ export const updateUser = (
 ) =>
   useMutation<updateUserMutation, updateUserMutationVariables>(
     User.UPDATE_USER_MUTATION,
+    options
+  );
+
+export const getCurrentUserBookings = (
+  options?: QueryHookOptions<
+    getCurrentUserBookingsQuery,
+    getCurrentUserBookingsQueryVariables
+  >
+) =>
+  useQuery<getCurrentUserBookingsQuery, getCurrentUserBookingsQueryVariables>(
+    GET_CURRENT_USER_BOOKINGS_QUERY,
     options
   );

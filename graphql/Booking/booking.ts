@@ -4,6 +4,27 @@ const BOOKING_FRAGMENT = gql`
   fragment bookingFragment on Booking {
     id
     status
+    updatedAt
+  }
+`;
+
+const HOST_BOOKING_FRAGMENT = gql`
+  fragment hostBookingFragment on Booking {
+    price
+    bookingDate
+    userEmail
+    userFullName
+    providableType
+    providable {
+      ... on VideoCall {
+        id
+        duration
+      }
+    }
+    service {
+      id
+      name
+    }
   }
 `;
 
@@ -39,7 +60,6 @@ export const RESCHEDULE_BOOKING_MUTATION = gql`
   }
   ${BOOKING_FRAGMENT}
 `;
-
 
 export const GET_BOOKING_CONFIRMATION_QUERY = gql`
   query getBookingConfirmationQuery($id: ID!) {
@@ -109,4 +129,33 @@ export const GET_BOOKING_RESCHEDULE_QUERY = gql`
     }
   }
   ${BOOKING_FRAGMENT}
+`;
+
+export const GET_CURRENT_USER_BOOKINGS_QUERY = gql`
+  query getCurrentUserBookingsQuery($isHost: Boolean) {
+    currentUser {
+      id
+      bookingsConnection(isHost: $isHost) {
+        nodes {
+          ...bookingFragment
+          ...hostBookingFragment
+        }
+      }
+    }
+  }
+  ${BOOKING_FRAGMENT}
+  ${HOST_BOOKING_FRAGMENT}
+`;
+
+export const GET_HOST_BOOKING_QUERY = gql`
+  query getHostBookingQuery($id: ID!) {
+    node(id: $id) {
+      ... on Booking {
+        ...bookingFragment
+        ...hostBookingFragment
+      }
+    }
+  }
+  ${BOOKING_FRAGMENT}
+  ${HOST_BOOKING_FRAGMENT}
 `;
