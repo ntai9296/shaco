@@ -33,7 +33,7 @@ const HowItWorkSelect = styled.select`
   border-radius: 25px;
   padding: 15px 20px;
   border: 1px solid #000;
-  max-width: 300px;
+  max-width: 320px;
   width: 100%;
   font-weight: bold;
   text-align: center;
@@ -88,10 +88,6 @@ const HowItWorkContentItem = styled.div`
   ${mediaBreakpointDown("sm")} {
     margin-bottom: 0;
   }
-
-  > img {
-    margin-bottom: 25px;
-  }
 `;
 
 const ContentItemHeading = styled.div`
@@ -103,6 +99,11 @@ const ContentItemHeading = styled.div`
 const ContentItemTitle = styled.h2`
   font-size: 30px;
   margin: 0 0 25px 0;
+
+  ${mediaBreakpointDown("sm")} {
+    text-align: center;
+    margin: 15px 0 15px 0;
+  }
 `;
 
 const ContentItemDescription = styled.div`
@@ -112,6 +113,14 @@ const ContentItemDescription = styled.div`
   > b {
     font-size: 35px;
   }
+
+  ${mediaBreakpointDown("sm")} {
+    text-align: center;
+  }
+`;
+
+const Line = styled.div`
+  margin-bottom: 25px;
 
   ${mediaBreakpointDown("sm")} {
     text-align: center;
@@ -129,6 +138,7 @@ export default () => {
           onChange={(e) => setOption(e.target.value)}
         >
           <option value="0">1:1 Video Calls</option>
+          <option value="7">Answering Questions & Giving Advice</option>
           <option value="2">Personalized Messages/Shoutouts</option>
           <option value="6">Donations</option>
           <option value="4">Name Your Price</option>
@@ -144,7 +154,9 @@ export default () => {
             <HowItWorkContentRightContainer>
               <HowItWorkContentItem>
                 <ContentItemTitle>1:1 Video Calls</ContentItemTitle>
-                <img src="/line.png" />
+                <Line>
+                  <img src="/line.png" />
+                </Line>
                 <ContentItemHeading>
                   <ContentItemDescription>
                     <b>1.</b> Set your own availability, price, and call
@@ -180,7 +192,9 @@ export default () => {
             <HowItWorkContentRightContainer>
               <HowItWorkContentItem>
                 <ContentItemTitle>1:1 Video Calls</ContentItemTitle>
-                <img src="/line.png" />
+                <Line>
+                  <img src="/line.png" />
+                </Line>
                 <ContentItemHeading>
                   <ContentItemDescription>
                     <b>1.</b> Set your own price, # of attendees and class
@@ -218,7 +232,9 @@ export default () => {
                 <ContentItemTitle>
                   Personalized Messages/Shoutouts
                 </ContentItemTitle>
-                <img src="/line.png" />
+                <Line>
+                  <img src="/line.png" />
+                </Line>
                 <ContentItemHeading>
                   <ContentItemDescription>
                     • Get paid to post video shoutouts on social media (e.g.
@@ -246,7 +262,9 @@ export default () => {
             <HowItWorkContentRightContainer>
               <HowItWorkContentItem>
                 <ContentItemTitle>Name Your Price</ContentItemTitle>
-                <img src="/line.png" />
+                <Line>
+                  <img src="/line.png" />
+                </Line>
                 <ContentItemHeading>
                   <ContentItemDescription>
                     Make your services more accessible by allowing your
@@ -267,7 +285,9 @@ export default () => {
             <HowItWorkContentRightContainer>
               <HowItWorkContentItem>
                 <ContentItemTitle>Create Your Own</ContentItemTitle>
-                <img src="/line.png" />
+                <Line>
+                  <img src="/line.png" />
+                </Line>
                 <ContentItemHeading>
                   <ContentItemDescription>
                     Create your own custom services & interactions for your
@@ -288,12 +308,40 @@ export default () => {
             <HowItWorkContentRightContainer>
               <HowItWorkContentItem>
                 <ContentItemTitle>Donations</ContentItemTitle>
-                <img src="/line.png" />
+                <Line>
+                  <img src="/line.png" />
+                </Line>
                 <ContentItemHeading>
                   <ContentItemDescription>
                     Collect donations from people that follow you or use your
                     services. Securely connect donations with Stripe and cash
                     out to your account at any time.
+                  </ContentItemDescription>
+                </ContentItemHeading>
+              </HowItWorkContentItem>
+            </HowItWorkContentRightContainer>
+          </>
+        )}
+
+        {option === "7" && (
+          <>
+            <HowItWorkContentLeftContainer>
+              <img src="/qa.png" />
+            </HowItWorkContentLeftContainer>
+            <HowItWorkContentRightContainer>
+              <HowItWorkContentItem>
+                <ContentItemTitle>
+                  Answering Questions & Giving Advice
+                </ContentItemTitle>
+                <Line>
+                  <img src="/line.png" />
+                </Line>
+                <ContentItemHeading>
+                  <ContentItemDescription>
+                    Get paid to answer customer questions or give them advice.
+                    You can send your answers or advice over a text, audio
+                    message, or video recording. You can customize the price and
+                    details.
                   </ContentItemDescription>
                 </ContentItemHeading>
               </HowItWorkContentItem>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import Link from "next/link";
 import { mediaBreakpointDown } from "../src/common/utility";
@@ -164,10 +164,8 @@ const UseCaseItemBox = styled.div<{ show?: boolean }>`
   `}
 
   ${mediaBreakpointDown("md")} {
-    flex-basis: 50%;
-  }
-  ${mediaBreakpointDown("xs")} {
     flex-basis: 100%;
+    min-height: 100%;
   }
 `;
 const UseCaseItemContent = styled.div`
@@ -225,6 +223,20 @@ const UseCaseRightButton = styled.div<{ disable: boolean }>`
 
 const App = () => {
   const [step, setStep] = useState(0);
+  const carouselInterval = useRef<any>();
+
+  useEffect(() => {
+    carouselInterval.current = setInterval(() => {
+      setStep((step) => {
+        if (step === 1) {
+          return 0;
+        } else {
+          return step + 1;
+        }
+      });
+    }, 4000);
+    return () => clearInterval(carouselInterval.current);
+  }, []);
 
   return (
     <div className="container">
@@ -262,6 +274,7 @@ const App = () => {
               <UseCaseLeftButton
                 disable={step === 0}
                 onClick={() => {
+                  clearInterval(carouselInterval.current);
                   if (step === 0) {
                     return;
                   } else {
@@ -335,6 +348,7 @@ const App = () => {
               <UseCaseRightButton
                 disable={step === 1}
                 onClick={() => {
+                  clearInterval(carouselInterval.current);
                   if (step === 1) {
                     return;
                   } else {
