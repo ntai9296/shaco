@@ -25,13 +25,13 @@ export default () => {
 
   const node = data?.node as getBookingConfirmationQuery_node_Booking;
 
-  if (!node || node?.status === BookingStatusEnum.CANCELLED) {
+  if (!node || node?.status === BookingStatusEnum.Cancelled) {
     return <div>Booking not found</div>;
   }
   return (
     <S.BookingConfirmationContainer>
       <S.ConfirmationHeader>
-        {node.status === BookingStatusEnum.REQUESTED
+        {node.status === BookingStatusEnum.Requested
           ? "Booking requested!"
           : "Booking confirmed!"}
       </S.ConfirmationHeader>

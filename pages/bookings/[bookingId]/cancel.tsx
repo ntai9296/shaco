@@ -35,7 +35,7 @@ export default () => {
     return <div>Booking not found</div>;
   }
 
-  if (node.status === BookingStatusEnum.CANCELLED) {
+  if (node.status === BookingStatusEnum.Cancelled) {
     return (
       <S.BookingConfirmationContainer>
         <S.ConfirmationContainer>
