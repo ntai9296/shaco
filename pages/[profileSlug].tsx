@@ -56,6 +56,7 @@ const App = () => {
       </Head>
       <S.Body>
         <Header
+          earlyAccess={data.profile.slug === "matt"}
           avatarURL={data.profile.profilePhotoUrl || ""}
           name={data.profile.name}
         />

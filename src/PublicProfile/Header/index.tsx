@@ -5,9 +5,10 @@ import * as S from "./header.styled";
 interface Props {
   avatarURL: string;
   name: string;
+  earlyAccess?: boolean;
 }
 
-const Header = ({ avatarURL, name }: Props) => {
+const Header = ({ avatarURL, name, earlyAccess }: Props) => {
   const [open, setOpen] = useState(false);
 
   const styledOpen = open
@@ -29,6 +30,13 @@ const Header = ({ avatarURL, name }: Props) => {
                   </S.Logo>
                 </Link>
               </S.HeaderLeft>
+              {earlyAccess && (
+                <S.HeaderRight>
+                  <Link href="/early_access">
+                    <S.EarlyAccessButton>Get Early Access</S.EarlyAccessButton>
+                  </Link>
+                </S.HeaderRight>
+              )}
 
               {/* <S.HeaderRight>
                 <ul>
@@ -117,6 +125,13 @@ const Header = ({ avatarURL, name }: Props) => {
                 </S.Logo>
               </Link>
             </S.HeaderLeft>
+            {earlyAccess && (
+              <S.HeaderRight>
+                <Link href="/early_access">
+                  <S.EarlyAccessButton>Get Early Access</S.EarlyAccessButton>
+                </Link>
+              </S.HeaderRight>
+            )}
           </S.HeaderTag>
         </div>
       </div>

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { CommonButton } from "../../common/Button";
 
 export const HeaderWrapper = styled.div`
   width: 100%;
@@ -554,4 +555,13 @@ export const Logo = styled.a`
   > img {
     max-width: 125px;
   }
+`;
+
+export const EarlyAccessButton = styled(CommonButton)`
+  border-radius: 25px;
+  background: #eeeeee;
+  color: #f77f00;
+  font-weight: bold;
+  font-size: 14px;
+  padding: 15px 20px;
 `;
