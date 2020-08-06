@@ -114,6 +114,11 @@ const ContentItemDescription = styled.div`
     font-size: 35px;
   }
 
+  > span {
+    color: ${props => props.theme.primaryColor};
+    font-weight: bold;
+  }
+
   ${mediaBreakpointDown("sm")} {
     text-align: center;
   }
@@ -177,6 +182,15 @@ export default () => {
                   <ContentItemDescription>
                     <b>3.</b> Meet with anyone in the world to answer questions
                     or just have a chat.
+                  </ContentItemDescription>
+                </ContentItemHeading>
+              </HowItWorkContentItem>
+
+              <HowItWorkContentItem>
+                <ContentItemHeading>
+                  <ContentItemDescription>
+                    <span>Pro Tip:</span> this is great for mentorship, advice, teaching, and
+                    meeting new people.
                   </ContentItemDescription>
                 </ContentItemHeading>
               </HowItWorkContentItem>

@@ -177,9 +177,9 @@ export default () => {
             <ItemContent>
               <Step>3</Step>
               <ProfileTitle>Share with your audience & earn 💰.</ProfileTitle>
-              <ProfileBox>
-                <img src="/earnings.svg" />
-              </ProfileBox>
+              <ProfileServiceBox>
+                <img src="/cash_out.png" />
+              </ProfileServiceBox>
             </ItemContent>
           </ItemBox>
         </HowItWorkContentContainer>

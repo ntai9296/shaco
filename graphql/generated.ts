@@ -883,6 +883,31 @@ export interface updateServiceQuestionMutationVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: getCurrentUserSimpleQuery
+// ====================================================
+
+export interface getCurrentUserSimpleQuery_currentUser {
+  id: string;
+  email: string;
+  roles: string[];
+  timezone: string;
+  waitlisted: boolean;
+  onboarded: boolean;
+}
+
+export interface getCurrentUserSimpleQuery {
+  /**
+   * Get current user based on jwt token in header
+   */
+  currentUser: getCurrentUserSimpleQuery_currentUser | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: getCurrentUserQuery
 // ====================================================
 

@@ -7,6 +7,7 @@ import LearnAboutOurServiceSection from "../src/Landing/LearnAboutOurServiceSect
 import HowItWorkSection from "../src/Landing/HowItWorkSection";
 import CallToActionSection from "../src/Landing/CallToActionSection";
 import { ArrowLeft, ArrowRight } from "react-feather";
+import { getCurrentUserSimple } from "../graphql/User/UserAPI";
 
 const MainContainer = styled.main`
   display: flex;
@@ -222,6 +223,8 @@ const UseCaseRightButton = styled.div<{ disable: boolean }>`
 `;
 
 const App = () => {
+  const { data } = getCurrentUserSimple();
+
   const [step, setStep] = useState(0);
   const carouselInterval = useRef<any>();
 
@@ -245,9 +248,15 @@ const App = () => {
           <Brand>
             <img src="/logo.svg" />
           </Brand>
-          <Link href="/login">
-            <SignInButton flex={false}>SIGN IN</SignInButton>
-          </Link>
+          {data?.currentUser?.id ? (
+            <Link href="/dashboard">
+              <SignInButton flex={false}>DASHBOARD</SignInButton>
+            </Link>
+          ) : (
+            <Link href="/login">
+              <SignInButton flex={false}>SIGN IN</SignInButton>
+            </Link>
+          )}
         </Header>
         <HeroSection>
           <HeroLeftContainer>

@@ -37,7 +37,16 @@ import {
   updateUserMutationVariables,
   getCurrentUserBookingsQuery,
   getCurrentUserBookingsQueryVariables,
+  getCurrentUserSimpleQuery,
 } from "../generated";
+
+export const getCurrentUserSimple = (
+  options?: QueryHookOptions<getCurrentUserSimpleQuery>
+) =>
+  useQuery<getCurrentUserSimpleQuery>(
+    User.GET_CURRENT_USER_SIMPLE_QUERY,
+    options
+  );
 
 export const getCurrentUser = (
   options?:

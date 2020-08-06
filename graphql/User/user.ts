@@ -2,6 +2,19 @@ import { gql } from "@apollo/client";
 import { SERVICE_FRAGMENT } from "../Service/service";
 import { PROFILE_FRAGMENT } from "../Profile/profile";
 
+export const GET_CURRENT_USER_SIMPLE_QUERY = gql`
+  query getCurrentUserSimpleQuery {
+    currentUser {
+      id
+      email
+      roles
+      timezone
+      waitlisted
+      onboarded
+    }
+  }
+`;
+
 export const GET_CURRENT_USER_QUERY = gql`
   query getCurrentUserQuery {
     currentUser {
