@@ -15,8 +15,6 @@ phases:
     commands:
       - echo building image for $CODEBUILD_SOURCE_VERSION...
       - docker build -t $REPOSITORY_URI:latest .
-        --build-arg NEXT_PUBLIC_GRAPHQL_ENDPOINT=$NEXT_PUBLIC_GRAPHQL_ENDPOINT
-        --build-arg GRAPHQL_ENDPOINT=$GRAPHQL_ENDPOINT
       - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
   post_build:
     commands:
