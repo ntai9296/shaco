@@ -198,7 +198,7 @@ export default ({ service }: Props) => {
               onSubmit={onSubmitPaymentCheckout}
               form={form}
               onChangeForm={(newForm: any) => setForm(newForm)}
-              title="Provide booking details"
+              title="Provide your details"
               loading={loading}
               errors={errors}
               showPayment={service.price > 0}

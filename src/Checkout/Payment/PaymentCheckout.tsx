@@ -119,9 +119,9 @@ const CheckoutForm = ({
   const getPricingText = () => {
     switch (pricingType) {
       case ServicePricingTypeEnum.FREE:
-        return "Confirm Booking";
+        return "Confirm";
       case ServicePricingTypeEnum.FLEXIBLE:
-        return "Request Booking";
+        return "Request";
       default:
         return `Pay $${price / 100}`;
     }
@@ -153,24 +153,6 @@ const CheckoutForm = ({
           />
         </S.Row>
 
-        {pricingType === ServicePricingTypeEnum.FLEXIBLE && (
-          <S.Row>
-            <NumberFormatInput
-              value={form.price || ""}
-              onValueChange={({ floatValue }) =>
-                onFormChange("price", floatValue)
-              }
-              label="How much do you want to pay?"
-              prefix="$"
-              allowLeadingZeros={false}
-              allowNegative={false}
-              allowEmptyFormatting={false}
-              decimalScale={2}
-              thousandSeparator
-            />
-          </S.Row>
-        )}
-
         {form.bookingQuestions?.map((question: any, idx: number) => (
           <S.Row key={question.serviceQuestionId}>
             <Textarea
@@ -192,6 +174,24 @@ const CheckoutForm = ({
             />
           </S.Row>
         ))}
+
+        {pricingType === ServicePricingTypeEnum.FLEXIBLE && (
+          <S.Row>
+            <NumberFormatInput
+              value={form.price || ""}
+              onValueChange={({ floatValue }) =>
+                onFormChange("price", floatValue)
+              }
+              label="How much do you want to pay?"
+              prefix="$"
+              allowLeadingZeros={false}
+              allowNegative={false}
+              allowEmptyFormatting={false}
+              decimalScale={2}
+              thousandSeparator
+            />
+          </S.Row>
+        )}
 
         {(pricingType === ServicePricingTypeEnum.SIMPLE ||
           pricingType === ServicePricingTypeEnum.FLEXIBLE) && (
