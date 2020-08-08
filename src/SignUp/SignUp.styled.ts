@@ -32,7 +32,10 @@ export const Title = styled.h1`
   font-weight: 900;
   font-size: 35px;
 `;
-export const SubTitle = styled.p``;
+export const SubTitle = styled.p`
+  margin: 0 0 25px 0;
+  text-align: center;
+`;
 export const SignUpForm = styled.form``;
 export const NameRow = styled.div`
   display: flex;

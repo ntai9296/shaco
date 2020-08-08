@@ -85,10 +85,15 @@ export const getCurrentUserOnboarding = (
   );
 
 export const useUser = () => useQuery(User.GET_CURRENT_USER_QUERY);
-export const createUser = () =>
+
+export const createUser = (
+  options?: MutationHookOptions<createUserMutation, createUserMutationVariables>
+) =>
   useMutation<createUserMutation, createUserMutationVariables>(
-    User.CREATE_USER_MUTATION
+    User.CREATE_USER_MUTATION,
+    options
   );
+
 export const createHostUser = () =>
   useMutation<createHostUserMutation, createHostUserMutationVariables>(
     User.CREATE_HOST_USER_MUTATION

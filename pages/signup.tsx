@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import cookie from "js-cookie";
 import Router from "next/router";
-import moment from 'moment-timezone';
+import moment from "moment-timezone";
 import Link from "next/link";
 import * as S from "../src/SignUp/SignUp.styled";
 import Input from "../src/common/Input";
@@ -12,10 +12,7 @@ import Notification from "../src/common/Notification";
 import SimpleNavigation from "../src/common/TopNav/SimpleNavigation";
 
 export default () => {
-  const [
-    getCurrentUser,
-    { data: userData },
-  ] = UserAPI.getCurrentUserLazy();
+  const [getCurrentUser, { data: userData }] = UserAPI.getCurrentUserLazy();
 
   useEffect(() => {
     getCurrentUser();
@@ -23,6 +20,8 @@ export default () => {
 
   const [createUser, { loading, error }] = UserAPI.createUser();
   const [form, setForm] = useState({
+    firstName: "",
+    lastName: "",
     email: "",
     password: "",
     timezone: moment.tz.guess(),
@@ -39,7 +38,11 @@ export default () => {
     try {
       const result = await createUser({
         variables: {
-          input: form,
+          input: {
+            ...form,
+            firstName: form.firstName.split(" ")[0] || "",
+            lastName: form.firstName.split(" ")[1] || "",
+          },
         },
       });
 
@@ -68,18 +71,26 @@ export default () => {
     <S.Page>
       <SimpleNavigation skipUser={true} />
       <S.Layout>
-        <S.Content>
-          <S.Heading>
-            <S.Title>Become a host</S.Title>
-            <S.SubTitle>
-              Already have an account yet?{" "}
-              <Link href="/login">
-                <a>Log in</a>
-              </Link>
-            </S.SubTitle>
-          </S.Heading>
+        <S.Title>Create your account</S.Title>
+        <S.SubTitle>
+          Already have an account?{" "}
+          <Link href="/login">
+            <a>Log in</a>
+          </Link>
+        </S.SubTitle>
 
+        <S.Content>
           <S.SignUpForm onSubmit={onSubmitSignUp}>
+            <S.EmailRow>
+              <S.EmailField>
+                <Input
+                  value={form.firstName}
+                  onChange={(e) => onChangeForm("firstName", e.target.value)}
+                  label="Name"
+                  placeholder="ie: John Doe"
+                />
+              </S.EmailField>
+            </S.EmailRow>
             <S.EmailRow>
               <S.EmailField>
                 <Input
@@ -87,6 +98,7 @@ export default () => {
                   onChange={(e) => onChangeForm("email", e.target.value)}
                   type="email"
                   label="Email"
+                  placeholder="ie: johndoe@gmail.com"
                 />
               </S.EmailField>
             </S.EmailRow>
