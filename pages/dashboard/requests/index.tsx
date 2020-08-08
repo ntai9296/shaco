@@ -35,6 +35,11 @@ export default () => {
                 </S.HeaderColumn>
               </S.BookingTableHeader>
               <S.BookingTableBody>
+                {bookings.length === 0 && (
+                  <S.BookingBodyEmpty>
+                    You don't have any request at the moment.
+                  </S.BookingBodyEmpty>
+                )}
                 {bookings.map((booking) => {
                   return (
                     <Link
@@ -56,8 +61,8 @@ export default () => {
                                   "ddd, MMM D"
                                 )}{" "}
                                 at{" "}
-                                {moment(booking.bookingDate).format("h:mm A")}{" "}
-                                ({booking?.providable?.duration} mins)
+                                {moment(booking.bookingDate).format("h:mm A")} (
+                                {booking?.providable?.duration} mins)
                               </S.ServiceDescription>
                             </>
                           )}

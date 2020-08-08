@@ -26,7 +26,7 @@ export default ({ ...props }: any) => {
         fonts: [
           {
             family: "Inter",
-            src: "url(https://tryfireside.com/fonts/Inter-Medium.woff2?v=3.13)",
+            src: "url(https://dny7wsvwl2aez.cloudfront.net/fonts/Inter-Medium.woff2?v=3.13)",
             weight: "400",
           },
         ],

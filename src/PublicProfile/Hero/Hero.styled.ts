@@ -61,7 +61,7 @@ export const BannerImage = styled.div<{ avatarURL: string }>`
   width: 128px;
   height: 128px;
   position: relative;
-  background-color: #fff;
+  background-color: #f2f4f7;
 
   ${Utility.mediaBreakpointDown("xs")} {
     width: 88px;

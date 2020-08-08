@@ -13,12 +13,16 @@ import SimpleNavigation from "../src/common/TopNav/SimpleNavigation";
 
 export default () => {
   const [getCurrentUser, { data: userData }] = UserAPI.getCurrentUserLazy();
-
+  const [errors, setErrors] = useState<string[]>([]);
   useEffect(() => {
     getCurrentUser();
   }, []);
 
-  const [createUser, { loading, error }] = UserAPI.createUser();
+  const [createUser, { loading }] = UserAPI.createUser({
+    onError: (error) => {
+      setErrors([error.message]);
+    },
+  });
   const [form, setForm] = useState({
     firstName: "",
     lastName: "",
@@ -26,11 +30,6 @@ export default () => {
     password: "",
     timezone: moment.tz.guess(),
   });
-  const [errors, setErrors] = useState<string[]>([]);
-
-  useEffect(() => {
-    setErrors(error?.graphQLErrors[0]?.extensions?.messages || []);
-  }, [error]);
 
   const onSubmitSignUp = async (e: any) => {
     e.preventDefault();

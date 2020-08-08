@@ -78,6 +78,10 @@ export const HeaderColumn = styled.div<{ noPadding?: boolean; flex?: boolean }>`
 `;
 
 export const BookingTableBody = styled.div``;
+export const BookingBodyEmpty = styled.div`
+  padding: 50px 25px;
+  text-align: center;
+`;
 export const BookingTableBodyRow = styled.div`
   display: flex;
   flex-wrap: wrap;
