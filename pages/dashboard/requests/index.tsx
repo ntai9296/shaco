@@ -56,7 +56,7 @@ export default () => {
                                   "ddd, MMM D"
                                 )}{" "}
                                 at{" "}
-                                {moment(booking.bookingDate).format("hh:mm A")}{" "}
+                                {moment(booking.bookingDate).format("h:mm A")}{" "}
                                 ({booking?.providable?.duration} mins)
                               </S.ServiceDescription>
                             </>

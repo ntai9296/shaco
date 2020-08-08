@@ -2,19 +2,26 @@ import React from "react";
 import moment from "moment-timezone";
 import { useRouter } from "next/router";
 import DashboardLayout from "../../../src/common/Layout/DashboardLayout";
-import * as SBooking from "../../../src/Dashboard/Request/Request.styled";
 import * as S from "../../../src/Dashboard/Request/EditRequest.styled";
-import { getCurrentUserBookings } from "../../../graphql/User/UserAPI";
-import { getHostBookingQuery_node_Booking } from "../../../graphql/generated";
-import { ChevronRight } from "react-feather";
+import {
+  getHostBookingQuery_node_Booking,
+  getHostBookingQuery_node_Booking_bookingQuestionsConnection_nodes,
+} from "../../../graphql/generated";
+import {
+  ChevronRight,
+  MoreVertical,
+  User,
+  Calendar,
+  Clock,
+} from "react-feather";
 import Link from "next/link";
 import { getHostBooking } from "../../../graphql/Booking/BookingAPI";
 import Button from "../../../src/common/Button";
 import Input from "../../../src/common/Input";
+import Textarea from "../../../src/common/Textarea";
 
 export default () => {
   const router = useRouter();
-  console.log(router.query);
 
   const { data } = getHostBooking({
     skip: !router.query.id,
@@ -31,40 +38,75 @@ export default () => {
     return null;
   }
 
+  const bookingQuestions = (node.bookingQuestionsConnection.nodes ||
+    []) as getHostBookingQuery_node_Booking_bookingQuestionsConnection_nodes[];
+
   return (
     <DashboardLayout noContentPadding>
-      <SBooking.Layout>
-        <SBooking.LayoutContainer>
-          <SBooking.HeadingContainer>
-            <SBooking.Heading>
+      <S.Layout>
+        <S.LayoutContainer>
+          <S.HeadingContainer>
+            <S.Heading>
               <Link href="/dashboard/requests">
                 <span style={{ cursor: "pointer" }}>Requests</span>
               </Link>
               <ChevronRight />
               <span>{node.service?.name}</span>
-            </SBooking.Heading>
-            <div>
-              <Button flex={false}>Start call</Button>
-            </div>
-          </SBooking.HeadingContainer>
-          <SBooking.SectionContainer>
+            </S.Heading>
+            <S.BookingSubHeading>
+              <S.SubHeadingLeft>
+                <div>
+                  <S.StatusLabel>{node.status}</S.StatusLabel>
+                </div>
+                <div>
+                  <User size={20} /> Tai Nguyen
+                </div>
+                {node.providableType === "VideoCall" && (
+                  <>
+                    <div>
+                      <Calendar size={20} />{" "}
+                      {moment(node.bookingDate).format("ddd, MMM D")}
+                    </div>
+                    <div>
+                      <Clock size={20} />
+                      {moment(node.bookingDate).format("h:mm A")}{" > "}
+                      {moment(node.bookingDate)
+                        .add(node?.providable?.duration, "minutes")
+                        .format("h:mm A")}{" "}
+                      ({node?.providable?.duration} mins)
+                    </div>
+                  </>
+                )}
+              </S.SubHeadingLeft>
+              <S.SubHeadingRight>
+                <S.MoreButton>
+                  <MoreVertical size={20} />
+                </S.MoreButton>
+                <Button>Start Call</Button>
+              </S.SubHeadingRight>
+            </S.BookingSubHeading>
+          </S.HeadingContainer>
+
+          <S.SectionContainer>
             <S.ContentContainer>
-              <S.ContentTitle>Basic Details</S.ContentTitle>
               <S.ContentBox>
-                <S.Row>
-                  <Input label="When" />
-                </S.Row>
-                <S.Row>
-                  <Input label="Who" />
-                </S.Row>
-                <S.Row>
-                  <Input label="Who" />
-                </S.Row>
+                {bookingQuestions.map((bookingQuestion) => {
+                  return (
+                    <S.Row key={bookingQuestion.id}>
+                      <Textarea
+                        readOnly
+                        rows={3}
+                        label={bookingQuestion.question}
+                        value={bookingQuestion.answer}
+                      />
+                    </S.Row>
+                  );
+                })}
               </S.ContentBox>
             </S.ContentContainer>
-          </SBooking.SectionContainer>
-        </SBooking.LayoutContainer>
-      </SBooking.Layout>
+          </S.SectionContainer>
+        </S.LayoutContainer>
+      </S.Layout>
     </DashboardLayout>
   );
 };

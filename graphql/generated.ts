@@ -214,6 +214,19 @@ export interface getCurrentUserBookingsQuery_currentUser_bookingsConnection_node
   duration: number;
 }
 
+export interface getCurrentUserBookingsQuery_currentUser_bookingsConnection_nodes_bookingQuestionsConnection_nodes {
+  id: string;
+  question: string;
+  answer: string;
+}
+
+export interface getCurrentUserBookingsQuery_currentUser_bookingsConnection_nodes_bookingQuestionsConnection {
+  /**
+   * A list of nodes.
+   */
+  nodes: (getCurrentUserBookingsQuery_currentUser_bookingsConnection_nodes_bookingQuestionsConnection_nodes | null)[] | null;
+}
+
 export interface getCurrentUserBookingsQuery_currentUser_bookingsConnection_nodes_service {
   id: string;
   name: string | null;
@@ -229,6 +242,7 @@ export interface getCurrentUserBookingsQuery_currentUser_bookingsConnection_node
   userFullName: string;
   providableType: string | null;
   providable: getCurrentUserBookingsQuery_currentUser_bookingsConnection_nodes_providable | null;
+  bookingQuestionsConnection: getCurrentUserBookingsQuery_currentUser_bookingsConnection_nodes_bookingQuestionsConnection;
   service: getCurrentUserBookingsQuery_currentUser_bookingsConnection_nodes_service | null;
 }
 
@@ -271,6 +285,19 @@ export interface getHostBookingQuery_node_Booking_providable {
   duration: number;
 }
 
+export interface getHostBookingQuery_node_Booking_bookingQuestionsConnection_nodes {
+  id: string;
+  question: string;
+  answer: string;
+}
+
+export interface getHostBookingQuery_node_Booking_bookingQuestionsConnection {
+  /**
+   * A list of nodes.
+   */
+  nodes: (getHostBookingQuery_node_Booking_bookingQuestionsConnection_nodes | null)[] | null;
+}
+
 export interface getHostBookingQuery_node_Booking_service {
   id: string;
   name: string | null;
@@ -286,6 +313,7 @@ export interface getHostBookingQuery_node_Booking {
   userFullName: string;
   providableType: string | null;
   providable: getHostBookingQuery_node_Booking_providable | null;
+  bookingQuestionsConnection: getHostBookingQuery_node_Booking_bookingQuestionsConnection;
   service: getHostBookingQuery_node_Booking_service | null;
 }
 
@@ -1471,6 +1499,19 @@ export interface hostBookingFragment_providable {
   duration: number;
 }
 
+export interface hostBookingFragment_bookingQuestionsConnection_nodes {
+  id: string;
+  question: string;
+  answer: string;
+}
+
+export interface hostBookingFragment_bookingQuestionsConnection {
+  /**
+   * A list of nodes.
+   */
+  nodes: (hostBookingFragment_bookingQuestionsConnection_nodes | null)[] | null;
+}
+
 export interface hostBookingFragment_service {
   id: string;
   name: string | null;
@@ -1483,6 +1524,7 @@ export interface hostBookingFragment {
   userFullName: string;
   providableType: string | null;
   providable: hostBookingFragment_providable | null;
+  bookingQuestionsConnection: hostBookingFragment_bookingQuestionsConnection;
   service: hostBookingFragment_service | null;
 }
 

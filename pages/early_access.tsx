@@ -7,7 +7,8 @@ import * as Utility from "../src/common/utility";
 import Button from "../src/common/Button";
 import Notification from "../src/common/Notification";
 import SimpleNavigation from "../src/common/TopNav/SimpleNavigation";
-import moment from 'moment-timezone';
+import moment from "moment-timezone";
+import Textarea from "../src/common/Textarea";
 
 export default () => {
   const [getCurrentUser, { data: userData }] = UserAPI.getCurrentUserLazy({
@@ -50,6 +51,8 @@ export default () => {
       variables: {
         input: {
           ...form,
+          firstName: form.firstName.split(" ")[0] || "",
+          lastName: form.firstName.split(" ")[1] || "",
           timezone: moment.tz.guess(),
           referCode: Router?.query?.ref as string,
         },
@@ -92,24 +95,16 @@ export default () => {
           ) : (
             <>
               <S.SignUpForm onSubmit={onSubmitEarlyAccess}>
-                <S.NameRow>
-                  <S.FirstNameField>
+                <S.EmailRow>
+                  <S.EmailField>
                     <Input
                       value={form.firstName}
-                      onChange={(e) =>
-                        onChangeForm("firstName", e.target.value)
-                      }
-                      label="First name"
+                      onChange={(e) => onChangeForm("firstName", e.target.value)}
+                      label="Name"
+                      placeholder="ie: John Doe"
                     />
-                  </S.FirstNameField>
-                  <S.LastNameField>
-                    <Input
-                      value={form.lastName}
-                      onChange={(e) => onChangeForm("lastName", e.target.value)}
-                      label="Last name"
-                    />
-                  </S.LastNameField>
-                </S.NameRow>
+                  </S.EmailField>
+                </S.EmailRow>
                 <S.EmailRow>
                   <S.EmailField>
                     <Input
@@ -117,17 +112,20 @@ export default () => {
                       onChange={(e) => onChangeForm("email", e.target.value)}
                       type="email"
                       label="Email"
+                      placeholder="johndoe@gmail.com"
                     />
                   </S.EmailField>
                 </S.EmailRow>
                 <S.EmailRow>
                   <S.EmailField>
-                    <Input
+                    <Textarea
+                      rows={3}
                       value={form.socialMediaAccounts}
                       onChange={(e) =>
                         onChangeForm("socialMediaAccounts", e.target.value)
                       }
-                      label="Social media accounts"
+                      label="Social media accounts (Instagram, Youtube, Twitter, TikTok, etc.)"
+                      placeholder="ie IG: @johndoe, Tiktok: @johndoe, etc."
                     />
                   </S.EmailField>
                 </S.EmailRow>

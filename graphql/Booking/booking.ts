@@ -21,6 +21,13 @@ const HOST_BOOKING_FRAGMENT = gql`
         duration
       }
     }
+    bookingQuestionsConnection {
+      nodes {
+        id
+        question
+        answer
+      }
+    }
     service {
       id
       name
