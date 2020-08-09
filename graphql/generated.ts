@@ -1939,6 +1939,7 @@ export interface BookingQuestionInput {
  */
 export interface CancelBookingInput {
   bookingId: string;
+  message?: string | null;
   clientMutationId?: string | null;
 }
 

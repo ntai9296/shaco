@@ -75,10 +75,6 @@ export default ({ node }: { node: getHostBookingQuery_node_Booking }) => {
     requestCancelBooking,
     { loading: requestCancelBookingLoading },
   ] = cancelBooking({
-    onCompleted: () => {
-      setDeclineModal(false);
-      setMessageToUser("");
-    },
   });
 
   return (
@@ -177,6 +173,7 @@ export default ({ node }: { node: getHostBookingQuery_node_Booking }) => {
               variables: {
                 input: {
                   bookingId: node.id,
+                  message: messageToUser,
                 },
               },
             });

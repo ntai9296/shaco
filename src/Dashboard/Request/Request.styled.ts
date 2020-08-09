@@ -99,6 +99,7 @@ export const RequestTableBodyContent = styled.div<{
   flex?: boolean;
 }>`
   padding: 16px 20px;
+  overflow: hidden;
 
   ${(props) =>
     props.noPadding &&

@@ -1,14 +1,8 @@
 import React from "react";
-import moment from "moment-timezone";
 import { useRouter } from "next/router";
 import * as Main from "../../src/BookingComplete/Main.styled";
 import { getBookingComplete } from "../../graphql/BookingComplete/BookingCompleteAPI";
-import {
-  BookingStatusEnum,
-  getBookingCompleteQuery_node_BookingComplete,
-} from "../../graphql/generated";
-import Button from "../../src/common/Button";
-import Link from "next/link";
+import { getBookingCompleteQuery_node_BookingComplete } from "../../graphql/generated";
 
 export default () => {
   const router = useRouter();
