@@ -328,7 +328,7 @@ export default () => {
                 />
               </S.Row>
 
-              <S.Row>
+              {/* <S.Row>
                 <S.FieldGroup>
                   <Input
                     value={service.buttonText || ""}
@@ -339,7 +339,7 @@ export default () => {
                     label="Call to action text"
                   />
                 </S.FieldGroup>
-              </S.Row>
+              </S.Row> */}
             </S.NewServiceContainer>
 
             <S.NewServiceContainer>
@@ -386,7 +386,7 @@ export default () => {
                 </S.Row>
               )}
 
-              {[
+              {/* {[
                 ServiceTypeEnum.SELLING_MERCH,
                 ServiceTypeEnum.CUSTOMIZE_YOUR_OWN,
               ].includes(service.serviceType) && (
@@ -405,7 +405,7 @@ export default () => {
                     />
                   </S.FieldGroup>
                 </S.Row>
-              )}
+              )} */}
 
               {[
                 ServiceTypeEnum.VIRTUAL_ONE_ON_ONE,

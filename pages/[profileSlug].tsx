@@ -4,6 +4,7 @@ import { ThemeProvider } from "styled-components";
 import { Instagram, Facebook, Youtube, Twitter, Twitch } from "react-feather";
 import { GET_PUBLIC_PROFILE_QUERY } from "../graphql/Profile/profile";
 import { getPublicProfileBySlug } from "../graphql/Profile/ProfileAPI";
+import { getCurrentUserSimple } from "../graphql/User/UserAPI";
 import { initializeApollo } from "../lib/withApollo";
 import * as S from "../src/PublicProfile/PublicProfile.styled";
 import Header from "../src/PublicProfile/Header";
@@ -15,6 +16,7 @@ const App = () => {
   const router = useRouter();
   const { profileSlug } = router.query;
 
+  const { data: currentUserData } = getCurrentUserSimple();
   const { data } = getPublicProfileBySlug(profileSlug as string);
 
   if (!data?.profile?.id) {
@@ -56,6 +58,7 @@ const App = () => {
       </Head>
       <S.Body>
         <Header
+          showDashboardButton={!!currentUserData?.currentUser?.id}
           earlyAccess={data.profile.slug === "matt"}
           avatarURL={data.profile.profilePhotoUrl || ""}
           name={data.profile.name}

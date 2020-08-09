@@ -35,7 +35,14 @@ const Body = styled.div`
   padding: 25px;
 `;
 
-export default ({ isOpen, onClose, title, children, ...args }: any) => {
+interface Props {
+  isOpen: boolean;
+  onClose: () => void;
+  title: string;
+  children: any
+}
+
+export default ({ isOpen, onClose, title, children, ...args }: Props) => {
   return (
     <Modal
       {...args}

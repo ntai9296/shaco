@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import { mediaBreakpointDown } from "../../common/utility";
+import { mediaBreakpointDown, Styling } from "../../common/utility";
+import { CommonButton } from "../../common/Button";
 
 export const Layout = styled.div`
   padding: 0 40px 40px 40px;
@@ -43,8 +44,11 @@ export const SectionContainer = styled.section`
 export const StatusLabel = styled.div`
   border-radius: 5px;
   padding: 5px 10px;
-  background-color: ${(props) => props.theme.primaryColor};
-  color: #fff;
+  background-color: #e5eff5;
+  color: #000;
+  font-size: 14px;
+  margin-left: 10px;
+  font-weight: 500;
 `;
 
 export const BookingSubHeading = styled.div`
@@ -82,9 +86,9 @@ export const MoreButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid ${props => props.theme.primaryColor};
+  border: 1px solid ${(props) => props.theme.primaryColor};
   svg {
-    color: ${props => props.theme.primaryColor};
+    color: ${(props) => props.theme.primaryColor};
   }
 `;
 
@@ -98,10 +102,29 @@ export const ContentBox = styled.div`
   border-radius: 8px;
   background: #fff;
   padding: 16px 20px;
+
+  > h4 {
+    margin-top: 0;
+  }
+`;
+
+export const ActionBody = styled.div``;
+
+export const CustomerBox = styled(ContentBox)`
+  flex-basis: 35%;
 `;
 
 export const Row = styled.div`
   margin-bottom: 15px;
+`;
+
+export const InfoRow = styled.div`
+  display: flex;
+  align-items: center;
+
+  > span {
+    margin-right: 20px;
+  }
 `;
 
 export const FieldGroup = styled.div`
@@ -111,4 +134,19 @@ export const FieldGroup = styled.div`
   > label {
     margin-bottom: 8px;
   }
+`;
+
+export const DangerButton = styled(CommonButton)`
+  background: #fff;
+  color: ${Styling.dangerColor};
+`;
+
+export const RescheduleButton = styled(CommonButton)`
+  color: ${Styling.blueColor};
+  background: #fff;
+`;
+
+export const PrimaryButton = styled(CommonButton)`
+  color: #fff;
+  background: ${Styling.primaryColor};
 `;

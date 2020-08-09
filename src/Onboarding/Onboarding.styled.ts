@@ -42,9 +42,9 @@ export const HeaderBackContainer = styled.div`
   }
 
   ${mediaBreakpointDown("xs")} {
-   flex-basis: 100%;
-   position: relative;
-   margin-bottom: 15px;
+    flex-basis: 100%;
+    position: relative;
+    margin-bottom: 15px;
   }
 `;
 export const HeaderStepContainer = styled.div`
@@ -53,8 +53,7 @@ export const HeaderStepContainer = styled.div`
 `;
 export const Step = styled.div<{ active?: boolean; checked?: boolean }>`
   background: #fff;
-  color: ${(props) =>
-    props.theme.primaryColor};
+  color: ${(props) => props.theme.primaryColor};
   border-radius: 8px;
   font-weight: bold;
   font-size: 16px;
@@ -64,8 +63,7 @@ export const Step = styled.div<{ active?: boolean; checked?: boolean }>`
   align-items: center;
   justify-content: center;
   margin-right: 10px;
-  border: 1px solid
-    ${(props) => props.theme.primaryColor};
+  border: 1px solid ${(props) => props.theme.primaryColor};
   cursor: pointer;
 
   ${(props) =>
@@ -122,3 +120,14 @@ export const Row = styled.div`
   margin-bottom: 15px;
 `;
 export const Field = styled.div``;
+
+export const AddServiceButton = styled.button`
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+  padding: 0;
+  margin-left: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;

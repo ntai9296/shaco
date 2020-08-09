@@ -6,9 +6,15 @@ interface Props {
   avatarURL: string;
   name: string;
   earlyAccess?: boolean;
+  showDashboardButton?: boolean;
 }
 
-const Header = ({ avatarURL, name, earlyAccess }: Props) => {
+const Header = ({
+  avatarURL,
+  name,
+  earlyAccess,
+  showDashboardButton,
+}: Props) => {
   const [open, setOpen] = useState(false);
 
   const styledOpen = open
@@ -34,6 +40,13 @@ const Header = ({ avatarURL, name, earlyAccess }: Props) => {
                 <S.HeaderRight>
                   <Link href="/early_access">
                     <S.EarlyAccessButton>Get Early Access</S.EarlyAccessButton>
+                  </Link>
+                </S.HeaderRight>
+              )}
+              {showDashboardButton && (
+                <S.HeaderRight>
+                  <Link href="/dashboard">
+                    <S.EarlyAccessButton>Dashboard</S.EarlyAccessButton>
                   </Link>
                 </S.HeaderRight>
               )}
@@ -129,6 +142,13 @@ const Header = ({ avatarURL, name, earlyAccess }: Props) => {
               <S.HeaderRight>
                 <Link href="/early_access">
                   <S.EarlyAccessButton>Get Early Access</S.EarlyAccessButton>
+                </Link>
+              </S.HeaderRight>
+            )}
+            {showDashboardButton && (
+              <S.HeaderRight>
+                <Link href="/dashboard">
+                  <S.EarlyAccessButton>Dashboard</S.EarlyAccessButton>
                 </Link>
               </S.HeaderRight>
             )}

@@ -6,19 +6,18 @@ import * as S from "../../../src/Dashboard/Request/EditRequest.styled";
 import {
   getHostBookingQuery_node_Booking,
   getHostBookingQuery_node_Booking_bookingQuestionsConnection_nodes,
+  ServiceTypeEnum,
+  BookingStatusEnum,
 } from "../../../graphql/generated";
-import {
-  ChevronRight,
-  MoreVertical,
-  User,
-  Calendar,
-  Clock,
-} from "react-feather";
+import { ChevronRight, Calendar, Clock, CreditCard } from "react-feather";
 import Link from "next/link";
 import { getHostBooking } from "../../../graphql/Booking/BookingAPI";
-import Button from "../../../src/common/Button";
-import Input from "../../../src/common/Input";
 import Textarea from "../../../src/common/Textarea";
+import Input from "../../../src/common/Input";
+import VirtualOneOnOne from "../../../src/Dashboard/Request/ActionBody/VirtualOneOnOne";
+import Custom from "../../../src/Dashboard/Request/ActionBody/Custom";
+import CustomCompleteResult from "../../../src/Dashboard/Request/CompleteBody/Custom";
+import Notification from "../../../src/common/Notification";
 
 export default () => {
   const router = useRouter();
@@ -30,13 +29,80 @@ export default () => {
     },
   });
 
-  console.log(data);
-
   const node = data?.node as getHostBookingQuery_node_Booking | null;
 
   if (!node) {
     return null;
   }
+
+  const renderActionBody = () => {
+    switch (node.service?.serviceType) {
+      case ServiceTypeEnum.VIRTUAL_ONE_ON_ONE:
+        return <VirtualOneOnOne node={node} />;
+      default:
+        return <Custom node={node} />;
+    }
+  };
+
+  const renderSubHeading = () => {
+    switch (node.service?.serviceType) {
+      case ServiceTypeEnum.VIRTUAL_ONE_ON_ONE:
+        return (
+          <>
+            {node.status !== BookingStatusEnum.Cancelled && (
+              <div>
+                <CreditCard size={20} />{" "}
+                {node.price > 0 ? `$${node.price / 100}` : "Free"}
+              </div>
+            )}
+            {node.status === BookingStatusEnum.RESCHEDULE_REQUESTED && (
+              <div>
+                <Calendar size={20} /> Rescheduled
+              </div>
+            )}
+            {[BookingStatusEnum.Active, BookingStatusEnum.Completed].includes(
+              node.status
+            ) && (
+              <>
+                <div>
+                  <Calendar size={20} />{" "}
+                  {moment(node.bookingDate).format("ddd, MMM D")}
+                </div>
+                <div>
+                  <Clock size={20} />
+                  {moment(node.bookingDate).format("h:mm A")}
+                  {" > "}
+                  {moment(node.bookingDate)
+                    .add(node?.providable?.duration, "minutes")
+                    .format("h:mm A")}{" "}
+                  ({node?.providable?.duration} mins)
+                </div>
+              </>
+            )}
+          </>
+        );
+      default:
+        return (
+          <>
+            {node.status !== BookingStatusEnum.Cancelled && (
+              <div>
+                <CreditCard size={20} />{" "}
+                {node.price > 0 ? `$${node.price / 100}` : "Free"}
+              </div>
+            )}
+          </>
+        );
+    }
+  };
+
+  const renderResultsBody = () => {
+    switch (node.service?.serviceType) {
+      case ServiceTypeEnum.VIRTUAL_ONE_ON_ONE:
+        return null;
+      default:
+        return <CustomCompleteResult node={node} />;
+    }
+  };
 
   const bookingQuestions = (node.bookingQuestionsConnection.nodes ||
     []) as getHostBookingQuery_node_Booking_bookingQuestionsConnection_nodes[];
@@ -48,48 +114,44 @@ export default () => {
           <S.HeadingContainer>
             <S.Heading>
               <Link href="/dashboard/requests">
-                <span style={{ cursor: "pointer" }}>Requests</span>
+                <span
+                  style={{ cursor: "pointer", textDecoration: "underline" }}
+                >
+                  Requests
+                </span>
               </Link>
               <ChevronRight />
-              <span>{node.service?.name}</span>
+              <span>{node.service?.name} </span>
+              <S.StatusLabel>{node.status}</S.StatusLabel>
             </S.Heading>
             <S.BookingSubHeading>
-              <S.SubHeadingLeft>
-                <div>
-                  <S.StatusLabel>{node.status}</S.StatusLabel>
-                </div>
-                <div>
-                  <User size={20} /> Tai Nguyen
-                </div>
-                {node.providableType === "VideoCall" && (
-                  <>
-                    <div>
-                      <Calendar size={20} />{" "}
-                      {moment(node.bookingDate).format("ddd, MMM D")}
-                    </div>
-                    <div>
-                      <Clock size={20} />
-                      {moment(node.bookingDate).format("h:mm A")}{" > "}
-                      {moment(node.bookingDate)
-                        .add(node?.providable?.duration, "minutes")
-                        .format("h:mm A")}{" "}
-                      ({node?.providable?.duration} mins)
-                    </div>
-                  </>
-                )}
-              </S.SubHeadingLeft>
-              <S.SubHeadingRight>
-                <S.MoreButton>
-                  <MoreVertical size={20} />
-                </S.MoreButton>
-                <Button>Start Call</Button>
-              </S.SubHeadingRight>
+              <S.SubHeadingLeft>{renderSubHeading()}</S.SubHeadingLeft>
             </S.BookingSubHeading>
           </S.HeadingContainer>
+
+          {node.status === BookingStatusEnum.Cancelled && (
+            <S.SectionContainer>
+              <S.ContentContainer>
+                <Notification
+                  type="success"
+                  notifications={[
+                    `We have sent an email to ${node.userFullName} letting them know the request is cancelled. No action is required from you.`,
+                  ]}
+                />
+              </S.ContentContainer>
+            </S.SectionContainer>
+          )}
 
           <S.SectionContainer>
             <S.ContentContainer>
               <S.ContentBox>
+                <h4>Request Information</h4>
+                <S.Row>
+                  <Input readOnly label="Full name" value={node.userFullName} />
+                </S.Row>
+                <S.Row>
+                  <Input readOnly label="Email" value={node.userEmail} />
+                </S.Row>
                 {bookingQuestions.map((bookingQuestion) => {
                   return (
                     <S.Row key={bookingQuestion.id}>
@@ -105,6 +167,32 @@ export default () => {
               </S.ContentBox>
             </S.ContentContainer>
           </S.SectionContainer>
+
+          {![BookingStatusEnum.Cancelled, BookingStatusEnum.Completed].includes(
+            node.status
+          ) && (
+            <S.SectionContainer>
+              <S.ContentContainer>
+                <S.ContentBox>
+                  <h4>Request Action</h4>
+                  <S.ActionBody>{renderActionBody()}</S.ActionBody>
+                </S.ContentBox>
+              </S.ContentContainer>
+            </S.SectionContainer>
+          )}
+
+          {BookingStatusEnum.Completed === node.status &&
+            node.service?.serviceType !==
+              ServiceTypeEnum.VIRTUAL_ONE_ON_ONE && (
+              <S.SectionContainer>
+                <S.ContentContainer>
+                  <S.ContentBox>
+                    <h4>Completed Response</h4>
+                    <S.ActionBody>{renderResultsBody()}</S.ActionBody>
+                  </S.ContentBox>
+                </S.ContentContainer>
+              </S.SectionContainer>
+            )}
         </S.LayoutContainer>
       </S.Layout>
     </DashboardLayout>

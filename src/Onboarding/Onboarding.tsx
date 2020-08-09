@@ -6,7 +6,7 @@ import {
   changeUserPassword,
 } from "../../graphql/User/UserAPI";
 import * as S from "./Onboarding.styled";
-import { ArrowLeft, PlusCircle, Check } from "react-feather";
+import { ArrowLeft, PlusCircle, Check, Plus } from "react-feather";
 import Input from "../common/Input";
 import Button from "../common/Button";
 import Notification from "../common/Notification";
@@ -59,9 +59,9 @@ export default () => {
               <S.ServicesHeading>
                 Your services
                 <Link href="/dashboard/services/new">
-                  <a>
-                    <PlusCircle size={30} />
-                  </a>
+                  <S.AddServiceButton>
+                    <Plus size={26} />
+                  </S.AddServiceButton>
                 </Link>
               </S.ServicesHeading>
             </S.HeadingContainer>

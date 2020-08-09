@@ -66,6 +66,16 @@ export default () => {
                               </S.ServiceDescription>
                             </>
                           )}
+                          {booking.providableType !== "VideoCall" && (
+                            <>
+                              <S.ServiceName>
+                                {booking.service?.name}
+                              </S.ServiceName>
+                              <S.ServiceDescription>
+                                {booking.userFullName} - {booking.userEmail}
+                              </S.ServiceDescription>
+                            </>
+                          )}
                         </S.RequestTableBodyContent>
                         <S.RequestTableBodyContent style={{ width: 125 }}>
                           {booking.price > 0

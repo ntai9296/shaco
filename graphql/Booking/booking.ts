@@ -8,6 +8,14 @@ const BOOKING_FRAGMENT = gql`
   }
 `;
 
+const BOOKING_COMPLETE_FRAGMENT = gql`
+  fragment bookingCompleteFragment on BookingComplete {
+    id
+    message
+    attachments
+  }
+`;
+
 const HOST_BOOKING_FRAGMENT = gql`
   fragment hostBookingFragment on Booking {
     price
@@ -31,8 +39,13 @@ const HOST_BOOKING_FRAGMENT = gql`
     service {
       id
       name
+      serviceType
+    }
+    bookingComplete {
+      ...bookingCompleteFragment
     }
   }
+  ${BOOKING_COMPLETE_FRAGMENT}
 `;
 
 export const CREATE_BOOKING_MUTATION = gql`
@@ -165,4 +178,54 @@ export const GET_HOST_BOOKING_QUERY = gql`
   }
   ${BOOKING_FRAGMENT}
   ${HOST_BOOKING_FRAGMENT}
+`;
+
+export const GET_HOST_BOOKING_ZOOM_START_URL_QUERY = gql`
+  query getHostBookingZoomStartUrlQuery($id: ID!) {
+    node(id: $id) {
+      ... on Booking {
+        ...bookingFragment
+        providable {
+          ... on VideoCall {
+            id
+            duration
+            zoomStartUrl
+          }
+        }
+      }
+    }
+  }
+  ${BOOKING_FRAGMENT}
+`;
+
+export const REQUEST_RESCHEDULE_BOOKING_MUTATION = gql`
+  mutation requestRescheduleBookingMutation(
+    $input: RequestRescheduleBookingInput!
+  ) {
+    requestRescheduleBooking(input: $input) {
+      booking {
+        ...bookingFragment
+        ...hostBookingFragment
+      }
+    }
+  }
+  ${BOOKING_FRAGMENT}
+  ${HOST_BOOKING_FRAGMENT}
+`;
+
+export const CREATE_BOOKING_COMPLETE_MUTATION = gql`
+  mutation createBookingCompleteMutation($input: CreateBookingCompleteInput!) {
+    createBookingComplete(input: $input) {
+      booking {
+        ...bookingFragment
+        ...hostBookingFragment
+      }
+      bookingComplete {
+        ...bookingCompleteFragment
+      }
+    }
+  }
+  ${BOOKING_FRAGMENT}
+  ${HOST_BOOKING_FRAGMENT}
+  ${BOOKING_COMPLETE_FRAGMENT}
 `;

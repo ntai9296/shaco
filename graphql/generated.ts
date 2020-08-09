@@ -9,7 +9,7 @@
 
 export interface createBookingMutation_createBooking_booking {
   id: string;
-  status: BookingStatusEnum | null;
+  status: BookingStatusEnum;
   updatedAt: any;
 }
 
@@ -36,7 +36,7 @@ export interface createBookingMutationVariables {
 
 export interface cancelBookingMutation_cancelBooking_booking {
   id: string;
-  status: BookingStatusEnum | null;
+  status: BookingStatusEnum;
   updatedAt: any;
 }
 
@@ -63,7 +63,7 @@ export interface cancelBookingMutationVariables {
 
 export interface rescheduleBookingMutation_rescheduleBooking_booking {
   id: string;
-  status: BookingStatusEnum | null;
+  status: BookingStatusEnum;
   updatedAt: any;
 }
 
@@ -88,7 +88,7 @@ export interface rescheduleBookingMutationVariables {
 // GraphQL query operation: getBookingConfirmationQuery
 // ====================================================
 
-export interface getBookingConfirmationQuery_node_CalendarEvent {}
+export interface getBookingConfirmationQuery_node_BookingComplete {}
 
 export interface getBookingConfirmationQuery_node_Booking_providable {
   id: string;
@@ -111,7 +111,7 @@ export interface getBookingConfirmationQuery_node_Booking_service {
 
 export interface getBookingConfirmationQuery_node_Booking {
   id: string;
-  status: BookingStatusEnum | null;
+  status: BookingStatusEnum;
   updatedAt: any;
   price: number;
   bookingDate: any;
@@ -122,7 +122,7 @@ export interface getBookingConfirmationQuery_node_Booking {
   service: getBookingConfirmationQuery_node_Booking_service | null;
 }
 
-export type getBookingConfirmationQuery_node = getBookingConfirmationQuery_node_CalendarEvent | getBookingConfirmationQuery_node_Booking;
+export type getBookingConfirmationQuery_node = getBookingConfirmationQuery_node_BookingComplete | getBookingConfirmationQuery_node_Booking;
 
 export interface getBookingConfirmationQuery {
   /**
@@ -144,7 +144,7 @@ export interface getBookingConfirmationQueryVariables {
 // GraphQL query operation: getBookingRescheduleQuery
 // ====================================================
 
-export interface getBookingRescheduleQuery_node_CalendarEvent {}
+export interface getBookingRescheduleQuery_node_BookingComplete {}
 
 export interface getBookingRescheduleQuery_node_Booking_providable {
   id: string;
@@ -175,7 +175,7 @@ export interface getBookingRescheduleQuery_node_Booking_service {
 
 export interface getBookingRescheduleQuery_node_Booking {
   id: string;
-  status: BookingStatusEnum | null;
+  status: BookingStatusEnum;
   updatedAt: any;
   price: number;
   bookingDate: any;
@@ -186,7 +186,7 @@ export interface getBookingRescheduleQuery_node_Booking {
   service: getBookingRescheduleQuery_node_Booking_service | null;
 }
 
-export type getBookingRescheduleQuery_node = getBookingRescheduleQuery_node_CalendarEvent | getBookingRescheduleQuery_node_Booking;
+export type getBookingRescheduleQuery_node = getBookingRescheduleQuery_node_BookingComplete | getBookingRescheduleQuery_node_Booking;
 
 export interface getBookingRescheduleQuery {
   /**
@@ -230,11 +230,18 @@ export interface getCurrentUserBookingsQuery_currentUser_bookingsConnection_node
 export interface getCurrentUserBookingsQuery_currentUser_bookingsConnection_nodes_service {
   id: string;
   name: string | null;
+  serviceType: ServiceTypeEnum;
+}
+
+export interface getCurrentUserBookingsQuery_currentUser_bookingsConnection_nodes_bookingComplete {
+  id: string;
+  message: string;
+  attachments: string[];
 }
 
 export interface getCurrentUserBookingsQuery_currentUser_bookingsConnection_nodes {
   id: string;
-  status: BookingStatusEnum | null;
+  status: BookingStatusEnum;
   updatedAt: any;
   price: number;
   bookingDate: any;
@@ -244,6 +251,7 @@ export interface getCurrentUserBookingsQuery_currentUser_bookingsConnection_node
   providable: getCurrentUserBookingsQuery_currentUser_bookingsConnection_nodes_providable | null;
   bookingQuestionsConnection: getCurrentUserBookingsQuery_currentUser_bookingsConnection_nodes_bookingQuestionsConnection;
   service: getCurrentUserBookingsQuery_currentUser_bookingsConnection_nodes_service | null;
+  bookingComplete: getCurrentUserBookingsQuery_currentUser_bookingsConnection_nodes_bookingComplete | null;
 }
 
 export interface getCurrentUserBookingsQuery_currentUser_bookingsConnection {
@@ -278,7 +286,7 @@ export interface getCurrentUserBookingsQueryVariables {
 // GraphQL query operation: getHostBookingQuery
 // ====================================================
 
-export interface getHostBookingQuery_node_CalendarEvent {}
+export interface getHostBookingQuery_node_BookingComplete {}
 
 export interface getHostBookingQuery_node_Booking_providable {
   id: string;
@@ -301,11 +309,18 @@ export interface getHostBookingQuery_node_Booking_bookingQuestionsConnection {
 export interface getHostBookingQuery_node_Booking_service {
   id: string;
   name: string | null;
+  serviceType: ServiceTypeEnum;
+}
+
+export interface getHostBookingQuery_node_Booking_bookingComplete {
+  id: string;
+  message: string;
+  attachments: string[];
 }
 
 export interface getHostBookingQuery_node_Booking {
   id: string;
-  status: BookingStatusEnum | null;
+  status: BookingStatusEnum;
   updatedAt: any;
   price: number;
   bookingDate: any;
@@ -315,9 +330,10 @@ export interface getHostBookingQuery_node_Booking {
   providable: getHostBookingQuery_node_Booking_providable | null;
   bookingQuestionsConnection: getHostBookingQuery_node_Booking_bookingQuestionsConnection;
   service: getHostBookingQuery_node_Booking_service | null;
+  bookingComplete: getHostBookingQuery_node_Booking_bookingComplete | null;
 }
 
-export type getHostBookingQuery_node = getHostBookingQuery_node_CalendarEvent | getHostBookingQuery_node_Booking;
+export type getHostBookingQuery_node = getHostBookingQuery_node_BookingComplete | getHostBookingQuery_node_Booking;
 
 export interface getHostBookingQuery {
   /**
@@ -328,6 +344,182 @@ export interface getHostBookingQuery {
 
 export interface getHostBookingQueryVariables {
   id: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: getHostBookingZoomStartUrlQuery
+// ====================================================
+
+export interface getHostBookingZoomStartUrlQuery_node_BookingComplete {}
+
+export interface getHostBookingZoomStartUrlQuery_node_Booking_providable {
+  id: string;
+  duration: number;
+  zoomStartUrl: string;
+}
+
+export interface getHostBookingZoomStartUrlQuery_node_Booking {
+  id: string;
+  status: BookingStatusEnum;
+  updatedAt: any;
+  providable: getHostBookingZoomStartUrlQuery_node_Booking_providable | null;
+}
+
+export type getHostBookingZoomStartUrlQuery_node = getHostBookingZoomStartUrlQuery_node_BookingComplete | getHostBookingZoomStartUrlQuery_node_Booking;
+
+export interface getHostBookingZoomStartUrlQuery {
+  /**
+   * Fetches an object given its ID.
+   */
+  node: getHostBookingZoomStartUrlQuery_node | null;
+}
+
+export interface getHostBookingZoomStartUrlQueryVariables {
+  id: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: requestRescheduleBookingMutation
+// ====================================================
+
+export interface requestRescheduleBookingMutation_requestRescheduleBooking_booking_providable {
+  id: string;
+  duration: number;
+}
+
+export interface requestRescheduleBookingMutation_requestRescheduleBooking_booking_bookingQuestionsConnection_nodes {
+  id: string;
+  question: string;
+  answer: string;
+}
+
+export interface requestRescheduleBookingMutation_requestRescheduleBooking_booking_bookingQuestionsConnection {
+  /**
+   * A list of nodes.
+   */
+  nodes: (requestRescheduleBookingMutation_requestRescheduleBooking_booking_bookingQuestionsConnection_nodes | null)[] | null;
+}
+
+export interface requestRescheduleBookingMutation_requestRescheduleBooking_booking_service {
+  id: string;
+  name: string | null;
+  serviceType: ServiceTypeEnum;
+}
+
+export interface requestRescheduleBookingMutation_requestRescheduleBooking_booking_bookingComplete {
+  id: string;
+  message: string;
+  attachments: string[];
+}
+
+export interface requestRescheduleBookingMutation_requestRescheduleBooking_booking {
+  id: string;
+  status: BookingStatusEnum;
+  updatedAt: any;
+  price: number;
+  bookingDate: any;
+  userEmail: string;
+  userFullName: string;
+  providableType: string | null;
+  providable: requestRescheduleBookingMutation_requestRescheduleBooking_booking_providable | null;
+  bookingQuestionsConnection: requestRescheduleBookingMutation_requestRescheduleBooking_booking_bookingQuestionsConnection;
+  service: requestRescheduleBookingMutation_requestRescheduleBooking_booking_service | null;
+  bookingComplete: requestRescheduleBookingMutation_requestRescheduleBooking_booking_bookingComplete | null;
+}
+
+export interface requestRescheduleBookingMutation_requestRescheduleBooking {
+  booking: requestRescheduleBookingMutation_requestRescheduleBooking_booking | null;
+}
+
+export interface requestRescheduleBookingMutation {
+  requestRescheduleBooking: requestRescheduleBookingMutation_requestRescheduleBooking | null;
+}
+
+export interface requestRescheduleBookingMutationVariables {
+  input: RequestRescheduleBookingInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: createBookingCompleteMutation
+// ====================================================
+
+export interface createBookingCompleteMutation_createBookingComplete_booking_providable {
+  id: string;
+  duration: number;
+}
+
+export interface createBookingCompleteMutation_createBookingComplete_booking_bookingQuestionsConnection_nodes {
+  id: string;
+  question: string;
+  answer: string;
+}
+
+export interface createBookingCompleteMutation_createBookingComplete_booking_bookingQuestionsConnection {
+  /**
+   * A list of nodes.
+   */
+  nodes: (createBookingCompleteMutation_createBookingComplete_booking_bookingQuestionsConnection_nodes | null)[] | null;
+}
+
+export interface createBookingCompleteMutation_createBookingComplete_booking_service {
+  id: string;
+  name: string | null;
+  serviceType: ServiceTypeEnum;
+}
+
+export interface createBookingCompleteMutation_createBookingComplete_booking_bookingComplete {
+  id: string;
+  message: string;
+  attachments: string[];
+}
+
+export interface createBookingCompleteMutation_createBookingComplete_booking {
+  id: string;
+  status: BookingStatusEnum;
+  updatedAt: any;
+  price: number;
+  bookingDate: any;
+  userEmail: string;
+  userFullName: string;
+  providableType: string | null;
+  providable: createBookingCompleteMutation_createBookingComplete_booking_providable | null;
+  bookingQuestionsConnection: createBookingCompleteMutation_createBookingComplete_booking_bookingQuestionsConnection;
+  service: createBookingCompleteMutation_createBookingComplete_booking_service | null;
+  bookingComplete: createBookingCompleteMutation_createBookingComplete_booking_bookingComplete | null;
+}
+
+export interface createBookingCompleteMutation_createBookingComplete_bookingComplete {
+  id: string;
+  message: string;
+  attachments: string[];
+}
+
+export interface createBookingCompleteMutation_createBookingComplete {
+  booking: createBookingCompleteMutation_createBookingComplete_booking | null;
+  bookingComplete: createBookingCompleteMutation_createBookingComplete_bookingComplete | null;
+}
+
+export interface createBookingCompleteMutation {
+  createBookingComplete: createBookingCompleteMutation_createBookingComplete | null;
+}
+
+export interface createBookingCompleteMutationVariables {
+  input: CreateBookingCompleteInput;
 }
 
 /* tslint:disable */
@@ -1481,8 +1673,23 @@ export interface updateUserMutationVariables {
 
 export interface bookingFragment {
   id: string;
-  status: BookingStatusEnum | null;
+  status: BookingStatusEnum;
   updatedAt: any;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL fragment: bookingCompleteFragment
+// ====================================================
+
+export interface bookingCompleteFragment {
+  id: string;
+  message: string;
+  attachments: string[];
 }
 
 /* tslint:disable */
@@ -1515,6 +1722,13 @@ export interface hostBookingFragment_bookingQuestionsConnection {
 export interface hostBookingFragment_service {
   id: string;
   name: string | null;
+  serviceType: ServiceTypeEnum;
+}
+
+export interface hostBookingFragment_bookingComplete {
+  id: string;
+  message: string;
+  attachments: string[];
 }
 
 export interface hostBookingFragment {
@@ -1526,6 +1740,7 @@ export interface hostBookingFragment {
   providable: hostBookingFragment_providable | null;
   bookingQuestionsConnection: hostBookingFragment_bookingQuestionsConnection;
   service: hostBookingFragment_service | null;
+  bookingComplete: hostBookingFragment_bookingComplete | null;
 }
 
 /* tslint:disable */
@@ -1621,6 +1836,7 @@ export enum BookingStatusEnum {
   Active = "Active",
   Cancelled = "Cancelled",
   Completed = "Completed",
+  RESCHEDULE_REQUESTED = "RESCHEDULE_REQUESTED",
   Requested = "Requested",
 }
 
@@ -1683,6 +1899,16 @@ export interface CancelBookingInput {
 export interface ChangeUserPasswordInput {
   currentPassword?: string | null;
   newPassword: string;
+  clientMutationId?: string | null;
+}
+
+/**
+ * Autogenerated input type of CreateBookingComplete
+ */
+export interface CreateBookingCompleteInput {
+  bookingId: string;
+  message: string;
+  attachments: string[];
   clientMutationId?: string | null;
 }
 
@@ -1845,6 +2071,15 @@ export interface RequestEarlyAccessInput {
   socialMediaAccounts: string;
   timezone?: string | null;
   referCode?: string | null;
+  clientMutationId?: string | null;
+}
+
+/**
+ * Autogenerated input type of RequestRescheduleBooking
+ */
+export interface RequestRescheduleBookingInput {
+  bookingId: string;
+  messageToUser?: string | null;
   clientMutationId?: string | null;
 }
 

@@ -24,6 +24,7 @@ export const Styling = {
 
   successColor: "#4caf50",
 
+  blueColor: "#0967d2",
   dangerColor: "#d64545",
   backgroundColor: "rgb(247, 247, 248)",
 

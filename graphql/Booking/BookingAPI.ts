@@ -3,6 +3,7 @@ import {
   MutationHookOptions,
   useQuery,
   QueryHookOptions,
+  useLazyQuery,
 } from "@apollo/client";
 import * as Booking from "./booking";
 import {
@@ -18,6 +19,12 @@ import {
   rescheduleBookingMutationVariables,
   getHostBookingQueryVariables,
   getHostBookingQuery,
+  getHostBookingZoomStartUrlQuery,
+  getHostBookingZoomStartUrlQueryVariables,
+  requestRescheduleBookingMutation,
+  requestRescheduleBookingMutationVariables,
+  createBookingCompleteMutation,
+  createBookingCompleteMutationVariables,
 } from "../generated";
 
 export const createBooking = (
@@ -51,6 +58,17 @@ export const getHostBooking = (
     options
   );
 
+export const getHostBookingZoomStartURL = (
+  options?: QueryHookOptions<
+    getHostBookingZoomStartUrlQuery,
+    getHostBookingZoomStartUrlQueryVariables
+  >
+) =>
+  useLazyQuery<
+    getHostBookingZoomStartUrlQuery,
+    getHostBookingZoomStartUrlQueryVariables
+  >(Booking.GET_HOST_BOOKING_ZOOM_START_URL_QUERY, options);
+
 export const getBookingReschedule = (
   options?:
     | QueryHookOptions<
@@ -65,9 +83,10 @@ export const getBookingReschedule = (
   );
 
 export const cancelBooking = (
-  options?:
-    | MutationHookOptions<cancelBookingMutation, cancelBookingMutationVariables>
-    | undefined
+  options?: MutationHookOptions<
+    cancelBookingMutation,
+    cancelBookingMutationVariables
+  >
 ) =>
   useMutation<cancelBookingMutation, cancelBookingMutationVariables>(
     Booking.CANCEL_BOOKING_MUTATION,
@@ -86,3 +105,25 @@ export const rescheduleBooking = (
     Booking.RESCHEDULE_BOOKING_MUTATION,
     options
   );
+
+export const requestRescheduleBooking = (
+  options?: MutationHookOptions<
+    requestRescheduleBookingMutation,
+    requestRescheduleBookingMutationVariables
+  >
+) =>
+  useMutation<
+    requestRescheduleBookingMutation,
+    requestRescheduleBookingMutationVariables
+  >(Booking.REQUEST_RESCHEDULE_BOOKING_MUTATION, options);
+
+export const createBookingComplete = (
+  options?: MutationHookOptions<
+    createBookingCompleteMutation,
+    createBookingCompleteMutationVariables
+  >
+) =>
+  useMutation<
+    createBookingCompleteMutation,
+    createBookingCompleteMutationVariables
+  >(Booking.CREATE_BOOKING_COMPLETE_MUTATION, options);

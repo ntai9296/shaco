@@ -170,9 +170,9 @@ export default () => {
                     <option value={ServiceTypeEnum.VIRTUAL_ONE_ON_ONE}>
                       Virtual 1:1 Video Calls
                     </option>
-                    <option value={ServiceTypeEnum.VIRTUAL_GROUP_MEET_UP}>
+                    {/* <option value={ServiceTypeEnum.VIRTUAL_GROUP_MEET_UP}>
                       Virtual Group Video Calls
-                    </option>
+                    </option> */}
                     <option value={ServiceTypeEnum.SOCIAL_MEDIA_SHOUT_OUT}>
                       Social Media & Video Shoutouts
                     </option>
@@ -252,7 +252,7 @@ export default () => {
                 />
               </S.Row>
 
-              <S.Row>
+              {/* <S.Row>
                 <S.FieldGroup>
                   <Input
                     value={service.buttonText || ""}
@@ -263,7 +263,7 @@ export default () => {
                     label="Call to action text"
                   />
                 </S.FieldGroup>
-              </S.Row>
+              </S.Row> */}
             </S.NewServiceContainer>
 
             <S.NewServiceContainer>
@@ -310,7 +310,7 @@ export default () => {
                 </S.Row>
               )}
 
-              {[
+              {/* {[
                 ServiceTypeEnum.SELLING_MERCH,
                 ServiceTypeEnum.CUSTOMIZE_YOUR_OWN,
               ].includes(service.serviceType) && (
@@ -329,7 +329,7 @@ export default () => {
                     />
                   </S.FieldGroup>
                 </S.Row>
-              )}
+              )} */}
 
               {[
                 ServiceTypeEnum.VIRTUAL_ONE_ON_ONE,
