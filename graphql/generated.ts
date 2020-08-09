@@ -528,6 +528,55 @@ export interface createBookingCompleteMutationVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: getBookingCompleteQuery
+// ====================================================
+
+export interface getBookingCompleteQuery_node_Booking {}
+
+export interface getBookingCompleteQuery_node_BookingComplete_booking_service {
+  id: string;
+  name: string | null;
+  imageUrl: string | null;
+}
+
+export interface getBookingCompleteQuery_node_BookingComplete_booking_hostProfile {
+  id: string;
+  name: string;
+  profilePhotoUrl: string | null;
+}
+
+export interface getBookingCompleteQuery_node_BookingComplete_booking {
+  id: string;
+  service: getBookingCompleteQuery_node_BookingComplete_booking_service | null;
+  hostProfile: getBookingCompleteQuery_node_BookingComplete_booking_hostProfile;
+}
+
+export interface getBookingCompleteQuery_node_BookingComplete {
+  id: string;
+  message: string;
+  attachments: string[];
+  booking: getBookingCompleteQuery_node_BookingComplete_booking | null;
+}
+
+export type getBookingCompleteQuery_node = getBookingCompleteQuery_node_Booking | getBookingCompleteQuery_node_BookingComplete;
+
+export interface getBookingCompleteQuery {
+  /**
+   * Fetches an object given its ID.
+   */
+  node: getBookingCompleteQuery_node | null;
+}
+
+export interface getBookingCompleteQueryVariables {
+  id: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: createCalendarEventMutation
 // ====================================================
 
@@ -1683,21 +1732,6 @@ export interface bookingFragment {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL fragment: bookingCompleteFragment
-// ====================================================
-
-export interface bookingCompleteFragment {
-  id: string;
-  message: string;
-  attachments: string[];
-}
-
-/* tslint:disable */
-/* eslint-disable */
-// @generated
-// This file was automatically generated and should not be edited.
-
-// ====================================================
 // GraphQL fragment: hostBookingFragment
 // ====================================================
 
@@ -1741,6 +1775,21 @@ export interface hostBookingFragment {
   bookingQuestionsConnection: hostBookingFragment_bookingQuestionsConnection;
   service: hostBookingFragment_service | null;
   bookingComplete: hostBookingFragment_bookingComplete | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL fragment: bookingCompleteFragment
+// ====================================================
+
+export interface bookingCompleteFragment {
+  id: string;
+  message: string;
+  attachments: string[];
 }
 
 /* tslint:disable */

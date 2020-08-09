@@ -1,4 +1,5 @@
 import React from "react";
+import Head from "next/head";
 import moment from "moment-timezone";
 import { useRouter } from "next/router";
 import DashboardLayout from "../../../src/common/Layout/DashboardLayout";
@@ -109,6 +110,9 @@ export default () => {
 
   return (
     <DashboardLayout noContentPadding>
+      <Head>
+        <script src="https://sdk.amazonaws.com/js/aws-sdk-2.713.0.min.js"></script>
+      </Head>
       <S.Layout>
         <S.LayoutContainer>
           <S.HeadingContainer>

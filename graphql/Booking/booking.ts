@@ -1,18 +1,11 @@
 import { gql } from "@apollo/client";
+import { BOOKING_COMPLETE_FRAGMENT } from '../BookingComplete/booking_complete';
 
 const BOOKING_FRAGMENT = gql`
   fragment bookingFragment on Booking {
     id
     status
     updatedAt
-  }
-`;
-
-const BOOKING_COMPLETE_FRAGMENT = gql`
-  fragment bookingCompleteFragment on BookingComplete {
-    id
-    message
-    attachments
   }
 `;
 

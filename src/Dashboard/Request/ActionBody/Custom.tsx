@@ -1,6 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import styled from "styled-components";
-import { Styling } from "../../../common/utility";
+import {
+  Styling,
+  showWorkingOverlay,
+  hideWorkingOverlay,
+  uploadToS3,
+} from "../../../common/utility";
 import { CommonButton } from "../../../common/Button";
 import {
   cancelBooking,
@@ -13,6 +18,7 @@ import {
 import Modal from "../../../common/Modal";
 import Textarea from "../../../common/Textarea";
 import Notification from "../../../common/Notification";
+import { X } from "react-feather";
 
 export const DangerButton = styled(CommonButton)<{
   background?: string;
@@ -38,9 +44,29 @@ export const Row = styled.div`
   margin-bottom: 15px;
 `;
 
+export const AttachmentList = styled.div``;
+export const AttachmentItem = styled.div`
+  margin-bottom: 7px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+export const AttachmentName = styled.div`
+  flex: 1;
+`;
+export const AttachmentDelete = styled.div`
+  cursor: pointer;
+`;
+export const Button = styled.button`
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin-top: 8px;
+`;
+
 export const Field = styled.div``;
 
 export default ({ node }: { node: getHostBookingQuery_node_Booking }) => {
+  const uploadRef = useRef<any>();
   const [completeForm, setCompleteForm] = useState<CreateBookingCompleteInput>({
     message: "",
     attachments: [],
@@ -63,9 +89,6 @@ export default ({ node }: { node: getHostBookingQuery_node_Booking }) => {
     requestCreateBookingComplete,
     { loading: requestCreateBookingCompleteLoading },
   ] = createBookingComplete({
-    onCompleted: () => {
-      setErrors([]);
-    },
     onError: (error) => {
       setErrors([error.message]);
     },
@@ -92,6 +115,63 @@ export default ({ node }: { node: getHostBookingQuery_node_Booking }) => {
             rows={6}
             label="Request message"
             placeholder="Required"
+          />
+        </Row>
+        <Row>
+          <AttachmentList>
+            {completeForm.attachments.map((attachment, index) => {
+              return (
+                <AttachmentItem key={attachment}>
+                  <AttachmentName>{attachment}</AttachmentName>
+                  <AttachmentDelete
+                    onClick={() =>
+                      setCompleteForm({
+                        ...completeForm,
+                        attachments: completeForm.attachments.filter(
+                          (item, idx) => idx !== index
+                        ),
+                      })
+                    }
+                  >
+                    <X size={20} />
+                  </AttachmentDelete>
+                </AttachmentItem>
+              );
+            })}
+          </AttachmentList>
+          <Button
+            type="button"
+            onClick={() => uploadRef.current && uploadRef.current.click()}
+          >
+            Upload files
+          </Button>
+          <input
+            style={{ display: "none" }}
+            ref={uploadRef}
+            onChange={(e: any) => {
+              showWorkingOverlay();
+              try {
+                Promise.all(
+                  [...e.target.files].map((file) => {
+                    return uploadToS3(file);
+                  })
+                ).then((results) => {
+                  setCompleteForm((completeForm) => ({
+                    ...completeForm,
+                    attachments: [
+                      ...completeForm.attachments,
+                      ...results.map((res) => res.Location),
+                    ],
+                  }));
+                  hideWorkingOverlay();
+                });
+              } catch (error) {
+                alert(error.message);
+                hideWorkingOverlay();
+              }
+            }}
+            type="file"
+            multiple={true}
           />
         </Row>
 
