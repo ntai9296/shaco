@@ -106,14 +106,12 @@ export default ({ node }: { node: getHostBookingQuery_node_Booking }) => {
           </PrimaryButton>
           <RescheduleButton
             flex={false}
-            isLoading={getZoomStartURLLoading}
             onClick={() => setRescheduleModal(true)}
           >
             Ask to reschedule
           </RescheduleButton>
           <DangerButton
             flex={false}
-            isLoading={getZoomStartURLLoading}
             onClick={() => setDeclineModal(true)}
           >
             Decline

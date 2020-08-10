@@ -10,6 +10,8 @@
 export interface createBookingMutation_createBooking_booking {
   id: string;
   status: BookingStatusEnum;
+  description: string | null;
+  createdAt: any;
   updatedAt: any;
 }
 
@@ -37,6 +39,8 @@ export interface createBookingMutationVariables {
 export interface cancelBookingMutation_cancelBooking_booking {
   id: string;
   status: BookingStatusEnum;
+  description: string | null;
+  createdAt: any;
   updatedAt: any;
 }
 
@@ -64,6 +68,8 @@ export interface cancelBookingMutationVariables {
 export interface rescheduleBookingMutation_rescheduleBooking_booking {
   id: string;
   status: BookingStatusEnum;
+  description: string | null;
+  createdAt: any;
   updatedAt: any;
 }
 
@@ -112,6 +118,8 @@ export interface getBookingConfirmationQuery_node_Booking_service {
 export interface getBookingConfirmationQuery_node_Booking {
   id: string;
   status: BookingStatusEnum;
+  description: string | null;
+  createdAt: any;
   updatedAt: any;
   price: number;
   bookingDate: any;
@@ -176,6 +184,8 @@ export interface getBookingRescheduleQuery_node_Booking_service {
 export interface getBookingRescheduleQuery_node_Booking {
   id: string;
   status: BookingStatusEnum;
+  description: string | null;
+  createdAt: any;
   updatedAt: any;
   price: number;
   bookingDate: any;
@@ -242,6 +252,8 @@ export interface getCurrentUserBookingsQuery_currentUser_bookingsConnection_node
 export interface getCurrentUserBookingsQuery_currentUser_bookingsConnection_nodes {
   id: string;
   status: BookingStatusEnum;
+  description: string | null;
+  createdAt: any;
   updatedAt: any;
   price: number;
   bookingDate: any;
@@ -275,6 +287,8 @@ export interface getCurrentUserBookingsQuery {
 
 export interface getCurrentUserBookingsQueryVariables {
   isHost?: boolean | null;
+  sortBy?: string | null;
+  statuses?: BookingStatusEnum[] | null;
 }
 
 /* tslint:disable */
@@ -321,6 +335,8 @@ export interface getHostBookingQuery_node_Booking_bookingComplete {
 export interface getHostBookingQuery_node_Booking {
   id: string;
   status: BookingStatusEnum;
+  description: string | null;
+  createdAt: any;
   updatedAt: any;
   price: number;
   bookingDate: any;
@@ -366,6 +382,8 @@ export interface getHostBookingZoomStartUrlQuery_node_Booking_providable {
 export interface getHostBookingZoomStartUrlQuery_node_Booking {
   id: string;
   status: BookingStatusEnum;
+  description: string | null;
+  createdAt: any;
   updatedAt: any;
   providable: getHostBookingZoomStartUrlQuery_node_Booking_providable | null;
 }
@@ -425,6 +443,8 @@ export interface requestRescheduleBookingMutation_requestRescheduleBooking_booki
 export interface requestRescheduleBookingMutation_requestRescheduleBooking_booking {
   id: string;
   status: BookingStatusEnum;
+  description: string | null;
+  createdAt: any;
   updatedAt: any;
   price: number;
   bookingDate: any;
@@ -491,6 +511,8 @@ export interface createBookingCompleteMutation_createBookingComplete_booking_boo
 export interface createBookingCompleteMutation_createBookingComplete_booking {
   id: string;
   status: BookingStatusEnum;
+  description: string | null;
+  createdAt: any;
   updatedAt: any;
   price: number;
   bookingDate: any;
@@ -533,12 +555,6 @@ export interface createBookingCompleteMutationVariables {
 
 export interface getBookingCompleteQuery_node_Booking {}
 
-export interface getBookingCompleteQuery_node_BookingComplete_booking_service {
-  id: string;
-  name: string | null;
-  imageUrl: string | null;
-}
-
 export interface getBookingCompleteQuery_node_BookingComplete_booking_hostProfile {
   id: string;
   name: string;
@@ -547,7 +563,7 @@ export interface getBookingCompleteQuery_node_BookingComplete_booking_hostProfil
 
 export interface getBookingCompleteQuery_node_BookingComplete_booking {
   id: string;
-  service: getBookingCompleteQuery_node_BookingComplete_booking_service | null;
+  description: string | null;
   hostProfile: getBookingCompleteQuery_node_BookingComplete_booking_hostProfile;
 }
 
@@ -1723,6 +1739,8 @@ export interface updateUserMutationVariables {
 export interface bookingFragment {
   id: string;
   status: BookingStatusEnum;
+  description: string | null;
+  createdAt: any;
   updatedAt: any;
 }
 
@@ -1882,11 +1900,11 @@ export interface serviceQuestionFragment {
 //==============================================================
 
 export enum BookingStatusEnum {
-  Active = "Active",
-  Cancelled = "Cancelled",
-  Completed = "Completed",
+  ACTIVE = "ACTIVE",
+  CANCELLED = "CANCELLED",
+  COMPLETED = "COMPLETED",
+  REQUESTED = "REQUESTED",
   RESCHEDULE_REQUESTED = "RESCHEDULE_REQUESTED",
-  Requested = "Requested",
 }
 
 export enum CalendarEventAvailabilityEnum {

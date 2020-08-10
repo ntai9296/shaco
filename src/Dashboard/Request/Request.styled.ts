@@ -35,6 +35,43 @@ export const Heading = styled.h1`
   font-size: 24px;
 `;
 
+export const HeadingFilter = styled.div`
+  display: flex;
+  align-items: center;
+`;
+export const FilterButton = styled.div`
+  background: #fff;
+  font-weight: 400;
+  color: #343f44;
+  padding: 5px 10px 6px;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.01), 0 1px 2px rgba(0, 0, 0, 0.05);
+  outline: none;
+  border: none;
+  border-right: 1px solid #f8fafc;
+  border-radius: 0;
+  white-space: nowrap;
+  transition: all 0.25s ease;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  font-size: 13px;
+
+  :first-child {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+  }
+
+  :last-child {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
+
+  > svg {
+    margin-left: 5px;
+  }
+`;
+
 export const SectionContainer = styled.section`
   margin-bottom: 25px;
 `;
@@ -130,4 +167,14 @@ export const StatusLabel = styled.div`
   display: inline-block;
   border-radius: 3px;
   padding: 3px 5px;
+  text-align: center;
+`;
+
+export const FilterList = styled.div``;
+export const FilterItem = styled.div`
+  padding: 10px;
+  cursor: pointer;
+  :hover {
+    background: #f2f4f7;
+  }
 `;

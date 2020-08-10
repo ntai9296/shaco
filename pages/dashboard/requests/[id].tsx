@@ -19,6 +19,7 @@ import VirtualOneOnOne from "../../../src/Dashboard/Request/ActionBody/VirtualOn
 import Custom from "../../../src/Dashboard/Request/ActionBody/Custom";
 import CustomCompleteResult from "../../../src/Dashboard/Request/CompleteBody/Custom";
 import Notification from "../../../src/common/Notification";
+import { getHumanizeEnum } from "../../../src/common/utility";
 
 export default () => {
   const router = useRouter();
@@ -50,7 +51,7 @@ export default () => {
       case ServiceTypeEnum.VIRTUAL_ONE_ON_ONE:
         return (
           <>
-            {node.status !== BookingStatusEnum.Cancelled && (
+            {node.status !== BookingStatusEnum.CANCELLED && (
               <div>
                 <CreditCard size={20} />{" "}
                 {node.price > 0 ? `$${node.price / 100}` : "Free"}
@@ -58,10 +59,10 @@ export default () => {
             )}
             {node.status === BookingStatusEnum.RESCHEDULE_REQUESTED && (
               <div>
-                <Calendar size={20} /> Rescheduled
+                <Calendar size={20} /> Reschedule requested
               </div>
             )}
-            {[BookingStatusEnum.Active, BookingStatusEnum.Completed].includes(
+            {[BookingStatusEnum.ACTIVE, BookingStatusEnum.COMPLETED].includes(
               node.status
             ) && (
               <>
@@ -85,7 +86,7 @@ export default () => {
       default:
         return (
           <>
-            {node.status !== BookingStatusEnum.Cancelled && (
+            {node.status !== BookingStatusEnum.CANCELLED && (
               <div>
                 <CreditCard size={20} />{" "}
                 {node.price > 0 ? `$${node.price / 100}` : "Free"}
@@ -126,14 +127,14 @@ export default () => {
               </Link>
               <ChevronRight />
               <span>{node.service?.name} </span>
-              <S.StatusLabel>{node.status}</S.StatusLabel>
+              <S.StatusLabel>{getHumanizeEnum(node.status)}</S.StatusLabel>
             </S.Heading>
             <S.BookingSubHeading>
               <S.SubHeadingLeft>{renderSubHeading()}</S.SubHeadingLeft>
             </S.BookingSubHeading>
           </S.HeadingContainer>
 
-          {node.status === BookingStatusEnum.Cancelled && (
+          {node.status === BookingStatusEnum.CANCELLED && (
             <S.SectionContainer>
               <S.ContentContainer>
                 <Notification
@@ -172,26 +173,26 @@ export default () => {
             </S.ContentContainer>
           </S.SectionContainer>
 
-          {![BookingStatusEnum.Cancelled, BookingStatusEnum.Completed].includes(
+          {![BookingStatusEnum.CANCELLED, BookingStatusEnum.COMPLETED].includes(
             node.status
           ) && (
             <S.SectionContainer>
               <S.ContentContainer>
                 <S.ContentBox>
-                  <h4>Request Action</h4>
+                  <h4>Request Response</h4>
                   <S.ActionBody>{renderActionBody()}</S.ActionBody>
                 </S.ContentBox>
               </S.ContentContainer>
             </S.SectionContainer>
           )}
 
-          {BookingStatusEnum.Completed === node.status &&
+          {BookingStatusEnum.COMPLETED === node.status &&
             node.service?.serviceType !==
               ServiceTypeEnum.VIRTUAL_ONE_ON_ONE && (
               <S.SectionContainer>
                 <S.ContentContainer>
                   <S.ContentBox>
-                    <h4>Completed Response</h4>
+                    <h4>Response</h4>
                     <S.ActionBody>{renderResultsBody()}</S.ActionBody>
                   </S.ContentBox>
                 </S.ContentContainer>

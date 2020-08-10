@@ -15,11 +15,7 @@ export const GET_BOOKING_COMPLETE_QUERY = gql`
         ...bookingCompleteFragment
         booking {
           id
-          service {
-            id
-            name
-            imageUrl
-          }
+          description
           hostProfile {
             id
             name

@@ -25,16 +25,14 @@ export default () => {
   return (
     <Main.BookingCompleteContainer>
       <Main.ConfirmationHeader>
-        Booking request completed
+        {node.booking?.hostProfile.name} completed your{" "}
+        {node.booking?.description} request!
       </Main.ConfirmationHeader>
       <Main.ConfirmationContainer>
-        <Main.HostProfileAvatar
-          src={node?.booking?.hostProfile?.profilePhotoUrl}
-        />
         <Main.HostProfileName>
-          {node?.booking?.hostProfile?.name}
+          Message from {node.booking?.hostProfile.name}
         </Main.HostProfileName>
-        <Main.ServiceName>{node?.booking?.service?.name}</Main.ServiceName>
+
         <Main.BookingMessageContainer>
           {node.message}
 

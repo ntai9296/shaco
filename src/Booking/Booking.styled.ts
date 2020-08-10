@@ -12,6 +12,13 @@ export const BookingConfirmationContainer = styled.div`
 export const ConfirmationHeader = styled.h2`
   text-align: center;
   font-size: 28px;
+  margin: 0 0 15px 0;
+`;
+
+export const ConfirmationSubHeader = styled.p`
+  text-align: center;
+  margin: 0 0 20px 0;
+  font-weight: 500;
 `;
 
 export const ConfirmationContainer = styled.div`
@@ -44,10 +51,15 @@ export const BookingDetails = styled.div`
   font-size: 16px;
   margin-bottom: 20px;
 `;
-export const BookingEmailMessage = styled.p`
+export const BookingEmailMessage = styled.div`
   text-align: center;
   max-width: 80%;
   margin: 0 auto 20px auto;
+  font-weight: 500;
+
+  > div {
+    margin-bottom: 10px;
+  }
 `;
 export const BookingNewDateTime = styled.p`
   text-align: center;

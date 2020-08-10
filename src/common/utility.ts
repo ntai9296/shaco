@@ -106,3 +106,9 @@ export const isVideoURL = (url: string) => {
   }
   return false;
 };
+
+export const getHumanizeEnum = (string: any) => {
+  let str = string.toLowerCase().replace("_", " ");
+
+  return str.charAt(0).toUpperCase() + str.slice(1);
+};

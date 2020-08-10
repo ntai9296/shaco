@@ -56,6 +56,10 @@ export const HeaderLeft = styled.div`
 export const HeaderRight = styled.div`
   justify-self: end;
 
+  > button {
+    margin-left: 8px;
+  }
+
   ul {
     margin: 0px;
     padding: 0px;

@@ -36,20 +36,18 @@ const Header = ({
                   </S.Logo>
                 </Link>
               </S.HeaderLeft>
-              {earlyAccess && (
-                <S.HeaderRight>
+              <S.HeaderRight>
+                {earlyAccess && (
                   <Link href="/early_access">
                     <S.EarlyAccessButton>Get Early Access</S.EarlyAccessButton>
                   </Link>
-                </S.HeaderRight>
-              )}
-              {showDashboardButton && (
-                <S.HeaderRight>
+                )}
+                {showDashboardButton && (
                   <Link href="/dashboard">
                     <S.EarlyAccessButton>Dashboard</S.EarlyAccessButton>
                   </Link>
-                </S.HeaderRight>
-              )}
+                )}
+              </S.HeaderRight>
 
               {/* <S.HeaderRight>
                 <ul>
@@ -138,20 +136,18 @@ const Header = ({
                 </S.Logo>
               </Link>
             </S.HeaderLeft>
-            {earlyAccess && (
-              <S.HeaderRight>
+            <S.HeaderRight>
+              {earlyAccess && (
                 <Link href="/early_access">
                   <S.EarlyAccessButton>Get Early Access</S.EarlyAccessButton>
                 </Link>
-              </S.HeaderRight>
-            )}
-            {showDashboardButton && (
-              <S.HeaderRight>
+              )}
+              {showDashboardButton && (
                 <Link href="/dashboard">
                   <S.EarlyAccessButton>Dashboard</S.EarlyAccessButton>
                 </Link>
-              </S.HeaderRight>
-            )}
+              )}
+            </S.HeaderRight>
           </S.HeaderTag>
         </div>
       </div>

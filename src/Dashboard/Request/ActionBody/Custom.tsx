@@ -113,8 +113,8 @@ export default ({ node }: { node: getHostBookingQuery_node_Booking }) => {
             }
             value={completeForm.message}
             rows={6}
-            label="Request message"
-            placeholder="Required"
+            label="Message"
+            placeholder="Enter your message"
           />
         </Row>
         <Row>
@@ -143,7 +143,7 @@ export default ({ node }: { node: getHostBookingQuery_node_Booking }) => {
             type="button"
             onClick={() => uploadRef.current && uploadRef.current.click()}
           >
-            Upload files
+            Add files
           </Button>
           <input
             style={{ display: "none" }}
@@ -191,7 +191,7 @@ export default ({ node }: { node: getHostBookingQuery_node_Booking }) => {
             flex={false}
             isLoading={requestCreateBookingCompleteLoading}
           >
-            Submit
+            Send Response
           </PrimaryButton>
 
           <DangerButton
@@ -216,6 +216,7 @@ export default ({ node }: { node: getHostBookingQuery_node_Booking }) => {
               variables: {
                 input: {
                   bookingId: node.id,
+                  message: messageToUser,
                 },
               },
             });

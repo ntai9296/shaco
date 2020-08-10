@@ -47,7 +47,7 @@ export const HostProfileAvatar = styled.div<{ src?: string | null }>`
 `;
 export const HostProfileName = styled.div`
   font-weight: bold;
-  font-size: 20px;
+  font-size: 16px;
   margin-bottom: 20px;
 `;
 
@@ -76,5 +76,6 @@ export const AttachmentList = styled.div`
 
   > div {
     margin-top: 7px;
+    word-break: break-all;
   }
 `;

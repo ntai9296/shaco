@@ -25,25 +25,19 @@ export default () => {
 
   const node = data?.node as getBookingConfirmationQuery_node_Booking;
 
-  if (!node || node?.status === BookingStatusEnum.Cancelled) {
-    return <div>Booking not found</div>;
+  if (!node || node?.status === BookingStatusEnum.CANCELLED) {
+    return <div>Request not found</div>;
   }
   return (
     <S.BookingConfirmationContainer>
-      <S.ConfirmationHeader>
-        {node.status === BookingStatusEnum.Requested
-          ? "Booking requested!"
-          : "Booking confirmed!"}
-      </S.ConfirmationHeader>
+      <S.ConfirmationHeader>Your request is complete!</S.ConfirmationHeader>
+      <S.ConfirmationSubHeader>
+        You requested a {node.description} from {node.hostProfile.name}.
+      </S.ConfirmationSubHeader>
 
       {node.providableType === "VideoCall" ? (
         <S.ConfirmationContainer>
-          {node.hostProfile.profilePhotoUrl && (
-            <S.ProfilePicture>
-              <img src={node.hostProfile.profilePhotoUrl} />
-            </S.ProfilePicture>
-          )}
-          <S.ProfileName>{node.hostProfile.name}</S.ProfileName>
+          <S.ProfileName>{node.description}</S.ProfileName>
           <S.BookingDetails>
             {moment
               .tz(node.bookingDate, moment.tz.guess())
@@ -62,14 +56,13 @@ export default () => {
         </S.ConfirmationContainer>
       ) : (
         <S.ConfirmationContainer>
-          {node?.service?.imageUrl && (
-            <S.ServiceImage>
-              <img src={node?.service?.imageUrl} />
-            </S.ServiceImage>
-          )}
-          <S.ProfileName>{node?.service?.name}</S.ProfileName>
+          <S.ProfileName>What's Next?</S.ProfileName>
           <S.BookingEmailMessage>
-            We sent a confirmation to {node.userEmail}. We will email you when there's an update.
+            <div>1. Your request has been sent to {node.hostProfile.name}!</div>
+            <div>
+              2. {node.hostProfile.name} has 1 week to fullfill your request.
+            </div>
+            <div>3. Interact with {node.hostProfile.name} again!</div>
           </S.BookingEmailMessage>
           <Link href={`/${node.hostProfile.slug}`}>
             <a>

@@ -36,7 +36,9 @@ export default ({
       windowBorderPadding={15}
       isOpen={isOpen}
       position={position}
-      content={<PopperContent>{content}</PopperContent>}
+      content={() =>
+        isOpen ? <PopperContent>{content}</PopperContent> : <div />
+      }
     >
       {children}
     </TinyPopper>

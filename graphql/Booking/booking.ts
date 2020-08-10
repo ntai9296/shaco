@@ -1,10 +1,12 @@
 import { gql } from "@apollo/client";
-import { BOOKING_COMPLETE_FRAGMENT } from '../BookingComplete/booking_complete';
+import { BOOKING_COMPLETE_FRAGMENT } from "../BookingComplete/booking_complete";
 
 const BOOKING_FRAGMENT = gql`
   fragment bookingFragment on Booking {
     id
     status
+    description
+    createdAt
     updatedAt
   }
 `;
@@ -145,10 +147,14 @@ export const GET_BOOKING_RESCHEDULE_QUERY = gql`
 `;
 
 export const GET_CURRENT_USER_BOOKINGS_QUERY = gql`
-  query getCurrentUserBookingsQuery($isHost: Boolean) {
+  query getCurrentUserBookingsQuery(
+    $isHost: Boolean
+    $sortBy: String
+    $statuses: [BookingStatusEnum!]
+  ) {
     currentUser {
       id
-      bookingsConnection(isHost: $isHost) {
+      bookingsConnection(isHost: $isHost, sortBy: $sortBy, statuses: $statuses) {
         nodes {
           ...bookingFragment
           ...hostBookingFragment

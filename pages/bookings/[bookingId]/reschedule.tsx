@@ -34,6 +34,9 @@ export default () => {
         Router.push(`/bookings/${data.rescheduleBooking?.booking.id}`);
       }
     },
+    onError: (error) => {
+      alert(error.message);
+    },
   });
 
   const { data, loading } = BookingAPI.getBookingReschedule({
@@ -105,26 +108,16 @@ export default () => {
 
   const node = data?.node as getBookingConfirmationQuery_node_Booking;
 
-  if (!node || node?.status === BookingStatusEnum.Cancelled) {
-    return <div>Booking not found</div>;
+  if (!node || node?.status === BookingStatusEnum.CANCELLED) {
+    return <div>Request not found</div>;
   }
 
   return (
     <S.BookingConfirmationContainer>
-      <S.ConfirmationHeader>Reschedule booking</S.ConfirmationHeader>
+      <S.ConfirmationHeader>
+        Reschedule {node.description} ({node.providable?.duration} mins)
+      </S.ConfirmationHeader>
       <S.ConfirmationContainer>
-        {node.hostProfile.profilePhotoUrl && (
-          <S.ProfilePicture>
-            <img src={node.hostProfile.profilePhotoUrl} />
-          </S.ProfilePicture>
-        )}
-        <S.ProfileName>{node.hostProfile.name}</S.ProfileName>
-        <S.BookingDetails>
-          {moment
-            .tz(node.bookingDate, moment.tz.guess())
-            .format("ddd, MMM DD - hh:mm A")}{" "}
-          ({node.providable?.duration} mins)
-        </S.BookingDetails>
         <S.BookingNewDateTime>Select a new date and time</S.BookingNewDateTime>
         <S.CalendarContainer>
           <Calendar
@@ -170,7 +163,7 @@ export default () => {
                 })
               }
             >
-              Confirm booking
+              Confirm
             </Button>
           </S.ConfirmRescheduleButtonContainer>
         )}

@@ -1,27 +1,123 @@
-import React from "react";
+import React, { useState } from "react";
 import moment from "moment-timezone";
 import DashboardLayout from "../../../src/common/Layout/DashboardLayout";
 import * as S from "../../../src/Dashboard/Request/Request.styled";
 import { getCurrentUserBookings } from "../../../graphql/User/UserAPI";
-import { getCurrentUserBookingsQuery_currentUser_bookingsConnection_nodes } from "../../../graphql/generated";
-import { ChevronRight } from "react-feather";
+import {
+  getCurrentUserBookingsQuery_currentUser_bookingsConnection_nodes,
+  BookingStatusEnum,
+  getCurrentUserBookingsQueryVariables,
+} from "../../../graphql/generated";
+import { ChevronRight, ChevronDown } from "react-feather";
 import Link from "next/link";
+import Popper from "../../../src/common/Popper";
+import { getHumanizeEnum } from "../../../src/common/utility";
 
 export default () => {
+  const [openStatusPop, setOpenStatusPop] = useState(false);
+  const [openSortPop, setOpenSortPop] = useState(false);
+  const [filter, setFilter] = useState<getCurrentUserBookingsQueryVariables>({
+    isHost: true,
+    statuses: [
+      BookingStatusEnum.ACTIVE,
+      BookingStatusEnum.REQUESTED,
+    ],
+    sortBy: "DESC",
+  });
   const { data } = getCurrentUserBookings({
-    variables: {
-      isHost: true,
-    },
+    variables: filter,
+    ssr: false,
   });
 
   const bookings = (data?.currentUser?.bookingsConnection.nodes ||
     []) as getCurrentUserBookingsQuery_currentUser_bookingsConnection_nodes[];
+
   return (
     <DashboardLayout noContentPadding>
       <S.Layout>
         <S.LayoutContainer>
           <S.HeadingContainer>
             <S.Heading>Requests</S.Heading>
+            <S.HeadingFilter>
+              <Popper
+                position="bottom"
+                onClickOutside={() => setOpenStatusPop(false)}
+                isOpen={openStatusPop}
+                content={
+                  <S.FilterList>
+                    <S.FilterItem
+                      onClick={() => {
+                        setFilter({
+                          ...filter,
+                          statuses: [
+                            BookingStatusEnum.ACTIVE,
+                            BookingStatusEnum.REQUESTED,
+                          ],
+                        });
+                        setOpenStatusPop(false);
+                      }}
+                    >
+                      Active
+                    </S.FilterItem>
+                    <S.FilterItem
+                      onClick={() => {
+                        setFilter({
+                          ...filter,
+                          statuses: [BookingStatusEnum.COMPLETED],
+                        });
+                        setOpenStatusPop(false);
+                      }}
+                    >
+                      Completed
+                    </S.FilterItem>
+                  </S.FilterList>
+                }
+              >
+                <S.FilterButton onClick={() => setOpenStatusPop(true)}>
+                  {filter.statuses?.includes(BookingStatusEnum.ACTIVE)
+                    ? "Active"
+                    : "Completed"}{" "}
+                  <ChevronDown size={16} />
+                </S.FilterButton>
+              </Popper>
+
+              <Popper
+                position="bottom"
+                onClickOutside={() => setOpenSortPop(false)}
+                isOpen={openSortPop}
+                content={
+                  <S.FilterList>
+                    <S.FilterItem
+                      onClick={() => {
+                        setFilter({
+                          ...filter,
+                          sortBy: "DESC",
+                        });
+                        setOpenSortPop(false);
+                      }}
+                    >
+                      Newest
+                    </S.FilterItem>
+                    <S.FilterItem
+                      onClick={() => {
+                        setFilter({
+                          ...filter,
+                          sortBy: "ASC",
+                        });
+                        setOpenSortPop(false);
+                      }}
+                    >
+                      Oldest
+                    </S.FilterItem>
+                  </S.FilterList>
+                }
+              >
+                <S.FilterButton onClick={() => setOpenSortPop(true)}>
+                  Sort by: {filter.sortBy === "DESC" ? "Newest" : "Oldest"}{" "}
+                  <ChevronDown size={16} />
+                </S.FilterButton>
+              </Popper>
+            </S.HeadingFilter>
           </S.HeadingContainer>
           <S.SectionContainer>
             <S.BookingTable>
@@ -31,7 +127,7 @@ export default () => {
                 <S.HeaderColumn style={{ width: 125 }}>Price</S.HeaderColumn>
                 <S.HeaderColumn style={{ width: 150 }}>Status</S.HeaderColumn>
                 <S.HeaderColumn style={{ width: 180 }}>
-                  Last Update
+                  Request Date
                 </S.HeaderColumn>
               </S.BookingTableHeader>
               <S.BookingTableBody>
@@ -83,10 +179,12 @@ export default () => {
                             : `Free`}
                         </S.RequestTableBodyContent>
                         <S.RequestTableBodyContent style={{ width: 150 }}>
-                          <S.StatusLabel>{booking.status}</S.StatusLabel>
+                          <S.StatusLabel>
+                            {getHumanizeEnum(booking.status)}
+                          </S.StatusLabel>
                         </S.RequestTableBodyContent>
                         <S.RequestTableBodyContent style={{ width: 180 }}>
-                          {moment(booking.updatedAt).fromNow()}
+                          {moment(booking.createdAt).fromNow()}
                         </S.RequestTableBodyContent>
                         <ChevronRight
                           size={17}
