@@ -6,7 +6,7 @@ import { CommonButton } from "../src/common/Button";
 import LearnAboutOurServiceSection from "../src/Landing/LearnAboutOurServiceSection";
 import HowItWorkSection from "../src/Landing/HowItWorkSection";
 import CallToActionSection from "../src/Landing/CallToActionSection";
-import { ArrowLeft, ArrowRight } from "react-feather";
+import { ArrowLeft, ArrowRight, Facebook } from "react-feather";
 import { getCurrentUserSimple } from "../graphql/User/UserAPI";
 
 const MainContainer = styled.main`

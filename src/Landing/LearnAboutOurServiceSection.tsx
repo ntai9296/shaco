@@ -115,7 +115,7 @@ const ContentItemDescription = styled.div`
   }
 
   > span {
-    color: ${props => props.theme.primaryColor};
+    color: ${(props) => props.theme.primaryColor};
     font-weight: bold;
   }
 
@@ -143,11 +143,11 @@ export default () => {
           onChange={(e) => setOption(e.target.value)}
         >
           <option value="0">1:1 Video Calls</option>
-          <option value="7">Answering Questions & Giving Advice</option>
+          <option value="7">Share Your Expert Opinion</option>
           <option value="2">Personalized Messages/Shoutouts</option>
           <option value="6">Donations</option>
           <option value="4">Name Your Price</option>
-          <option value="5">Create Your Own</option>
+          <option value="5">Build Your Own Service</option>
         </HowItWorkSelect>
       </HowItWorkSelectContainer>
       <HowItWorkContentContainer>
@@ -172,16 +172,14 @@ export default () => {
               <HowItWorkContentItem>
                 <ContentItemHeading>
                   <ContentItemDescription>
-                    <b>2.</b> We’ll provide a Zoom link and ensure your calendar
-                    has no conflicts.
+                    <b>2.</b> We'll handle the scheduling so you don't have to.
                   </ContentItemDescription>
                 </ContentItemHeading>
               </HowItWorkContentItem>
               <HowItWorkContentItem>
                 <ContentItemHeading>
                   <ContentItemDescription>
-                    <b>3.</b> Meet with anyone in the world to answer questions
-                    or just have a chat.
+                    <b>3.</b> Meet with anyone to discuss anything.
                   </ContentItemDescription>
                 </ContentItemHeading>
               </HowItWorkContentItem>
@@ -189,8 +187,8 @@ export default () => {
               <HowItWorkContentItem>
                 <ContentItemHeading>
                   <ContentItemDescription>
-                    <span>Pro Tip:</span> this is great for mentorship, advice, teaching, and
-                    meeting new people.
+                    <span>Pro Tip:</span> this is great for mentorship, advice,
+                    teaching, and meeting new people.
                   </ContentItemDescription>
                 </ContentItemHeading>
               </HowItWorkContentItem>
@@ -298,7 +296,7 @@ export default () => {
             </HowItWorkContentLeftContainer>
             <HowItWorkContentRightContainer>
               <HowItWorkContentItem>
-                <ContentItemTitle>Create Your Own</ContentItemTitle>
+                <ContentItemTitle>Build Your Own Service</ContentItemTitle>
                 <Line>
                   <img src="/line.png" />
                 </Line>
@@ -344,9 +342,7 @@ export default () => {
             </HowItWorkContentLeftContainer>
             <HowItWorkContentRightContainer>
               <HowItWorkContentItem>
-                <ContentItemTitle>
-                  Answering Questions & Giving Advice
-                </ContentItemTitle>
+                <ContentItemTitle>Share Your Expert Opinion</ContentItemTitle>
                 <Line>
                   <img src="/line.png" />
                 </Line>

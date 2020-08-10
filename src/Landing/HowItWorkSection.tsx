@@ -143,7 +143,7 @@ export default () => {
             <ItemContent>
               <Step>1</Step>
               <ProfileTitle>
-                Create your page & claim your unique URL.
+                Create your page & claim your unique URL
               </ProfileTitle>
               <ProfileBox>
                 <ProfileAvatar>
@@ -158,7 +158,7 @@ export default () => {
                 </ProfileDescription>
               </ProfileBox>
               <ProfileURL>
-                <b>tryfireside.com/</b>yournamehere
+                <b>tryfireside.com/</b>laura
               </ProfileURL>
             </ItemContent>
           </ItemBox>
@@ -166,7 +166,7 @@ export default () => {
           <ItemBox>
             <ItemContent>
               <Step>2</Step>
-              <ProfileTitle>Add your services & interactions.</ProfileTitle>
+              <ProfileTitle>Add your services & interactions</ProfileTitle>
               <ProfileServiceBox style={{ padding: 0 }}>
                 <img src="/custom_gif.gif" />
               </ProfileServiceBox>
@@ -176,7 +176,7 @@ export default () => {
           <ItemBox>
             <ItemContent>
               <Step>3</Step>
-              <ProfileTitle>Share with your audience & earn 💰.</ProfileTitle>
+              <ProfileTitle>Share with your audience & earn 💰</ProfileTitle>
               <ProfileServiceBox>
                 <img src="/cash_out.png" />
               </ProfileServiceBox>
