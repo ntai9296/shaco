@@ -20,9 +20,7 @@ export default () => {
     cancelBooking,
     { loading: cancelBookingLoading },
   ] = BookingAPI.cancelBooking({
-    onCompleted: (data) => {
-      console.log(data);
-    },
+    onCompleted: (data) => {},
   });
 
   if (loading) {

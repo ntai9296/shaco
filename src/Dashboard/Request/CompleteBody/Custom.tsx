@@ -35,8 +35,6 @@ export default ({ node }: Props) => {
 
   const attachments = node.bookingComplete?.attachments || [];
 
-  console.log(node)
-
   return (
     <div>
       <Row>
