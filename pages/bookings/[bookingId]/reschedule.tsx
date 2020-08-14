@@ -42,7 +42,6 @@ export default () => {
   const { data, loading } = BookingAPI.getBookingReschedule({
     variables: {
       id: (router.query?.bookingId as string) || "",
-      atOrAfterStarting: currentDateTime.clone().subtract("1", "day"),
     },
     onCompleted: (data) => {
       const node = data?.node as getBookingRescheduleQuery_node_Booking;

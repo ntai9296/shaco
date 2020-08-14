@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import Router from "next/router";
+import dynamic from "next/dynamic";
 import Head from "next/head";
 import update from "immutability-helper";
 import DashboardLayout from "../../../src/common/Layout/DashboardLayout";
@@ -22,9 +23,15 @@ import {
 import Notification from "../../../src/common/Notification";
 import { ServiceItem } from "../../../src/PublicProfile/Service/ServiceList";
 
+const Availability = dynamic(
+  () => import("../../../src/Dashboard/Service/Availability"),
+  { ssr: false }
+);
+
 export default () => {
   const { data: userData, loading } = UserAPI.getCurrentUserProfileServices();
   const imageRef = useRef<any>();
+
   const [service, setService] = useState<CreateServiceInput>({
     profileId: "",
     name: "",
@@ -127,13 +134,15 @@ export default () => {
     return null;
   }
 
-  if (!userData?.currentUser) {
+  const currentUser = userData?.currentUser;
+
+  if (!currentUser) {
     Router.replace("/login");
     return null;
   }
 
   return (
-    <DashboardLayout hideSidebar redirectOnboard={false}>
+    <DashboardLayout skipUser hideSidebar redirectOnboard={false}>
       <Head>
         <script src="https://sdk.amazonaws.com/js/aws-sdk-2.713.0.min.js"></script>
       </Head>
@@ -423,10 +432,25 @@ export default () => {
                     ])
                   }
                 >
-                  Add Question
+                  Add question +
                 </S.AddScreeningQuestion>
               </S.ScreeningQuestionList>
             </S.NewServiceContainer>
+
+            {ServiceTypeEnum.VIRTUAL_ONE_ON_ONE === service.serviceType && (
+              <S.NewServiceContainer>
+                <S.NewServiceHeaderContainer>
+                  <S.Step>4</S.Step>
+                  <span>Availability</span>
+                </S.NewServiceHeaderContainer>
+                <p>
+                  Set your available hours when people can schedule calls with
+                  you.
+                </p>
+                <Availability />
+              </S.NewServiceContainer>
+            )}
+
             {errors.length > 0 && (
               <S.Row>
                 <Notification

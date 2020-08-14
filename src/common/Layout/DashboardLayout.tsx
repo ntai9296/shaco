@@ -11,26 +11,32 @@ export default ({
   hideSidebar,
   redirectOnboard = true,
   noContentPadding,
+  skipUser,
 }: {
   children: any;
   hideSidebar?: boolean;
   redirectOnboard?: boolean;
   noContentPadding?: boolean;
+  skipUser?: boolean;
 }) => {
-  const { data: userData, loading } = UserAPI.getCurrentUser();
+  const { data: userData, loading } = UserAPI.getCurrentUser({
+    skip: skipUser,
+  });
 
-  if (loading) {
-    return null;
-  }
+  if (!skipUser) {
+    if (loading) {
+      return null;
+    }
 
-  if (!userData?.currentUser) {
-    Router.replace("/login");
-    return null;
-  }
+    if (!userData?.currentUser) {
+      Router.replace("/login");
+      return null;
+    }
 
-  if (redirectOnboard && !userData.currentUser.onboarded) {
-    Router.replace("/onboarding");
-    return null;
+    if (redirectOnboard && !userData.currentUser.onboarded) {
+      Router.replace("/onboarding");
+      return null;
+    }
   }
 
   return (

@@ -38,6 +38,9 @@ import {
   getCurrentUserBookingsQuery,
   getCurrentUserBookingsQueryVariables,
   getCurrentUserSimpleQuery,
+  updateUserAvailabilityMutation,
+  updateUserAvailabilityMutationVariables,
+  getCurrentUserAvailabilityQuery,
 } from "../generated";
 
 export const getCurrentUserSimple = (
@@ -206,5 +209,24 @@ export const getCurrentUserBookings = (
 ) =>
   useQuery<getCurrentUserBookingsQuery, getCurrentUserBookingsQueryVariables>(
     GET_CURRENT_USER_BOOKINGS_QUERY,
+    options
+  );
+
+export const updateUserAvailability = (
+  options?: MutationHookOptions<
+    updateUserAvailabilityMutation,
+    updateUserAvailabilityMutationVariables
+  >
+) =>
+  useMutation<
+    updateUserAvailabilityMutation,
+    updateUserAvailabilityMutationVariables
+  >(User.UPDATE_USER_AVAILABILITY_MUTATION, options);
+
+export const getCurrentUserAvailability = (
+  options?: QueryHookOptions<getCurrentUserAvailabilityQuery>
+) =>
+  useQuery<getCurrentUserAvailabilityQuery>(
+    User.GET_CURRENT_USER_AVAILABILITY_QUERY,
     options
   );

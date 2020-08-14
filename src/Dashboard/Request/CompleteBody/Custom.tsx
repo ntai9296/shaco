@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { getHostBookingQuery_node_Booking } from "../../../../graphql/generated";
 
@@ -32,7 +32,6 @@ interface Props {
 }
 
 export default ({ node }: Props) => {
-
   const attachments = node.bookingComplete?.attachments || [];
 
   return (

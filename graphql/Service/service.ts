@@ -77,13 +77,13 @@ export const GET_SERVICE_QUERY = gql`
 `;
 
 export const GET_SERVICE_AVAILABILITY_QUERY = gql`
-  query getServiceAvailabilityQuery($id: ID!, $atOrAfterStarting: DateTime) {
+  query getServiceAvailabilityQuery($id: ID!, $timeZone: String) {
     node(id: $id) {
       ... on Service {
         id
         profile {
           id
-          availabilities(atOrAfterStarting: $atOrAfterStarting)
+          availabilities(timeZone: $timeZone)
         }
       }
     }

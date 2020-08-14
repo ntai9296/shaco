@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import Router, { useRouter } from "next/router";
 import Head from "next/head";
+import dynamic from "next/dynamic";
 import update from "immutability-helper";
 import * as UserAPI from "../../../graphql/User/UserAPI";
 import * as S from "../../../src/Dashboard/Service/Service.styled";
@@ -22,6 +23,12 @@ import {
 import Notification from "../../../src/common/Notification";
 import { ServiceItem } from "../../../src/PublicProfile/Service/ServiceList";
 import DashboardLayout from "../../../src/common/Layout/DashboardLayout";
+import { SERVICE_QUESTION_FRAGMENT } from "../../../graphql/ServiceQuestion/service_question";
+
+const Availability = dynamic(
+  () => import("../../../src/Dashboard/Service/Availability"),
+  { ssr: false }
+);
 
 export default () => {
   const router = useRouter();
@@ -106,12 +113,14 @@ export default () => {
           id: cache.identify(service as any),
           fields: {
             serviceQuestionsConnection(existingConnection) {
+              const newSQ = cache.writeFragment({
+                data: data.createServiceQuestion?.serviceQuestion,
+                fragment: SERVICE_QUESTION_FRAGMENT,
+              });
+
               return {
                 ...existingConnection,
-                nodes: [
-                  ...existingConnection.nodes,
-                  data.createServiceQuestion?.serviceQuestion,
-                ],
+                nodes: [...existingConnection.nodes, newSQ],
               };
             },
           },
@@ -513,6 +522,21 @@ export default () => {
                 </a>
               </S.ScreeningQuestionList>
             </S.NewServiceContainer>
+
+            {ServiceTypeEnum.VIRTUAL_ONE_ON_ONE === service.serviceType && (
+              <S.NewServiceContainer>
+                <S.NewServiceHeaderContainer>
+                  <S.Step>4</S.Step>
+                  <span>Availability</span>
+                </S.NewServiceHeaderContainer>
+                <p>
+                  Set your available hours when people can schedule calls with
+                  you.
+                </p>
+                <Availability />
+              </S.NewServiceContainer>
+            )}
+
             {errors.length > 0 && (
               <S.Row>
                 <Notification

@@ -76,7 +76,7 @@ export default ({ service }: Props) => {
   const { data } = getServiceAvailabilityById({
     variables: {
       id: service.id,
-      atOrAfterStarting: currentDateTime.clone().subtract("1", "day"),
+      timeZone: userTimezone.current,
     },
     onCompleted: (data) => {
       const node = data?.node as getServiceAvailabilityQuery_node_Service;

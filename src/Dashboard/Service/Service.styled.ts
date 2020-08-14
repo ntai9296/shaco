@@ -60,7 +60,7 @@ export const NewServiceContainer = styled.div`
 export const NewServiceHeaderContainer = styled.div`
   display: flex;
   align-items: center;
-  margin-bottom: 25px;
+  margin-bottom: 20px;
 
   > span {
     font-weight: bold;
@@ -69,7 +69,7 @@ export const NewServiceHeaderContainer = styled.div`
 `;
 
 export const Step = styled.div`
-  background: ${props => props.theme.primaryColor};
+  background: ${(props) => props.theme.primaryColor};
   border-radius: 8px;
   width: 35px;
   height: 35px;
@@ -171,7 +171,7 @@ export const ScreeningQuestionList = styled.div`
 `;
 
 export const ScreeningQuestionItem = styled.div`
-  padding: 15px;
+  padding: 10px 15px;
   border-bottom: ${(props) => props.theme.border};
   display: flex;
   justify-content: flex-start;
@@ -179,7 +179,7 @@ export const ScreeningQuestionItem = styled.div`
   align-items: center;
 
   > b {
-    font-size: 16px;
+    font-size: 14px;
   }
   > input {
     border: none;
@@ -193,8 +193,7 @@ export const ScreeningQuestionItem = styled.div`
 `;
 
 export const AddScreeningQuestion = styled.div`
-  padding: 15px;
-  font-weight: bold;
+  padding: 10px 15px;
   text-align: center;
   user-select: none;
   cursor: pointer;

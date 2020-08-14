@@ -110,7 +110,7 @@ export const GET_BOOKING_CONFIRMATION_QUERY = gql`
 `;
 
 export const GET_BOOKING_RESCHEDULE_QUERY = gql`
-  query getBookingRescheduleQuery($id: ID!, $atOrAfterStarting: DateTime) {
+  query getBookingRescheduleQuery($id: ID!, $timeZone: String) {
     node(id: $id) {
       ... on Booking {
         ...bookingFragment
@@ -129,7 +129,7 @@ export const GET_BOOKING_RESCHEDULE_QUERY = gql`
           name
           profilePhotoUrl
           slug
-          availabilities(atOrAfterStarting: $atOrAfterStarting)
+          availabilities(timeZone: $timeZone)
         }
         service {
           id

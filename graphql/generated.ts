@@ -4,6 +4,90 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: updateAvailabilityMutation
+// ====================================================
+
+export interface updateAvailabilityMutation_updateAvailability_availability {
+  id: string;
+  starting: any;
+  ending: any;
+  day: AvailabilityDayEnum;
+}
+
+export interface updateAvailabilityMutation_updateAvailability {
+  availability: updateAvailabilityMutation_updateAvailability_availability | null;
+}
+
+export interface updateAvailabilityMutation {
+  updateAvailability: updateAvailabilityMutation_updateAvailability | null;
+}
+
+export interface updateAvailabilityMutationVariables {
+  input: UpdateAvailabilityInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: deleteAvailabilityMutation
+// ====================================================
+
+export interface deleteAvailabilityMutation_deleteAvailability_availability {
+  id: string;
+  starting: any;
+  ending: any;
+  day: AvailabilityDayEnum;
+}
+
+export interface deleteAvailabilityMutation_deleteAvailability {
+  availability: deleteAvailabilityMutation_deleteAvailability_availability | null;
+}
+
+export interface deleteAvailabilityMutation {
+  deleteAvailability: deleteAvailabilityMutation_deleteAvailability | null;
+}
+
+export interface deleteAvailabilityMutationVariables {
+  input: DeleteAvailabilityInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: createAvailabilityMutation
+// ====================================================
+
+export interface createAvailabilityMutation_createAvailability_availability {
+  id: string;
+  starting: any;
+  ending: any;
+  day: AvailabilityDayEnum;
+}
+
+export interface createAvailabilityMutation_createAvailability {
+  availability: createAvailabilityMutation_createAvailability_availability | null;
+}
+
+export interface createAvailabilityMutation {
+  createAvailability: createAvailabilityMutation_createAvailability | null;
+}
+
+export interface createAvailabilityMutationVariables {
+  input: CreateAvailabilityInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: createBookingMutation
 // ====================================================
 
@@ -94,7 +178,7 @@ export interface rescheduleBookingMutationVariables {
 // GraphQL query operation: getBookingConfirmationQuery
 // ====================================================
 
-export interface getBookingConfirmationQuery_node_BookingComplete {}
+export interface getBookingConfirmationQuery_node_Availability {}
 
 export interface getBookingConfirmationQuery_node_Booking_providable {
   id: string;
@@ -130,7 +214,7 @@ export interface getBookingConfirmationQuery_node_Booking {
   service: getBookingConfirmationQuery_node_Booking_service | null;
 }
 
-export type getBookingConfirmationQuery_node = getBookingConfirmationQuery_node_BookingComplete | getBookingConfirmationQuery_node_Booking;
+export type getBookingConfirmationQuery_node = getBookingConfirmationQuery_node_Availability | getBookingConfirmationQuery_node_Booking;
 
 export interface getBookingConfirmationQuery {
   /**
@@ -152,7 +236,7 @@ export interface getBookingConfirmationQueryVariables {
 // GraphQL query operation: getBookingRescheduleQuery
 // ====================================================
 
-export interface getBookingRescheduleQuery_node_BookingComplete {}
+export interface getBookingRescheduleQuery_node_Availability {}
 
 export interface getBookingRescheduleQuery_node_Booking_providable {
   id: string;
@@ -196,7 +280,7 @@ export interface getBookingRescheduleQuery_node_Booking {
   service: getBookingRescheduleQuery_node_Booking_service | null;
 }
 
-export type getBookingRescheduleQuery_node = getBookingRescheduleQuery_node_BookingComplete | getBookingRescheduleQuery_node_Booking;
+export type getBookingRescheduleQuery_node = getBookingRescheduleQuery_node_Availability | getBookingRescheduleQuery_node_Booking;
 
 export interface getBookingRescheduleQuery {
   /**
@@ -207,7 +291,7 @@ export interface getBookingRescheduleQuery {
 
 export interface getBookingRescheduleQueryVariables {
   id: string;
-  atOrAfterStarting?: any | null;
+  timeZone?: string | null;
 }
 
 /* tslint:disable */
@@ -300,7 +384,7 @@ export interface getCurrentUserBookingsQueryVariables {
 // GraphQL query operation: getHostBookingQuery
 // ====================================================
 
-export interface getHostBookingQuery_node_BookingComplete {}
+export interface getHostBookingQuery_node_Availability {}
 
 export interface getHostBookingQuery_node_Booking_providable {
   id: string;
@@ -349,7 +433,7 @@ export interface getHostBookingQuery_node_Booking {
   bookingComplete: getHostBookingQuery_node_Booking_bookingComplete | null;
 }
 
-export type getHostBookingQuery_node = getHostBookingQuery_node_BookingComplete | getHostBookingQuery_node_Booking;
+export type getHostBookingQuery_node = getHostBookingQuery_node_Availability | getHostBookingQuery_node_Booking;
 
 export interface getHostBookingQuery {
   /**
@@ -371,7 +455,7 @@ export interface getHostBookingQueryVariables {
 // GraphQL query operation: getHostBookingZoomStartUrlQuery
 // ====================================================
 
-export interface getHostBookingZoomStartUrlQuery_node_BookingComplete {}
+export interface getHostBookingZoomStartUrlQuery_node_Availability {}
 
 export interface getHostBookingZoomStartUrlQuery_node_Booking_providable {
   id: string;
@@ -388,7 +472,7 @@ export interface getHostBookingZoomStartUrlQuery_node_Booking {
   providable: getHostBookingZoomStartUrlQuery_node_Booking_providable | null;
 }
 
-export type getHostBookingZoomStartUrlQuery_node = getHostBookingZoomStartUrlQuery_node_BookingComplete | getHostBookingZoomStartUrlQuery_node_Booking;
+export type getHostBookingZoomStartUrlQuery_node = getHostBookingZoomStartUrlQuery_node_Availability | getHostBookingZoomStartUrlQuery_node_Booking;
 
 export interface getHostBookingZoomStartUrlQuery {
   /**
@@ -553,7 +637,7 @@ export interface createBookingCompleteMutationVariables {
 // GraphQL query operation: getBookingCompleteQuery
 // ====================================================
 
-export interface getBookingCompleteQuery_node_Booking {}
+export interface getBookingCompleteQuery_node_Availability {}
 
 export interface getBookingCompleteQuery_node_BookingComplete_booking_hostProfile {
   id: string;
@@ -574,7 +658,7 @@ export interface getBookingCompleteQuery_node_BookingComplete {
   booking: getBookingCompleteQuery_node_BookingComplete_booking | null;
 }
 
-export type getBookingCompleteQuery_node = getBookingCompleteQuery_node_Booking | getBookingCompleteQuery_node_BookingComplete;
+export type getBookingCompleteQuery_node = getBookingCompleteQuery_node_Availability | getBookingCompleteQuery_node_BookingComplete;
 
 export interface getBookingCompleteQuery {
   /**
@@ -991,7 +1075,7 @@ export interface deleteServiceMutationVariables {
 // GraphQL query operation: getServiceQuery
 // ====================================================
 
-export interface getServiceQuery_node_Booking {}
+export interface getServiceQuery_node_Availability {}
 
 export interface getServiceQuery_node_Service_providable_VideoCallService {
   id: string;
@@ -1033,7 +1117,7 @@ export interface getServiceQuery_node_Service {
   serviceQuestionsConnection: getServiceQuery_node_Service_serviceQuestionsConnection;
 }
 
-export type getServiceQuery_node = getServiceQuery_node_Booking | getServiceQuery_node_Service;
+export type getServiceQuery_node = getServiceQuery_node_Availability | getServiceQuery_node_Service;
 
 export interface getServiceQuery {
   /**
@@ -1055,7 +1139,7 @@ export interface getServiceQueryVariables {
 // GraphQL query operation: getServiceAvailabilityQuery
 // ====================================================
 
-export interface getServiceAvailabilityQuery_node_Booking {}
+export interface getServiceAvailabilityQuery_node_Availability {}
 
 export interface getServiceAvailabilityQuery_node_Service_profile {
   id: string;
@@ -1067,7 +1151,7 @@ export interface getServiceAvailabilityQuery_node_Service {
   profile: getServiceAvailabilityQuery_node_Service_profile | null;
 }
 
-export type getServiceAvailabilityQuery_node = getServiceAvailabilityQuery_node_Booking | getServiceAvailabilityQuery_node_Service;
+export type getServiceAvailabilityQuery_node = getServiceAvailabilityQuery_node_Availability | getServiceAvailabilityQuery_node_Service;
 
 export interface getServiceAvailabilityQuery {
   /**
@@ -1078,7 +1162,7 @@ export interface getServiceAvailabilityQuery {
 
 export interface getServiceAvailabilityQueryVariables {
   id: string;
-  atOrAfterStarting?: any | null;
+  timeZone?: string | null;
 }
 
 /* tslint:disable */
@@ -1561,11 +1645,40 @@ export interface getCurrentUserProfileServicesQuery_currentUser_profile {
   servicesConnection: getCurrentUserProfileServicesQuery_currentUser_profile_servicesConnection | null;
 }
 
+export interface getCurrentUserProfileServicesQuery_currentUser_userAvailability_availabilitiesConnection_nodes {
+  id: string;
+  starting: any;
+  ending: any;
+  day: AvailabilityDayEnum;
+}
+
+export interface getCurrentUserProfileServicesQuery_currentUser_userAvailability_availabilitiesConnection {
+  /**
+   * A list of nodes.
+   */
+  nodes: (getCurrentUserProfileServicesQuery_currentUser_userAvailability_availabilitiesConnection_nodes | null)[] | null;
+}
+
+export interface getCurrentUserProfileServicesQuery_currentUser_userAvailability {
+  id: string;
+  mondayActive: boolean;
+  tuesdayActive: boolean;
+  wednesdayActive: boolean;
+  thursdayActive: boolean;
+  fridayActive: boolean;
+  saturdayActive: boolean;
+  sundayActive: boolean;
+  unavailableActive: boolean;
+  availabilitiesConnection: getCurrentUserProfileServicesQuery_currentUser_userAvailability_availabilitiesConnection;
+}
+
 export interface getCurrentUserProfileServicesQuery_currentUser {
   id: string;
   email: string;
+  timezone: string;
   onboarded: boolean;
   profile: getCurrentUserProfileServicesQuery_currentUser_profile | null;
+  userAvailability: getCurrentUserProfileServicesQuery_currentUser_userAvailability;
 }
 
 export interface getCurrentUserProfileServicesQuery {
@@ -1725,6 +1838,119 @@ export interface updateUserMutation {
 
 export interface updateUserMutationVariables {
   input: UpdateUserInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: updateUserAvailabilityMutation
+// ====================================================
+
+export interface updateUserAvailabilityMutation_updateUserAvailability_userAvailability_availabilitiesConnection_nodes {
+  id: string;
+  starting: any;
+  ending: any;
+  day: AvailabilityDayEnum;
+}
+
+export interface updateUserAvailabilityMutation_updateUserAvailability_userAvailability_availabilitiesConnection {
+  /**
+   * A list of nodes.
+   */
+  nodes: (updateUserAvailabilityMutation_updateUserAvailability_userAvailability_availabilitiesConnection_nodes | null)[] | null;
+}
+
+export interface updateUserAvailabilityMutation_updateUserAvailability_userAvailability {
+  id: string;
+  mondayActive: boolean;
+  tuesdayActive: boolean;
+  wednesdayActive: boolean;
+  thursdayActive: boolean;
+  fridayActive: boolean;
+  saturdayActive: boolean;
+  sundayActive: boolean;
+  unavailableActive: boolean;
+  availabilitiesConnection: updateUserAvailabilityMutation_updateUserAvailability_userAvailability_availabilitiesConnection;
+}
+
+export interface updateUserAvailabilityMutation_updateUserAvailability {
+  userAvailability: updateUserAvailabilityMutation_updateUserAvailability_userAvailability | null;
+}
+
+export interface updateUserAvailabilityMutation {
+  updateUserAvailability: updateUserAvailabilityMutation_updateUserAvailability | null;
+}
+
+export interface updateUserAvailabilityMutationVariables {
+  input: UpdateUserAvailabilityInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: getCurrentUserAvailabilityQuery
+// ====================================================
+
+export interface getCurrentUserAvailabilityQuery_currentUser_userAvailability_availabilitiesConnection_nodes {
+  id: string;
+  starting: any;
+  ending: any;
+  day: AvailabilityDayEnum;
+}
+
+export interface getCurrentUserAvailabilityQuery_currentUser_userAvailability_availabilitiesConnection {
+  /**
+   * A list of nodes.
+   */
+  nodes: (getCurrentUserAvailabilityQuery_currentUser_userAvailability_availabilitiesConnection_nodes | null)[] | null;
+}
+
+export interface getCurrentUserAvailabilityQuery_currentUser_userAvailability {
+  id: string;
+  mondayActive: boolean;
+  tuesdayActive: boolean;
+  wednesdayActive: boolean;
+  thursdayActive: boolean;
+  fridayActive: boolean;
+  saturdayActive: boolean;
+  sundayActive: boolean;
+  unavailableActive: boolean;
+  availabilitiesConnection: getCurrentUserAvailabilityQuery_currentUser_userAvailability_availabilitiesConnection;
+}
+
+export interface getCurrentUserAvailabilityQuery_currentUser {
+  id: string;
+  timezone: string;
+  userAvailability: getCurrentUserAvailabilityQuery_currentUser_userAvailability;
+}
+
+export interface getCurrentUserAvailabilityQuery {
+  /**
+   * Get current user based on jwt token in header
+   */
+  currentUser: getCurrentUserAvailabilityQuery_currentUser | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL fragment: availabilityFragment
+// ====================================================
+
+export interface availabilityFragment {
+  id: string;
+  starting: any;
+  ending: any;
+  day: AvailabilityDayEnum;
 }
 
 /* tslint:disable */
@@ -1895,9 +2121,56 @@ export interface serviceQuestionFragment {
 // @generated
 // This file was automatically generated and should not be edited.
 
+// ====================================================
+// GraphQL fragment: userAvailabilityFragment
+// ====================================================
+
+export interface userAvailabilityFragment_availabilitiesConnection_nodes {
+  id: string;
+  starting: any;
+  ending: any;
+  day: AvailabilityDayEnum;
+}
+
+export interface userAvailabilityFragment_availabilitiesConnection {
+  /**
+   * A list of nodes.
+   */
+  nodes: (userAvailabilityFragment_availabilitiesConnection_nodes | null)[] | null;
+}
+
+export interface userAvailabilityFragment {
+  id: string;
+  mondayActive: boolean;
+  tuesdayActive: boolean;
+  wednesdayActive: boolean;
+  thursdayActive: boolean;
+  fridayActive: boolean;
+  saturdayActive: boolean;
+  sundayActive: boolean;
+  unavailableActive: boolean;
+  availabilitiesConnection: userAvailabilityFragment_availabilitiesConnection;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
 //==============================================================
 // START Enums and Input Objects
 //==============================================================
+
+export enum AvailabilityDayEnum {
+  FRIDAY = "FRIDAY",
+  MONDAY = "MONDAY",
+  SATURDAY = "SATURDAY",
+  SUNDAY = "SUNDAY",
+  THURSDAY = "THURSDAY",
+  TUESDAY = "TUESDAY",
+  UNAVAILABLE = "UNAVAILABLE",
+  WEDNESDAY = "WEDNESDAY",
+}
 
 export enum BookingStatusEnum {
   ACTIVE = "ACTIVE",
@@ -1967,6 +2240,15 @@ export interface CancelBookingInput {
 export interface ChangeUserPasswordInput {
   currentPassword?: string | null;
   newPassword: string;
+  clientMutationId?: string | null;
+}
+
+/**
+ * Autogenerated input type of CreateAvailability
+ */
+export interface CreateAvailabilityInput {
+  userAvailabilityId: string;
+  day: AvailabilityDayEnum;
   clientMutationId?: string | null;
 }
 
@@ -2073,6 +2355,14 @@ export interface CreateUserInput {
 }
 
 /**
+ * Autogenerated input type of DeleteAvailability
+ */
+export interface DeleteAvailabilityInput {
+  availabilityId: string;
+  clientMutationId?: string | null;
+}
+
+/**
  * Autogenerated input type of DeleteCalendarEvent
  */
 export interface DeleteCalendarEventInput {
@@ -2170,6 +2460,16 @@ export interface ResetPasswordInput {
 }
 
 /**
+ * Autogenerated input type of UpdateAvailability
+ */
+export interface UpdateAvailabilityInput {
+  availabilityId: string;
+  starting?: any | null;
+  ending?: any | null;
+  clientMutationId?: string | null;
+}
+
+/**
  * Autogenerated input type of UpdateCalendarEvent
  */
 export interface UpdateCalendarEventInput {
@@ -2227,6 +2527,22 @@ export interface UpdateServiceInput {
 export interface UpdateServiceQuestionInput {
   serviceQuestionId: string;
   question: string;
+  clientMutationId?: string | null;
+}
+
+/**
+ * Autogenerated input type of UpdateUserAvailability
+ */
+export interface UpdateUserAvailabilityInput {
+  userAvailabilityId: string;
+  mondayActive?: boolean | null;
+  tuesdayActive?: boolean | null;
+  wednesdayActive?: boolean | null;
+  thursdayActive?: boolean | null;
+  fridayActive?: boolean | null;
+  saturdayActive?: boolean | null;
+  sundayActive?: boolean | null;
+  unavailableActive?: boolean | null;
   clientMutationId?: string | null;
 }
 

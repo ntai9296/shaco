@@ -37,7 +37,7 @@ export default () => {
     return (
       <S.BookingConfirmationContainer>
         <S.ConfirmationContainer>
-          <S.ConfirmationHeader>Booking cancelled.</S.ConfirmationHeader>
+          <S.ConfirmationHeader>Request cancelled.</S.ConfirmationHeader>
           <S.BookingEmailMessage>
             You will get a full refund within a few days.
           </S.BookingEmailMessage>
@@ -48,7 +48,7 @@ export default () => {
 
   return (
     <S.BookingConfirmationContainer>
-      <S.ConfirmationHeader>Cancel Booking</S.ConfirmationHeader>
+      <S.ConfirmationHeader>Cancel Request</S.ConfirmationHeader>
       <S.ConfirmationContainer>
         {node.hostProfile.profilePhotoUrl && (
           <S.ProfilePicture>
@@ -79,7 +79,7 @@ export default () => {
             }
             isLoading={cancelBookingLoading}
           >
-            Cancel booking
+            Cancel Request
           </Button>
         </div>
       </S.ConfirmationContainer>

@@ -1,6 +1,28 @@
 import { gql } from "@apollo/client";
 import { SERVICE_FRAGMENT } from "../Service/service";
 import { PROFILE_FRAGMENT } from "../Profile/profile";
+import { AVAILABILITY_FRAGMENT } from "../Availability/availability";
+
+export const USER_AVAILABILITY_FRAGMENT = gql`
+  fragment userAvailabilityFragment on UserAvailability {
+    id
+    mondayActive
+    tuesdayActive
+    wednesdayActive
+    thursdayActive
+    fridayActive
+    saturdayActive
+    sundayActive
+    unavailableActive
+
+    availabilitiesConnection {
+      nodes {
+        ...availabilityFragment
+      }
+    }
+  }
+  ${AVAILABILITY_FRAGMENT}
+`;
 
 export const GET_CURRENT_USER_SIMPLE_QUERY = gql`
   query getCurrentUserSimpleQuery {
@@ -170,6 +192,7 @@ export const GET_CURRENT_USER_PROFILE_SERVICES_QUERY = gql`
     currentUser {
       id
       email
+      timezone
       onboarded
       profile {
         id
@@ -180,9 +203,13 @@ export const GET_CURRENT_USER_PROFILE_SERVICES_QUERY = gql`
           }
         }
       }
+      userAvailability {
+        ...userAvailabilityFragment
+      }
     }
   }
   ${SERVICE_FRAGMENT}
+  ${USER_AVAILABILITY_FRAGMENT}
 `;
 
 export const REQUEST_EARLY_ACCESS_MUTATION = gql`
@@ -234,4 +261,30 @@ export const UPDATE_USER_MUTATION = gql`
       }
     }
   }
+`;
+
+export const UPDATE_USER_AVAILABILITY_MUTATION = gql`
+  mutation updateUserAvailabilityMutation(
+    $input: UpdateUserAvailabilityInput!
+  ) {
+    updateUserAvailability(input: $input) {
+      userAvailability {
+        ...userAvailabilityFragment
+      }
+    }
+  }
+  ${USER_AVAILABILITY_FRAGMENT}
+`;
+
+export const GET_CURRENT_USER_AVAILABILITY_QUERY = gql`
+  query getCurrentUserAvailabilityQuery {
+    currentUser {
+      id
+      timezone
+      userAvailability {
+        ...userAvailabilityFragment
+      }
+    }
+  }
+  ${USER_AVAILABILITY_FRAGMENT}
 `;
