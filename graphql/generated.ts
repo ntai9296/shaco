@@ -2248,6 +2248,8 @@ export interface ChangeUserPasswordInput {
  */
 export interface CreateAvailabilityInput {
   userAvailabilityId: string;
+  starting?: any | null;
+  ending?: any | null;
   day: AvailabilityDayEnum;
   clientMutationId?: string | null;
 }

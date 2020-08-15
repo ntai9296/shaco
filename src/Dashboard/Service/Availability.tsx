@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import moment from "moment-timezone";
+import DatePicker from "react-datepicker";
 import update from "immutability-helper";
 import Switch from "../../common/Switch";
 import SelectCommon from "../../common/Select";
@@ -22,6 +23,7 @@ import {
   AvailabilityDayEnum,
 } from "../../../graphql/generated";
 import Popper from "../../common/Popper";
+import { CommonInput } from "../../common/Input";
 
 export const AvailabilityContainer = styled.div`
   border: 1px solid rgb(229, 227, 221);
@@ -63,14 +65,15 @@ export const AvailabilityItem = styled.div`
   margin-bottom: 7px;
   text-align: center;
 
+  svg {
+    margin-left: 15px;
+    cursor: pointer;
+  }
+
   > div {
     :last-child {
       display: flex;
       align-items: center;
-      > svg {
-        margin-left: 15px;
-        cursor: pointer;
-      }
 
       > div {
         ${mediaBreakpointDown("xs")} {
@@ -137,7 +140,16 @@ export default () => {
       }
     });
 
-    setData([monday, tuesday, wednesday, thursday, friday, saturday, sunday]);
+    setData([
+      monday,
+      tuesday,
+      wednesday,
+      thursday,
+      friday,
+      saturday,
+      sunday,
+      unavailable,
+    ]);
   }, [currentUser]);
 
   if (!currentUser) {
@@ -194,6 +206,11 @@ export default () => {
         title="Sunday"
         userAvailability={currentUser.userAvailability}
         day={AvailabilityDayEnum.SUNDAY}
+      />
+      <UnAvailabilitySection
+        timezone={currentUser.timezone}
+        availabilities={data[7]}
+        userAvailability={currentUser.userAvailability}
       />
     </div>
   );
@@ -514,19 +531,35 @@ interface UnAvailabilitySectionProps {
 const UnAvailabilitySection = ({
   userAvailability,
   timezone,
-  availabilities,
+  availabilities = [],
 }: UnAvailabilitySectionProps) => {
+  const currDate = moment();
   const [openAddDate, setOpenAddDate] = useState(false);
-  const [state, setState] = useState([
-    {
-      startDate: new Date(),
-      endDate: new Date(),
-      key: "selection",
-    },
-  ]);
+  const [startDate, setStartDate] = useState<any>(null);
+  const [endDate, setEndDate] = useState<any>(null);
+  const onChange = (dates: any) => {
+    const [start, end] = dates;
+    setStartDate(start);
+    setEndDate(end);
+
+    if (start && end) {
+      setOpenAddDate(false);
+      setStartDate(null);
+      setEndDate(null);
+      onCreateAvailability({
+        variables: {
+          input: {
+            userAvailabilityId: userAvailability.id,
+            starting: moment.tz(start, timezone).toISOString(),
+            ending: moment.tz(end, timezone).toISOString(),
+            day: AvailabilityDayEnum.UNAVAILABLE,
+          },
+        },
+      });
+    }
+  };
 
   const [onUdateUserAvailability] = updateUserAvailability();
-  const [onUpdateAvailability] = updateAvailability();
 
   const [onCreateAvailability] = createAvailability({
     update: (cache, { data }) => {
@@ -594,22 +627,21 @@ const UnAvailabilitySection = ({
         </AvailabilityHeaderContainer>
         {userAvailability.unavailableActive && (
           <AvailabilityTimes>
-            {availabilities.map((date, idx) => (
-              <AvailabilityItem key={idx}>
-                <div>
-                  <XCircle
-                    size={20}
-                    onClick={() =>
-                      onDeleteAvailability({
-                        variables: {
-                          input: {
-                            availabilityId: date.id,
-                          },
+            {availabilities.map((date) => (
+              <AvailabilityItem key={date.id}>
+                <InputItem date={date} currDate={currDate} timezone={timezone} />
+                <XCircle
+                  size={20}
+                  onClick={() =>
+                    onDeleteAvailability({
+                      variables: {
+                        input: {
+                          availabilityId: date.id,
                         },
-                      })
-                    }
-                  />
-                </div>
+                      },
+                    })
+                  }
+                />
               </AvailabilityItem>
             ))}
           </AvailabilityTimes>
@@ -619,7 +651,21 @@ const UnAvailabilitySection = ({
         <Popper
           isOpen={openAddDate}
           onClickOutside={() => setOpenAddDate(false)}
-          content={<div></div>}
+          content={
+            <div>
+              <DatePicker
+                showPopperArrow={false}
+                minDate={currDate.toDate()}
+                onChange={onChange}
+                startDate={startDate}
+                endDate={endDate}
+                selected={startDate}
+                selectsRange
+                inline
+                disabledKeyboardNavigation
+              />
+            </div>
+          }
         >
           <AddAvailability onClick={() => setOpenAddDate(true)}>
             Add dates +
@@ -627,5 +673,71 @@ const UnAvailabilitySection = ({
         </Popper>
       )}
     </AvailabilityContainer>
+  );
+};
+
+const Input = styled(CommonInput)``;
+
+const InputItem = ({ date, currDate, timezone }: any) => {
+  const [openAddDate, setOpenAddDate] = useState(false);
+  const [startDate, setStartDate] = useState<any>(moment.tz(date.starting, timezone).toDate());
+  const [endDate, setEndDate] = useState<any>(moment.tz(date.ending, timezone).toDate());
+  const [onUpdateAvailability] = updateAvailability();
+
+  const onChange = (dates: any) => {
+    const [start, end] = dates;
+    setStartDate(start);
+    setEndDate(end);
+
+    if (start && end) {
+      setOpenAddDate(false);
+      onUpdateAvailability({
+        variables: {
+          input: {
+            availabilityId: date.id,
+            starting: moment.tz(start, timezone).toISOString(),
+            ending: moment.tz(end, timezone).toISOString(),
+          },
+        },
+      });
+    }
+  };
+  return (
+    <div style={{ flex: 1 }}>
+      <Popper
+        isOpen={openAddDate}
+        onClickOutside={() => setOpenAddDate(false)}
+        content={
+          <div>
+            <DatePicker
+              showPopperArrow={false}
+              minDate={currDate.toDate()}
+              onChange={onChange}
+              startDate={startDate}
+              endDate={endDate}
+              selected={startDate}
+              selectsRange
+              inline
+              disabledKeyboardNavigation
+            />
+          </div>
+        }
+      >
+        <Input
+          onClick={() => {
+            setOpenAddDate(true);
+            setStartDate(moment.tz(date.starting, timezone).toDate());
+            setEndDate(moment.tz(date.ending, timezone).toDate());
+          }}
+          style={{ textAlign: "center" }}
+          value={`${moment
+            .tz(date.starting, timezone)
+            .format("MM/DD/YYYY")} ~ ${moment
+            .tz(date.ending, timezone)
+            .format("MM/DD/YYYY")}`}
+          readOnly
+        />
+      </Popper>
+    </div>
   );
 };

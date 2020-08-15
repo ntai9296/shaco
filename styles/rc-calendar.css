@@ -1129,3 +1129,9 @@
   border-top-color: #3fc7fa;
   color: #3fc7fa;
 }
+
+.react-datepicker__day--keyboard-selected {
+  background-color: transparent !important;
+  color: #000 !important;
+  font-weight: 400 !important;
+}

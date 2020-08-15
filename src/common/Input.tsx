@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { mediaBreakpointDown } from "./utility";
 import { setLightness } from "polished";
 
-const Input = styled.input`
+export const CommonInput = styled.input`
   color: #3b3b3b;
   background-color: #fff;
   border: 1px solid #d6e3eb;
@@ -39,6 +39,6 @@ interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
 export default ({ label = "", ...props }: Props) => (
   <Content>
     {label && <label htmlFor={label}>{label}</label>}
-    <Input id={label && label} {...props} />
+    <CommonInput id={label && label} {...props} />
   </Content>
 );

@@ -2,6 +2,7 @@ import "../styles/static.scss";
 import "../styles/calendar.scss";
 import "../styles/rc-calendar.css";
 import "nprogress/nprogress.css";
+import "react-datepicker/dist/react-datepicker.css";
 import Router from "next/router";
 import { ApolloProvider } from "@apollo/client";
 import NProgress from "nprogress"; //nprogress module
