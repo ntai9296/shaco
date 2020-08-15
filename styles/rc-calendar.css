@@ -1135,3 +1135,7 @@
   color: #000 !important;
   font-weight: 400 !important;
 }
+
+.react-datepicker {
+  border: none !important;
+}

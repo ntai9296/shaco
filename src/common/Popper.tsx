@@ -34,6 +34,7 @@ export default ({
       onClickOutside={onClickOutside}
       containerStyle={{ overflow: "visible", zIndex: "999" }}
       windowBorderPadding={15}
+      disableReposition
       isOpen={isOpen}
       position={position}
       content={() =>

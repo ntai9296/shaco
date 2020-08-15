@@ -24,6 +24,7 @@ import {
 } from "../../../graphql/generated";
 import Popper from "../../common/Popper";
 import { CommonInput } from "../../common/Input";
+import { Button } from "../Request/ActionBody/Custom";
 
 export const AvailabilityContainer = styled.div`
   border: 1px solid rgb(229, 227, 221);
@@ -541,22 +542,6 @@ const UnAvailabilitySection = ({
     const [start, end] = dates;
     setStartDate(start);
     setEndDate(end);
-
-    if (start && end) {
-      setOpenAddDate(false);
-      setStartDate(null);
-      setEndDate(null);
-      onCreateAvailability({
-        variables: {
-          input: {
-            userAvailabilityId: userAvailability.id,
-            starting: moment.tz(start, timezone).toISOString(),
-            ending: moment.tz(end, timezone).toISOString(),
-            day: AvailabilityDayEnum.UNAVAILABLE,
-          },
-        },
-      });
-    }
   };
 
   const [onUdateUserAvailability] = updateUserAvailability();
@@ -629,7 +614,11 @@ const UnAvailabilitySection = ({
           <AvailabilityTimes>
             {availabilities.map((date) => (
               <AvailabilityItem key={date.id}>
-                <InputItem date={date} currDate={currDate} timezone={timezone} />
+                <InputItem
+                  date={date}
+                  currDate={currDate}
+                  timezone={timezone}
+                />
                 <XCircle
                   size={20}
                   onClick={() =>
@@ -650,7 +639,6 @@ const UnAvailabilitySection = ({
       {userAvailability.unavailableActive && (
         <Popper
           isOpen={openAddDate}
-          onClickOutside={() => setOpenAddDate(false)}
           content={
             <div>
               <DatePicker
@@ -664,6 +652,38 @@ const UnAvailabilitySection = ({
                 inline
                 disabledKeyboardNavigation
               />
+              <PickerFooter>
+                <a
+                  onClick={() => {
+                    setOpenAddDate(false);
+                    setStartDate(null);
+                    setEndDate(null);
+                  }}
+                >
+                  Cancel
+                </a>
+                <a
+                  onClick={() => {
+                    setOpenAddDate(false);
+                    setStartDate(null);
+                    setEndDate(null);
+                    onCreateAvailability({
+                      variables: {
+                        input: {
+                          userAvailabilityId: userAvailability.id,
+                          starting: moment
+                            .tz(startDate, timezone)
+                            .toISOString(),
+                          ending: moment.tz(endDate, timezone).toISOString(),
+                          day: AvailabilityDayEnum.UNAVAILABLE,
+                        },
+                      },
+                    });
+                  }}
+                >
+                  Add
+                </a>
+              </PickerFooter>
             </div>
           }
         >
@@ -677,36 +697,40 @@ const UnAvailabilitySection = ({
 };
 
 const Input = styled(CommonInput)``;
+const PickerFooter = styled.div`
+  padding: 0 10px 10px 10px;
+  display: flex;
+  justify-content: flex-end;
+
+  > a {
+    cursor: pointer;
+    margin-left: 12px;
+
+    :last-child {
+      font-weight: bold;
+    }
+  }
+`;
 
 const InputItem = ({ date, currDate, timezone }: any) => {
   const [openAddDate, setOpenAddDate] = useState(false);
-  const [startDate, setStartDate] = useState<any>(moment.tz(date.starting, timezone).toDate());
-  const [endDate, setEndDate] = useState<any>(moment.tz(date.ending, timezone).toDate());
+  const [startDate, setStartDate] = useState<any>(
+    moment.tz(date.starting, timezone).toDate()
+  );
+  const [endDate, setEndDate] = useState<any>(
+    moment.tz(date.ending, timezone).toDate()
+  );
   const [onUpdateAvailability] = updateAvailability();
 
   const onChange = (dates: any) => {
     const [start, end] = dates;
     setStartDate(start);
     setEndDate(end);
-
-    if (start && end) {
-      setOpenAddDate(false);
-      onUpdateAvailability({
-        variables: {
-          input: {
-            availabilityId: date.id,
-            starting: moment.tz(start, timezone).toISOString(),
-            ending: moment.tz(end, timezone).toISOString(),
-          },
-        },
-      });
-    }
   };
   return (
     <div style={{ flex: 1 }}>
       <Popper
         isOpen={openAddDate}
-        onClickOutside={() => setOpenAddDate(false)}
         content={
           <div>
             <DatePicker
@@ -720,6 +744,33 @@ const InputItem = ({ date, currDate, timezone }: any) => {
               inline
               disabledKeyboardNavigation
             />
+            <PickerFooter>
+              <a
+                onClick={() => {
+                  setOpenAddDate(false);
+                  setStartDate(moment.tz(date.starting, timezone).toDate());
+                  setEndDate(moment.tz(date.ending, timezone).toDate());
+                }}
+              >
+                Cancel
+              </a>
+              <a
+                onClick={() => {
+                  setOpenAddDate(false);
+                  onUpdateAvailability({
+                    variables: {
+                      input: {
+                        availabilityId: date.id,
+                        starting: moment.tz(startDate, timezone).toISOString(),
+                        ending: moment.tz(endDate, timezone).toISOString(),
+                      },
+                    },
+                  });
+                }}
+              >
+                Save
+              </a>
+            </PickerFooter>
           </div>
         }
       >
