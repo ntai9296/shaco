@@ -41,6 +41,12 @@ import {
   updateUserAvailabilityMutation,
   updateUserAvailabilityMutationVariables,
   getCurrentUserAvailabilityQuery,
+  getCurrentUserStripeAccountQuery,
+  authorizeConnectStripeAccountMutation,
+  authorizeConnectStripeAccountMutationVariables,
+  getCurrentUserStripeAccountLoginLinkQuery,
+  currentUserRequestPayoutMutation,
+  currentUserRequestPayoutMutationVariables,
 } from "../generated";
 
 export const getCurrentUserSimple = (
@@ -230,3 +236,41 @@ export const getCurrentUserAvailability = (
     User.GET_CURRENT_USER_AVAILABILITY_QUERY,
     options
   );
+
+export const getCurrentUserStripeAccountLoginLinkLazy = (
+  options?: QueryHookOptions<getCurrentUserStripeAccountLoginLinkQuery>
+) =>
+  useLazyQuery<getCurrentUserStripeAccountLoginLinkQuery>(
+    User.GET_CURRENT_USER_STRIPE_ACCOUNT_LOGIN_LINK_QUERY,
+    options
+  );
+
+export const getCurrentUserStripeAccount = (
+  options?: QueryHookOptions<getCurrentUserStripeAccountQuery>
+) =>
+  useQuery<getCurrentUserStripeAccountQuery>(
+    User.GET_CURRENT_USER_STRIPE_ACCOUNT_QUERY,
+    options
+  );
+
+export const currentUserAuthorizeConnectStripeAccount = (
+  options?: MutationHookOptions<
+    authorizeConnectStripeAccountMutation,
+    authorizeConnectStripeAccountMutationVariables
+  >
+) =>
+  useMutation<
+    authorizeConnectStripeAccountMutation,
+    authorizeConnectStripeAccountMutationVariables
+  >(User.CURRENT_USER_AUTHORIZE_CONNECT_STRIPE_ACCOUNT_MUTATION, options);
+
+export const currentUserRequestPayout = (
+  options?: MutationHookOptions<
+    currentUserRequestPayoutMutation,
+    currentUserRequestPayoutMutationVariables
+  >
+) =>
+  useMutation<
+    currentUserRequestPayoutMutation,
+    currentUserRequestPayoutMutationVariables
+  >(User.CURRENT_USER_REQUEST_PAYOUT_MUTATION, options);

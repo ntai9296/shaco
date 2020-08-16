@@ -57,6 +57,9 @@ export const mediaBreakpointBetween = (
 export const showWorkingOverlay = (delay = 500) =>
   OverlayJS.showWorkingOverlay(delay);
 export const hideWorkingOverlay = () => OverlayJS.hideWorkingOverlay();
+export const showPageNotice = OverlayJS.showPageNotice;
+export const hidePageNotice = OverlayJS.hidePageNotice;
+
 export const extensionName = (fileName: string) => {
   return fileName.substr(fileName.lastIndexOf(".") + 1);
 };

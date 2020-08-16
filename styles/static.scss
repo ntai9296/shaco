@@ -159,3 +159,52 @@ button:focus {
 .ReactModalPortal {
   height: 0;
 }
+
+
+.page-notice {
+  position: fixed;
+  left: 0;
+  width: 100%;
+  font-size: 1.2em;
+  text-align: center;
+  opacity: 1;
+  z-index: 10000;
+  font-size: 14px;
+  color: #fff;
+  height: 50px;
+
+
+  > .message-container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    background: #d64545;
+
+
+    > .message {
+      padding: 21px 0 21px 45px;
+      text-align: center;
+      flex: 1;
+    }
+  }
+
+  .close {
+    color: #fff;
+    opacity: 0.8;
+    top: 0;
+    right: 10px;
+    font-size: 2em;
+    border: 0;
+    line-height: 52px;
+    background: none;
+    cursor: pointer;
+    outline: none;
+
+    width: 45px;
+    padding: 0;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}

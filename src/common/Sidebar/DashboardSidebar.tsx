@@ -96,12 +96,12 @@ export default () => {
         </S.SidebarItem>
       </Link> */}
 
-      {/* <Link href="/dashboard/payout">
-        <S.SidebarItem isActive={activeRoute("/payout")}>
+      <Link href="/dashboard/payouts">
+        <S.SidebarItem isActive={activeRoute("/payouts")}>
           <DollarSign width={15} height={15} />
           Payouts
         </S.SidebarItem>
-      </Link> */}
+      </Link>
 
       {/* <Link href="/dashboard/calendar">
         <S.SidebarItem isActive={activeRoute("/calendar")}>

@@ -7,9 +7,13 @@ interface Props {
   type?: "error" | "success" | "info";
   notifications: string[];
   onClose?: () => void;
+  noBorderRadius?: boolean;
 }
 
-const Notification = styled.div<{ errorType: "error" | "success" | "info" }>`
+const Notification = styled.div<{
+  errorType: "error" | "success" | "info";
+  noBorderRadius?: boolean;
+}>`
   background-color: #fff;
   border-radius: 4px;
   padding: 13px 40px 13px 16px;
@@ -26,7 +30,13 @@ const Notification = styled.div<{ errorType: "error" | "success" | "info" }>`
     props.errorType === "success" &&
     `
   color: #fff;
-  background: ${props.theme.successColor};
+  background: ${props.theme.successColor || "#4caf50"};
+  `}
+
+  ${(props) =>
+    props.noBorderRadius &&
+    `
+    border-radius: 0px;
   `}
 `;
 
@@ -38,12 +48,17 @@ const NotificationItem = styled.div`
   }
 `;
 
-export default ({ type = "info", notifications, onClose }: Props) => {
+export default ({
+  type = "info",
+  notifications,
+  onClose,
+  noBorderRadius,
+}: Props) => {
   if (notifications.length === 0) {
     return null;
   }
   return (
-    <Notification errorType={type}>
+    <Notification errorType={type} noBorderRadius={noBorderRadius}>
       {onClose && <CloseIcon onClick={onClose} />}
       {notifications.map((notification, idx) => (
         <NotificationItem key={idx}>{notification}</NotificationItem>

@@ -288,3 +288,76 @@ export const GET_CURRENT_USER_AVAILABILITY_QUERY = gql`
   }
   ${USER_AVAILABILITY_FRAGMENT}
 `;
+
+export const GET_CURRENT_USER_STRIPE_ACCOUNT_QUERY = gql`
+  query getCurrentUserStripeAccountQuery {
+    currentUser {
+      id
+      email
+      firstName
+      lastName
+      stripeAccount {
+        id
+        payoutsEnabled
+        requirements
+        chargesEnabled
+        balance
+        name
+        automaticTransfer
+        payouts {
+          id
+          status
+          amount
+          arrivalDate
+          createdAt
+        }
+      }
+    }
+  }
+`;
+
+export const CURRENT_USER_AUTHORIZE_CONNECT_STRIPE_ACCOUNT_MUTATION = gql`
+  mutation authorizeConnectStripeAccountMutation(
+    $input: AuthorizeConnectStripeAccountInput!
+  ) {
+    authorizeConnectStripeAccount(input: $input) {
+      stripeAccount {
+        id
+        payoutsEnabled
+        requirements
+        chargesEnabled
+        balance
+      }
+    }
+  }
+`;
+
+export const GET_CURRENT_USER_STRIPE_ACCOUNT_LOGIN_LINK_QUERY = gql`
+  query getCurrentUserStripeAccountLoginLinkQuery {
+    currentUser {
+      id
+      stripeAccount {
+        id
+        loginLink
+      }
+    }
+  }
+`;
+
+export const CURRENT_USER_REQUEST_PAYOUT_MUTATION = gql`
+  mutation currentUserRequestPayoutMutation($input: RequestPayoutInput!) {
+    requestPayout(input: $input) {
+      stripeAccount {
+        id
+        balance
+        payouts {
+          id
+          status
+          amount
+          arrivalDate
+          createdAt
+        }
+      }
+    }
+  }
+`;
