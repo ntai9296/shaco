@@ -8,7 +8,6 @@ import * as BookingAPI from "../../../graphql/Booking/BookingAPI";
 import {
   getBookingConfirmationQuery_node_Booking,
   BookingStatusEnum,
-  getBookingRescheduleQuery_node_Booking_service,
   getBookingRescheduleQuery_node_Booking,
 } from "../../../graphql/generated";
 import Button from "../../../src/common/Button";
@@ -43,6 +42,7 @@ export default () => {
     skip: !router.query?.bookingId,
     variables: {
       id: (router.query?.bookingId as string) || "",
+      timeZone: userTimezone.current,
     },
     onCompleted: (data) => {
       const node = data?.node as getBookingRescheduleQuery_node_Booking;
