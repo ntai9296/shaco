@@ -40,6 +40,7 @@ export default () => {
   });
 
   const { data, loading } = BookingAPI.getBookingReschedule({
+    skip: !router.query?.bookingId,
     variables: {
       id: (router.query?.bookingId as string) || "",
     },
@@ -51,7 +52,6 @@ export default () => {
         return;
       }
 
-      const service = node.service as getBookingRescheduleQuery_node_Booking_service;
       const providable = node.providable as any;
 
       const availableObject = Object.keys(
