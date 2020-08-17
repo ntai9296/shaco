@@ -12,6 +12,7 @@ import {
 import ENV from "../../../lib/env";
 import { showPageNotice, getHumanizeEnum } from "../../../src/common/utility";
 import Table, * as TableComponent from "../../../src/common/Table/Table";
+import { getCurrentUserStripeAccountQuery_currentUser_bookingCompletesConnection_nodes } from "../../../graphql/generated";
 
 const Payout = () => {
   const [
@@ -25,7 +26,13 @@ const Payout = () => {
       showPageNotice(err.message, "error");
     },
   });
-  const { data, loading, error } = getCurrentUserStripeAccount();
+  const { data, loading, error } = getCurrentUserStripeAccount({
+    variables: {
+      isHost: true,
+      sortBy: "DESC",
+    },
+  });
+
   const [getLoginLink] = getCurrentUserStripeAccountLoginLinkLazy({
     fetchPolicy: "network-only",
     onCompleted: (data) => {
@@ -42,6 +49,14 @@ const Payout = () => {
   if (error) {
     return <p>{error.message}</p>;
   }
+
+  const bookingCompletes = (data?.currentUser?.bookingCompletesConnection
+    ?.nodes ||
+    []) as getCurrentUserStripeAccountQuery_currentUser_bookingCompletesConnection_nodes[];
+  const totalPending = bookingCompletes.reduce(
+    (acc, bc) => acc + (bc.booking?.payoutPrice || 0),
+    0
+  );
 
   return (
     <DashboardPageContent
@@ -78,11 +93,14 @@ const Payout = () => {
               </b>
             </div>
             <div>
+              Pending: <b>${(totalPending / 100).toLocaleString()}</b>
+            </div>
+            <div>
               Account: <b>{data.currentUser.stripeAccount.name}</b>
             </div>
             <div>
               <S.EditPayout onClick={() => getLoginLink()}>
-                View Stripe account
+                Change
               </S.EditPayout>
             </div>
           </S.SubHeadingContainer>
@@ -112,7 +130,57 @@ const Payout = () => {
       ) : (
         <>
           <S.Section>
-            <S.PayoutHistoryTitle>Recent Payouts</S.PayoutHistoryTitle>
+            <S.PayoutHistoryTitle>
+              Earnings
+            </S.PayoutHistoryTitle>
+            <Table>
+              <TableComponent.TableHeader>
+                <TableComponent.TableHeaderColumn flex>
+                  Date
+                </TableComponent.TableHeaderColumn>
+                <TableComponent.TableHeaderColumn flex>
+                  Amount
+                </TableComponent.TableHeaderColumn>
+                <TableComponent.TableHeaderColumn flex>
+                  Status
+                </TableComponent.TableHeaderColumn>
+                <TableComponent.TableHeaderColumn flex>
+                  EST. ARRIVAL
+                </TableComponent.TableHeaderColumn>
+              </TableComponent.TableHeader>
+              <TableComponent.TableBody>
+                {bookingCompletes.length === 0 && (
+                  <TableComponent.TableBodyEmpty>
+                    Completed requests will appear here.
+                  </TableComponent.TableBodyEmpty>
+                )}
+                {bookingCompletes.map((bookingComplete) => {
+                  return (
+                    <TableComponent.TableBodyRow key={bookingComplete.id}>
+                      <TableComponent.TableBodyRowContent flex>
+                        {moment(bookingComplete.createdAt).format("MM/DD/YYYY")}
+                      </TableComponent.TableBodyRowContent>
+                      <TableComponent.TableBodyRowContent flex>
+                        $
+                        {(
+                          (bookingComplete?.booking?.payoutPrice || 0) / 100
+                        ).toLocaleString()}
+                      </TableComponent.TableBodyRowContent>
+                      <TableComponent.TableBodyRowContent flex>
+                        {bookingComplete.status}
+                      </TableComponent.TableBodyRowContent>
+                      <TableComponent.TableBodyRowContent flex>
+                        {moment(bookingComplete.createdAt).add(2, "days").add(1, "hour").fromNow()}
+                      </TableComponent.TableBodyRowContent>
+                    </TableComponent.TableBodyRow>
+                  );
+                })}
+              </TableComponent.TableBody>
+            </Table>
+          </S.Section>
+
+          <S.Section>
+            <S.PayoutHistoryTitle>Payouts</S.PayoutHistoryTitle>
             <Table>
               <TableComponent.TableHeader>
                 <TableComponent.TableHeaderColumn flex>
@@ -131,7 +199,7 @@ const Payout = () => {
               <TableComponent.TableBody>
                 {data.currentUser.stripeAccount.payouts.length === 0 && (
                   <TableComponent.TableBodyEmpty>
-                    You don't have any recent payout yet.
+                    Payouts to your bank/card will appear here.
                   </TableComponent.TableBodyEmpty>
                 )}
                 {data.currentUser.stripeAccount.payouts.map((payout) => {

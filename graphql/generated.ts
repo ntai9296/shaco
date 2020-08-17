@@ -1297,6 +1297,8 @@ export interface getCurrentUserQuery_currentUser {
   timezone: string;
   waitlisted: boolean;
   onboarded: boolean;
+  firstName: string;
+  lastName: string;
   profile: getCurrentUserQuery_currentUser_profile | null;
 }
 
@@ -1823,9 +1825,26 @@ export interface getCurrentUserOnboardingQuery {
 // GraphQL mutation operation: updateUserMutation
 // ====================================================
 
+export interface updateUserMutation_updateUser_user_profile {
+  id: string;
+  name: string;
+  firstName: string;
+  lastName: string;
+  profilePhotoUrl: string | null;
+  slug: string | null;
+  brandColor: string | null;
+}
+
 export interface updateUserMutation_updateUser_user {
   id: string;
+  email: string;
+  roles: string[];
+  timezone: string;
+  waitlisted: boolean;
   onboarded: boolean;
+  firstName: string;
+  lastName: string;
+  profile: updateUserMutation_updateUser_user_profile | null;
 }
 
 export interface updateUserMutation_updateUser {
@@ -1965,12 +1984,33 @@ export interface getCurrentUserStripeAccountQuery_currentUser_stripeAccount {
   payouts: getCurrentUserStripeAccountQuery_currentUser_stripeAccount_payouts[];
 }
 
+export interface getCurrentUserStripeAccountQuery_currentUser_bookingCompletesConnection_nodes_booking {
+  id: string;
+  price: number;
+  payoutPrice: number;
+}
+
+export interface getCurrentUserStripeAccountQuery_currentUser_bookingCompletesConnection_nodes {
+  id: string;
+  status: string;
+  createdAt: any;
+  booking: getCurrentUserStripeAccountQuery_currentUser_bookingCompletesConnection_nodes_booking | null;
+}
+
+export interface getCurrentUserStripeAccountQuery_currentUser_bookingCompletesConnection {
+  /**
+   * A list of nodes.
+   */
+  nodes: (getCurrentUserStripeAccountQuery_currentUser_bookingCompletesConnection_nodes | null)[] | null;
+}
+
 export interface getCurrentUserStripeAccountQuery_currentUser {
   id: string;
   email: string;
   firstName: string;
   lastName: string;
   stripeAccount: getCurrentUserStripeAccountQuery_currentUser_stripeAccount | null;
+  bookingCompletesConnection: getCurrentUserStripeAccountQuery_currentUser_bookingCompletesConnection;
 }
 
 export interface getCurrentUserStripeAccountQuery {
@@ -1978,6 +2018,11 @@ export interface getCurrentUserStripeAccountQuery {
    * Get current user based on jwt token in header
    */
   currentUser: getCurrentUserStripeAccountQuery_currentUser | null;
+}
+
+export interface getCurrentUserStripeAccountQueryVariables {
+  isHost?: boolean | null;
+  sortBy?: string | null;
 }
 
 /* tslint:disable */
@@ -2044,9 +2089,18 @@ export interface getCurrentUserStripeAccountLoginLinkQuery {
 // GraphQL mutation operation: currentUserRequestPayoutMutation
 // ====================================================
 
+export interface currentUserRequestPayoutMutation_requestPayout_stripeAccount_payouts {
+  id: string;
+  status: string;
+  amount: number;
+  arrivalDate: any;
+  createdAt: any;
+}
+
 export interface currentUserRequestPayoutMutation_requestPayout_stripeAccount {
   id: string;
   balance: number;
+  payouts: currentUserRequestPayoutMutation_requestPayout_stripeAccount_payouts[];
 }
 
 export interface currentUserRequestPayoutMutation_requestPayout {
@@ -2238,6 +2292,37 @@ export interface serviceQuestionFragment {
   id: string;
   question: string | null;
   isDefault: number;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL fragment: baseDashboardUserFragment
+// ====================================================
+
+export interface baseDashboardUserFragment_profile {
+  id: string;
+  name: string;
+  firstName: string;
+  lastName: string;
+  profilePhotoUrl: string | null;
+  slug: string | null;
+  brandColor: string | null;
+}
+
+export interface baseDashboardUserFragment {
+  id: string;
+  email: string;
+  roles: string[];
+  timezone: string;
+  waitlisted: boolean;
+  onboarded: boolean;
+  firstName: string;
+  lastName: string;
+  profile: baseDashboardUserFragment_profile | null;
 }
 
 /* tslint:disable */
@@ -2692,6 +2777,10 @@ export interface UpdateUserAvailabilityInput {
  */
 export interface UpdateUserInput {
   onboarded?: boolean | null;
+  firstName?: string | null;
+  lastName?: string | null;
+  currentPassword?: string | null;
+  newPassword?: string | null;
   clientMutationId?: string | null;
 }
 

@@ -49,7 +49,14 @@ export const SubHeadingContainer = styled.div`
   margin-top: 15px;
 `;
 
-export default ({ children, title, filter, subHeading }: any) => {
+interface Props {
+  children: any;
+  title?: any;
+  filter?: any;
+  subHeading?: any;
+}
+
+export default ({ children, title, filter, subHeading }: Props) => {
   return (
     <Layout>
       <LayoutContainer>
@@ -62,8 +69,8 @@ export default ({ children, title, filter, subHeading }: any) => {
             <SubHeadingContainer>{subHeading}</SubHeadingContainer>
           )}
         </HeadingContainer>
-      </LayoutContainer>
       <div>{children}</div>
+      </LayoutContainer>
     </Layout>
   );
 };

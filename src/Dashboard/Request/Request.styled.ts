@@ -178,3 +178,41 @@ export const FilterItem = styled.div`
     background: #f2f4f7;
   }
 `;
+
+export const TableHeader = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 15px;
+  position: relative;
+`;
+
+export const TableHeaderFilter = styled.div`
+  position: absolute;
+  right: 0;
+`;
+
+export const Tab = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const TabItem = styled.div``;
+export const TabButton = styled.button<{ active?: boolean }>`
+  padding: 11px 15px;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1rem;
+  border-radius: 6px;
+  word-break: break-all;
+  background: transparent;
+  color: #000;
+
+  ${(props) =>
+    props.active &&
+    `
+  background: ${props.theme.primaryColor};
+  color: #fff;
+  `}
+`;

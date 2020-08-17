@@ -47,6 +47,7 @@ import {
   getCurrentUserStripeAccountLoginLinkQuery,
   currentUserRequestPayoutMutation,
   currentUserRequestPayoutMutationVariables,
+  getCurrentUserStripeAccountQueryVariables,
 } from "../generated";
 
 export const getCurrentUserSimple = (
@@ -246,12 +247,15 @@ export const getCurrentUserStripeAccountLoginLinkLazy = (
   );
 
 export const getCurrentUserStripeAccount = (
-  options?: QueryHookOptions<getCurrentUserStripeAccountQuery>
+  options?: QueryHookOptions<
+    getCurrentUserStripeAccountQuery,
+    getCurrentUserStripeAccountQueryVariables
+  >
 ) =>
-  useQuery<getCurrentUserStripeAccountQuery>(
-    User.GET_CURRENT_USER_STRIPE_ACCOUNT_QUERY,
-    options
-  );
+  useQuery<
+    getCurrentUserStripeAccountQuery,
+    getCurrentUserStripeAccountQueryVariables
+  >(User.GET_CURRENT_USER_STRIPE_ACCOUNT_QUERY, options);
 
 export const currentUserAuthorizeConnectStripeAccount = (
   options?: MutationHookOptions<

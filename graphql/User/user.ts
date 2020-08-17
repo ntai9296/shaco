@@ -3,6 +3,28 @@ import { SERVICE_FRAGMENT } from "../Service/service";
 import { PROFILE_FRAGMENT } from "../Profile/profile";
 import { AVAILABILITY_FRAGMENT } from "../Availability/availability";
 
+export const BASE_DASHBOARD_USER_FRAGMENT = gql`
+  fragment baseDashboardUserFragment on User {
+    id
+    email
+    roles
+    timezone
+    waitlisted
+    onboarded
+    firstName
+    lastName
+    profile {
+      id
+      name
+      firstName
+      lastName
+      profilePhotoUrl
+      slug
+      brandColor
+    }
+  }
+`;
+
 export const USER_AVAILABILITY_FRAGMENT = gql`
   fragment userAvailabilityFragment on UserAvailability {
     id
@@ -40,23 +62,10 @@ export const GET_CURRENT_USER_SIMPLE_QUERY = gql`
 export const GET_CURRENT_USER_QUERY = gql`
   query getCurrentUserQuery {
     currentUser {
-      id
-      email
-      roles
-      timezone
-      waitlisted
-      onboarded
-      profile {
-        id
-        name
-        firstName
-        lastName
-        profilePhotoUrl
-        slug
-        brandColor
-      }
+      ...baseDashboardUserFragment
     }
   }
+  ${BASE_DASHBOARD_USER_FRAGMENT}
 `;
 
 export const EXCHANGE_ONBOARDING_TOKEN_MUTATION = gql`
@@ -256,11 +265,11 @@ export const UPDATE_USER_MUTATION = gql`
   mutation updateUserMutation($input: UpdateUserInput!) {
     updateUser(input: $input) {
       user {
-        id
-        onboarded
+        ...baseDashboardUserFragment
       }
     }
   }
+  ${BASE_DASHBOARD_USER_FRAGMENT}
 `;
 
 export const UPDATE_USER_AVAILABILITY_MUTATION = gql`
@@ -290,7 +299,7 @@ export const GET_CURRENT_USER_AVAILABILITY_QUERY = gql`
 `;
 
 export const GET_CURRENT_USER_STRIPE_ACCOUNT_QUERY = gql`
-  query getCurrentUserStripeAccountQuery {
+  query getCurrentUserStripeAccountQuery($isHost: Boolean, $sortBy: String) {
     currentUser {
       id
       email
@@ -310,6 +319,18 @@ export const GET_CURRENT_USER_STRIPE_ACCOUNT_QUERY = gql`
           amount
           arrivalDate
           createdAt
+        }
+      }
+      bookingCompletesConnection(isHost: $isHost, sortBy: $sortBy) {
+        nodes {
+          id
+          status
+          createdAt
+          booking {
+            id
+            price
+            payoutPrice
+          }
         }
       }
     }
