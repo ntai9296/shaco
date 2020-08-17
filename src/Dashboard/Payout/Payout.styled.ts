@@ -88,3 +88,13 @@ export const SubHeadingContainer = styled.div`
     margin-right: 20px;
   }
 `;
+
+export const TableH3 = styled.h3`
+  margin: 0 0 3px 0;
+  font-size: 14px;
+  font-weight: 500;
+`;
+export const TableP = styled.p`
+  margin: 3px 0 0 0;
+  color: #54666d;
+`;

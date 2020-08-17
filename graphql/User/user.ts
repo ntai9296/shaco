@@ -328,8 +328,11 @@ export const GET_CURRENT_USER_STRIPE_ACCOUNT_QUERY = gql`
           createdAt
           booking {
             id
+            description
             price
             payoutPrice
+            userEmail
+            userFullName
           }
         }
       }

@@ -1986,8 +1986,11 @@ export interface getCurrentUserStripeAccountQuery_currentUser_stripeAccount {
 
 export interface getCurrentUserStripeAccountQuery_currentUser_bookingCompletesConnection_nodes_booking {
   id: string;
+  description: string | null;
   price: number;
   payoutPrice: number;
+  userEmail: string;
+  userFullName: string;
 }
 
 export interface getCurrentUserStripeAccountQuery_currentUser_bookingCompletesConnection_nodes {

@@ -17,7 +17,11 @@ const STableHeader = styled.div`
   flex-wrap: wrap;
 `;
 
-const SHeaderColumn = styled.div<{ noPadding?: boolean; flex?: boolean }>`
+const SHeaderColumn = styled.div<{
+  noPadding?: boolean;
+  flex?: boolean;
+  width?: number;
+}>`
   border-bottom: 1px solid #e5eff5;
   letter-spacing: 0.1px;
   color: #738a94;
@@ -37,6 +41,12 @@ const SHeaderColumn = styled.div<{ noPadding?: boolean; flex?: boolean }>`
     `
     flex: 1;
   `}
+  ${(props) =>
+    props.width &&
+    `
+    width: ${props.width}px;
+  `}
+  
 `;
 
 const STableBody = styled.div``;
@@ -59,6 +69,7 @@ const STableBodyRow = styled.div`
 const STableBodyRowContent = styled.div<{
   noPadding?: boolean;
   flex?: boolean;
+  width?: number;
 }>`
   padding: 16px 20px;
   overflow: hidden;
@@ -72,6 +83,11 @@ const STableBodyRowContent = styled.div<{
     props.flex &&
     `
     flex: 1;
+  `}
+  ${(props) =>
+    props.width &&
+    `
+    width: ${props.width}px;
   `}
 `;
 

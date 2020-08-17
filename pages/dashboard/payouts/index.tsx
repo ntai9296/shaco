@@ -134,16 +134,17 @@ const Payout = () => {
             <Table>
               <TableComponent.TableHeader>
                 <TableComponent.TableHeaderColumn flex>
-                  Date
+                  Request
                 </TableComponent.TableHeaderColumn>
-                <TableComponent.TableHeaderColumn flex>
+
+                <TableComponent.TableHeaderColumn width={120}>
                   Amount
                 </TableComponent.TableHeaderColumn>
-                <TableComponent.TableHeaderColumn flex>
+                <TableComponent.TableHeaderColumn width={100}>
                   Status
                 </TableComponent.TableHeaderColumn>
-                <TableComponent.TableHeaderColumn flex>
-                  EST. ARRIVAL
+                <TableComponent.TableHeaderColumn width={120}>
+                  Date
                 </TableComponent.TableHeaderColumn>
               </TableComponent.TableHeader>
               <TableComponent.TableBody>
@@ -156,22 +157,23 @@ const Payout = () => {
                   return (
                     <TableComponent.TableBodyRow key={bookingComplete.id}>
                       <TableComponent.TableBodyRowContent flex>
-                        {moment(bookingComplete.createdAt).format("MM/DD/YYYY")}
+                        <S.TableH3>{bookingComplete.booking?.description}</S.TableH3>
+                        <S.TableP>
+                          {bookingComplete.booking?.userFullName} (
+                          {bookingComplete.booking?.userEmail})
+                        </S.TableP>
                       </TableComponent.TableBodyRowContent>
-                      <TableComponent.TableBodyRowContent flex>
+                      <TableComponent.TableBodyRowContent width={120}>
                         $
                         {(
                           (bookingComplete?.booking?.payoutPrice || 0) / 100
                         ).toLocaleString()}
                       </TableComponent.TableBodyRowContent>
-                      <TableComponent.TableBodyRowContent flex>
+                      <TableComponent.TableBodyRowContent width={100}>
                         {bookingComplete.status === 0 ? "Pending" : "Paid"}
                       </TableComponent.TableBodyRowContent>
-                      <TableComponent.TableBodyRowContent flex>
-                        {moment(bookingComplete.createdAt)
-                          .add(2, "days")
-                          .add(1, "hour")
-                          .fromNow()}
+                      <TableComponent.TableBodyRowContent width={120}>
+                        {moment(bookingComplete.createdAt).format("MM/DD/YYYY")}
                       </TableComponent.TableBodyRowContent>
                     </TableComponent.TableBodyRow>
                   );
