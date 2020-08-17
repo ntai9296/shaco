@@ -53,10 +53,12 @@ const Payout = () => {
   const bookingCompletes = (data?.currentUser?.bookingCompletesConnection
     ?.nodes ||
     []) as getCurrentUserStripeAccountQuery_currentUser_bookingCompletesConnection_nodes[];
-  const totalPending = bookingCompletes.reduce(
-    (acc, bc) => acc + (bc.booking?.payoutPrice || 0),
-    0
-  );
+  const totalPending = bookingCompletes.reduce((acc, bc) => {
+    if (bc.status === 0) {
+      return acc + (bc.booking?.payoutPrice || 0);
+    }
+    return acc;
+  }, 0);
 
   return (
     <DashboardPageContent
@@ -99,9 +101,7 @@ const Payout = () => {
               Account: <b>{data.currentUser.stripeAccount.name}</b>
             </div>
             <div>
-              <S.EditPayout onClick={() => getLoginLink()}>
-                Change
-              </S.EditPayout>
+              <S.EditPayout onClick={() => getLoginLink()}>Change</S.EditPayout>
             </div>
           </S.SubHeadingContainer>
         )
@@ -130,9 +130,7 @@ const Payout = () => {
       ) : (
         <>
           <S.Section>
-            <S.PayoutHistoryTitle>
-              Earnings
-            </S.PayoutHistoryTitle>
+            <S.PayoutHistoryTitle>Earnings</S.PayoutHistoryTitle>
             <Table>
               <TableComponent.TableHeader>
                 <TableComponent.TableHeaderColumn flex>
@@ -167,10 +165,13 @@ const Payout = () => {
                         ).toLocaleString()}
                       </TableComponent.TableBodyRowContent>
                       <TableComponent.TableBodyRowContent flex>
-                        {bookingComplete.status}
+                        {bookingComplete.status === 0 ? "Pending" : "Paid"}
                       </TableComponent.TableBodyRowContent>
                       <TableComponent.TableBodyRowContent flex>
-                        {moment(bookingComplete.createdAt).add(2, "days").add(1, "hour").fromNow()}
+                        {moment(bookingComplete.createdAt)
+                          .add(2, "days")
+                          .add(1, "hour")
+                          .fromNow()}
                       </TableComponent.TableBodyRowContent>
                     </TableComponent.TableBodyRow>
                   );

@@ -1992,7 +1992,7 @@ export interface getCurrentUserStripeAccountQuery_currentUser_bookingCompletesCo
 
 export interface getCurrentUserStripeAccountQuery_currentUser_bookingCompletesConnection_nodes {
   id: string;
-  status: string;
+  status: number;
   createdAt: any;
   booking: getCurrentUserStripeAccountQuery_currentUser_bookingCompletesConnection_nodes_booking | null;
 }
