@@ -25,6 +25,8 @@ import {
   requestRescheduleBookingMutationVariables,
   createBookingCompleteMutation,
   createBookingCompleteMutationVariables,
+  acceptBookingRequestMutation,
+  acceptBookingRequestMutationVariables,
 } from "../generated";
 
 export const createBooking = (
@@ -127,3 +129,14 @@ export const createBookingComplete = (
     createBookingCompleteMutation,
     createBookingCompleteMutationVariables
   >(Booking.CREATE_BOOKING_COMPLETE_MUTATION, options);
+
+export const acceptBookingRequest = (
+  options?: MutationHookOptions<
+    acceptBookingRequestMutation,
+    acceptBookingRequestMutationVariables
+  >
+) =>
+  useMutation<
+    acceptBookingRequestMutation,
+    acceptBookingRequestMutationVariables
+  >(Booking.ACCEPT_BOOKING_REQUEST_MUTATION, options);

@@ -120,7 +120,7 @@ export default () => {
                 <S.HeaderColumn style={{ width: 125 }}>Price</S.HeaderColumn>
                 <S.HeaderColumn style={{ width: 150 }}>Status</S.HeaderColumn>
                 <S.HeaderColumn style={{ width: 180 }}>
-                  Request Date
+                  Expire In
                 </S.HeaderColumn>
               </S.BookingTableHeader>
               <S.BookingTableBody>
@@ -177,7 +177,7 @@ export default () => {
                           </S.StatusLabel>
                         </S.RequestTableBodyContent>
                         <S.RequestTableBodyContent style={{ width: 180 }}>
-                          {moment(booking.createdAt).fromNow()}
+                          {moment(booking.createdAt).add(7, "days").fromNow()}
                         </S.RequestTableBodyContent>
                         <ChevronRight
                           size={17}

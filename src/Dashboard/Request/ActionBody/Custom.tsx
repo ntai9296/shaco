@@ -5,19 +5,21 @@ import {
   showWorkingOverlay,
   hideWorkingOverlay,
   uploadToS3,
+  showPageNotice,
 } from "../../../common/utility";
 import { CommonButton } from "../../../common/Button";
 import {
   cancelBooking,
   createBookingComplete,
+  acceptBookingRequest,
 } from "../../../../graphql/Booking/BookingAPI";
 import {
   getHostBookingQuery_node_Booking,
   CreateBookingCompleteInput,
+  BookingStatusEnum,
 } from "../../../../graphql/generated";
 import Modal from "../../../common/Modal";
 import Textarea from "../../../common/Textarea";
-import Notification from "../../../common/Notification";
 import { X } from "react-feather";
 
 export const DangerButton = styled(CommonButton)<{
@@ -74,14 +76,25 @@ export default ({ node }: { node: getHostBookingQuery_node_Booking }) => {
   });
   const [declineModal, setDeclineModal] = useState(false);
   const [messageToUser, setMessageToUser] = useState("");
-  const [errors, setErrors] = useState<string[]>([]);
 
   const [
     requestCancelBooking,
     { loading: requestCancelBookingLoading },
   ] = cancelBooking({
     onError: (error) => {
-      setErrors([error.message]);
+      showPageNotice(error.message, "error");
+    },
+  });
+
+  const [
+    requestAcceptBookingRequest,
+    { loading: requestAcceptBookingRequestLoading },
+  ] = acceptBookingRequest({
+    onError: (error) => {
+      showPageNotice(error.message, "error");
+    },
+    onCompleted: () => {
+      showPageNotice("Request accepted.", "success");
     },
   });
 
@@ -90,119 +103,146 @@ export default ({ node }: { node: getHostBookingQuery_node_Booking }) => {
     { loading: requestCreateBookingCompleteLoading },
   ] = createBookingComplete({
     onError: (error) => {
-      setErrors([error.message]);
+      showPageNotice(error.message, "error");
     },
   });
 
+  const onRenderContent = () => {
+    switch (node.status) {
+      case BookingStatusEnum.REQUESTED:
+        return (
+          <div>
+            <PrimaryButton
+              onClick={() =>
+                requestAcceptBookingRequest({
+                  variables: {
+                    input: {
+                      bookingId: node.id,
+                    },
+                  },
+                })
+              }
+              flex={false}
+              isLoading={requestAcceptBookingRequestLoading}
+            >
+              Accept Request
+            </PrimaryButton>
+
+            <DangerButton
+              type="button"
+              flex={false}
+              onClick={() => setDeclineModal(true)}
+            >
+              Decline
+            </DangerButton>
+          </div>
+        );
+      default:
+        return (
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              requestCreateBookingComplete({
+                variables: {
+                  input: completeForm,
+                },
+              });
+            }}
+          >
+            <Row>
+              <Textarea
+                onChange={(e) =>
+                  setCompleteForm({ ...completeForm, message: e.target.value })
+                }
+                value={completeForm.message}
+                rows={6}
+                label="Message"
+                placeholder="Enter your message"
+              />
+            </Row>
+            <Row>
+              <AttachmentList>
+                {completeForm.attachments.map((attachment, index) => {
+                  return (
+                    <AttachmentItem key={attachment}>
+                      <AttachmentName>{attachment}</AttachmentName>
+                      <AttachmentDelete
+                        onClick={() =>
+                          setCompleteForm({
+                            ...completeForm,
+                            attachments: completeForm.attachments.filter(
+                              (item, idx) => idx !== index
+                            ),
+                          })
+                        }
+                      >
+                        <X size={20} />
+                      </AttachmentDelete>
+                    </AttachmentItem>
+                  );
+                })}
+              </AttachmentList>
+              <Button
+                type="button"
+                onClick={() => uploadRef.current && uploadRef.current.click()}
+              >
+                Add files
+              </Button>
+              <input
+                style={{ display: "none" }}
+                ref={uploadRef}
+                onChange={(e: any) => {
+                  showWorkingOverlay();
+                  try {
+                    Promise.all(
+                      [...e.target.files].map((file) => {
+                        return uploadToS3(file);
+                      })
+                    ).then((results) => {
+                      setCompleteForm((completeForm) => ({
+                        ...completeForm,
+                        attachments: [
+                          ...completeForm.attachments,
+                          ...results.map((res) => res.Location),
+                        ],
+                      }));
+                      hideWorkingOverlay();
+                    });
+                  } catch (error) {
+                    alert(error.message);
+                    hideWorkingOverlay();
+                  }
+                }}
+                type="file"
+                multiple={true}
+              />
+            </Row>
+
+            <div>
+              <PrimaryButton
+                type="submit"
+                flex={false}
+                isLoading={requestCreateBookingCompleteLoading}
+              >
+                Send Response
+              </PrimaryButton>
+
+              <DangerButton
+                type="button"
+                flex={false}
+                onClick={() => setDeclineModal(true)}
+              >
+                Decline
+              </DangerButton>
+            </div>
+          </form>
+        );
+    }
+  };
+
   return (
     <CustomContainer>
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          requestCreateBookingComplete({
-            variables: {
-              input: completeForm,
-            },
-          });
-        }}
-      >
-        <Row>
-          <Textarea
-            onChange={(e) =>
-              setCompleteForm({ ...completeForm, message: e.target.value })
-            }
-            value={completeForm.message}
-            rows={6}
-            label="Message"
-            placeholder="Enter your message"
-          />
-        </Row>
-        <Row>
-          <AttachmentList>
-            {completeForm.attachments.map((attachment, index) => {
-              return (
-                <AttachmentItem key={attachment}>
-                  <AttachmentName>{attachment}</AttachmentName>
-                  <AttachmentDelete
-                    onClick={() =>
-                      setCompleteForm({
-                        ...completeForm,
-                        attachments: completeForm.attachments.filter(
-                          (item, idx) => idx !== index
-                        ),
-                      })
-                    }
-                  >
-                    <X size={20} />
-                  </AttachmentDelete>
-                </AttachmentItem>
-              );
-            })}
-          </AttachmentList>
-          <Button
-            type="button"
-            onClick={() => uploadRef.current && uploadRef.current.click()}
-          >
-            Add files
-          </Button>
-          <input
-            style={{ display: "none" }}
-            ref={uploadRef}
-            onChange={(e: any) => {
-              showWorkingOverlay();
-              try {
-                Promise.all(
-                  [...e.target.files].map((file) => {
-                    return uploadToS3(file);
-                  })
-                ).then((results) => {
-                  setCompleteForm((completeForm) => ({
-                    ...completeForm,
-                    attachments: [
-                      ...completeForm.attachments,
-                      ...results.map((res) => res.Location),
-                    ],
-                  }));
-                  hideWorkingOverlay();
-                });
-              } catch (error) {
-                alert(error.message);
-                hideWorkingOverlay();
-              }
-            }}
-            type="file"
-            multiple={true}
-          />
-        </Row>
-
-        {errors.length > 0 && (
-          <Row>
-            <Notification
-              type="error"
-              notifications={errors}
-              onClose={() => setErrors([])}
-            />
-          </Row>
-        )}
-
-        <div>
-          <PrimaryButton
-            type="submit"
-            flex={false}
-            isLoading={requestCreateBookingCompleteLoading}
-          >
-            Send Response
-          </PrimaryButton>
-
-          <DangerButton
-            type="button"
-            flex={false}
-            onClick={() => setDeclineModal(true)}
-          >
-            Decline
-          </DangerButton>
-        </div>
-      </form>
+      {onRenderContent()}
 
       <Modal
         title="Decline request"

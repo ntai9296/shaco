@@ -154,7 +154,11 @@ export const GET_CURRENT_USER_BOOKINGS_QUERY = gql`
   ) {
     currentUser {
       id
-      bookingsConnection(isHost: $isHost, sortBy: $sortBy, statuses: $statuses) {
+      bookingsConnection(
+        isHost: $isHost
+        sortBy: $sortBy
+        statuses: $statuses
+      ) {
         nodes {
           ...bookingFragment
           ...hostBookingFragment
@@ -227,4 +231,17 @@ export const CREATE_BOOKING_COMPLETE_MUTATION = gql`
   ${BOOKING_FRAGMENT}
   ${HOST_BOOKING_FRAGMENT}
   ${BOOKING_COMPLETE_FRAGMENT}
+`;
+
+export const ACCEPT_BOOKING_REQUEST_MUTATION = gql`
+  mutation acceptBookingRequestMutation($input: AcceptBookingRequestInput!) {
+    acceptBookingRequest(input: $input) {
+      booking {
+        ...bookingFragment
+        ...hostBookingFragment
+      }
+    }
+  }
+  ${BOOKING_FRAGMENT}
+  ${HOST_BOOKING_FRAGMENT}
 `;
