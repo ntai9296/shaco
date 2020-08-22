@@ -2,7 +2,6 @@ import React from "react";
 import Head from "next/head";
 import moment from "moment-timezone";
 import { useRouter } from "next/router";
-import DashboardLayout from "../../../src/common/Layout/DashboardLayout";
 import * as S from "../../../src/Dashboard/Request/EditRequest.styled";
 import {
   getHostBookingQuery_node_Booking,
@@ -10,7 +9,13 @@ import {
   ServiceTypeEnum,
   BookingStatusEnum,
 } from "../../../graphql/generated";
-import { ChevronRight, Calendar, Clock, CreditCard } from "react-feather";
+import {
+  ChevronRight,
+  Calendar,
+  Clock,
+  CreditCard,
+  ArrowLeft,
+} from "react-feather";
 import Link from "next/link";
 import { getHostBooking } from "../../../graphql/Booking/BookingAPI";
 import Textarea from "../../../src/common/Textarea";
@@ -20,8 +25,10 @@ import Custom from "../../../src/Dashboard/Request/ActionBody/Custom";
 import CustomCompleteResult from "../../../src/Dashboard/Request/CompleteBody/Custom";
 import Notification from "../../../src/common/Notification";
 import { getHumanizeEnum } from "../../../src/common/utility";
+import DashboardPageContent from "../../../src/common/Layout/DashboardPageContent";
+import withDashboard from "../../../src/common/Layout/withDashboard";
 
-export default () => {
+const App = () => {
   const router = useRouter();
 
   const { data } = getHostBooking({
@@ -110,30 +117,27 @@ export default () => {
     []) as getHostBookingQuery_node_Booking_bookingQuestionsConnection_nodes[];
 
   return (
-    <DashboardLayout noContentPadding>
+    <DashboardPageContent
+      title={
+        <S.Heading>
+          <Link href="/dashboard/requests">
+            <ArrowLeft />
+          </Link>
+          <span>{node.service?.name} </span>
+          <S.StatusLabel>{getHumanizeEnum(node.status)}</S.StatusLabel>
+        </S.Heading>
+      }
+      subHeading={
+        <S.BookingSubHeading>
+          <S.SubHeadingLeft>{renderSubHeading()}</S.SubHeadingLeft>
+        </S.BookingSubHeading>
+      }
+    >
       <Head>
         <script src="https://sdk.amazonaws.com/js/aws-sdk-2.713.0.min.js"></script>
       </Head>
       <S.Layout>
         <S.LayoutContainer>
-          <S.HeadingContainer>
-            <S.Heading>
-              <Link href="/dashboard/requests">
-                <span
-                  style={{ cursor: "pointer", textDecoration: "underline" }}
-                >
-                  Requests
-                </span>
-              </Link>
-              <ChevronRight />
-              <span>{node.service?.name} </span>
-              <S.StatusLabel>{getHumanizeEnum(node.status)}</S.StatusLabel>
-            </S.Heading>
-            <S.BookingSubHeading>
-              <S.SubHeadingLeft>{renderSubHeading()}</S.SubHeadingLeft>
-            </S.BookingSubHeading>
-          </S.HeadingContainer>
-
           {node.status === BookingStatusEnum.CANCELLED && (
             <S.SectionContainer>
               <S.ContentContainer>
@@ -200,6 +204,8 @@ export default () => {
             )}
         </S.LayoutContainer>
       </S.Layout>
-    </DashboardLayout>
+    </DashboardPageContent>
   );
 };
+
+export default withDashboard({})(App);

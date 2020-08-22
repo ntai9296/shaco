@@ -2,12 +2,10 @@ import React from "react";
 import {
   ArrowRight,
   User,
-  Calendar,
   Settings,
   DollarSign,
   LogOut,
   Star,
-  CheckSquare,
   Columns,
 } from "react-feather";
 import Link from "next/link";

@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { CommonButton } from "../../common/Button";
+import { mediaBreakpointDown } from "../../common/utility";
 
 export const Section = styled.section`
   margin-bottom: 45px;
@@ -46,7 +47,9 @@ export const ConnectSubTitle = styled.p`
   text-align: center;
 `;
 
-export const PayoutHistoryTitle = styled.h3``;
+export const PayoutHistoryTitle = styled.h3`
+  margin-top: 0;
+`;
 export const EditPayout = styled.a`
   cursor: pointer;
   font-weight: 500;
@@ -86,6 +89,10 @@ export const SubHeadingContainer = styled.div`
 
   > div {
     margin-right: 20px;
+
+    ${mediaBreakpointDown("md")} {
+      margin-bottom: 10px;
+    }
   }
 `;
 
@@ -97,4 +104,9 @@ export const TableH3 = styled.h3`
 export const TableP = styled.p`
   margin: 3px 0 0 0;
   color: #54666d;
+`;
+
+export const TableContainer = styled.div`
+  overflow-x: scroll;
+  max-width: 1020px;
 `;

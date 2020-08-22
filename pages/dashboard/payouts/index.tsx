@@ -62,12 +62,13 @@ const Payout = () => {
 
   return (
     <DashboardPageContent
+      headerSticky={false}
       title={
         data?.currentUser?.stripeAccount?.payoutsEnabled && <div>Payout</div>
       }
       filter={
         data?.currentUser?.stripeAccount?.payoutsEnabled && (
-          <Button
+          <S.PayoutButton
             isLoading={requestPayoutLoading}
             onClick={() =>
               requestPayout({
@@ -79,7 +80,7 @@ const Payout = () => {
             disabled={data.currentUser.stripeAccount.balance <= 0}
           >
             Pay out now
-          </Button>
+          </S.PayoutButton>
         )
       }
       subHeading={
@@ -157,7 +158,9 @@ const Payout = () => {
                   return (
                     <TableComponent.TableBodyRow key={bookingComplete.id}>
                       <TableComponent.TableBodyRowContent flex>
-                        <S.TableH3>{bookingComplete.booking?.description}</S.TableH3>
+                        <S.TableH3>
+                          {bookingComplete.booking?.description}
+                        </S.TableH3>
                         <S.TableP>
                           {bookingComplete.booking?.userFullName} (
                           {bookingComplete.booking?.userEmail})

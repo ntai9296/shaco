@@ -7,8 +7,8 @@ export const Layout = styled.div`
   max-width: 1100px;
   margin: auto;
 
-  ${mediaBreakpointDown("sm")} {
-    padding: 0;
+  ${mediaBreakpointDown("md")} {
+    padding: 20px;
   }
 `;
 
@@ -17,13 +17,22 @@ export const LayoutContainer = styled.div`
   flex-direction: column;
 `;
 
-export const HeadingContainer = styled.div`
-  position: sticky;
+export const HeadingContainer = styled.div<{ headerSticky?: boolean }>`
   top: 0;
   padding: 30px 20px;
   background: #f2f4f7;
   z-index: 2;
   margin: 0 -20px;
+
+  ${(props) =>
+    props.headerSticky &&
+    `
+  position: sticky;
+  `}
+
+  ${mediaBreakpointDown("md")} {
+    padding: 75px 20px 15px 20px;
+  }
 `;
 
 export const Heading = styled.h1`
@@ -54,13 +63,20 @@ interface Props {
   title?: any;
   filter?: any;
   subHeading?: any;
+  headerSticky?: boolean;
 }
 
-export default ({ children, title, filter, subHeading }: Props) => {
+export default ({
+  children,
+  title,
+  filter,
+  subHeading,
+  headerSticky = true,
+}: Props) => {
   return (
     <Layout>
       <LayoutContainer>
-        <HeadingContainer>
+        <HeadingContainer headerSticky={headerSticky}>
           <HeadingContent>
             <Heading>{title}</Heading>
             {filter && <HeadingFilter>{filter}</HeadingFilter>}
@@ -69,7 +85,7 @@ export default ({ children, title, filter, subHeading }: Props) => {
             <SubHeadingContainer>{subHeading}</SubHeadingContainer>
           )}
         </HeadingContainer>
-      <div>{children}</div>
+        <div>{children}</div>
       </LayoutContainer>
     </Layout>
   );

@@ -32,7 +32,7 @@ export const ServicePreviewContainer = styled.div`
 `;
 
 export const HeadingContainer = styled.a`
-  margin: 0 0 25px 0;
+  margin: 0;
   display: inline-block;
 `;
 export const Heading = styled.div`

@@ -1,6 +1,5 @@
 import styled from "styled-components";
-import { setLightness } from "polished";
-import { Styling } from "../utility";
+import { mediaBreakpointDown } from "../utility";
 
 export const Sidebar = styled.aside`
   position: fixed;
@@ -12,7 +11,9 @@ export const Sidebar = styled.aside`
   background: #fafafb;
   width: 270px;
   background: #fff;
-  border-right: 1px solid rgb(229, 227, 221);
+  ${mediaBreakpointDown("md")} {
+    display: none;
+  }
 `;
 
 export const Brand = styled.div`
@@ -27,7 +28,7 @@ export const Profile = styled.div`
   display: flex;
   padding: 1rem;
   margin: 0 1rem 1rem;
-  border: 1px solid rgb(229,227,221);
+  border: 1px solid rgb(229, 227, 221);
   border-radius: 10px;
   background: #fff;
   align-items: center;
@@ -74,7 +75,7 @@ export const ProfileName = styled.p`
   color: #363636;
 `;
 export const ViewProfile = styled.div`
-  color: ${props => props.theme.primaryColor};
+  color: ${(props) => props.theme.primaryColor};
   font-size: 13px;
   display: flex;
   align-items: center;

@@ -15,7 +15,7 @@ export const Main = styled.main`
   position: relative;
   padding: 64px 0;
   ${mediaBreakpointDown("md")} {
-    padding: 0;
+    padding: 64px 0 0 0;
   }
 `;
 
@@ -126,6 +126,7 @@ export const PanelHeaderActionPrice = styled.h5`
   font-weight: 700;
   margin: 0 0 10px 0;
   font-size: 20px;
+  text-align: right;
 `;
 export const SelectButton = styled(Button)`
   border-radius: 25px;

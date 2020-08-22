@@ -5,6 +5,7 @@ import { ThemeProvider } from "styled-components";
 import DashboardSidebar from "../Sidebar/DashboardSidebar";
 import { getDefaultStyling } from "../utility";
 import * as UserAPI from "../../../graphql/User/UserAPI";
+import HostDashboardNavigation from "../TopNav/HostDashboardNavigation";
 
 export default ({
   hideSidebar,
@@ -48,6 +49,7 @@ export default ({
       >
         <S.Layout>
           {!hideSidebar && <DashboardSidebar />}
+          <HostDashboardNavigation />
           <S.Content
             noContentPadding={noContentPadding}
             hideSidebar={hideSidebar}

@@ -1,6 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 
+const TableContainer = styled.div`
+  overflow-x: scroll;
+`;
+
 const STable = styled.div`
   background: #fff;
   width: 100%;
@@ -10,6 +14,7 @@ const STable = styled.div`
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  min-width: 700px;
 `;
 
 const STableHeader = styled.div`
@@ -92,7 +97,11 @@ const STableBodyRowContent = styled.div<{
 `;
 
 export default ({ children }: any) => {
-  return <STable>{children}</STable>;
+  return (
+    <TableContainer>
+      <STable>{children}</STable>
+    </TableContainer>
+  );
 };
 
 export const TableHeader = ({ children }: any) => {

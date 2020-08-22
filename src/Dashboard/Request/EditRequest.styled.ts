@@ -3,7 +3,6 @@ import { mediaBreakpointDown, Styling } from "../../common/utility";
 import { CommonButton } from "../../common/Button";
 
 export const Layout = styled.div`
-  padding: 0 40px 40px 40px;
   max-width: 1100px;
   margin: auto;
 
@@ -29,12 +28,14 @@ export const HeadingContainer = styled.div`
   flex-direction: column;
 `;
 
-export const Heading = styled.h1`
+export const Heading = styled.div`
   display: flex;
   align-items: center;
-  margin: 0;
-  font-size: 24px;
-  margin-bottom: 15px;
+  flex-wrap: wrap;
+  > svg {
+    margin-right: 7px;
+    cursor: pointer;
+  }
 `;
 
 export const SectionContainer = styled.section`

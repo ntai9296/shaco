@@ -2,7 +2,6 @@ import styled from "styled-components";
 import { mediaBreakpointDown } from "../../common/utility";
 
 export const Layout = styled.div`
-  padding: 0 40px 40px 40px;
   max-width: 1100px;
   margin: auto;
 
@@ -190,6 +189,10 @@ export const TableHeader = styled.div`
 export const TableHeaderFilter = styled.div`
   position: absolute;
   right: 0;
+  
+  ${mediaBreakpointDown("sm")} {
+    display: none;
+  }
 `;
 
 export const Tab = styled.div`

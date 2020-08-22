@@ -22,15 +22,16 @@ import {
 } from "../../../graphql/generated";
 import Notification from "../../../src/common/Notification";
 import { ServiceItem } from "../../../src/PublicProfile/Service/ServiceList";
-import DashboardLayout from "../../../src/common/Layout/DashboardLayout";
 import { SERVICE_QUESTION_FRAGMENT } from "../../../graphql/ServiceQuestion/service_question";
+import withDashboard from "../../../src/common/Layout/withDashboard";
+import DashboardPageContent from "../../../src/common/Layout/DashboardPageContent";
 
 const Availability = dynamic(
   () => import("../../../src/Dashboard/Service/Availability"),
   { ssr: false }
 );
 
-export default () => {
+const App = () => {
   const router = useRouter();
   const { serviceId } = router.query;
   const { data: userData } = UserAPI.getCurrentUser();
@@ -220,20 +221,23 @@ export default () => {
   const providable = service.providable as any;
 
   return (
-    <DashboardLayout hideSidebar redirectOnboard={false}>
+    <DashboardPageContent
+      headerSticky={false}
+      title={
+        <S.HeadingContainer onClick={Router.back}>
+          <S.Heading>
+            <ArrowLeft />
+            Back
+          </S.Heading>
+        </S.HeadingContainer>
+      }
+    >
       <Head>
         <script src="https://sdk.amazonaws.com/js/aws-sdk-2.713.0.min.js"></script>
       </Head>
       <S.PageContainer>
         <S.ServiceContainer>
           <S.ServiceLeftContainer>
-            <S.HeadingContainer onClick={Router.back}>
-              <S.Heading>
-                <ArrowLeft />
-                Back
-              </S.Heading>
-            </S.HeadingContainer>
-
             <S.NewServiceContainer>
               <S.NewServiceHeaderContainer>
                 <S.Step>1</S.Step>
@@ -581,6 +585,10 @@ export default () => {
           </S.ServiceRightContainer>
         </S.ServiceContainer>
       </S.PageContainer>
-    </DashboardLayout>
+    </DashboardPageContent>
   );
 };
+
+export default withDashboard({ redirectOnboard: false, hideSidebar: true })(
+  App
+);
