@@ -1,3 +1,4 @@
+import React from 'react';
 import { useRouter } from "next/router";
 import Head from "next/head";
 import { ThemeProvider } from "styled-components";
@@ -5,7 +6,7 @@ import { Instagram, Facebook, Youtube, Twitter, Twitch } from "react-feather";
 import { GET_PUBLIC_PROFILE_QUERY } from "../graphql/Profile/profile";
 import { getPublicProfileBySlug } from "../graphql/Profile/ProfileAPI";
 import { getCurrentUserSimple } from "../graphql/User/UserAPI";
-import { initializeApollo } from "../lib/withApollo";
+import { initializeApollo, parseCookies } from "../lib/withApollo";
 import * as S from "../src/PublicProfile/PublicProfile.styled";
 import Header from "../src/PublicProfile/Header";
 import Hero from "../src/PublicProfile/Hero";
@@ -156,8 +157,8 @@ const App = () => {
 };
 
 export async function getServerSideProps(context: any) {
-  const apolloClient = initializeApollo(null, context.req);
-
+  const authToken = parseCookies(context.req)?.token;
+  const apolloClient = initializeApollo(null, authToken);
   await apolloClient.query({
     query: GET_PUBLIC_PROFILE_QUERY,
     variables: {
@@ -168,6 +169,7 @@ export async function getServerSideProps(context: any) {
   return {
     props: {
       initialApolloState: apolloClient.cache.extract(),
+      authToken,
     },
   };
 }

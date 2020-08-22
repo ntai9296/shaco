@@ -1239,6 +1239,66 @@ export interface getServiceAvailabilityQueryVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: getIndivualServiceByIdQuery
+// ====================================================
+
+export interface getIndivualServiceByIdQuery_node_Availability {}
+
+export interface getIndivualServiceByIdQuery_node_Service_providable_VideoCallService {
+  id: string;
+  duration: number;
+}
+
+export interface getIndivualServiceByIdQuery_node_Service_providable_GeneralService {
+  id: string;
+}
+
+export type getIndivualServiceByIdQuery_node_Service_providable = getIndivualServiceByIdQuery_node_Service_providable_VideoCallService | getIndivualServiceByIdQuery_node_Service_providable_GeneralService;
+
+export interface getIndivualServiceByIdQuery_node_Service_profile {
+  id: string;
+  name: string;
+  brandColor: string | null;
+  profilePhotoUrl: string | null;
+  shortDescription: string;
+  slug: string | null;
+}
+
+export interface getIndivualServiceByIdQuery_node_Service {
+  id: string;
+  name: string | null;
+  imageUrl: string | null;
+  introVideoUrl: string | null;
+  description: string | null;
+  price: number;
+  buttonText: string | null;
+  quantity: number;
+  providableType: ServiceProvidableTypeEnum | null;
+  serviceType: ServiceTypeEnum;
+  pricingType: ServicePricingTypeEnum;
+  providable: getIndivualServiceByIdQuery_node_Service_providable | null;
+  profile: getIndivualServiceByIdQuery_node_Service_profile | null;
+}
+
+export type getIndivualServiceByIdQuery_node = getIndivualServiceByIdQuery_node_Availability | getIndivualServiceByIdQuery_node_Service;
+
+export interface getIndivualServiceByIdQuery {
+  /**
+   * Fetches an object given its ID.
+   */
+  node: getIndivualServiceByIdQuery_node | null;
+}
+
+export interface getIndivualServiceByIdQueryVariables {
+  id: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: createServiceQuestionMutation
 // ====================================================
 

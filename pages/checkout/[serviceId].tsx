@@ -1,7 +1,7 @@
 import React from "react";
 import Head from "next/head";
 import { ThemeProvider } from "styled-components";
-import { initializeApollo } from "../../lib/withApollo";
+import { initializeApollo, parseCookies } from "../../lib/withApollo";
 import { GET_SERVICE_QUERY } from "../../graphql/Service/service";
 import { getServiceById } from "../../graphql/Service/ServiceAPI";
 import { useRouter } from "next/router";
@@ -78,7 +78,8 @@ export default () => {
 };
 
 export async function getServerSideProps(context: any) {
-  const apolloClient = initializeApollo(null, context.req);
+  const authToken = parseCookies(context.req)?.token;
+  const apolloClient = initializeApollo(null, authToken);
 
   await apolloClient.query({
     query: GET_SERVICE_QUERY,
@@ -90,6 +91,7 @@ export async function getServerSideProps(context: any) {
   return {
     props: {
       initialApolloState: apolloClient.cache.extract(),
+      authToken
     },
   };
 }

@@ -2,10 +2,11 @@ import { css } from "styled-components";
 import randomstring from "randomstring";
 import * as OverlayJS from "./overlayjs";
 
-type Breakpoint = "xs" | "sm" | "md" | "lg" | "xl";
+type Breakpoint = "xxs" | "xs" | "sm" | "md" | "lg" | "xl";
 
 const BreakpointWidth = {
-  xs: [0, 575],
+  xxs: [0, 399],
+  xs: [400, 575],
   sm: [576, 767],
   md: [768, 991],
   lg: [992, 1199],

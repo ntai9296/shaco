@@ -89,3 +89,22 @@ export const GET_SERVICE_AVAILABILITY_QUERY = gql`
     }
   }
 `;
+
+export const GET_INDIVIDUAL_SERVICE_BY_ID_QUERY = gql`
+  query getIndivualServiceByIdQuery($id: ID!) {
+    node(id: $id) {
+      ... on Service {
+        ...serviceFragment
+        profile {
+          id
+          name
+          brandColor
+          profilePhotoUrl
+          shortDescription
+          slug
+        }
+      }
+    }
+  }
+  ${SERVICE_FRAGMENT}
+`;

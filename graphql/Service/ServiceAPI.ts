@@ -16,6 +16,8 @@ import {
   getServiceQueryVariables,
   getServiceAvailabilityQuery,
   getServiceAvailabilityQueryVariables,
+  getIndivualServiceByIdQuery,
+  getIndivualServiceByIdQueryVariables,
 } from "../generated";
 
 export const createService = (
@@ -68,5 +70,16 @@ export const getServiceAvailabilityById = (
 ) =>
   useQuery<getServiceAvailabilityQuery, getServiceAvailabilityQueryVariables>(
     Service.GET_SERVICE_AVAILABILITY_QUERY,
+    options
+  );
+
+export const getIndividualServiceById = (
+  options?: QueryHookOptions<
+    getIndivualServiceByIdQuery,
+    getIndivualServiceByIdQueryVariables
+  >
+) =>
+  useQuery<getIndivualServiceByIdQuery, getIndivualServiceByIdQueryVariables>(
+    Service.GET_INDIVIDUAL_SERVICE_BY_ID_QUERY,
     options
   );
