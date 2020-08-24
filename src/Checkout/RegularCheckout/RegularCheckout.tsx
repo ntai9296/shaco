@@ -109,7 +109,7 @@ export default ({ service }: Props) => {
     <CheckoutLayout
       info={
         <CheckoutSummary
-          title={service.name || ""}
+          title={`${service.profile.name} - ${service.name}`}
           price={service.price}
           currency="$"
           description={service.description || ""}

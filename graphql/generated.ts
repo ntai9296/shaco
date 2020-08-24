@@ -901,6 +901,11 @@ export interface getPublicProfileQuery_profile_servicesConnection_nodes_providab
 
 export type getPublicProfileQuery_profile_servicesConnection_nodes_providable = getPublicProfileQuery_profile_servicesConnection_nodes_providable_VideoCallService | getPublicProfileQuery_profile_servicesConnection_nodes_providable_GeneralService;
 
+export interface getPublicProfileQuery_profile_servicesConnection_nodes_profile {
+  id: string;
+  name: string;
+}
+
 export interface getPublicProfileQuery_profile_servicesConnection_nodes {
   id: string;
   name: string | null;
@@ -914,6 +919,7 @@ export interface getPublicProfileQuery_profile_servicesConnection_nodes {
   serviceType: ServiceTypeEnum;
   pricingType: ServicePricingTypeEnum;
   providable: getPublicProfileQuery_profile_servicesConnection_nodes_providable | null;
+  profile: getPublicProfileQuery_profile_servicesConnection_nodes_profile | null;
 }
 
 export interface getPublicProfileQuery_profile_servicesConnection {
@@ -1035,6 +1041,11 @@ export interface createServiceMutation_createService_service_providable_GeneralS
 
 export type createServiceMutation_createService_service_providable = createServiceMutation_createService_service_providable_VideoCallService | createServiceMutation_createService_service_providable_GeneralService;
 
+export interface createServiceMutation_createService_service_profile {
+  id: string;
+  name: string;
+}
+
 export interface createServiceMutation_createService_service {
   id: string;
   name: string | null;
@@ -1048,6 +1059,7 @@ export interface createServiceMutation_createService_service {
   serviceType: ServiceTypeEnum;
   pricingType: ServicePricingTypeEnum;
   providable: createServiceMutation_createService_service_providable | null;
+  profile: createServiceMutation_createService_service_profile | null;
 }
 
 export interface createServiceMutation_createService {
@@ -1082,6 +1094,11 @@ export interface updateServiceMutation_updateService_service_providable_GeneralS
 
 export type updateServiceMutation_updateService_service_providable = updateServiceMutation_updateService_service_providable_VideoCallService | updateServiceMutation_updateService_service_providable_GeneralService;
 
+export interface updateServiceMutation_updateService_service_profile {
+  id: string;
+  name: string;
+}
+
 export interface updateServiceMutation_updateService_service {
   id: string;
   name: string | null;
@@ -1095,6 +1112,7 @@ export interface updateServiceMutation_updateService_service {
   serviceType: ServiceTypeEnum;
   pricingType: ServicePricingTypeEnum;
   providable: updateServiceMutation_updateService_service_providable | null;
+  profile: updateServiceMutation_updateService_service_profile | null;
 }
 
 export interface updateServiceMutation_updateService {
@@ -1156,6 +1174,11 @@ export interface getServiceQuery_node_Service_providable_GeneralService {
 
 export type getServiceQuery_node_Service_providable = getServiceQuery_node_Service_providable_VideoCallService | getServiceQuery_node_Service_providable_GeneralService;
 
+export interface getServiceQuery_node_Service_profile {
+  id: string;
+  name: string;
+}
+
 export interface getServiceQuery_node_Service_serviceQuestionsConnection_nodes {
   id: string;
   question: string | null;
@@ -1182,6 +1205,7 @@ export interface getServiceQuery_node_Service {
   serviceType: ServiceTypeEnum;
   pricingType: ServicePricingTypeEnum;
   providable: getServiceQuery_node_Service_providable | null;
+  profile: getServiceQuery_node_Service_profile | null;
   serviceQuestionsConnection: getServiceQuery_node_Service_serviceQuestionsConnection;
 }
 
@@ -1747,6 +1771,11 @@ export interface getCurrentUserProfileServicesQuery_currentUser_profile_services
 
 export type getCurrentUserProfileServicesQuery_currentUser_profile_servicesConnection_nodes_providable = getCurrentUserProfileServicesQuery_currentUser_profile_servicesConnection_nodes_providable_VideoCallService | getCurrentUserProfileServicesQuery_currentUser_profile_servicesConnection_nodes_providable_GeneralService;
 
+export interface getCurrentUserProfileServicesQuery_currentUser_profile_servicesConnection_nodes_profile {
+  id: string;
+  name: string;
+}
+
 export interface getCurrentUserProfileServicesQuery_currentUser_profile_servicesConnection_nodes {
   id: string;
   name: string | null;
@@ -1760,6 +1789,7 @@ export interface getCurrentUserProfileServicesQuery_currentUser_profile_services
   serviceType: ServiceTypeEnum;
   pricingType: ServicePricingTypeEnum;
   providable: getCurrentUserProfileServicesQuery_currentUser_profile_servicesConnection_nodes_providable | null;
+  profile: getCurrentUserProfileServicesQuery_currentUser_profile_servicesConnection_nodes_profile | null;
 }
 
 export interface getCurrentUserProfileServicesQuery_currentUser_profile_servicesConnection {
@@ -1884,6 +1914,11 @@ export interface getCurrentUserOnboardingQuery_currentUser_profile_servicesConne
 
 export type getCurrentUserOnboardingQuery_currentUser_profile_servicesConnection_nodes_providable = getCurrentUserOnboardingQuery_currentUser_profile_servicesConnection_nodes_providable_VideoCallService | getCurrentUserOnboardingQuery_currentUser_profile_servicesConnection_nodes_providable_GeneralService;
 
+export interface getCurrentUserOnboardingQuery_currentUser_profile_servicesConnection_nodes_profile {
+  id: string;
+  name: string;
+}
+
 export interface getCurrentUserOnboardingQuery_currentUser_profile_servicesConnection_nodes {
   id: string;
   name: string | null;
@@ -1897,6 +1932,7 @@ export interface getCurrentUserOnboardingQuery_currentUser_profile_servicesConne
   serviceType: ServiceTypeEnum;
   pricingType: ServicePricingTypeEnum;
   providable: getCurrentUserOnboardingQuery_currentUser_profile_servicesConnection_nodes_providable | null;
+  profile: getCurrentUserOnboardingQuery_currentUser_profile_servicesConnection_nodes_profile | null;
 }
 
 export interface getCurrentUserOnboardingQuery_currentUser_profile_servicesConnection {
@@ -2395,6 +2431,11 @@ export interface serviceFragment_providable_GeneralService {
 
 export type serviceFragment_providable = serviceFragment_providable_VideoCallService | serviceFragment_providable_GeneralService;
 
+export interface serviceFragment_profile {
+  id: string;
+  name: string;
+}
+
 export interface serviceFragment {
   id: string;
   name: string | null;
@@ -2408,6 +2449,7 @@ export interface serviceFragment {
   serviceType: ServiceTypeEnum;
   pricingType: ServicePricingTypeEnum;
   providable: serviceFragment_providable | null;
+  profile: serviceFragment_profile | null;
 }
 
 /* tslint:disable */

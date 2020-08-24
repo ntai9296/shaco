@@ -24,6 +24,10 @@ export const SERVICE_FRAGMENT = gql`
         id
       }
     }
+    profile {
+      id
+      name
+    }
   }
 `;
 

@@ -157,7 +157,7 @@ const App = () => {
 };
 
 export async function getServerSideProps(context: any) {
-  const authToken = parseCookies(context.req)?.token;
+  const authToken = parseCookies(context.req)?.token || null;
   const apolloClient = initializeApollo(null, authToken);
   await apolloClient.query({
     query: GET_PUBLIC_PROFILE_QUERY,
