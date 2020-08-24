@@ -24,10 +24,6 @@ export const SERVICE_FRAGMENT = gql`
         id
       }
     }
-    profile {
-      id
-      name
-    }
   }
 `;
 
@@ -68,6 +64,10 @@ export const GET_SERVICE_QUERY = gql`
     node(id: $id) {
       ... on Service {
         ...serviceFragment
+        profile {
+          id
+          name
+        }
         serviceQuestionsConnection {
           nodes {
             ...serviceQuestionFragment
