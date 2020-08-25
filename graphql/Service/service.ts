@@ -15,6 +15,8 @@ export const SERVICE_FRAGMENT = gql`
     providableType
     serviceType
     pricingType
+    position
+    status
     providable {
       ... on VideoCallService {
         id

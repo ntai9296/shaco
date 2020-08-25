@@ -7,27 +7,25 @@ import {
   updateUser,
 } from "../../graphql/User/UserAPI";
 import { getCurrentUserOnboardingQuery_currentUser_profile_servicesConnection_nodes } from "../../graphql/generated";
-import { ServiceItem } from "../PublicProfile/Service/ServiceList";
+import ServiceCard from "../Service/ServiceCard";
+import ServiceList from "../Dashboard/Service/ServiceList";
 import Button from "../common/Button";
 
 const ListContainer = styled.div`
   width: 100%;
 `;
 
-const ServiceList = styled.div`
+const ServiceItem = styled.div`
+  flex-basis: 33.33%;
+  padding: 10px;
   display: flex;
-  margin: 0 -10px;
-  flex-wrap: wrap;
+  flex-direction: column;
 
   ${mediaBreakpointDown("lg")} {
-    > div {
-      flex-basis: 50%;
-    }
+    flex-basis: 50%;
   }
   ${mediaBreakpointDown("md")} {
-    > div {
-      flex-basis: 100%;
-    }
+    flex-basis: 100%;
   }
 `;
 
@@ -55,11 +53,14 @@ export default () => {
 
   return (
     <ListContainer>
-      <ServiceList>
+      <ServiceList/>
+      {/* <ServiceList>
         {services.map((service) => (
-          <ServiceItem key={service.id} service={service} editMode />
+          <ServiceItem key={service.id}>
+            <ServiceCard service={service} isPreview />
+          </ServiceItem>
         ))}
-      </ServiceList>
+      </ServiceList> */}
 
       {services.length > 0 && (
         <ButtonContainer>

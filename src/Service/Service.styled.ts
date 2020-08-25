@@ -54,21 +54,21 @@ export const Panel = styled.div`
     margin: 0;
     max-width: 1000px;
     padding-bottom: 40px;
-
   }
   ${mediaBreakpointDown("xs")} {
-      padding-bottom: 80px;
+    padding-bottom: 80px;
   }
 `;
 
 export const PanelHero = styled.div`
   position: relative;
+  background: #e8e9eb;
 `;
-export const PanelHeroImage = styled.div<{ bg: string }>`
-  background-image: url(${(props) => props.bg});
+export const PanelHeroImage = styled.div<{ bg: string | null }>`
+  background-image: url(${(props) => props.bg || "/fireside-icon.svg"});
   background-repeat: no-repeat;
   background-position: center center;
-  background-size: cover;
+  background-size: ${(props) => (props.bg ? "cover" : "inherit")};
   height: 300px;
 
   ${mediaBreakpointDown("xs")} {

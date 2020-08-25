@@ -9,12 +9,26 @@ export const Title = styled.div`
 export const Price = styled.div`
   font-size: 36px;
   font-weight: bold;
-  margin: 5px 0 3px 0;
+  margin: 10px 0 0 0;
 `;
 export const Description = styled.div`
   font-weight: 500;
   font-size: 14px;
   color: rgba(26, 26, 26, 0.6);
+  max-height: 150px;
+  white-space: break-spaces;
+  overflow-y: scroll;
+  margin-top: 13px;
+
+  ::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 7px;
+  }
+  ::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, 0.5);
+    -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
+  }
 `;
 
 export const MoreData = styled.div`

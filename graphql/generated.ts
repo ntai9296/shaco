@@ -913,6 +913,8 @@ export interface getPublicProfileQuery_profile_servicesConnection_nodes {
   providableType: ServiceProvidableTypeEnum | null;
   serviceType: ServiceTypeEnum;
   pricingType: ServicePricingTypeEnum;
+  position: number;
+  status: ServiceStatusEnum;
   providable: getPublicProfileQuery_profile_servicesConnection_nodes_providable | null;
 }
 
@@ -1047,6 +1049,8 @@ export interface createServiceMutation_createService_service {
   providableType: ServiceProvidableTypeEnum | null;
   serviceType: ServiceTypeEnum;
   pricingType: ServicePricingTypeEnum;
+  position: number;
+  status: ServiceStatusEnum;
   providable: createServiceMutation_createService_service_providable | null;
 }
 
@@ -1094,6 +1098,8 @@ export interface updateServiceMutation_updateService_service {
   providableType: ServiceProvidableTypeEnum | null;
   serviceType: ServiceTypeEnum;
   pricingType: ServicePricingTypeEnum;
+  position: number;
+  status: ServiceStatusEnum;
   providable: updateServiceMutation_updateService_service_providable | null;
 }
 
@@ -1186,6 +1192,8 @@ export interface getServiceQuery_node_Service {
   providableType: ServiceProvidableTypeEnum | null;
   serviceType: ServiceTypeEnum;
   pricingType: ServicePricingTypeEnum;
+  position: number;
+  status: ServiceStatusEnum;
   providable: getServiceQuery_node_Service_providable | null;
   profile: getServiceQuery_node_Service_profile | null;
   serviceQuestionsConnection: getServiceQuery_node_Service_serviceQuestionsConnection;
@@ -1282,6 +1290,8 @@ export interface getIndivualServiceByIdQuery_node_Service {
   providableType: ServiceProvidableTypeEnum | null;
   serviceType: ServiceTypeEnum;
   pricingType: ServicePricingTypeEnum;
+  position: number;
+  status: ServiceStatusEnum;
   providable: getIndivualServiceByIdQuery_node_Service_providable | null;
   profile: getIndivualServiceByIdQuery_node_Service_profile | null;
 }
@@ -1765,6 +1775,8 @@ export interface getCurrentUserProfileServicesQuery_currentUser_profile_services
   providableType: ServiceProvidableTypeEnum | null;
   serviceType: ServiceTypeEnum;
   pricingType: ServicePricingTypeEnum;
+  position: number;
+  status: ServiceStatusEnum;
   providable: getCurrentUserProfileServicesQuery_currentUser_profile_servicesConnection_nodes_providable | null;
 }
 
@@ -1902,6 +1914,8 @@ export interface getCurrentUserOnboardingQuery_currentUser_profile_servicesConne
   providableType: ServiceProvidableTypeEnum | null;
   serviceType: ServiceTypeEnum;
   pricingType: ServicePricingTypeEnum;
+  position: number;
+  status: ServiceStatusEnum;
   providable: getCurrentUserOnboardingQuery_currentUser_profile_servicesConnection_nodes_providable | null;
 }
 
@@ -2413,6 +2427,8 @@ export interface serviceFragment {
   providableType: ServiceProvidableTypeEnum | null;
   serviceType: ServiceTypeEnum;
   pricingType: ServicePricingTypeEnum;
+  position: number;
+  status: ServiceStatusEnum;
   providable: serviceFragment_providable | null;
 }
 
@@ -2550,6 +2566,12 @@ export enum ServicePricingTypeEnum {
 export enum ServiceProvidableTypeEnum {
   GENERAL_SERVICE = "GENERAL_SERVICE",
   VIDEO_CALL_SERVICE = "VIDEO_CALL_SERVICE",
+}
+
+export enum ServiceStatusEnum {
+  ACTIVE = "ACTIVE",
+  ARCHIVED = "ARCHIVED",
+  INACTIVE = "INACTIVE",
 }
 
 export enum ServiceTypeEnum {
@@ -2883,10 +2905,12 @@ export interface UpdateServiceInput {
   serviceId: string;
   name: string;
   price: number;
-  buttonText: string;
+  buttonText?: string | null;
   imageUrl?: string | null;
   description?: string | null;
   quantity?: number | null;
+  position?: number | null;
+  status?: ServiceStatusEnum | null;
   pricingType?: ServicePricingTypeEnum | null;
   providableData?: any | null;
   clientMutationId?: string | null;

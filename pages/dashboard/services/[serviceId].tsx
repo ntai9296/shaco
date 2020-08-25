@@ -21,10 +21,10 @@ import {
   ServiceTypeEnum,
 } from "../../../graphql/generated";
 import Notification from "../../../src/common/Notification";
-import { ServiceItem } from "../../../src/PublicProfile/Service/ServiceList";
 import { SERVICE_QUESTION_FRAGMENT } from "../../../graphql/ServiceQuestion/service_question";
 import withDashboard from "../../../src/common/Layout/withDashboard";
 import DashboardPageContent from "../../../src/common/Layout/DashboardPageContent";
+import ServiceCard from "../../../src/Service/ServiceCard";
 
 const Availability = dynamic(
   () => import("../../../src/Dashboard/Service/Availability"),
@@ -574,8 +574,7 @@ const App = () => {
           <S.ServiceRightContainer>
             <S.ServicePreviewContainer>
               <h3>Preview</h3>
-              <ServiceItem
-                previewMode
+              <ServiceCard
                 service={{
                   ...service,
                   price: (service.price || 0) * 100,

@@ -55,7 +55,7 @@ export const SocialMediaItem = styled.a`
 
 export const ServiceContent = styled.div``;
 export const ServiceTitle = styled.h2`
-  margin: 0 0 15px 0;
+  margin: 0 0 25px 0;
   text-align: center;
   font-size: 30px;
 `;

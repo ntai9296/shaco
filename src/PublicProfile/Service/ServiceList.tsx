@@ -1,12 +1,10 @@
-import React, { useState, useRef, useEffect } from "react";
-import { ChevronDown, Edit } from "react-feather";
-import Link from "next/link";
+import React, { useState, useEffect } from "react";
+import { ChevronDown } from "react-feather";
 import * as S from "./Service.styled";
 import {
   getPublicProfileQuery_profile_servicesConnection_nodes,
-  ServicePricingTypeEnum,
-  ServiceTypeEnum,
 } from "../../../graphql/generated";
+import ServiceCard from "../../Service/ServiceCard";
 
 interface Props {
   services: getPublicProfileQuery_profile_servicesConnection_nodes[];
@@ -25,7 +23,9 @@ export default ({ services }: Props) => {
     <>
       <S.ServiceList totalCount={capServices.length}>
         {capServices.map((service) => (
-          <ServiceItem key={service.id} service={service} />
+          <S.ServiceItem>
+            <ServiceCard key={service.id} service={service} />
+          </S.ServiceItem>
         ))}
       </S.ServiceList>
       {services.length > 6 && capServices.length <= 6 && (
@@ -38,92 +38,5 @@ export default ({ services }: Props) => {
         </S.ShowMoreContent>
       )}
     </>
-  );
-};
-
-export const ServiceItem = ({
-  service,
-  editMode,
-  previewMode,
-}: {
-  service: getPublicProfileQuery_profile_servicesConnection_nodes;
-  editMode?: boolean;
-  previewMode?: boolean;
-}) => {
-  const [showMore, setShowMore] = useState(false);
-  const paragraphRef = useRef<any>(null);
-  useEffect(() => {
-    if (paragraphRef.current && paragraphRef.current.clientHeight > 120) {
-      setShowMore(true);
-    }
-  }, [paragraphRef.current]);
-
-  const onRenderItemCost = () => {
-    if (service.pricingType === ServicePricingTypeEnum.FREE) {
-      return "Free";
-    } else if (service.pricingType === ServicePricingTypeEnum.FLEXIBLE) {
-      return "Name your price";
-    }
-
-    return `$${service.price / 100}`;
-  };
-
-  const providable = service.providable as any;
-
-  return (
-    <S.ServiceItem>
-      <S.ServiceContent>
-        {editMode && (
-          <S.EditHeader>
-            <Link
-              href="/dashboard/services/[serviceId]"
-              as={`/dashboard/services/${service.id}`}
-            >
-              <Edit size={20} />
-            </Link>
-          </S.EditHeader>
-        )}
-        <S.ServiceTitle>{service.name}</S.ServiceTitle>
-        <S.ServiceItemImage>
-          {service.imageUrl && (
-            <S.ServiceItemImageContent src={service.imageUrl} />
-          )}
-        </S.ServiceItemImage>
-        <S.ServiceItemPricing>
-          <S.ServiceItemCost>{onRenderItemCost()}</S.ServiceItemCost>
-          {service.serviceType === ServiceTypeEnum.VIRTUAL_ONE_ON_ONE && (
-            <S.ServiceItemDuration>
-              Duration: {providable?.duration} minutes
-            </S.ServiceItemDuration>
-          )}
-          <S.ServiceItemAction>
-            {previewMode ? (
-              <S.ServiceItemButton>
-                {service.buttonText || "Select"}
-              </S.ServiceItemButton>
-            ) : (
-              <Link
-                href={`/checkout/[serviceId]`}
-                as={`/checkout/${service.id}`}
-              >
-                <S.ServiceItemButton>
-                  {service.buttonText || "Select"}
-                </S.ServiceItemButton>
-              </Link>
-            )}
-          </S.ServiceItemAction>
-        </S.ServiceItemPricing>
-        {service.description && (
-          <S.ServiceItemDescriptionBox maxHeight={showMore}>
-            <p ref={paragraphRef}>{service.description}</p>
-          </S.ServiceItemDescriptionBox>
-        )}
-        {showMore && (
-          <S.ServiceItemDescriptionShowMore>
-            <a onClick={() => setShowMore(false)}>Show more</a>
-          </S.ServiceItemDescriptionShowMore>
-        )}
-      </S.ServiceContent>
-    </S.ServiceItem>
   );
 };

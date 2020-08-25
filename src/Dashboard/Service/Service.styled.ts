@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Button from "../../common/Button";
+import { mediaBreakpointDown } from "../../common/utility";
 
 export const PageContainer = styled.div`
   max-width: 1000px;
@@ -18,14 +19,19 @@ export const ServiceLeftContainer = styled.div`
 
 export const ServiceRightContainer = styled.div`
   flex: 1;
-  margin-left: 25px;
-  width: 350px;
+  margin: 0 auto;
+  max-width: 350px;
+
+  ${mediaBreakpointDown("md")} {
+    display: none;
+  }
 `;
 
 export const ServicePreviewContainer = styled.div`
-  position: fixed;
-  width: inherit;
-
+  width: 100%;
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 0;
   > h3 {
     text-align: center;
   }
@@ -120,7 +126,7 @@ export const ImagePlaceholder = styled.div`
 `;
 
 export const ServiceItemImageHover = styled.div`
-  display: none;
+  display: flex;
   position: absolute;
   width: 100%;
   top: 0;
@@ -157,12 +163,6 @@ export const ServiceImageContainer = styled.div<any>`
   background-size: contain;
   position: relative;
   overflow: hidden;
-
-  :hover {
-    ${ServiceItemImageHover} {
-      display: flex;
-    }
-  }
 `;
 
 export const ScreeningQuestionList = styled.div`

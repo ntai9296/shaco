@@ -6,12 +6,12 @@ import {
   changeUserPassword,
 } from "../../graphql/User/UserAPI";
 import * as S from "./Onboarding.styled";
-import { ArrowLeft, PlusCircle, Check, Plus } from "react-feather";
+import { ArrowLeft, Check, Plus } from "react-feather";
 import Input from "../common/Input";
 import Button from "../common/Button";
 import Notification from "../common/Notification";
 import OnboardingProfile from "./OnboardingProfile";
-import OnboardingServices from "./OnboardingServices";
+import ServiceList from "../Dashboard/Service/ServiceList";
 
 export default () => {
   const router = useRouter();
@@ -66,7 +66,7 @@ export default () => {
               </S.ServicesHeading>
             </S.HeadingContainer>
             <S.ContentContainer>
-              <OnboardingServices />
+              <ServiceList />
             </S.ContentContainer>
           </>
         );
@@ -144,21 +144,21 @@ export default () => {
         </Link>
         <S.HeaderStepContainer>
           <S.Step
-            onClick={() => router.push("/onboarding?step=one")}
+            // onClick={() => router.push("/onboarding?step=one")}
             active={step === "one"}
             checked={!(step === "one")}
           >
             {step === "one" ? "1" : <Check size={20} />}
           </S.Step>
           <S.Step
-            onClick={() => router.push("/onboarding?step=two")}
+            // onClick={() => router.push("/onboarding?step=two")}
             active={step === "two"}
             checked={step === "three"}
           >
             {step === "two" || step === "one" ? "2" : <Check size={20} />}
           </S.Step>
           <S.Step
-            onClick={() => router.push("/onboarding?step=three")}
+            // onClick={() => router.push("/onboarding?step=three")}
             active={step === "three"}
           >
             3

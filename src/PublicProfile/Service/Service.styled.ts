@@ -5,10 +5,11 @@ import { CommonButton } from "../../common/Button";
 export const ServiceList = styled.div<{ totalCount: number }>`
   display: flex;
   flex-wrap: wrap;
-  margin: 0 -10px 10px -10px;
+  margin: -15px;
+  justify-content: center;
 
   ${(props) =>
-    props.totalCount < 3 &&
+    props.totalCount < 6 &&
     `
     justify-content: center;
   `}
@@ -16,11 +17,17 @@ export const ServiceList = styled.div<{ totalCount: number }>`
   ${Utility.mediaBreakpointDown("lg")} {
     justify-content: center;
   }
+  ${Utility.mediaBreakpointDown("sm")} {
+    max-width: 425px;
+    margin: 0 auto;
+  }
 `;
 
 export const ServiceItem = styled.div`
-  padding: 10px;
+  padding: 15px;
   flex-basis: 33.33%;
+  display: flex;
+  flex-direction: column;
 
   ${Utility.mediaBreakpointDown("md")} {
     flex-basis: 50%;

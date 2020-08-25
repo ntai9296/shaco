@@ -18,11 +18,12 @@ import {
   CreateServiceInput,
   ServicePricingTypeEnum,
   ServiceTypeEnum,
+  ServiceStatusEnum,
 } from "../../../graphql/generated";
 import Notification from "../../../src/common/Notification";
-import { ServiceItem } from "../../../src/PublicProfile/Service/ServiceList";
 import withDashboard from "../../../src/common/Layout/withDashboard";
 import DashboardPageContent from "../../../src/common/Layout/DashboardPageContent";
+import ServiceCard from "../../../src/Service/ServiceCard";
 
 const Availability = dynamic(
   () => import("../../../src/Dashboard/Service/Availability"),
@@ -471,8 +472,7 @@ const App = () => {
           <S.ServiceRightContainer>
             <S.ServicePreviewContainer>
               <h3>Preview</h3>
-              <ServiceItem
-                previewMode
+              <ServiceCard
                 service={{
                   id: "1",
                   name: service.name || "Service title",
@@ -489,6 +489,8 @@ const App = () => {
                     service.serviceType === ServiceTypeEnum.VIRTUAL_ONE_ON_ONE
                       ? ServiceProvidableTypeEnum.VIDEO_CALL_SERVICE
                       : ServiceProvidableTypeEnum.GENERAL_SERVICE,
+                  position: 1,
+                  status: ServiceStatusEnum.ACTIVE,
                 }}
               />
             </S.ServicePreviewContainer>

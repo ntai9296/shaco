@@ -51,7 +51,8 @@ body {
 
 body {
   position: relative;
-  font-family: "Inter", "SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: "Inter", "SF Pro Display", -apple-system, BlinkMacSystemFont,
+    sans-serif;
   font-size: 14px;
 
   > div {
@@ -62,7 +63,8 @@ body {
 input,
 textarea,
 select {
-  font-family: "Inter", "SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: "Inter", "SF Pro Display", -apple-system, BlinkMacSystemFont,
+    sans-serif;
   -webkit-appearance: none;
 }
 
@@ -160,7 +162,6 @@ button:focus {
   height: 0;
 }
 
-
 .page-notice {
   position: fixed;
   left: 0;
@@ -173,13 +174,11 @@ button:focus {
   color: #fff;
   height: 50px;
 
-
   > .message-container {
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
     background: #d64545;
-
 
     > .message {
       padding: 21px 0 21px 45px;
@@ -207,4 +206,8 @@ button:focus {
       opacity: 1;
     }
   }
+}
+
+.sortableHelper {
+  z-index: 999;
 }
