@@ -23,7 +23,7 @@ export const CardHero = styled.div`
   background: #e8e9eb;
 `;
 export const CardHeroImage = styled.div<{ src?: string | null }>`
-  background-image: url(${(props) => props.src || "/fireside-icon.svg"});
+  background-image: url(${(props) => props.src});
   background-repeat: no-repeat;
   background-position: center center;
   background-size: ${(props) => (props.src ? "cover" : "inherhit")};

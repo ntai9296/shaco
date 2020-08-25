@@ -65,7 +65,7 @@ export const PanelHero = styled.div`
   background: #e8e9eb;
 `;
 export const PanelHeroImage = styled.div<{ bg: string | null }>`
-  background-image: url(${(props) => props.bg || "/fireside-icon.svg"});
+  background-image: url(${(props) => props.bg});
   background-repeat: no-repeat;
   background-position: center center;
   background-size: ${(props) => (props.bg ? "cover" : "inherit")};
