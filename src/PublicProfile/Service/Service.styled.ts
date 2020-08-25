@@ -5,7 +5,7 @@ import { CommonButton } from "../../common/Button";
 export const ServiceList = styled.div<{ totalCount: number }>`
   display: flex;
   flex-wrap: wrap;
-  margin: -15px;
+  margin: -15px -15px 25px -15px;
   justify-content: center;
 
   ${(props) =>
