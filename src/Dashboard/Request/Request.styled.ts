@@ -189,7 +189,7 @@ export const TableHeader = styled.div`
 export const TableHeaderFilter = styled.div`
   position: absolute;
   right: 0;
-  
+
   ${mediaBreakpointDown("sm")} {
     display: none;
   }
@@ -199,18 +199,25 @@ export const Tab = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  background: #fff;
+  border-radius: 50px;
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.12), 0 1px 6px rgba(0, 0, 0, 0.03),
+    0 6px 10px -8px rgba(0, 0, 0, 0.1);
+    padding: 5px;
 `;
 
 export const TabItem = styled.div``;
 export const TabButton = styled.button<{ active?: boolean }>`
-  padding: 11px 15px;
-  font-weight: 400;
-  font-size: 1rem;
+  padding: 10px 15px;
+  font-weight: 500;
   line-height: 1rem;
-  border-radius: 6px;
+  border-radius: 50px;
   word-break: break-all;
   background: transparent;
   color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   ${(props) =>
     props.active &&

@@ -97,7 +97,7 @@ export default () => {
       <Link href="/dashboard/payouts">
         <S.SidebarItem isActive={activeRoute("/payouts")}>
           <DollarSign width={15} height={15} />
-          Payouts
+          Earnings
         </S.SidebarItem>
       </Link>
 

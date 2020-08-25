@@ -4,6 +4,7 @@ import Link from "next/link";
 import {
   getCurrentUserOnboarding,
   changeUserPassword,
+  updateUser,
 } from "../../graphql/User/UserAPI";
 import * as S from "./Onboarding.styled";
 import { ArrowLeft, Check, Plus } from "react-feather";
@@ -37,6 +38,12 @@ export default () => {
     },
   });
 
+  const [onUpdateUser, { loading: onUpdateUserLoading }] = updateUser({
+    onCompleted: () => {
+      router.replace("/dashboard/mysite");
+    },
+  });
+
   const onRenderContent = () => {
     switch (step) {
       case "two":
@@ -67,6 +74,23 @@ export default () => {
             </S.HeadingContainer>
             <S.ContentContainer>
               <ServiceList />
+            </S.ContentContainer>
+            <S.ContentContainer>
+              <Button
+                flex={false}
+                isLoading={onUpdateUserLoading}
+                onClick={() =>
+                  onUpdateUser({
+                    variables: {
+                      input: {
+                        onboarded: true,
+                      },
+                    },
+                  })
+                }
+              >
+                I'm done. Take me to my public profile
+              </Button>
             </S.ContentContainer>
           </>
         );
