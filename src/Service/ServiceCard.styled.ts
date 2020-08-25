@@ -49,6 +49,7 @@ export const Pricing = styled.div`
   height: 30px;
   display: flex;
   align-items: center;
+  font-size: 16px;
 `;
 export const SubTitle = styled.p`
   font-weight: 500;
