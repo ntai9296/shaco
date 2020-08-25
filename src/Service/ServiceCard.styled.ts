@@ -60,9 +60,9 @@ export const SubTitle = styled.p`
 `;
 
 export const CardTitle = styled.h3`
-  margin: 0 0 10px 0;
+  margin: 0 0 13px 0;
   text-align: center;
-  font-size: 20px;
+  font-size: 22px;
 `;
 
 export const ServiceType = styled.div`
