@@ -59,6 +59,7 @@ const App = () => {
 
   const pageTitle = `${node?.name} | Fireside`;
   const coverPhotoURL = node?.imageUrl || "";
+  const soldOut = node.limitedQuantity && node.quantity <= 0;
   return (
     <ThemeProvider
       theme={{
@@ -100,8 +101,13 @@ const App = () => {
                 {renderServiceTitle()}
                 <S.HostInfoContainer>
                   <Link href="/[profileSlug]" as={`/${node.profile?.slug}`}>
-                    <div>By {node.profile?.name}</div>
+                    <S.ByHost>By {node.profile?.name}</S.ByHost>
                   </Link>
+                  {node.limitedQuantity && (
+                    <S.LimitedText>
+                      | Limited: <b>{node.quantity.toLocaleString()}</b> remaining
+                    </S.LimitedText>
+                  )}
                 </S.HostInfoContainer>
               </S.PanelHeaderInfo>
               <S.PanelHeaderAction>
@@ -109,13 +115,19 @@ const App = () => {
                   {onRenderItemCost()}
                 </S.PanelHeaderActionPrice>
                 <Link href="/checkout/[serviceId]" as={`/checkout/${node.id}`}>
-                  <S.SelectButton>{node.buttonText || "Select"}</S.SelectButton>
+                  <S.SelectButton
+                    disabled={soldOut}
+                  >
+                    {soldOut ? "Sold Out" : node.buttonText || "Select"}
+                  </S.SelectButton>
                 </Link>
               </S.PanelHeaderAction>
             </S.PanelHeader>
             <S.PanelBody>
               <S.PanelBodyHeading>Description</S.PanelBodyHeading>
-              <S.PanelBodyDescription>{node.description}</S.PanelBodyDescription>
+              <S.PanelBodyDescription>
+                {node.description}
+              </S.PanelBodyDescription>
             </S.PanelBody>
             <S.PanelBody>
               <S.PanelBodyHeading>
@@ -139,11 +151,13 @@ const App = () => {
         </S.Main>
       </S.Body>
       <S.CheckoutPanel>
-        <S.CheckoutPanelPrice>
-          {onRenderItemCost()}
-        </S.CheckoutPanelPrice>
+        <S.CheckoutPanelPrice>{onRenderItemCost()}</S.CheckoutPanelPrice>
         <Link href="/checkout/[serviceId]" as={`/checkout/${node.id}`}>
-          <S.CheckoutButton>{node.buttonText || "Select"}</S.CheckoutButton>
+          <S.CheckoutButton
+            disabled={soldOut}
+          >
+            {soldOut ? "Sold Out" : node.buttonText || "Select"}
+          </S.CheckoutButton>
         </Link>
       </S.CheckoutPanel>
     </ThemeProvider>

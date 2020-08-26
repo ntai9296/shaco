@@ -104,13 +104,19 @@ export const PanelHeaderInfo = styled.div`
 `;
 export const HostInfoContainer = styled.div`
   display: flex;
-  > div {
-    &:hover {
-      text-decoration: underline;
-      cursor: pointer;
-    }
+  align-items: center;
+`;
+
+export const ByHost = styled.div`
+  &:hover {
+    text-decoration: underline;
+    cursor: pointer;
   }
 `;
+export const LimitedText = styled.div`
+  margin-left: 10px;
+`;
+
 export const HostAvatar = styled.img`
   width: 65px;
   height: 65px;

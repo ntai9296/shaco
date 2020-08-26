@@ -24,6 +24,7 @@ import Notification from "../../../src/common/Notification";
 import withDashboard from "../../../src/common/Layout/withDashboard";
 import DashboardPageContent from "../../../src/common/Layout/DashboardPageContent";
 import ServiceCard from "../../../src/Service/ServiceCard";
+import Switch from "../../../src/common/Switch";
 
 const Availability = dynamic(
   () => import("../../../src/Dashboard/Service/Availability"),
@@ -47,6 +48,7 @@ const App = () => {
       duration: 30,
     },
     quantity: 100,
+    limitedQuantity: false,
     serviceQuestions: [],
   });
   const [errors, setErrors] = useState<string[]>([]);
@@ -114,6 +116,7 @@ const App = () => {
           serviceQuestions: service.serviceQuestions,
           pricingType: service.pricingType,
           quantity: service.quantity,
+          limitedQuantity: service.limitedQuantity,
         },
       },
     });
@@ -324,27 +327,6 @@ const App = () => {
                 </S.Row>
               )}
 
-              {/* {[
-                ServiceTypeEnum.SELLING_MERCH,
-                ServiceTypeEnum.CUSTOMIZE_YOUR_OWN,
-              ].includes(service.serviceType) && (
-                <S.Row>
-                  <S.FieldGroup>
-                    <NumberFormatInput
-                      value={service.quantity || ""}
-                      onValueChange={({ floatValue }) =>
-                        onChangeService("quantity", floatValue)
-                      }
-                      allowNegative={false}
-                      placeholder="E.g: 100 available"
-                      label="Available quantity"
-                      decimalScale={0}
-                      thousandSeparator
-                    />
-                  </S.FieldGroup>
-                </S.Row>
-              )} */}
-
               {[
                 ServiceTypeEnum.VIRTUAL_ONE_ON_ONE,
                 ServiceTypeEnum.VIRTUAL_GROUP_MEET_UP,
@@ -372,6 +354,35 @@ const App = () => {
                   </S.FieldGroup>
                 </S.Row>
               )}
+
+              <S.Row>
+                <S.FieldGroup>
+                  <S.SwitchLabel>
+                    <label>Limited Quantity?</label>
+                    <Switch
+                      checked={service.limitedQuantity || false}
+                      onChange={() =>
+                        onChangeService(
+                          "limitedQuantity",
+                          !service.limitedQuantity
+                        )
+                      }
+                    />
+                  </S.SwitchLabel>
+                  {service.limitedQuantity && (
+                    <NumberFormatInput
+                      value={service.quantity || ""}
+                      onValueChange={({ floatValue }) =>
+                        onChangeService("quantity", floatValue)
+                      }
+                      allowNegative={false}
+                      placeholder="E.g: 100 available"
+                      decimalScale={0}
+                      thousandSeparator
+                    />
+                  )}
+                </S.FieldGroup>
+              </S.Row>
             </S.NewServiceContainer>
 
             <S.NewServiceContainer>
@@ -484,13 +495,14 @@ const App = () => {
                   providable: service.providableData,
                   pricingType: service.pricingType,
                   serviceType: service.serviceType,
-                  quantity: service.quantity || 100,
+                  quantity: service.quantity || 0,
                   providableType:
                     service.serviceType === ServiceTypeEnum.VIRTUAL_ONE_ON_ONE
                       ? ServiceProvidableTypeEnum.VIDEO_CALL_SERVICE
                       : ServiceProvidableTypeEnum.GENERAL_SERVICE,
                   position: 1,
                   status: ServiceStatusEnum.ACTIVE,
+                  limitedQuantity: !!service.limitedQuantity,
                 }}
               />
             </S.ServicePreviewContainer>

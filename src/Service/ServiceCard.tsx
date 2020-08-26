@@ -22,7 +22,7 @@ export default ({ service, isPreview }: Props) => {
       setShowMore(true);
     }
   }, [paragraphRef.current]);
-  
+
   const getPricing = () => {
     if (service.pricingType === ServicePricingTypeEnum.FREE) {
       return "Free";
@@ -32,7 +32,7 @@ export default ({ service, isPreview }: Props) => {
     return `$${(service.price / 100).toLocaleString()}`;
   };
   const providable = service.providable as any;
-
+  const soldOut = service.limitedQuantity && service.quantity <= 0;
   return (
     <S.Card isPreview={isPreview}>
       <S.CardHero>
@@ -55,9 +55,17 @@ export default ({ service, isPreview }: Props) => {
             <span>Duration: {providable?.duration} minutes</span>
           </S.SubTitle>
         )}
+
         <S.ButtonContainer>
+          {service.limitedQuantity && (
+            <S.RemainingText>
+              Limited: <b>{service.quantity.toLocaleString()}</b> remaining
+            </S.RemainingText>
+          )}
           <Link href="/checkout/[serviceId]" as={`/checkout/${service.id}`}>
-            <S.Button>{service.buttonText}</S.Button>
+            <S.Button disabled={soldOut}>
+              {soldOut ? "Sold Out" : service.buttonText}
+            </S.Button>
           </Link>
         </S.ButtonContainer>
         {service.description && (

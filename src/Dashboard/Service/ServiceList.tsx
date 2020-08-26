@@ -92,6 +92,7 @@ export default () => {
       services={services}
       onSortEnd={onSortEnd}
       useDragHandle
+      useWindowAsScrollContainer
       onUpdateService={onUpdateService}
       helperClass="sortableHelper"
     />

@@ -915,6 +915,7 @@ export interface getPublicProfileQuery_profile_servicesConnection_nodes {
   pricingType: ServicePricingTypeEnum;
   position: number;
   status: ServiceStatusEnum;
+  limitedQuantity: boolean;
   providable: getPublicProfileQuery_profile_servicesConnection_nodes_providable | null;
 }
 
@@ -1051,6 +1052,7 @@ export interface createServiceMutation_createService_service {
   pricingType: ServicePricingTypeEnum;
   position: number;
   status: ServiceStatusEnum;
+  limitedQuantity: boolean;
   providable: createServiceMutation_createService_service_providable | null;
 }
 
@@ -1100,6 +1102,7 @@ export interface updateServiceMutation_updateService_service {
   pricingType: ServicePricingTypeEnum;
   position: number;
   status: ServiceStatusEnum;
+  limitedQuantity: boolean;
   providable: updateServiceMutation_updateService_service_providable | null;
 }
 
@@ -1194,6 +1197,7 @@ export interface getServiceQuery_node_Service {
   pricingType: ServicePricingTypeEnum;
   position: number;
   status: ServiceStatusEnum;
+  limitedQuantity: boolean;
   providable: getServiceQuery_node_Service_providable | null;
   profile: getServiceQuery_node_Service_profile | null;
   serviceQuestionsConnection: getServiceQuery_node_Service_serviceQuestionsConnection;
@@ -1292,6 +1296,7 @@ export interface getIndivualServiceByIdQuery_node_Service {
   pricingType: ServicePricingTypeEnum;
   position: number;
   status: ServiceStatusEnum;
+  limitedQuantity: boolean;
   providable: getIndivualServiceByIdQuery_node_Service_providable | null;
   profile: getIndivualServiceByIdQuery_node_Service_profile | null;
 }
@@ -1777,6 +1782,7 @@ export interface getCurrentUserProfileServicesQuery_currentUser_profile_services
   pricingType: ServicePricingTypeEnum;
   position: number;
   status: ServiceStatusEnum;
+  limitedQuantity: boolean;
   providable: getCurrentUserProfileServicesQuery_currentUser_profile_servicesConnection_nodes_providable | null;
 }
 
@@ -1916,6 +1922,7 @@ export interface getCurrentUserOnboardingQuery_currentUser_profile_servicesConne
   pricingType: ServicePricingTypeEnum;
   position: number;
   status: ServiceStatusEnum;
+  limitedQuantity: boolean;
   providable: getCurrentUserOnboardingQuery_currentUser_profile_servicesConnection_nodes_providable | null;
 }
 
@@ -2429,6 +2436,7 @@ export interface serviceFragment {
   pricingType: ServicePricingTypeEnum;
   position: number;
   status: ServiceStatusEnum;
+  limitedQuantity: boolean;
   providable: serviceFragment_providable | null;
 }
 
@@ -2711,6 +2719,7 @@ export interface CreateServiceInput {
   buttonText: string;
   imageUrl?: string | null;
   description?: string | null;
+  limitedQuantity?: boolean | null;
   quantity?: number | null;
   pricingType: ServicePricingTypeEnum;
   serviceType: ServiceTypeEnum;
@@ -2908,6 +2917,7 @@ export interface UpdateServiceInput {
   buttonText?: string | null;
   imageUrl?: string | null;
   description?: string | null;
+  limitedQuantity?: boolean | null;
   quantity?: number | null;
   position?: number | null;
   status?: ServiceStatusEnum | null;
