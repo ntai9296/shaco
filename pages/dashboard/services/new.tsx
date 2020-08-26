@@ -254,7 +254,7 @@ const App = () => {
                     <S.ImagePlaceholder
                       onClick={() => imageRef.current.click()}
                     >
-                      <b>Service image (optional)</b>
+                      <b>Service image</b>
                       <div>Recommended size: 460 by 200 pixels</div>
                     </S.ImagePlaceholder>
                   )}
