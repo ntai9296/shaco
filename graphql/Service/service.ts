@@ -24,8 +24,10 @@ export const SERVICE_FRAGMENT = gql`
         id
         duration
       }
-      ... on GeneralService {
+      ... on GroupVideoCallService {
         id
+        duration
+        startDate
       }
     }
   }

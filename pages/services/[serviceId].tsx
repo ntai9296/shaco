@@ -1,4 +1,5 @@
 import React from "react";
+import moment from "moment-timezone";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import Link from "next/link";
@@ -60,6 +61,7 @@ const App = () => {
   const pageTitle = `${node?.name} | Fireside`;
   const coverPhotoURL = node?.imageUrl || "";
   const soldOut = node.limitedQuantity && node.quantity <= 0;
+  const providable = node.providable as any;
   return (
     <ThemeProvider
       theme={{
@@ -100,12 +102,30 @@ const App = () => {
               <S.PanelHeaderInfo>
                 {renderServiceTitle()}
                 <S.HostInfoContainer>
+                  {providable &&
+                    node.serviceType ===
+                      ServiceTypeEnum.VIRTUAL_GROUP_MEET_UP && (
+                      <S.StartDate>
+                        {moment
+                          .tz(providable.startDate, moment.tz.guess())
+                          .format("ddd, MMM DD, YYYY h:mm A")}{" "}
+                        -{" "}
+                        {moment
+                          .tz(providable.startDate, moment.tz.guess())
+                          .add(providable.duration, "minutes")
+                          .format("h:mm A z")}
+                      </S.StartDate>
+                    )}
+                </S.HostInfoContainer>
+                <S.HostInfoContainer>
                   <Link href="/[profileSlug]" as={`/${node.profile?.slug}`}>
-                    <S.ByHost>By {node.profile?.name}</S.ByHost>
+                    <S.ByHost>
+                      <b>By</b> {node.profile?.name}
+                    </S.ByHost>
                   </Link>
                   {node.limitedQuantity && (
                     <S.LimitedText>
-                      | Limited: <b>{node.quantity.toLocaleString()}</b> remaining
+                      <b>Limited</b>: {node.quantity.toLocaleString()} remaining
                     </S.LimitedText>
                   )}
                 </S.HostInfoContainer>
@@ -115,9 +135,7 @@ const App = () => {
                   {onRenderItemCost()}
                 </S.PanelHeaderActionPrice>
                 <Link href="/checkout/[serviceId]" as={`/checkout/${node.id}`}>
-                  <S.SelectButton
-                    disabled={soldOut}
-                  >
+                  <S.SelectButton disabled={soldOut}>
                     {soldOut ? "Sold Out" : node.buttonText || "Select"}
                   </S.SelectButton>
                 </Link>
@@ -153,9 +171,7 @@ const App = () => {
       <S.CheckoutPanel>
         <S.CheckoutPanelPrice>{onRenderItemCost()}</S.CheckoutPanelPrice>
         <Link href="/checkout/[serviceId]" as={`/checkout/${node.id}`}>
-          <S.CheckoutButton
-            disabled={soldOut}
-          >
+          <S.CheckoutButton disabled={soldOut}>
             {soldOut ? "Sold Out" : node.buttonText || "Select"}
           </S.CheckoutButton>
         </Link>

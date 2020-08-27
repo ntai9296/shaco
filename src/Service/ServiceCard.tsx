@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
+import moment from "moment-timezone";
 import CopyToClipboard from "react-copy-to-clipboard";
 import * as S from "./ServiceCard.styled";
 import {
@@ -53,6 +54,25 @@ export default ({ service, isPreview }: Props) => {
         {service.serviceType === ServiceTypeEnum.VIRTUAL_ONE_ON_ONE && (
           <S.SubTitle>
             <span>Duration: {providable?.duration} minutes</span>
+          </S.SubTitle>
+        )}
+        {service.serviceType === ServiceTypeEnum.VIRTUAL_GROUP_MEET_UP && providable && (
+          <S.SubTitle>
+            <S.EventStartDate>
+              {moment
+                .tz(providable.startDate, moment.tz.guess())
+                .format("ddd, MMM DD, YYYY")}
+            </S.EventStartDate>
+            <span>
+              {moment
+                .tz(providable.startDate, moment.tz.guess())
+                .format("h:mm A")}{" "}
+              -{" "}
+              {moment
+                .tz(providable.startDate, moment.tz.guess())
+                .add(providable.duration, "minutes")
+                .format("h:mm A z")}
+            </span>
           </S.SubTitle>
         )}
 

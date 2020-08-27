@@ -51,23 +51,28 @@ export const Pricing = styled.div`
   align-items: center;
   font-size: 16px;
 `;
-export const SubTitle = styled.p`
-  font-weight: 400;
+export const SubTitle = styled.div`
+  font-weight: 500;
   color: rgb(112, 108, 100);
   text-align: center;
   margin: 0 0 10px 0;
   font-size: 14px;
 `;
 
+export const EventStartDate = styled.div`
+  margin-bottom: 6px;
+  font-weight: bold;
+  font-size: 16px;
+  margin-top: 20px;
+`;
+
 export const RemainingText = styled.p`
   color: rgb(112, 108, 100);
   text-align: center;
   margin: 0 0 9px 0;
-  font-size: 12px;
-  font-weight: 500;
+  font-size: 13px;
+  font-weight: 400;
 `;
-
-
 
 export const CardTitle = styled.h3`
   margin: 0 0 13px 0;

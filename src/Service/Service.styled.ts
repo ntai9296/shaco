@@ -107,6 +107,12 @@ export const HostInfoContainer = styled.div`
   align-items: center;
 `;
 
+export const StartDate = styled.div`
+  margin-bottom: 10px;
+  font-weight: 400;
+  font-size: 16px;
+`;
+
 export const ByHost = styled.div`
   &:hover {
     text-decoration: underline;
@@ -114,7 +120,7 @@ export const ByHost = styled.div`
   }
 `;
 export const LimitedText = styled.div`
-  margin-left: 10px;
+  margin-left: 14px;
 `;
 
 export const HostAvatar = styled.img`

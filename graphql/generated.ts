@@ -251,14 +251,14 @@ export interface getBookingRescheduleQuery_node_Booking_hostProfile {
   availabilities: any | null;
 }
 
-export interface getBookingRescheduleQuery_node_Booking_service_providable_GeneralService {}
+export interface getBookingRescheduleQuery_node_Booking_service_providable_GroupVideoCallService {}
 
 export interface getBookingRescheduleQuery_node_Booking_service_providable_VideoCallService {
   id: string;
   duration: number;
 }
 
-export type getBookingRescheduleQuery_node_Booking_service_providable = getBookingRescheduleQuery_node_Booking_service_providable_GeneralService | getBookingRescheduleQuery_node_Booking_service_providable_VideoCallService;
+export type getBookingRescheduleQuery_node_Booking_service_providable = getBookingRescheduleQuery_node_Booking_service_providable_GroupVideoCallService | getBookingRescheduleQuery_node_Booking_service_providable_VideoCallService;
 
 export interface getBookingRescheduleQuery_node_Booking_service {
   id: string;
@@ -895,11 +895,13 @@ export interface getPublicProfileQuery_profile_servicesConnection_nodes_providab
   duration: number;
 }
 
-export interface getPublicProfileQuery_profile_servicesConnection_nodes_providable_GeneralService {
+export interface getPublicProfileQuery_profile_servicesConnection_nodes_providable_GroupVideoCallService {
   id: string;
+  duration: number;
+  startDate: any;
 }
 
-export type getPublicProfileQuery_profile_servicesConnection_nodes_providable = getPublicProfileQuery_profile_servicesConnection_nodes_providable_VideoCallService | getPublicProfileQuery_profile_servicesConnection_nodes_providable_GeneralService;
+export type getPublicProfileQuery_profile_servicesConnection_nodes_providable = getPublicProfileQuery_profile_servicesConnection_nodes_providable_VideoCallService | getPublicProfileQuery_profile_servicesConnection_nodes_providable_GroupVideoCallService;
 
 export interface getPublicProfileQuery_profile_servicesConnection_nodes {
   id: string;
@@ -1032,11 +1034,13 @@ export interface createServiceMutation_createService_service_providable_VideoCal
   duration: number;
 }
 
-export interface createServiceMutation_createService_service_providable_GeneralService {
+export interface createServiceMutation_createService_service_providable_GroupVideoCallService {
   id: string;
+  duration: number;
+  startDate: any;
 }
 
-export type createServiceMutation_createService_service_providable = createServiceMutation_createService_service_providable_VideoCallService | createServiceMutation_createService_service_providable_GeneralService;
+export type createServiceMutation_createService_service_providable = createServiceMutation_createService_service_providable_VideoCallService | createServiceMutation_createService_service_providable_GroupVideoCallService;
 
 export interface createServiceMutation_createService_service {
   id: string;
@@ -1082,11 +1086,13 @@ export interface updateServiceMutation_updateService_service_providable_VideoCal
   duration: number;
 }
 
-export interface updateServiceMutation_updateService_service_providable_GeneralService {
+export interface updateServiceMutation_updateService_service_providable_GroupVideoCallService {
   id: string;
+  duration: number;
+  startDate: any;
 }
 
-export type updateServiceMutation_updateService_service_providable = updateServiceMutation_updateService_service_providable_VideoCallService | updateServiceMutation_updateService_service_providable_GeneralService;
+export type updateServiceMutation_updateService_service_providable = updateServiceMutation_updateService_service_providable_VideoCallService | updateServiceMutation_updateService_service_providable_GroupVideoCallService;
 
 export interface updateServiceMutation_updateService_service {
   id: string;
@@ -1159,11 +1165,13 @@ export interface getServiceQuery_node_Service_providable_VideoCallService {
   duration: number;
 }
 
-export interface getServiceQuery_node_Service_providable_GeneralService {
+export interface getServiceQuery_node_Service_providable_GroupVideoCallService {
   id: string;
+  duration: number;
+  startDate: any;
 }
 
-export type getServiceQuery_node_Service_providable = getServiceQuery_node_Service_providable_VideoCallService | getServiceQuery_node_Service_providable_GeneralService;
+export type getServiceQuery_node_Service_providable = getServiceQuery_node_Service_providable_VideoCallService | getServiceQuery_node_Service_providable_GroupVideoCallService;
 
 export interface getServiceQuery_node_Service_profile {
   id: string;
@@ -1267,11 +1275,13 @@ export interface getIndivualServiceByIdQuery_node_Service_providable_VideoCallSe
   duration: number;
 }
 
-export interface getIndivualServiceByIdQuery_node_Service_providable_GeneralService {
+export interface getIndivualServiceByIdQuery_node_Service_providable_GroupVideoCallService {
   id: string;
+  duration: number;
+  startDate: any;
 }
 
-export type getIndivualServiceByIdQuery_node_Service_providable = getIndivualServiceByIdQuery_node_Service_providable_VideoCallService | getIndivualServiceByIdQuery_node_Service_providable_GeneralService;
+export type getIndivualServiceByIdQuery_node_Service_providable = getIndivualServiceByIdQuery_node_Service_providable_VideoCallService | getIndivualServiceByIdQuery_node_Service_providable_GroupVideoCallService;
 
 export interface getIndivualServiceByIdQuery_node_Service_profile {
   id: string;
@@ -1762,11 +1772,13 @@ export interface getCurrentUserProfileServicesQuery_currentUser_profile_services
   duration: number;
 }
 
-export interface getCurrentUserProfileServicesQuery_currentUser_profile_servicesConnection_nodes_providable_GeneralService {
+export interface getCurrentUserProfileServicesQuery_currentUser_profile_servicesConnection_nodes_providable_GroupVideoCallService {
   id: string;
+  duration: number;
+  startDate: any;
 }
 
-export type getCurrentUserProfileServicesQuery_currentUser_profile_servicesConnection_nodes_providable = getCurrentUserProfileServicesQuery_currentUser_profile_servicesConnection_nodes_providable_VideoCallService | getCurrentUserProfileServicesQuery_currentUser_profile_servicesConnection_nodes_providable_GeneralService;
+export type getCurrentUserProfileServicesQuery_currentUser_profile_servicesConnection_nodes_providable = getCurrentUserProfileServicesQuery_currentUser_profile_servicesConnection_nodes_providable_VideoCallService | getCurrentUserProfileServicesQuery_currentUser_profile_servicesConnection_nodes_providable_GroupVideoCallService;
 
 export interface getCurrentUserProfileServicesQuery_currentUser_profile_servicesConnection_nodes {
   id: string;
@@ -1902,11 +1914,13 @@ export interface getCurrentUserOnboardingQuery_currentUser_profile_servicesConne
   duration: number;
 }
 
-export interface getCurrentUserOnboardingQuery_currentUser_profile_servicesConnection_nodes_providable_GeneralService {
+export interface getCurrentUserOnboardingQuery_currentUser_profile_servicesConnection_nodes_providable_GroupVideoCallService {
   id: string;
+  duration: number;
+  startDate: any;
 }
 
-export type getCurrentUserOnboardingQuery_currentUser_profile_servicesConnection_nodes_providable = getCurrentUserOnboardingQuery_currentUser_profile_servicesConnection_nodes_providable_VideoCallService | getCurrentUserOnboardingQuery_currentUser_profile_servicesConnection_nodes_providable_GeneralService;
+export type getCurrentUserOnboardingQuery_currentUser_profile_servicesConnection_nodes_providable = getCurrentUserOnboardingQuery_currentUser_profile_servicesConnection_nodes_providable_VideoCallService | getCurrentUserOnboardingQuery_currentUser_profile_servicesConnection_nodes_providable_GroupVideoCallService;
 
 export interface getCurrentUserOnboardingQuery_currentUser_profile_servicesConnection_nodes {
   id: string;
@@ -2416,11 +2430,13 @@ export interface serviceFragment_providable_VideoCallService {
   duration: number;
 }
 
-export interface serviceFragment_providable_GeneralService {
+export interface serviceFragment_providable_GroupVideoCallService {
   id: string;
+  duration: number;
+  startDate: any;
 }
 
-export type serviceFragment_providable = serviceFragment_providable_VideoCallService | serviceFragment_providable_GeneralService;
+export type serviceFragment_providable = serviceFragment_providable_VideoCallService | serviceFragment_providable_GroupVideoCallService;
 
 export interface serviceFragment {
   id: string;
@@ -2572,7 +2588,7 @@ export enum ServicePricingTypeEnum {
 }
 
 export enum ServiceProvidableTypeEnum {
-  GENERAL_SERVICE = "GENERAL_SERVICE",
+  GROUP_VIDEO_CALL_SERVICE = "GROUP_VIDEO_CALL_SERVICE",
   VIDEO_CALL_SERVICE = "VIDEO_CALL_SERVICE",
 }
 
@@ -2716,7 +2732,7 @@ export interface CreateServiceInput {
   profileId: string;
   name: string;
   price?: number | null;
-  buttonText: string;
+  buttonText?: string | null;
   imageUrl?: string | null;
   description?: string | null;
   limitedQuantity?: boolean | null;

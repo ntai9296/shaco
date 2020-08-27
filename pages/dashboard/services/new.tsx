@@ -1,5 +1,7 @@
 import React, { useState, useRef } from "react";
 import Router from "next/router";
+import DatePicker from "react-datepicker";
+import moment from "moment-timezone";
 import dynamic from "next/dynamic";
 import Head from "next/head";
 import update from "immutability-helper";
@@ -25,6 +27,7 @@ import withDashboard from "../../../src/common/Layout/withDashboard";
 import DashboardPageContent from "../../../src/common/Layout/DashboardPageContent";
 import ServiceCard from "../../../src/Service/ServiceCard";
 import Switch from "../../../src/common/Switch";
+import Popper from "../../../src/common/Popper";
 
 const Availability = dynamic(
   () => import("../../../src/Dashboard/Service/Availability"),
@@ -34,6 +37,8 @@ const Availability = dynamic(
 const App = () => {
   const { data: userData, loading } = UserAPI.getCurrentUserProfileServices();
   const imageRef = useRef<any>();
+
+  const [openStartDate, setOpenStartDate] = useState(false);
 
   const [service, setService] = useState<CreateServiceInput>({
     profileId: "",
@@ -46,6 +51,7 @@ const App = () => {
     serviceType: ServiceTypeEnum.VIRTUAL_ONE_ON_ONE,
     providableData: {
       duration: 30,
+      startDate: new Date(),
     },
     quantity: 100,
     limitedQuantity: false,
@@ -187,9 +193,9 @@ const App = () => {
                     <option value={ServiceTypeEnum.VIRTUAL_ONE_ON_ONE}>
                       Virtual 1:1 Video Calls
                     </option>
-                    {/* <option value={ServiceTypeEnum.VIRTUAL_GROUP_MEET_UP}>
-                      Virtual Group Video Calls
-                    </option> */}
+                    <option value={ServiceTypeEnum.VIRTUAL_GROUP_MEET_UP}>
+                      Virtual Events/Classes
+                    </option>
                     <option value={ServiceTypeEnum.SOCIAL_MEDIA_SHOUT_OUT}>
                       Social Media & Video Shoutouts
                     </option>
@@ -327,6 +333,60 @@ const App = () => {
                 </S.Row>
               )}
 
+              {[ServiceTypeEnum.VIRTUAL_GROUP_MEET_UP].includes(
+                service.serviceType
+              ) && (
+                <S.Row>
+                  <S.FieldGroup>
+                    <Popper
+                      isOpen={openStartDate}
+                      content={
+                        <div>
+                          <DatePicker
+                            timeIntervals={15}
+                            showPopperArrow={false}
+                            minDate={moment().toDate()}
+                            onChange={(e) =>
+                              onChangeService("providableData", {
+                                ...service.providableData,
+                                startDate: e,
+                              })
+                            }
+                            selected={service.providableData.startDate}
+                            inline
+                            showTimeSelect
+                            disabledKeyboardNavigation
+                          />
+                          <S.PickerFooter>
+                            <Button
+                              onClick={() => {
+                                setOpenStartDate(false);
+                              }}
+                            >
+                              Ok
+                            </Button>
+                          </S.PickerFooter>
+                        </div>
+                      }
+                    >
+                      <div>
+                        <Input
+                          label="Start Date"
+                          onClick={() => setOpenStartDate(true)}
+                          value={`${moment
+                            .tz(
+                              service.providableData.startDate,
+                              userData?.currentUser?.timezone || ""
+                            )
+                            .format("MMM DD, YYYY hh:mm A z")}`}
+                          readOnly
+                        />
+                      </div>
+                    </Popper>
+                  </S.FieldGroup>
+                </S.Row>
+              )}
+
               {[
                 ServiceTypeEnum.VIRTUAL_ONE_ON_ONE,
                 ServiceTypeEnum.VIRTUAL_GROUP_MEET_UP,
@@ -347,9 +407,11 @@ const App = () => {
                       <option value={15}>15 mins</option>
                       <option value={30}>30 mins</option>
                       <option value={45}>45 mins</option>
-                      <option value={60}>60 mins</option>
-                      <option value={90}>90 mins</option>
-                      <option value={120}>120 mins</option>
+                      <option value={60}>1 hour</option>
+                      <option value={90}>1 hour 30 mins</option>
+                      <option value={120}>2 hours</option>
+                      <option value={150}>2 hours 30 mins</option>
+                      <option value={180}>3 hours</option>
                     </Select>
                   </S.FieldGroup>
                 </S.Row>
@@ -499,7 +561,7 @@ const App = () => {
                   providableType:
                     service.serviceType === ServiceTypeEnum.VIRTUAL_ONE_ON_ONE
                       ? ServiceProvidableTypeEnum.VIDEO_CALL_SERVICE
-                      : ServiceProvidableTypeEnum.GENERAL_SERVICE,
+                      : null,
                   position: 1,
                   status: ServiceStatusEnum.ACTIVE,
                   limitedQuantity: !!service.limitedQuantity,

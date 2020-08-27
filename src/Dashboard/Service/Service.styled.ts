@@ -218,3 +218,14 @@ export const DeleteButton = styled(Button)`
   background: transparent;
   color: ${(props) => props.theme.dangerColor};
 `;
+
+export const PickerFooter = styled.div`
+  margin-top: 10px;
+  padding: 0 10px 10px 10px;
+  display: flex;
+  justify-content: flex-end;
+
+  > button {
+    padding: 10px;
+  }
+`;
